@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>En Construcción</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;700&display=swap"
+        rel="stylesheet">
+    <style>
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg: #050505;
+            --text: #FFFFFF;
+            --cyan: hsl(180, 100%, 50%);
+            --green: hsl(150, 100%, 50%);
+            --font-title: 'Space Grotesk', sans-serif;
+            --font-body: 'Inter', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+
+        body {
+            min-height: 100vh;
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: var(--font-body);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Patrón de rejilla técnica */
+        body::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(0, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            pointer-events: none;
+        }
+
+        /* Líneas de escaneo */
+        body::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: repeating-linear-gradient(0deg,
+                    transparent,
+                    transparent 2px,
+                    rgba(0, 255, 255, 0.01) 2px,
+                    rgba(0, 255, 255, 0.01) 4px);
+            pointer-events: none;
+            animation: scan 8s linear infinite;
+        }
+
+        @keyframes scan {
+            0% {
+                transform: translateY(0);
+            }
+
+            100% {
+                transform: translateY(20px);
+            }
+        }
+
+        /* Contenedor principal */
+        .container {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            padding: 2rem;
+            max-width: 600px;
+        }
+
+        /* Icono de construcción */
+        .icon {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            animation: pulse 2s ease-in-out infinite;
+            filter: drop-shadow(0 0 20px var(--cyan));
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+
+            50% {
+                transform: scale(1.05);
+                opacity: 0.8;
+            }
+        }
+
+        /* Título principal */
+        h1 {
+            font-family: var(--font-title);
+            font-size: clamp(2rem, 6vw, 3.5rem);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 1rem;
+            text-shadow:
+                0 0 10px var(--cyan),
+                0 0 20px var(--cyan),
+                0 0 40px rgba(0, 255, 255, 0.5);
+        }
+
+        /* Subtítulo */
+        .subtitle {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 2.5rem;
+            line-height: 1.6;
+        }
+
+        /* Caja de estado */
+        .status-box {
+            position: relative;
+            border: 1px solid var(--cyan);
+            padding: 1.5rem 2rem;
+            background: rgba(0, 255, 255, 0.02);
+            box-shadow:
+                0 0 15px rgba(0, 255, 255, 0.1),
+                inset 0 0 30px rgba(0, 255, 255, 0.02);
+        }
+
+        /* Esquinas decorativas */
+        .status-box::before,
+        .status-box::after {
+            content: '';
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            border-color: var(--green);
+            border-style: solid;
+        }
+
+        .status-box::before {
+            top: -1px;
+            left: -1px;
+            border-width: 2px 0 0 2px;
+        }
+
+        .status-box::after {
+            bottom: -1px;
+            right: -1px;
+            border-width: 0 2px 2px 0;
+        }
+
+        .status-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+        }
+
+        /* LED indicador */
+        .led {
+            width: 10px;
+            height: 10px;
+            background: var(--green);
+            box-shadow: 0 0 10px var(--green), 0 0 20px var(--green);
+            animation: blink 1.5s ease-in-out infinite;
+        }
+
+        @keyframes blink {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.4;
+            }
+        }
+
+        .status-text {
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            color: var(--green);
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+        }
+
+        /* Barra de progreso */
+        .progress-container {
+            margin-top: 2.5rem;
+            width: 100%;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .progress-label {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.5);
+            margin-bottom: 0.5rem;
+            text-align: left;
+        }
+
+        .progress-bar {
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 30%;
+            background: linear-gradient(90deg, var(--cyan), var(--green));
+            box-shadow: 0 0 10px var(--cyan);
+            animation: loading 2s ease-in-out infinite;
+        }
+
+        @keyframes loading {
+            0% {
+                left: -30%;
+            }
+
+            100% {
+                left: 100%;
+            }
+        }
+
+        /* Footer */
+        footer {
+            position: absolute;
+            bottom: 2rem;
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.3);
+        }
+
+        footer span {
+            color: var(--cyan);
+        }
+
+        /* Decoraciones de esquinas de página */
+        .corner {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            border-color: rgba(0, 255, 255, 0.2);
+            border-style: solid;
+            z-index: 0;
+        }
+
+        .corner--tl {
+            top: 20px;
+            left: 20px;
+            border-width: 2px 0 0 2px;
+        }
+
+        .corner--tr {
+            top: 20px;
+            right: 20px;
+            border-width: 2px 2px 0 0;
+        }
+
+        .corner--bl {
+            bottom: 20px;
+            left: 20px;
+            border-width: 0 0 2px 2px;
+        }
+
+        .corner--br {
+            bottom: 20px;
+            right: 20px;
+            border-width: 0 2px 2px 0;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Decoraciones de esquinas -->
+    <div class="corner corner--tl"></div>
+    <div class="corner corner--tr"></div>
+    <div class="corner corner--bl"></div>
+    <div class="corner corner--br"></div>
+
+    <!-- Contenido principal -->
+    <main class="container">
+        <div class="icon">&#9888;</div>
+
+        <h1>En Construcción</h1>
+
+        <p class="subtitle">
+            Esta página está en desarrollo.<br>
+            ¡Vuelve pronto!
+        </p>
+
+        <div class="status-box">
+            <div class="status-content">
+                <div class="led"></div>
+                <span class="status-text">Trabajando en ello...</span>
+            </div>
+        </div>
+
+        <div class="progress-container">
+            <div class="progress-label"></div>
+            <div class="progress-bar">
+                <div class="progress-fill"></div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <span> v0.0.1 </span>
+    </footer>
+</body>
+
+</html>
