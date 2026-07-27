@@ -1,0 +1,292 @@
+{
+  "nav": {
+    "home": "HOME",
+    "about": "ABOUT US",
+    "product": "SentryN3t",
+    "contact": "CONTACT",
+    "partner": "Become a partner"
+  },
+  "hero": {
+    "system_tag": "Cyber Defense Systems",
+    "title_1": "Secure your",
+    "title_2": "Industrial",
+    "title_3": "Infrastructure",
+    "description": "SentryN3t Protection: Advanced NDR solution specifically designed to protect critical industrial environments. Total visibility, AI detection, and real-time response.",
+    "cta_demo": "REQUEST DEMO",
+    "cta_discover": "Discover SentryN3t",
+    "stats": {
+      "threats": "BLOCKED THREATS",
+      "uptime": "UPTIME",
+      "encryption": "ENCRYPTION"
+    }
+  },
+  "about": {
+    "tag": "Who We Are",
+    "title_main": "Innovation and",
+    "title_sub": "Security North Labs",
+    "description": "Founded in Northwest Spain with a clear mission: to shield the industrial productive fabric. We specialize in Industrial and IT Cybersecurity, developing our own proprietary tools.",
+    "features": {
+      "team_title": "Multidisciplinary Team",
+      "team_desc": "Computer engineers, chemists, and geomatics experts working together.",
+      "rd_title": "In-house R&D",
+      "rd_desc": "We develop 100% European technology tailored to real-world needs.",
+      "vision_title": "Global Vision",
+      "vision_desc": "Convergence of technical and economic profiles for viable solutions."
+    },
+    "services": {
+      "consulting": "CONSULTANCY",
+      "deployment": "DEPLOYMENT",
+      "monitoring": "MONITORING",
+      "response": "RESPONSE",
+      "consulting_desc": "Risk analysis and regulatory compliance.",
+      "deployment_desc": "Seamless implementation in production environments.",
+      "monitoring_desc": "24/7 surveillance of critical assets.",
+      "response_desc": "Immediate action upon detected anomalies."
+    }
+  },
+  "product": {
+    "badge": "CORE TECHNOLOGY",
+    "title_main": "SentryN3t",
+    "title_sub": "Protection",
+    "description": "Network Detection and Response (NDR) solution designed for modern industrial environments. Where IT loses visibility, SentryN3t takes control.",
+    "benefits": {
+      "visibility_title": "TOTAL VISIBILITY",
+      "visibility_desc": "Monitors OT and IT traffic, even between devices that do not pass through visible nodes. Eliminates blind spots in your network.",
+      "ai_title": "ARTIFICIAL INTELLIGENCE",
+      "ai_desc": "Detects anomalous behavior after a passive learning period. No complex static rules required.",
+      "interrupt_title": "ZERO DISRUPTIONS",
+      "interrupt_desc": "Passive deployment via Port Mirroring or TAP. Does not interfere with production traffic or require agents.",
+      "sovereignty_title": "EUROPEAN SOVEREIGNTY",
+      "sovereignty_desc": "Technology developed entirely in the EU, complying with the most demanding privacy and security standards."
+    },
+    "poc": {
+      "title": "Where do we start?",
+      "description": "We perform a Proof of Concept (PoC) on a critical line or zone without causing disruption. We validate detection and visibility in your real environment.",
+      "steps": [
+        "Scope and objectives definition",
+        "Initial deployment and passive learning (2-4 weeks)",
+        "Active analysis and anomaly detection",
+        "Full assets and threats report"
+      ],
+      "cta": "DOWNLOAD PoC DOSSIER",
+      "weeks": "2-4",
+      "weeks_label": "WEEKS OF ANALYSIS",
+      "phase_label": "AI TRAINING PHASE"
+    }
+  },
+  
+"contact": {
+    "title": "Let's Talk",
+    "description": "Want to include SentryN3t Protection in your portfolio? Need to secure your industrial plant? Our team is ready to help.",
+    "info": {
+      "email": "Email",
+      "phone": "Phone",
+      "offices": "Offices"
+    },
+    "form": {
+      "title": "Send us a message",
+      "label_name": "Name",
+      "placeholder_name": "Your name",
+      "label_email": "Email",
+      "placeholder_email": "your@email.com",
+      "label_company": "Company",
+      "placeholder_company": "Company name",
+      "label_message": "Message",
+      "placeholder_message": "How can we help you?",
+      "submit": "Send Request"
+    }
+  },
+  "footer": {
+  "description": "Advanced cyber defense and monitoring systems for critical industrial infrastructures. European Sovereignty.",
+  "nav_title": "Navigation",
+  "legal_title": "Legal",
+  "links": {
+    "home": "Home",
+    "about": "About Us",
+    "product": "SentryN3t",
+    "contacto": "Contact"
+  },
+  "legal": {
+    "privacy": "Privacy Policy",
+    "notice": "Legal Notice",
+    "cookies": "Cookie Policy"
+  },
+  "copyright": "INNOVATION & SECURITY NORTH LABS SL. ALL RIGHTS RESERVED."
+  },
+  "privacy": {
+    "back": "← BACK TO HOME",
+    "title": "Privacy",
+    "titleHighlight": "Policy",
+    "sections": {
+      "responsable": {
+        "title": "Data Controller",
+        "holder": "Owner",
+        "address": "Address",
+        "nif": "Tax ID",
+        "email": "Email"
+      },
+      "finalidades": {
+        "title": "Purpose of Data Processing",
+        "intro": "INNOVATION AND SECURITY NORTH LABS will process personal data for the following purposes, provided there is a legal basis:",
+        "list": [
+          "Contracting products and services and their management.",
+          "Responding to inquiries and questions.",
+          "Evaluating candidates in recruitment processes.",
+          "Sending commercial communications unless opposed.",
+          "Producing anonymous statistical reports.",
+          "Keeping users informed through social media.",
+          "Complying with legal obligations."
+        ]
+      },
+      "legitimacion": {
+        "title": "Legal Basis for Data Processing",
+        "content": [
+          "Recruitment data processing is based on user consent.",
+          "Service management is based on contract execution.",
+          "Commercial communications are based on legitimate interest.",
+          "Data may also be processed to comply with legal obligations."
+        ]
+      },
+      "categorias": {
+        "title": "Categories of Personal Data",
+        "list": [
+          "Identification data.",
+          "Contact data.",
+          "Academic and professional data.",
+          "Financial and banking data.",
+          "Other data provided by the user."
+        ],
+        "note": "Refusal to provide mandatory data may prevent service delivery."
+      },
+      "comunicaciones": {
+        "title": "Disclosure of Personal Data",
+        "list": [
+          "Law enforcement authorities.",
+          "Judicial authorities.",
+          "Public administrations.",
+          "Financial institutions.",
+          "Professionals required for service provision."
+        ]
+      },
+      "transferencias": {
+        "title": "International Transfers",
+        "content": "As a general rule, no international data transfers are carried out. If required, all legal safeguards will be applied."
+      },
+      "conservacion": {
+        "title": "Data Retention",
+        "content": [
+          "Data will be retained for as long as necessary for its intended purpose.",
+          "Candidate data will be retained for one year."
+        ]
+      },
+      "derechos": {
+        "title": "Data Subject Rights",
+        "list": [
+          "Withdraw consent.",
+          "Access personal data.",
+          "Rectify inaccurate data.",
+          "Request data erasure.",
+          "Request processing limitation.",
+          "Request data portability.",
+          "File a complaint with the Spanish Data Protection Agency."
+        ]
+      },
+      "seguridad": {
+        "title": "Security Measures",
+        "content": [
+          "Technical and organizational measures are applied to protect data.",
+          "This policy may be updated in accordance with current legislation."
+        ]
+      }
+    }
+  },
+  "legal": {
+    "back": "← BACK TO HOME",
+    "title": "LEGAL",
+    "titleHighlight": "NOTICE",
+    "sections": {
+      "responsable": {
+        "title": "Data Controller",
+        "holder": "Owner",
+        "address": "Address",
+        "nif": "Tax ID",
+        "email": "Email"
+      },
+      "objeto": {
+        "title": "Object",
+        "p1": "These general conditions regulate the access, navigation and use of the service of this website (hereinafter, 'the Web'), without prejudice to the fact that INNOVATION AND SECURITY NORTH LABS reserves the right to modify the presentation, configuration and content of the Web, as well as the conditions required for its access and/or use.",
+        "p2": "Visiting and using the Web attributes the condition of Web user (hereinafter, the 'User') and implies acceptance of all the conditions included in this Legal Notice, having the same validity as any written and signed contract. The User must carefully read this Legal Notice, as it and its conditions of use may undergo modifications. In the event that you do not agree with the terms set forth, do not browse or use the Web."
+      },
+      "propiedad": {
+        "title": "Intellectual and Industrial Property Rights",
+        "p1": "INNOVATION AND SECURITY NORTH LABS is the owner or, where appropriate, has the corresponding licenses for the exploitation rights of intellectual and industrial property of the Web, as well as the intellectual and industrial property rights over the elements contained therein.",
+        "p2": "All the contents of the Web, including images, photographs, documents, software, texts, graphics, brands, logos, distinctive signs, color combinations, structure and design, etc., (hereinafter, the 'Contents'), are the intellectual property of INNOVATION AND SECURITY NORTH LABS or its licensors. Access and use of the Web does not attribute any rights over them to the User.",
+        "p3": "In accordance with the provisions of the Intellectual Property Law, the reproduction, distribution and public communication, including its modality of making available, of all or part of the contents of the Web, for commercial purposes, in any support and by any technical means, are expressly prohibited. Furthermore, the User shall refrain from deleting, altering, evading or manipulating any protection device or security system installed on the website."
+      },
+      "enlaces": {
+        "title": "Links",
+        "p1": "In those cases where there are links or hyperlinks on the Web that facilitate access to independent third-party websites, INNOVATION AND SECURITY NORTH LABS informs that it does not exercise any type of control over the websites or their contents as they are not its property, therefore it will not assume any responsibility for the contents and operation of the external website.",
+        "p2": "Links to third-party sites depend on each linked site and the contents of said pages, as well as the security configuration of said environments are the responsibility of the entity that owns it. INNOVATION AND SECURITY NORTH LABS will not assume any responsibility for the contents of the linked sites, nor does it guarantee that the links to other places are accurate at the time of access or that said sites are operational at all times.",
+        "p3": "INNOVATION AND SECURITY NORTH LABS will not be responsible for the information that directs the client of its services through existing links, provided that it does not have effective knowledge that the activity or information is unlawful or that it harms property or rights of a third party susceptible to compensation."
+      },
+      "uso": {
+        "title": "Terms of Use",
+        "p1": "The User undertakes to make correct use of the Web in accordance with the Law and this Legal Notice.",
+        "p2": "The User will be liable to INNOVATION AND SECURITY NORTH LABS or third parties for any damages that may be caused as a result of a breach of said obligation. The use of the Web for purposes harmful to property or interests of INNOVATION AND SECURITY NORTH LABS or third parties is expressly prohibited."
+      },
+      "exclusion": {
+        "title": "Disclaimer",
+        "p1": "INNOVATION AND SECURITY NORTH LABS is not responsible for the truthfulness, accuracy, adequacy, suitability and updating of the contents provided by third parties, being exempt from any contractual or extra-contractual liability with Users who make use of them.",
+        "p2": "Access to the Web does not imply the obligation of INNOVATION AND SECURITY NORTH LABS to control the absence of viruses or any other harmful computer element. It is the responsibility of the User to have adequate tools for detection and disinfection. INNOVATION AND SECURITY NORTH LABS is not responsible for damages produced in the computer equipment of Users or third parties during the provision of the service.",
+        "p3": "Access to the Web requires services and supplies from third parties, including transport through telecommunications networks whose reliability and quality do not correspond to INNOVATION AND SECURITY NORTH LABS.",
+        "p4": "INNOVATION AND SECURITY NORTH LABS is not responsible for damages of any kind produced in the User caused by failures or disconnections in the telecommunications networks that produce the suspension or interruption of the service.",
+        "p5": "In the event that the User has knowledge of the existence of illegal or inappropriate content, they must notify INNOVATION AND SECURITY NORTH LABS immediately."
+      },
+      "proteccion": {
+        "title": "Data Protection",
+        "p1": "In accordance with the provisions of REGULATION (EU) 2016/679 AND current regulations, the User is informed that all personal data provided during the use of the Website will be processed in accordance with the provisions of the Privacy Policy.",
+        "p2": "INNOVATION AND SECURITY NORTH LABS will use its social media profiles to advertise its own services."
+      },
+      "cookies": {
+        "title": "Cookies",
+        "content": "See Cookie Policy"
+      },
+      "miscelanea": {
+        "title": "Miscellaneous",
+        "p1": "In the event that any provision of this legal notice is declared null or unenforceable, such nullity or unenforceability will not affect the remaining provisions."
+      },
+      "jurisdiccion": {
+        "title": "Jurisdiction and Applicable Law",
+        "p1": "For any controversy or question that may derive from the application or interpretation of this Legal Notice, the parties will apply the principles of good faith and will be governed by current Spanish regulations.",
+        "p2": "For the resolution of conflicts, the parties expressly submit to the courts and tribunals of Gijón, provided that the applicable legislation so allows."
+      }
+    }
+  },
+  "cookies": {
+    "back": "← BACK TO HOME",
+    "title": "COOKIE",
+    "titleHighlight": "POLICY",
+    "sections": {
+      "info": {
+        "title": "General Information",
+        "paragraphs": [
+          "This website uses cookies. Cookies on this website are used to personalize content and ads, provide social features and analyze traffic. In addition, we share information about your use of the website with our social media, advertising and web analysis partners, who may combine it with other information you have provided to them or that they have collected from your use of their services.",
+          "Cookies are small text files that websites can use to make the user experience more efficient.",
+          "The law states that we can store cookies on your device if they are strictly necessary for the operation of this page. For all other types of cookies we need your permission.",
+          "This page uses different types of cookies. Some cookies are placed by third-party services that appear on our pages.",
+          "At any time you can change or withdraw your consent from the Cookie Declaration on our website.",
+          "Learn more about who we are, how you can contact us and how we process personal data in our Privacy Policy.",
+          "When contacting us regarding your consent, please state the ID and date of your consent.",
+          "Your consent applies to the following domains: secnorthlabs.eu"
+        ]
+      }
+    }
+  },
+  "footer": {
+    "description": "Advanced cyberdefense and monitoring systems for critical industrial infrastructures. European Sovereignty.",
+    "legal_title": "LEGAL",
+    "privacy": "PRIVACY POLICY",
+    "legal_notice": "LEGAL NOTICE",
+    "cookies": "COOKIES POLICY"
+  }
+}

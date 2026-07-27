@@ -1,0 +1,41 @@
+# ── Dependencias y artefactos de build ──
+node_modules/
+.next/
+out/
+dist/
+dist-ssr/
+*.local
+.turbo/
+
+# ── Entorno ──
+.env
+.env.*
+!.env.example
+
+# ── Logs ──
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# ── Editor / SO ──
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+Thumbs.db
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# ── Datos confidenciales ────────────────────────────────────────────────
+# ISNLA-DOC-0008-01 §5: la hoja VALIDACION del dimensionador contiene
+# nombres reales de clientes, horas contratadas y PVP por contrato, y la
+# hoja CALCULADORA contiene coste interno, tarifa efectiva y margen bruto.
+# Nada de eso puede entrar en el repositorio que Netlify clona para
+# construir el sitio. El fichero se distribuye por canal interno.
+docs/*.xlsx
