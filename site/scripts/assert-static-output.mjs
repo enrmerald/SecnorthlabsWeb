@@ -80,7 +80,11 @@ const FORBIDDEN_TOKENS = [
 ]
 
 // Nombres de cliente de la hoja VALIDACION. No pueden aparecer en ninguna parte.
-const CLIENT_NAMES = /campoastur|el musel|plabite|microviable|sierense|galma|acciona|adaro/i
+//
+// Con limites de palabra en los dos extremos: sin ellos, "acciona" casa dentro
+// de "accionable" y "galma" dentro de cualquier palabra que la contenga, y el
+// verificador se vuelve ruido que la gente aprende a ignorar.
+const CLIENT_NAMES = /\b(campoastur|el musel|plabite|microviable|sierense|galma|acciona|adaro)\b/i
 
 // 6,58 y 57 como cifras sueltas dan demasiados falsos positivos dentro de los
 // hashes y los chunks minificados, asi que se busca la forma en que apareceria
@@ -125,7 +129,14 @@ if (await exists(routesModule)) {
       if (!/<html[^>]+lang="/.test(content)) note(`out/${html}: sin atributo lang`)
       if (headings.length !== 1) note(`out/${html}: ${headings.length} elementos h1, debe haber 1`)
       if (!/rel="canonical"/.test(content)) note(`out/${html}: sin canonical`)
-      if (route.indexable && !/hreflang="/.test(content)) note(`out/${html}: sin hreflang`)
+      // Insensible a mayusculas: React serializa el atributo como `hrefLang`.
+      // HTML no distingue mayusculas en los nombres de atributo, asi que es
+      // valido, pero un `test` sensible daria un falso negativo en todas las
+      // paginas.
+      if (route.indexable && !/hreflang=/i.test(content)) note(`out/${html}: sin hreflang`)
+      if (!/<html[^>]+lang="([^"]+)"/.exec(content)?.[1]?.startsWith(locale)) {
+        note(`out/${html}: el atributo lang no corresponde al idioma "${locale}"`)
+      }
     }
   }
 } else {

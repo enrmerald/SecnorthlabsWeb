@@ -1,0 +1,1750 @@
+{
+  "blog": {
+    "hero": {
+      "breadcrumb": [
+        {
+          "label": "Home",
+          "routeId": "home"
+        },
+        {
+          "label": "Blog",
+          "routeId": null
+        }
+      ],
+      "subtitle": "We translate cybersecurity and GRC news into something actionable for CISOs and compliance leaders. No fluff: what it means, who it affects and what to do.",
+      "title": "Blog",
+      "titleHighlight": "Analysis, regulation and best practices"
+    },
+    "newsletter": {
+      "cta": "Subscribe",
+      "error": "Couldn't complete the subscription. Please try again.",
+      "placeholder": "you@company.com",
+      "privacyNote": "By subscribing you accept our Privacy Policy. You can unsubscribe at any time.",
+      "subtitle": "Cybersecurity and GRC news, with our actionable angle. No spam.",
+      "success": "Done! Check your inbox to confirm your subscription.",
+      "title": "Get ISN Labs' monthly analysis"
+    },
+    "seo": {
+      "description": "Actionable analysis of NIS2, DORA, ISO 27001, ENS, GDPR and incident response for CISOs and compliance leaders.",
+      "title": "Cybersecurity and compliance blog (NIS2, DORA, ISO) — ISN Labs"
+    },
+    "soon": {
+      "body": "We will publish two analyses a month on NIS2, DORA, ISO 27001, ENS, GDPR and incident response. The angle will always be the same: what it means, who it affects and what to do.",
+      "kicker": "Coming soon",
+      "note": "We would rather publish nothing than publish filler.",
+      "title": "We are putting the editorial line together",
+      "topics": [
+        "NIS2",
+        "DORA",
+        "ISO 27001",
+        "ENS",
+        "GDPR",
+        "OT / ICS",
+        "Incident response"
+      ],
+      "topicsLabel": "What we will write about"
+    }
+  },
+  "calculator": {
+    "auditNote": "Technical audits include a report with CVSS severity and a retest, valid as evidence for the ENS certification audit; the Certificate of Conformity is issued by an ENAC-accredited body.",
+    "cumplimiento": {
+      "legend": "Regulatory compliance",
+      "modulo": {
+        "label": "Audit module",
+        "options": {
+          "ensAlta": "ENS high category",
+          "ensMedia": "ENS medium category",
+          "ninguno": "No audits",
+          "nis2": "NIS2 Ready"
+        }
+      }
+    },
+    "errors": {
+      "cpdExternoConServidoresPropios": "You selected an external data centre but there are own servers. Choose hybrid or remove the own servers.",
+      "cpdPropioConServidoresExternos": "You selected an own data centre but there are external servers. Choose hybrid or remove the external servers.",
+      "entero": "Enter a whole number.",
+      "generic": "The fee could not be calculated. Please try again in a few seconds.",
+      "rango": "The value is outside the accepted range.",
+      "rateLimited": "Too many requests. Please wait a moment and try again.",
+      "tokenCaducado": "The session has expired. Enter your details again to recalculate."
+    },
+    "exclusions": [
+      "Taxes",
+      "Travel",
+      "Remediation of findings",
+      "Extraordinary testing",
+      "Fees of the ENS certification body"
+    ],
+    "exclusionsLabel": "Not included",
+    "hero": {
+      "breadcrumb": [
+        {
+          "label": "Home",
+          "routeId": "home"
+        },
+        {
+          "label": "Calculator",
+          "routeId": null
+        }
+      ],
+      "subtitle": "Answer a few questions about your environment and we will give you an indicative range for the Managed Cybersecurity Base Plan. No unsolicited sales calls.",
+      "title": "Find out which security plan",
+      "titleHighlight": "you need"
+    },
+    "leadGate": {
+      "submit": "Show my indicative fee",
+      "submitting": "Calculating…",
+      "subtitle": "We will show you the indicative fee right away. No unsolicited sales calls.",
+      "title": "Tell us who you are"
+    },
+    "legalNote": "Indicative estimate, not binding. The final fee depends on the scope validated in a free 30-minute technical session.",
+    "no": "No",
+    "organizacion": {
+      "cpd": {
+        "label": "Data centre",
+        "options": {
+          "externo": "External (cloud or provider)",
+          "hibrido": "Hybrid",
+          "propio": "Own (on-premise)"
+        }
+      },
+      "instalacionesOT": {
+        "help": "Plants, substations or lines. 0 if not applicable.",
+        "label": "OT sites"
+      },
+      "legend": "Your organisation",
+      "sedes": {
+        "help": "Between 1 and 50.",
+        "label": "Number of sites"
+      },
+      "srvFisExt": {
+        "label": "External physical servers"
+      },
+      "srvFisPropio": {
+        "label": "Own physical servers"
+      },
+      "srvVirExt": {
+        "label": "External virtual servers"
+      },
+      "srvVirPropio": {
+        "label": "Own virtual servers"
+      },
+      "usuarios": {
+        "help": "People with a workstation. Between 1 and 2,000.",
+        "label": "IT users"
+      }
+    },
+    "result": {
+      "breakdown": {
+        "audits": "NIS2 / ENS audits",
+        "licences": "Licences",
+        "title": "Breakdown",
+        "total": "TOTAL"
+      },
+      "cta": "Get a detailed proposal",
+      "ctaSent": "Proposal requested. We will write to you within 24 working hours.",
+      "managedLabel": "Managed service",
+      "perMonth": "€/month · taxes not included",
+      "recalculating": "Updating the fee…",
+      "sizeLabel": "Estimated size",
+      "title": "Quote prepared for {nombre}",
+      "updated": "Fee updated"
+    },
+    "seo": {
+      "description": "Estimate the monthly fee of the Managed Cybersecurity Base Plan in a minute, based on your sites, users, servers and compliance module.",
+      "title": "Managed Cybersecurity Base Plan calculator — ISN Labs"
+    },
+    "servicios": {
+      "backup": {
+        "label": "Backup monitoring"
+      },
+      "edr": {
+        "label": "EDR / MDR",
+        "options": {
+          "edr": "Managed EDR (Defender)",
+          "mdr": "Managed MDR (Huntress)",
+          "ninguno": "Already covered"
+        }
+      },
+      "firewalls": {
+        "label": "Number of firewalls"
+      },
+      "horasConsultoria": {
+        "label": "Consulting hours per month"
+      },
+      "legend": "Managed services",
+      "licenciasIncluidas": {
+        "label": "Should we include the licences?"
+      },
+      "parcheo": {
+        "label": "Managed patching"
+      },
+      "siem": {
+        "label": "SIEM-XDR"
+      }
+    },
+    "si": "Yes"
+  },
+  "common": {
+    "a11y": {
+      "breadcrumb": "You are here",
+      "closeMenu": "Close menu",
+      "currentPage": "Current page",
+      "externalLink": "opens in a new tab",
+      "footerNav": "Footer links",
+      "languageSwitch": "Change language",
+      "loading": "Calculating…",
+      "mainNav": "Main navigation",
+      "openMenu": "Open menu",
+      "openSubmenu": "Open Solutions submenu",
+      "required": "required",
+      "skipToContent": "Skip to content"
+    },
+    "brand": {
+      "claim": "Cybersecurity, IA & Innovation",
+      "legalName": "Innovation and Security North Labs SL (ISNOL)",
+      "location": "Asturias, Spain",
+      "name": "ISN Labs"
+    },
+    "buttons": {
+      "calcBudget": "Calculate your budget",
+      "contact": "Contact us",
+      "discoverPlan": "Discover your plan",
+      "learnMore": "Learn more",
+      "read": "Read",
+      "readArticle": "Read article",
+      "request": "Request",
+      "requestProposal": "Request a proposal",
+      "seeServices": "See services",
+      "subscribe": "Subscribe",
+      "talkExpert": "Talk to an expert"
+    },
+    "footer": {
+      "columns": {
+        "company": {
+          "links": [
+            {
+              "label": "About us",
+              "routeId": "company"
+            },
+            {
+              "label": "Sectors",
+              "routeId": "sectors"
+            },
+            {
+              "label": "Blog",
+              "routeId": "blog"
+            },
+            {
+              "label": "Contact",
+              "routeId": "contact"
+            }
+          ],
+          "title": "Company"
+        },
+        "legal": {
+          "cookieSettings": {
+            "action": "openCookieManager",
+            "label": "Cookie settings"
+          },
+          "links": [
+            {
+              "label": "Privacy Policy",
+              "routeId": "privacy"
+            },
+            {
+              "label": "Legal notice",
+              "routeId": "legal"
+            },
+            {
+              "label": "Cookie Policy",
+              "routeId": "cookies"
+            }
+          ],
+          "title": "Legal"
+        },
+        "solutions": {
+          "links": [
+            {
+              "hash": "#it",
+              "label": "IT MSSP",
+              "routeId": "mssp"
+            },
+            {
+              "hash": "#ot",
+              "label": "OT MSSP",
+              "routeId": "mssp"
+            },
+            {
+              "label": "GRC",
+              "routeId": "grc"
+            },
+            {
+              "hash": "#idi",
+              "label": "R&D&I",
+              "routeId": "grc"
+            }
+          ],
+          "title": "Solutions"
+        }
+      },
+      "copyright": "© 2026 ISN Labs · All rights reserved",
+      "ewalaNotice": "SentryN3t® is a trademark of Ewala",
+      "legalLine": "Innovation and Security North Labs SL (ISNOL) · Asturias, Spain"
+    },
+    "frameworks": [
+      "NIS2",
+      "DORA",
+      "ISO 27001",
+      "ISO 42001",
+      "ENS",
+      "GDPR",
+      "IEC 62443"
+    ],
+    "frameworksLabel": "Frameworks and regulations we align with",
+    "nav": {
+      "blog": "Blog",
+      "company": "Company",
+      "contact": "Contact",
+      "cta": "Find out which security plan you need",
+      "languageToggle": "ES",
+      "sectors": "Sectors",
+      "software": "Software",
+      "solutions": "Solutions"
+    },
+    "notFound": {
+      "code": "404",
+      "cta": "Back to home",
+      "ctaSecondary": "Contact us",
+      "seo": {
+        "description": "The page you are looking for does not exist or has moved.",
+        "title": "Page not found — ISN Labs"
+      },
+      "subtitle": "The address you opened does not match any page on this site. It may have moved, or the link may be misspelled.",
+      "title": "This page",
+      "titleHighlight": "does not exist"
+    },
+    "solutionsMenu": {
+      "items": [
+        {
+          "hash": "#it",
+          "label": "IT Security",
+          "routeId": "mssp"
+        },
+        {
+          "hash": "#ot",
+          "label": "OT Security",
+          "routeId": "mssp"
+        },
+        {
+          "label": "GRC",
+          "routeId": "grc"
+        },
+        {
+          "hash": "#idi",
+          "label": "R&D&I",
+          "routeId": "grc"
+        }
+      ],
+      "label": "Solutions"
+    }
+  },
+  "company": {
+    "cta": {
+      "ctaPrimary": "Contact",
+      "title": "Are we a fit for what you need?"
+    },
+    "hero": {
+      "breadcrumb": [
+        {
+          "label": "Home",
+          "routeId": "home"
+        },
+        {
+          "label": "Company",
+          "routeId": null
+        }
+      ],
+      "subtitle": "We are ISN Labs (Innovation and Security North Labs). An MSSP with an in-house GRC department: we combine managed security operations with governance, risk and compliance. Based in Asturias, with expansion in mind.",
+      "title": "Security and compliance,",
+      "titleHighlight": "under one roof"
+    },
+    "mission": {
+      "body": "We were founded to close that gap. Many organizations have, on one side, regulatory requirements and documentation and, on the other, technical measures applied without an overall view. We bring both together: we govern security with rigor and operate it with our own and partner technology, across IT and OT.",
+      "kicker": "Why we exist",
+      "line1": "Compliance without operations is paper.",
+      "line2": "Operations without governance is reactive."
+    },
+    "seo": {
+      "description": "ISN Labs (Innovation and Security North Labs) combines managed security and GRC compliance, across IT and OT, with in-house R&D&I. Based in Asturias.",
+      "title": "About ISN Labs: an MSSP with in-house GRC in Asturias"
+    },
+    "stats": [
+      {
+        "description": "Operations and compliance integrated, not siloed.",
+        "title": "MSSP + GRC"
+      },
+      {
+        "description": "We cover both corporate and industrial environments.",
+        "title": "IT + OT"
+      },
+      {
+        "description": "Security by design and funded projects.",
+        "title": "In-house R&D&I"
+      },
+      {
+        "description": "No sales fluff: we tell you what you really need.",
+        "title": "Technical rigor"
+      }
+    ],
+    "team": {
+      "kicker": "Team",
+      "roles": [
+        {
+          "description": "Strategy and operation of managed services.",
+          "title": "MSSP Direction"
+        },
+        {
+          "description": "Compliance, management systems and auditing.",
+          "title": "Head of GRC"
+        },
+        {
+          "description": "Service coordination and delivery.",
+          "title": "Operations Direction"
+        },
+        {
+          "description": "Architecture, technology and SentryN3t.",
+          "title": "CTO"
+        },
+        {
+          "description": "Security, risk and incident response.",
+          "title": "CSO"
+        },
+        {
+          "description": "Monitoring, response and IT/OT engineering.",
+          "title": "L2/OT technical team"
+        },
+        {
+          "description": "Architects, development, AI and project management.",
+          "title": "R&D&I"
+        },
+        {
+          "description": "ENS, ISO, NIS2, DORA and privacy.",
+          "title": "Consulting"
+        }
+      ],
+      "title": "A multidisciplinary team"
+    },
+    "values": {
+      "items": [
+        {
+          "description": "Security without alarmism. The complex, explained clearly for the board.",
+          "title": "Precision and restraint"
+        },
+        {
+          "description": "Useful, tailored systems. Neither over-licensing nor over-documenting.",
+          "title": "Proportionality"
+        },
+        {
+          "description": "No black boxes: clear, traceable reports. You see what we see.",
+          "title": "Transparency"
+        },
+        {
+          "description": "What works, what doesn't and the next step. Always.",
+          "title": "Continuous improvement"
+        }
+      ],
+      "kicker": "How we work"
+    }
+  },
+  "consent": {
+    "banner": {
+      "accept": "Accept all",
+      "configure": "Configure",
+      "reject": "Reject all",
+      "text": "We use technical cookies that are required for the site to work. We want your decision on the rest before enabling them.",
+      "title": "Cookies and similar technologies"
+    },
+    "preferences": {
+      "categories": {
+        "analytics": {
+          "description": "Tell us which pages are read, in aggregate, so we can improve the content.",
+          "title": "Analytics"
+        },
+        "marketing": {
+          "description": "Allow us to measure how effective our campaigns are.",
+          "title": "Marketing"
+        },
+        "necessary": {
+          "always": "Always on",
+          "description": "Required for the site to work. These cannot be disabled.",
+          "title": "Necessary"
+        }
+      },
+      "close": "Close",
+      "intro": "Choose which categories to allow. You can change this at any time from the footer.",
+      "save": "Save preferences",
+      "title": "Cookie preferences"
+    },
+    "table": {
+      "caption": "Cookies and technologies used",
+      "category": "Category",
+      "duration": "Duration",
+      "empty": "This site currently uses no cookies other than the strictly necessary ones. The table will be completed once the analytics tool is decided.",
+      "name": "Name",
+      "owner": "Owner",
+      "purpose": "Purpose"
+    }
+  },
+  "contact": {
+    "form": {
+      "consent": "I have read the basic data protection information.",
+      "errorMessage": "Couldn't send. Please check the fields and try again.",
+      "errors": {
+        "company": "Please enter your company.",
+        "consent": "You must confirm that you have read the data protection information.",
+        "email": "Enter a valid email.",
+        "firstName": "Enter your first name.",
+        "generic": "Couldn't send. Please check the fields and try again.",
+        "genericEmailDomain": "This looks like a personal address. A work email helps us prepare a better answer.",
+        "lastName": "Enter your last name.",
+        "message": "The message is too long (max. 1000 characters).",
+        "need": "Select an option.",
+        "rateLimited": "Too many attempts. Please wait a moment and try again.",
+        "summaryTitle": "Please review these fields before sending"
+      },
+      "fields": {
+        "company": {
+          "label": "Company",
+          "placeholder": "Acme Industrial S.A."
+        },
+        "email": {
+          "label": "Work email",
+          "placeholder": "ana@company.com"
+        },
+        "firstName": {
+          "label": "First name",
+          "placeholder": "Ana"
+        },
+        "lastName": {
+          "label": "Last name",
+          "placeholder": "García Pérez"
+        },
+        "message": {
+          "label": "Message",
+          "placeholder": "Briefly tell us about your environment (IT/OT), size and concerns…"
+        },
+        "need": {
+          "label": "What do you need?",
+          "placeholder": "Select an option"
+        },
+        "phone": {
+          "label": "Phone",
+          "placeholder": "+34 6XX XXX XXX"
+        },
+        "role": {
+          "label": "Role",
+          "placeholder": "CISO, IT Manager, Compliance…"
+        }
+      },
+      "marketing": "I would like to receive commercial communications from ISN Labs.",
+      "needOptions": [
+        "IT MSSP",
+        "OT MSSP",
+        "GRC",
+        "SentryN3t demo",
+        "Licenses / Software",
+        "Other"
+      ],
+      "privacyBasicInfo": {
+        "moreLabel": "Further information in the Privacy policy",
+        "rows": [
+          {
+            "label": "Controller",
+            "value": "Innovation and Security North Labs SL · Tax ID B22966139"
+          },
+          {
+            "label": "Purpose",
+            "value": "To answer your enquiry and, where appropriate, prepare a service proposal."
+          },
+          {
+            "label": "Recipients",
+            "value": "Our own CRM, hosted in the European Union. No data is shared with third parties except where legally required."
+          },
+          {
+            "label": "Retention",
+            "value": "As long as needed to handle the enquiry, plus any applicable legal periods."
+          },
+          {
+            "label": "Rights",
+            "value": "Access, rectification, erasure, restriction, portability and objection, by writing to info@secnorthlabs.eu"
+          }
+        ],
+        "title": "Basic data protection information"
+      },
+      "privacyLinkLabel": "Privacy Policy",
+      "privacyNote": "We process your data to answer your enquiry. See the basic information above and the Privacy policy.",
+      "requiredNote": "Fields marked with * are required.",
+      "responseNote": "Reply within 24 business hours",
+      "submit": "Send request",
+      "successMessage": "Thank you. We'll reply within 24 business hours.",
+      "title": "Request information or a demo"
+    },
+    "hero": {
+      "breadcrumb": [
+        {
+          "label": "Home",
+          "routeId": "home"
+        },
+        {
+          "label": "Contact",
+          "routeId": null
+        }
+      ],
+      "subtitle": "Tell us about your context and we'll reply within 24 business hours. Free initial assessment: we tell you what works, what doesn't and the recommended next step.",
+      "title": "Let's talk about your",
+      "titleHighlight": "security posture"
+    },
+    "rail": {
+      "contactDirect": {
+        "items": [
+          {
+            "label": "Email",
+            "value": "info@secnorthlabs.eu"
+          },
+          {
+            "label": "Phone",
+            "value": "+34 634 651 312"
+          },
+          {
+            "label": "Office",
+            "value": "Calle Peña Brava 21, Of. 1B · PI de Silvota, Llanera (Asturias)"
+          },
+          {
+            "label": "Hours",
+            "value": "Mon–Fri · 9:00–18:00 (CET)"
+          }
+        ],
+        "title": "Direct contact"
+      },
+      "incident": {
+        "phone": "",
+        "phoneSuffix": "24/7",
+        "text": "If you're facing a security incident right now, call us directly for priority response.",
+        "title": "Incident in progress?"
+      },
+      "whatNext": {
+        "steps": [
+          {
+            "description": "A specialist, not a salesperson.",
+            "title": "We contact you"
+          },
+          {
+            "description": "We understand your IT/OT context and priorities.",
+            "title": "Brief assessment"
+          },
+          {
+            "description": "Scope, services and a clear next step.",
+            "title": "Tailored proposal"
+          }
+        ],
+        "title": "What happens next"
+      }
+    },
+    "seo": {
+      "description": "Tell us about your IT/OT context and we'll reply within 24 business hours. Free initial assessment.",
+      "title": "Contact — Request information or a demo | ISN Labs"
+    }
+  },
+  "cookies": {
+    "sections": {
+      "info": {
+        "paragraphs": [
+          "This website uses cookies. Cookies on this website are used to personalize content and ads, provide social features and analyze traffic. In addition, we share information about your use of the website with our social media, advertising and web analysis partners, who may combine it with other information you have provided to them or that they have collected from your use of their services.",
+          "Cookies are small text files that websites can use to make the user experience more efficient.",
+          "The law states that we can store cookies on your device if they are strictly necessary for the operation of this page. For all other types of cookies we need your permission.",
+          "This page uses different types of cookies. Some cookies are placed by third-party services that appear on our pages.",
+          "At any time you can change or withdraw your consent from the Cookie Declaration on our website.",
+          "Learn more about who we are, how you can contact us and how we process personal data in our Privacy Policy.",
+          "When contacting us regarding your consent, please state the ID and date of your consent.",
+          "Your consent applies to the following domains: secnorthlabs.eu"
+        ],
+        "title": "General Information"
+      }
+    },
+    "seo": {
+      "description": "Which cookies and technologies the ISN Labs website uses, for what purpose and how to manage them.",
+      "title": "Cookie policy — ISN Labs"
+    },
+    "title": "COOKIE",
+    "titleHighlight": "POLICY"
+  },
+  "grc": {
+    "consulting": {
+      "cards": [
+        {
+          "cta": "Learn more",
+          "description": "Alignment and certification with the Spanish National Security Framework (RD 311/2022). Mandatory for those serving public administration.",
+          "tag": "Mandatory · public sector",
+          "title": "ENS"
+        },
+        {
+          "cta": "Learn more",
+          "description": "Govern the lifecycle of your Artificial Intelligence systems and get ahead of the EU AI Act.",
+          "tag": "AI management",
+          "title": "ISO 42001"
+        },
+        {
+          "cta": "Learn more",
+          "description": "The international benchmark standard. A useful, proportional and certifiable ISMS, aligned with your business.",
+          "tag": "Information security",
+          "title": "ISO 27001"
+        },
+        {
+          "cta": "Learn more",
+          "description": "NIS2 alignment: governance, risk management, supplier control and incident notification.",
+          "tag": "European directive",
+          "title": "NIS2"
+        }
+      ],
+      "discover": {
+        "label": "Discover more",
+        "link": "See all GRC services",
+        "text": "ISO 27701 (privacy), ISO 22301 (continuity), GDPR, DPO as a Service, ISMS, Security Master Plan and strategic direction (vCISO)."
+      },
+      "kicker": "Compliance · Core frameworks",
+      "title": "Featured consulting services"
+    },
+    "cta": {
+      "ctaPrimary": "Talk to GRC",
+      "ctaSecondary": "See MSSP services",
+      "title": "Do you have a regulatory deadline?"
+    },
+    "hero": {
+      "breadcrumb": [
+        {
+          "label": "Home",
+          "routeId": "home"
+        },
+        {
+          "label": "Solutions",
+          "routeId": null
+        },
+        {
+          "label": "GRC",
+          "routeId": null
+        }
+      ],
+      "subtitle": "Useful, proportional management systems, integrated into your real operations. You meet the regulation and, along the way, improve your security. These are the frameworks we get asked about most.",
+      "title": "Governance, risk and",
+      "titleHighlight": "compliance (GRC)"
+    },
+    "idi": {
+      "items": [
+        {
+          "description": "Leadership and management of national and European consortia, with cross-cutting security from TRL0.",
+          "tag": "D1",
+          "title": "Collaborative R&D&I projects"
+        },
+        {
+          "description": "From idea to fundable project: objectives, consortium and fit with calls for proposals.",
+          "tag": "D2",
+          "title": "Funding sourcing"
+        }
+      ],
+      "kicker": "R&D&I with security by design",
+      "title": "Secure and funded innovation"
+    },
+    "seo": {
+      "description": "ENS, ISO 27001, ISO 42001 and NIS2 alignment and certification, plus GDPR, DPO as a Service and Master Plan. Proportional compliance.",
+      "title": "GRC consulting: ENS, ISO 27001, ISO 42001 and NIS2 — ISN Labs"
+    },
+    "why": {
+      "items": [
+        {
+          "description": "Systems that get used, not ones that decorate a shelf.",
+          "title": "Proportional"
+        },
+        {
+          "description": "GRC connected to your MSSP: compliance backed by real evidence.",
+          "title": "Integrated with operations"
+        },
+        {
+          "description": "A single framework covering ENS, ISO, NIS2 and privacy at once.",
+          "title": "No duplication"
+        }
+      ],
+      "label": "Why ISN Labs for GRC"
+    }
+  },
+  "grcCatalog": {
+    "cta": {
+      "ctaPrimary": "Talk to GRC",
+      "ctaSecondary": "See MSSP services",
+      "title": "Do you have a regulatory deadline?"
+    },
+    "hero": {
+      "breadcrumb": [
+        {
+          "label": "Home",
+          "routeId": "home"
+        },
+        {
+          "label": "Solutions",
+          "routeId": null
+        },
+        {
+          "label": "GRC",
+          "routeId": "grc"
+        },
+        {
+          "label": "Catalogue",
+          "routeId": null
+        }
+      ],
+      "subtitle": "The full breakdown of our GRC services. Useful, proportional management systems, coordinated to avoid duplication.",
+      "title": "Governance, risk and compliance",
+      "titleHighlight": "services catalog"
+    },
+    "idiNote": "See also our R&D&I services (collaborative projects and funding) on the GRC page.",
+    "seo": {
+      "description": "All Governance, Risk and Compliance services: ENS, ISO 27001/27701/22301/42001, NIS2, GDPR, DPO as a Service, ISMS, Master Plan and vCISO.",
+      "title": "GRC services catalog — ISN Labs"
+    },
+    "services": [
+      {
+        "code": "A1",
+        "description": "Alignment and certification with the Spanish National Security Framework (RD 311/2022).",
+        "title": "ENS alignment"
+      },
+      {
+        "code": "A2",
+        "description": "Implementation and maintenance of the Information Security Management System.",
+        "title": "ISO 27001 (ISMS)"
+      },
+      {
+        "code": "A3",
+        "description": "Alignment with the European directive, built on ISO 27001 and ENS.",
+        "title": "NIS2 alignment"
+      },
+      {
+        "code": "A4",
+        "description": "Artificial Intelligence management system (AIMS), aligned with the AI Act.",
+        "title": "ISO 42001 (AI)"
+      },
+      {
+        "code": "A5",
+        "description": "Business continuity management system (BCMS).",
+        "title": "ISO 22301 (Continuity)"
+      },
+      {
+        "code": "A6",
+        "description": "Data protection alignment and maintenance.",
+        "title": "GDPR / LOPDGDD"
+      },
+      {
+        "code": "A7",
+        "description": "Privacy information management system (PIMS).",
+        "title": "ISO 27701 (Privacy)"
+      },
+      {
+        "code": "A8",
+        "description": "External, independent and up-to-date Data Protection Officer.",
+        "title": "DPO as a Service"
+      },
+      {
+        "code": "A9",
+        "description": "Design, implementation and maintenance of the security management system.",
+        "title": "ISMS implementation"
+      },
+      {
+        "code": "A10",
+        "description": "Risk-prioritized roadmap, aligned with the business.",
+        "title": "Security Master Plan"
+      },
+      {
+        "code": "A11",
+        "description": "Direction with technical rigor, without assuming the delegated legal role.",
+        "title": "Strategic cybersecurity direction (vCISO)"
+      }
+    ]
+  },
+  "home": {
+    "ctaBand": {
+      "ctaPrimary": "Discover your plan",
+      "ctaSecondary": "Contact",
+      "subtitle": "Free initial assessment. We tell you what works, what doesn't and the next step.",
+      "title": "If your company's cybersecurity worries you",
+      "titleHighlight": "we can help"
+    },
+    "hero": {
+      "ctaPrimary": "Contact us",
+      "ctaSecondary": "Talk to an expert",
+      "subtitle": "We run your security (MSSP) and govern your compliance (GRC) from a single team. AI-based detection across IT and OT, managed response and alignment with NIS2, DORA, ISO 27001, ENS and GDPR. No fluff, just technical rigor.",
+      "tags": [
+        "MSSP",
+        "GRC",
+        "Cybersecurity",
+        "AI"
+      ],
+      "title": "Managed security and compliance,",
+      "titleHighlight": "with no loose ends"
+    },
+    "panel": {
+      "footer": "MSSP + GRC · one single point of contact",
+      "header": "managed service",
+      "rows": [
+        {
+          "label": "IT security",
+          "value": "Managed"
+        },
+        {
+          "label": "OT security",
+          "value": "Managed"
+        },
+        {
+          "label": "Governance & compliance",
+          "value": "GRC"
+        },
+        {
+          "label": "Detection & response",
+          "value": "24/7"
+        },
+        {
+          "label": "R&D&I · innovation",
+          "value": "Active"
+        }
+      ],
+      "status": "operational",
+      "title": "Coverage under one roof"
+    },
+    "pillars": {
+      "items": [
+        {
+          "cta": "See services",
+          "description": "Continuous monitoring (PBCG), 24/7 SOC, EDR/MDR/XDR, perimeter, 3-2-1 backup, hardening, pentesting and vulnerability management.",
+          "tag": "MSSP · IT",
+          "title": "Managed IT security"
+        },
+        {
+          "cta": "See services",
+          "description": "Visibility and passive inventory, SentryN3t NDR, 24/7 monitoring, controlled patching, perimeter security and OT/ICS auditing.",
+          "tag": "MSSP · OT",
+          "title": "Industrial security"
+        },
+        {
+          "cta": "See services",
+          "description": "ENS, ISO 27001/27701/22301/42001, NIS2, GDPR, DPO as a Service, Master Plan and strategic cybersecurity direction.",
+          "tag": "GRC",
+          "title": "Governance, risk and compliance"
+        },
+        {
+          "cta": "See services",
+          "description": "Security by design (TRL0), consortium leadership and national and European funding for R&D&I projects.",
+          "tag": "R&D&I",
+          "title": "Innovation with security"
+        }
+      ],
+      "kicker": "What we do",
+      "title": "Four capabilities, one point of contact"
+    },
+    "sentry": {
+      "chips": [
+        "Passive & non-intrusive",
+        "AI / ML",
+        "100% European",
+        "Scalable"
+      ],
+      "cta": "Learn more",
+      "ctaUrl": "https://www.ewala.es",
+      "description": "Anomaly detection in network traffic with no agents, no signatures and no impact on operations. Passive inventory of every asset and full visibility before an incident occurs. A European product aligned with NIS2 and IEC 62443. We deploy, operate and integrate it as part of your managed service.",
+      "kicker": "Featured technology",
+      "note": "At ewala.es · a trademark of Ewala",
+      "title": "SentryN3t — AI-powered NDR for OT/IoT/IT"
+    },
+    "seo": {
+      "description": "Managed security (MSSP) and compliance (GRC) under one roof. AI-based detection across IT and OT, NIS2, DORA, ISO 27001, ENS and GDPR.",
+      "title": "ISN Labs · MSSP & GRC | Managed IT and OT cybersecurity"
+    }
+  },
+  "legal": {
+    "sections": {
+      "cookies": {
+        "content": "See Cookie Policy",
+        "title": "Cookies"
+      },
+      "enlaces": {
+        "p1": "In those cases where there are links or hyperlinks on the Web that facilitate access to independent third-party websites, INNOVATION AND SECURITY NORTH LABS informs that it does not exercise any type of control over the websites or their contents as they are not its property, therefore it will not assume any responsibility for the contents and operation of the external website.",
+        "p2": "Links to third-party sites depend on each linked site and the contents of said pages, as well as the security configuration of said environments are the responsibility of the entity that owns it. INNOVATION AND SECURITY NORTH LABS will not assume any responsibility for the contents of the linked sites, nor does it guarantee that the links to other places are accurate at the time of access or that said sites are operational at all times.",
+        "p3": "INNOVATION AND SECURITY NORTH LABS will not be responsible for the information that directs the client of its services through existing links, provided that it does not have effective knowledge that the activity or information is unlawful or that it harms property or rights of a third party susceptible to compensation.",
+        "title": "Links"
+      },
+      "exclusion": {
+        "p1": "INNOVATION AND SECURITY NORTH LABS is not responsible for the truthfulness, accuracy, adequacy, suitability and updating of the contents provided by third parties, being exempt from any contractual or extra-contractual liability with Users who make use of them.",
+        "p2": "Access to the Web does not imply the obligation of INNOVATION AND SECURITY NORTH LABS to control the absence of viruses or any other harmful computer element. It is the responsibility of the User to have adequate tools for detection and disinfection. INNOVATION AND SECURITY NORTH LABS is not responsible for damages produced in the computer equipment of Users or third parties during the provision of the service.",
+        "p3": "Access to the Web requires services and supplies from third parties, including transport through telecommunications networks whose reliability and quality do not correspond to INNOVATION AND SECURITY NORTH LABS.",
+        "p4": "INNOVATION AND SECURITY NORTH LABS is not responsible for damages of any kind produced in the User caused by failures or disconnections in the telecommunications networks that produce the suspension or interruption of the service.",
+        "p5": "In the event that the User has knowledge of the existence of illegal or inappropriate content, they must notify INNOVATION AND SECURITY NORTH LABS immediately.",
+        "title": "Disclaimer"
+      },
+      "jurisdiccion": {
+        "p1": "For any controversy or question that may derive from the application or interpretation of this Legal Notice, the parties will apply the principles of good faith and will be governed by current Spanish regulations.",
+        "p2": "For the resolution of conflicts, the parties expressly submit to the courts and tribunals of Gijón, provided that the applicable legislation so allows.",
+        "title": "Jurisdiction and Applicable Law"
+      },
+      "miscelanea": {
+        "p1": "In the event that any provision of this legal notice is declared null or unenforceable, such nullity or unenforceability will not affect the remaining provisions.",
+        "title": "Miscellaneous"
+      },
+      "objeto": {
+        "p1": "These general conditions regulate the access, navigation and use of the service of this website (hereinafter, 'the Web'), without prejudice to the fact that INNOVATION AND SECURITY NORTH LABS reserves the right to modify the presentation, configuration and content of the Web, as well as the conditions required for its access and/or use.",
+        "p2": "Visiting and using the Web attributes the condition of Web user (hereinafter, the 'User') and implies acceptance of all the conditions included in this Legal Notice, having the same validity as any written and signed contract. The User must carefully read this Legal Notice, as it and its conditions of use may undergo modifications. In the event that you do not agree with the terms set forth, do not browse or use the Web.",
+        "title": "Object"
+      },
+      "propiedad": {
+        "p1": "INNOVATION AND SECURITY NORTH LABS is the owner or, where appropriate, has the corresponding licenses for the exploitation rights of intellectual and industrial property of the Web, as well as the intellectual and industrial property rights over the elements contained therein.",
+        "p2": "All the contents of the Web, including images, photographs, documents, software, texts, graphics, brands, logos, distinctive signs, color combinations, structure and design, etc., (hereinafter, the 'Contents'), are the intellectual property of INNOVATION AND SECURITY NORTH LABS or its licensors. Access and use of the Web does not attribute any rights over them to the User.",
+        "p3": "In accordance with the provisions of the Intellectual Property Law, the reproduction, distribution and public communication, including its modality of making available, of all or part of the contents of the Web, for commercial purposes, in any support and by any technical means, are expressly prohibited. Furthermore, the User shall refrain from deleting, altering, evading or manipulating any protection device or security system installed on the website.",
+        "title": "Intellectual and Industrial Property Rights"
+      },
+      "proteccion": {
+        "p1": "In accordance with the provisions of REGULATION (EU) 2016/679 AND current regulations, the User is informed that all personal data provided during the use of the Website will be processed in accordance with the provisions of the Privacy Policy.",
+        "p2": "INNOVATION AND SECURITY NORTH LABS will use its social media profiles to advertise its own services.",
+        "title": "Data Protection"
+      },
+      "responsable": {
+        "address": "Address",
+        "addressValue": "Calle Peña Brava 21, oficina 1B, PI de Silvota, Llanera, CP 33192",
+        "email": "Email",
+        "emailValue": "info@secnorthlabs.eu",
+        "holder": "Owner",
+        "holderValue": "Innovation and Security North Labs SL",
+        "nif": "Tax ID",
+        "nifValue": "B22966139",
+        "title": "Data Controller"
+      },
+      "uso": {
+        "p1": "The User undertakes to make correct use of the Web in accordance with the Law and this Legal Notice.",
+        "p2": "The User will be liable to INNOVATION AND SECURITY NORTH LABS or third parties for any damages that may be caused as a result of a breach of said obligation. The use of the Web for purposes harmful to property or interests of INNOVATION AND SECURITY NORTH LABS or third parties is expressly prohibited.",
+        "title": "Terms of Use"
+      }
+    },
+    "seo": {
+      "description": "Terms of access, browsing and use of the ISN Labs website, intellectual property, links and applicable jurisdiction.",
+      "title": "Legal notice — ISN Labs"
+    },
+    "title": "LEGAL",
+    "titleHighlight": "NOTICE"
+  },
+  "mssp": {
+    "cta": {
+      "ctaPrimary": "Contact us",
+      "ctaSecondary": "See software",
+      "title": "Shall we set up your managed service?"
+    },
+    "hero": {
+      "breadcrumb": [
+        {
+          "label": "Home",
+          "routeId": "home"
+        },
+        {
+          "label": "Solutions",
+          "routeId": null
+        },
+        {
+          "label": "MSSP",
+          "routeId": null
+        }
+      ],
+      "subtitle": "We run your security end to end. We start with the essentials and grow with you: first visibility and control, then 24/7 detection and response.",
+      "title": "Managed cybersecurity",
+      "titleHighlight": "IT + OT, one team"
+    },
+    "it": {
+      "discover": {
+        "label": "Discover more",
+        "link": "See all IT services",
+        "text": "24/7 SOC, EDR/MDR/XDR, audits, perimeter security, backup, hardening, pentesting, vulnerability management and training."
+      },
+      "featured": {
+        "cta": "Calculate your budget",
+        "description": "Periodic monitoring and review of your IT security: backups, EDR, SIEM/XDR and firewall under expert control, with early alerting and reporting. The foundation everything else grows on.",
+        "includes": [
+          "Backup and restore review",
+          "EDR console and endpoint alerts",
+          "SIEM/XDR and firewall review",
+          "Periodic report + hours bank"
+        ],
+        "label": "Core service",
+        "title": "Managed Baseline Cybersecurity Plan (PBCG)"
+      },
+      "kicker": "MSSP · IT Security",
+      "title": "Start with the basics and grow with rigor"
+    },
+    "model": {
+      "items": [
+        {
+          "description": "You see what we see: clear, traceable reports.",
+          "title": "No black boxes"
+        },
+        {
+          "description": "IT and OT under one point of contact, integrated with GRC.",
+          "title": "One contract"
+        },
+        {
+          "description": "Start with the Baseline Plan and evolve to a 24/7 SOC when you need it.",
+          "title": "Scalable"
+        }
+      ],
+      "label": "Our service model",
+      "title": "Visibility · Detection · Response · Continuous improvement"
+    },
+    "ot": {
+      "discover": {
+        "label": "Discover more",
+        "link": "See all OT services",
+        "text": "OT architecture and inventory, SentryN3t NDR, industrial perimeter security, controlled patching, OT/ICS auditing and plant training."
+      },
+      "featured": {
+        "cta": "Contact us",
+        "description": "Continuous monitoring of your industrial network with SentryN3t (NDR): early anomaly detection, out-of-pattern access and incident indicators, with no agents and no impact on operations. With managed triage and escalation.",
+        "includes": [
+          "Passive detection with AI / ML",
+          "Context-aware alerts for the plant floor",
+          "Incident triage and escalation",
+          "Periodic 8x5 or 24x7 reporting"
+        ],
+        "label": "Core service",
+        "title": "Continuous monitoring — detection and response"
+      },
+      "kicker": "MSSP · OT / Industrial Security",
+      "title": "Industrial security without stopping production"
+    },
+    "seo": {
+      "description": "Managed Baseline Cybersecurity Plan (PBCG), 24/7 SOC and OT monitoring with SentryN3t. One team for IT and OT.",
+      "title": "IT and OT MSSP services | Managed cybersecurity — ISN Labs"
+    }
+  },
+  "msspItCatalog": {
+    "categories": [
+      {
+        "code": "C1",
+        "description": "Continuous monitoring and review of your IT security, with early detection and reporting.",
+        "services": [
+          {
+            "description": "Periodic review of backups, EDR, SIEM/XDR and firewall, with early alerting and a consulting hours bank.",
+            "title": "Managed Baseline Cybersecurity Plan (PBCG)"
+          },
+          {
+            "description": "24/7 monitoring, detection and response coordination for environments that need broader coverage.",
+            "title": "SOC (Security Operations Center)"
+          },
+          {
+            "description": "Agentless network-based detection; visibility complementing endpoint and perimeter.",
+            "title": "SentryN3t NDR"
+          },
+          {
+            "description": "Full incident lifecycle (triage, analysis, containment and closure) with technical and executive reporting.",
+            "title": "Incident management and reporting"
+          }
+        ],
+        "title": "Continuous monitoring"
+      },
+      {
+        "code": "C2",
+        "description": "An objective, up-to-date view of your security posture, prioritized by real risk.",
+        "services": [
+          {
+            "description": "A first, non-intrusive snapshot of maturity level and perceived risks.",
+            "title": "Initial audit"
+          },
+          {
+            "description": "In-depth analysis of configurations, architecture and technical controls.",
+            "title": "Technical audit"
+          },
+          {
+            "description": "Systematic detection of technical weaknesses, prioritized by criticality.",
+            "title": "Vulnerability assessment"
+          }
+        ],
+        "title": "Security audits"
+      },
+      {
+        "code": "C3",
+        "description": "Reduce the attack surface and control your network traffic.",
+        "services": [
+          {
+            "description": "Perimeter architecture and segmentation (VLANs, DMZ, security zones).",
+            "title": "Perimeter controls design and deployment"
+          },
+          {
+            "description": "Ongoing management of VPN, rules, NAT, Proxy/WAF and device lifecycle.",
+            "title": "Firewall management"
+          }
+        ],
+        "title": "Perimeter security"
+      },
+      {
+        "code": "C4",
+        "description": "Strengthen security closest to the user.",
+        "services": [
+          {
+            "description": "Endpoint detection and response, tailored to your maturity and exposure.",
+            "title": "EDR / MDR / XDR"
+          },
+          {
+            "description": "3-2-1 strategy for the workstation and corporate email.",
+            "title": "Endpoint and email backup"
+          },
+          {
+            "description": "Password manager and multi-factor authentication to close the credential vector.",
+            "title": "Password manager and MFA"
+          }
+        ],
+        "title": "Endpoint (user) protection"
+      },
+      {
+        "code": "C5",
+        "description": "Secure operations within a recurring security framework.",
+        "services": [
+          {
+            "description": "Secure configurations to reduce the attack surface.",
+            "title": "Hardening"
+          },
+          {
+            "description": "On-premise, cloud or hybrid, focused on stability, scalability and security.",
+            "title": "Infrastructure analysis, design and operation"
+          },
+          {
+            "description": "Continuous inventory based on real traffic (SentryN3t).",
+            "title": "Asset discovery and inventory"
+          },
+          {
+            "description": "Risk-prioritized updates with change control and traceability.",
+            "title": "Managed patching"
+          },
+          {
+            "description": "Backup and recovery of servers and services, including Microsoft 365 and Google Workspace.",
+            "title": "Corporate backup"
+          }
+        ],
+        "title": "Network and systems support"
+      },
+      {
+        "code": "C6",
+        "description": "Verify your real exposure in a controlled way.",
+        "services": [
+          {
+            "description": "Controlled intrusion against infrastructure, web applications and APIs.",
+            "title": "Pentesting (infrastructure and web)"
+          },
+          {
+            "description": "Analysis of your public footprint and exposure in open sources.",
+            "title": "OSINT investigation"
+          },
+          {
+            "description": "Identification, prioritization and continuous follow-up.",
+            "title": "Vulnerability and attack surface management"
+          }
+        ],
+        "title": "Testing and validation"
+      },
+      {
+        "code": "C7",
+        "description": "Reduce risk from the human factor.",
+        "services": [
+          {
+            "description": "Tailored content by role and topic, with a practical approach.",
+            "title": "Custom training"
+          },
+          {
+            "description": "Realistic campaigns and metrics to measure improvement.",
+            "title": "Phishing simulation"
+          },
+          {
+            "description": "Train response and cross-team coordination under pressure.",
+            "title": "Tabletop incident exercises"
+          }
+        ],
+        "title": "Prevention, awareness and training"
+      }
+    ],
+    "cta": {
+      "ctaPrimary": "Contact us",
+      "ctaSecondary": "Calculate your budget",
+      "title": "Want us to review your IT security?"
+    },
+    "hero": {
+      "breadcrumb": [
+        {
+          "label": "Home",
+          "routeId": "home"
+        },
+        {
+          "label": "Solutions",
+          "routeId": null
+        },
+        {
+          "label": "MSSP",
+          "routeId": "mssp"
+        },
+        {
+          "label": "IT catalogue",
+          "routeId": null
+        }
+      ],
+      "subtitle": "The full breakdown of our managed IT security services. Everything runs within a recurring security framework, with visibility and traceability.",
+      "title": "IT Security",
+      "titleHighlight": "services catalog"
+    },
+    "seo": {
+      "description": "All IT MSSP services: monitoring (PBCG, 24/7 SOC, NDR), audits, perimeter, endpoints, support, testing and training.",
+      "title": "IT Security services catalog — ISN Labs"
+    }
+  },
+  "msspOtCatalog": {
+    "categories": [
+      {
+        "code": "B1",
+        "description": "A stable, documented and securely operated OT infrastructure.",
+        "services": [
+          {
+            "description": "Design, operation and preventive maintenance of the OT environment.",
+            "title": "Infrastructure operation, improvement and maintenance"
+          },
+          {
+            "description": "Passive, agentless inventory based on real traffic (SentryN3t).",
+            "title": "OT asset discovery and inventory"
+          },
+          {
+            "description": "Controlled, planned patching compatible with operations.",
+            "title": "Managed patching in OT environments"
+          },
+          {
+            "description": "Backup tailored to industrial systems: PLCs, HMIs and OT servers.",
+            "title": "Backups"
+          }
+        ],
+        "title": "Network and systems architecture"
+      },
+      {
+        "code": "B2",
+        "description": "Early threat detection in your OT environment.",
+        "services": [
+          {
+            "description": "Passive anomaly detection on the OT network, understandable for plant staff.",
+            "title": "SentryN3t NDR deployment"
+          },
+          {
+            "description": "Extended visibility and IT/OT correlation across endpoints, identities and cloud.",
+            "title": "XDR deployment"
+          },
+          {
+            "description": "8x5 or 24x7 monitoring with context-aware analysis.",
+            "title": "Continuous OT monitoring"
+          },
+          {
+            "description": "Full OT incident lifecycle, with technical and executive reporting.",
+            "title": "Incident management and reporting"
+          }
+        ],
+        "title": "Managed detection and response"
+      },
+      {
+        "code": "B3",
+        "description": "Control communications without compromising production.",
+        "services": [
+          {
+            "description": "IT/OT segmentation, zones and conduits, industrial DMZ.",
+            "title": "Perimeter controls design and deployment"
+          },
+          {
+            "description": "VPN, rules, NAT, WAF and lifecycle management in industrial environments.",
+            "title": "Firewall management"
+          }
+        ],
+        "title": "Perimeter security"
+      },
+      {
+        "code": "B4",
+        "description": "Understand your real industrial exposure.",
+        "services": [
+          {
+            "description": "A specific, non-intrusive methodology for industrial environments.",
+            "title": "OT vulnerability assessment"
+          },
+          {
+            "description": "Comprehensive technical, organizational and governance assessment.",
+            "title": "Industrial cybersecurity audit (OT/ICS)"
+          }
+        ],
+        "title": "OT audit"
+      },
+      {
+        "code": "B5",
+        "description": "Strengthen resilience through people.",
+        "services": [
+          {
+            "description": "Tailored to the industrial sector and real plant risks.",
+            "title": "Custom training"
+          },
+          {
+            "description": "IT/OT scenarios to train response and coordination.",
+            "title": "Tabletop incident exercises"
+          }
+        ],
+        "title": "Prevention, training and awareness"
+      }
+    ],
+    "cta": {
+      "ctaPrimary": "Contact us",
+      "ctaSecondary": "See IT Security",
+      "title": "Shall we protect your industrial environment?"
+    },
+    "hero": {
+      "breadcrumb": [
+        {
+          "label": "Home",
+          "routeId": "home"
+        },
+        {
+          "label": "Solutions",
+          "routeId": null
+        },
+        {
+          "label": "MSSP",
+          "routeId": "mssp"
+        },
+        {
+          "label": "OT catalogue",
+          "routeId": null
+        }
+      ],
+      "subtitle": "The full breakdown of our industrial cybersecurity services, designed to protect operations without stopping production.",
+      "title": "OT Security",
+      "titleHighlight": "services catalog"
+    },
+    "seo": {
+      "description": "All OT MSSP services: architecture and inventory, SentryN3t NDR, industrial perimeter, OT/ICS auditing and plant training.",
+      "title": "OT / Industrial Security services catalog — ISN Labs"
+    }
+  },
+  "privacy": {
+    "sections": {
+      "categorias": {
+        "list": [
+          "Identification data.",
+          "Contact data.",
+          "Academic and professional data.",
+          "Financial and banking data.",
+          "Other data provided by the user."
+        ],
+        "note": "Refusal to provide mandatory data may prevent service delivery.",
+        "title": "Categories of Personal Data"
+      },
+      "comunicaciones": {
+        "list": [
+          "Law enforcement authorities.",
+          "Judicial authorities.",
+          "Public administrations.",
+          "Financial institutions.",
+          "Professionals required for service provision."
+        ],
+        "title": "Disclosure of Personal Data"
+      },
+      "conservacion": {
+        "content": [
+          "Data will be retained for as long as necessary for its intended purpose.",
+          "Candidate data will be retained for one year."
+        ],
+        "title": "Data Retention"
+      },
+      "derechos": {
+        "list": [
+          "Withdraw consent.",
+          "Access personal data.",
+          "Rectify inaccurate data.",
+          "Request data erasure.",
+          "Request processing limitation.",
+          "Request data portability.",
+          "File a complaint with the Spanish Data Protection Agency."
+        ],
+        "title": "Data Subject Rights"
+      },
+      "finalidades": {
+        "intro": "INNOVATION AND SECURITY NORTH LABS will process personal data for the following purposes, provided there is a legal basis:",
+        "list": [
+          "Contracting products and services and their management.",
+          "Responding to inquiries and questions.",
+          "Evaluating candidates in recruitment processes.",
+          "Sending commercial communications unless opposed.",
+          "Producing anonymous statistical reports.",
+          "Keeping users informed through social media.",
+          "Complying with legal obligations."
+        ],
+        "title": "Purpose of Data Processing"
+      },
+      "legitimacion": {
+        "content": [
+          "Recruitment data processing is based on user consent.",
+          "Service management is based on contract execution.",
+          "Commercial communications are based on legitimate interest.",
+          "Data may also be processed to comply with legal obligations."
+        ],
+        "title": "Legal Basis for Data Processing"
+      },
+      "responsable": {
+        "address": "Address",
+        "addressValue": "Calle Peña Brava 21, oficina 1B, PI de Silvota, Llanera, CP 33192",
+        "email": "Email",
+        "emailValue": "info@secnorthlabs.eu",
+        "holder": "Owner",
+        "holderValue": "Innovation and Security North Labs SL",
+        "nif": "Tax ID",
+        "nifValue": "B22966139",
+        "title": "Data Controller"
+      },
+      "seguridad": {
+        "content": [
+          "Technical and organizational measures are applied to protect data.",
+          "This policy may be updated in accordance with current legislation."
+        ],
+        "title": "Security Measures"
+      },
+      "transferencias": {
+        "content": "As a general rule, no international data transfers are carried out. If required, all legal safeguards will be applied.",
+        "title": "International Transfers"
+      }
+    },
+    "seo": {
+      "description": "How ISN Labs (Innovation and Security North Labs SL) processes personal data: purposes, legal basis, retention and rights.",
+      "title": "Privacy policy — ISN Labs"
+    },
+    "title": "Privacy",
+    "titleHighlight": "Policy"
+  },
+  "sectors": {
+    "cta": {
+      "ctaPrimary": "Contact",
+      "subtitle": "The methodology is the same: understand your real risk and protect it with rigor.",
+      "title": "Don't see your sector? We can still help."
+    },
+    "hero": {
+      "breadcrumb": [
+        {
+          "label": "Home",
+          "routeId": "home"
+        },
+        {
+          "label": "Sectors",
+          "routeId": null
+        }
+      ],
+      "subtitle": "We adapt protection to your sector's real risk: IT/OT convergence, regulatory obligations and operational continuity. These are the environments where we add the most value.",
+      "title": "Cybersecurity for",
+      "titleHighlight": "essential sectors"
+    },
+    "items": [
+      {
+        "description": "Visibility and detection across production lines and warehouses, without stopping operations.",
+        "tag": "NIS2 · IEC 62443",
+        "title": "Industry and manufacturing"
+      },
+      {
+        "description": "OT cybersecurity for the food and livestock industry, including extensive farming.",
+        "tag": "NIS2",
+        "title": "Agrifood"
+      },
+      {
+        "description": "Continuity and resilience of essential services with 24/7 monitoring.",
+        "tag": "NIS2",
+        "title": "Energy"
+      },
+      {
+        "description": "Protection of connected systems and devices and continuity of care.",
+        "tag": "NIS2",
+        "title": "Healthcare"
+      },
+      {
+        "description": "Control of suppliers and third parties: a core requirement of the directive.",
+        "tag": "NIS2 · Delegated liability",
+        "title": "Supply chain"
+      },
+      {
+        "description": "ENS alignment and certification for those serving the public sector.",
+        "tag": "ENS",
+        "title": "Public administration"
+      },
+      {
+        "description": "Digital operational resilience and third-party management under DORA.",
+        "tag": "DORA",
+        "title": "Finance and insurance"
+      }
+    ],
+    "note": "GDPR applies across all sectors.",
+    "seo": {
+      "description": "IT/OT protection for industry, agrifood, energy, healthcare and supply chain (NIS2), public administration (ENS) and finance (DORA).",
+      "title": "Cybersecurity by sector: industry, energy, healthcare — ISN Labs"
+    }
+  },
+  "software": {
+    "cta": {
+      "ctaPrimary": "Request a proposal",
+      "ctaSecondary": "Talk to an expert",
+      "subtitle": "We prepare a tailored proposal at no cost. You only pay for what adds value.",
+      "title": "Which licenses do you really need?"
+    },
+    "hero": {
+      "breadcrumb": [
+        {
+          "label": "Home",
+          "routeId": "home"
+        },
+        {
+          "label": "Software",
+          "routeId": null
+        }
+      ],
+      "subtitle": "We don't just resell licenses: we advise you on the right solution, license it and operate it as part of your managed service. A single point of contact for technology, deployment and support.",
+      "title": "Licenses and technology",
+      "titleHighlight": "we deploy and manage"
+    },
+    "how": {
+      "steps": [
+        {
+          "description": "We analyze your environment and real need. No over-licensing.",
+          "number": "01",
+          "title": "We advise"
+        },
+        {
+          "description": "We handle provisioning and billing (CSP / subscription).",
+          "number": "02",
+          "title": "We license"
+        },
+        {
+          "description": "Implementation and configuration with security criteria.",
+          "number": "03",
+          "title": "We deploy"
+        },
+        {
+          "description": "Operation, support and renewals in a single contract.",
+          "number": "04",
+          "title": "We manage"
+        }
+      ],
+      "title": "How our licensing model works"
+    },
+    "licenses": {
+      "cardFooter": "License + ISN Labs management",
+      "cards": [
+        {
+          "description": "The whole ecosystem: productivity, identity, MFA, endpoint protection (Defender XDR) and backup, with security criteria.",
+          "name": "Microsoft",
+          "subtitle": "365 · Defender · Entra · Intune"
+        },
+        {
+          "description": "24/7 managed detection and response across endpoints and identity, operated by the ISN Labs team.",
+          "name": "Huntress",
+          "subtitle": "Managed MDR / EDR"
+        },
+        {
+          "description": "Firewall and VPN on OPNsense: a controlled perimeter, with no per-feature license cost.",
+          "name": "OPNsense",
+          "subtitle": "Firewall / perimeter"
+        },
+        {
+          "description": "FortiGate firewalls and the Fortinet ecosystem: managed perimeter, VPN and segmentation.",
+          "name": "Fortinet",
+          "subtitle": "NGFW / network security"
+        }
+      ],
+      "kicker": "Licenses",
+      "subtitle": "We license and manage the solutions you deploy, configuring them with real security criteria. A single contract for licensing, deployment and support. Pricing depends on volume and program; we prepare a tailored proposal.",
+      "title": "We license and manage your security software"
+    },
+    "others": {
+      "items": [
+        "EDR / XDR",
+        "NGFW firewalls",
+        "Backup & DR",
+        "Password manager",
+        "MFA",
+        "SIEM"
+      ],
+      "label": "Other technologies we integrate and manage"
+    },
+    "sentry": {
+      "chips": [
+        "Passive / non-intrusive",
+        "AI + ML",
+        "Automatic inventory",
+        "SIEM/XDR integration",
+        "100% European"
+      ],
+      "description": "A European NDR solution for OT/IoT/IT. It detects network traffic anomalies with no agents, no signatures and no impact on operations, and passively inventories every asset in your environment. Aligned with NIS2 and IEC 62443. At ISN Labs we deploy, tune and integrate it with your SIEM/XDR, and operate it in managed mode.",
+      "kicker": "Featured technology",
+      "learnMore": "Learn more at ewala.es",
+      "learnMoreUrl": "https://www.ewala.es",
+      "licenseModel": {
+        "items": [
+          "Annual subscription",
+          "Per network segment / site",
+          "Physical or virtual sensor",
+          "Includes updates"
+        ],
+        "title": "Licensing model"
+      },
+      "name": "SentryN3t",
+      "notes": [
+        "SentryN3t® is a trademark of Ewala.",
+        "ISN Labs, deployment partner."
+      ],
+      "tagline": "NDR · Network Detection & Response"
+    },
+    "seo": {
+      "description": "SentryN3t NDR (Ewala) and Microsoft, Huntress, OPNsense and Fortinet licenses, deployed and managed by ISN Labs. Tailored proposal.",
+      "title": "Software and licenses: SentryN3t, Microsoft, Huntress, OPNsense, Fortinet — ISN Labs"
+    },
+    "tiers": {
+      "cta": "Request",
+      "items": [
+        {
+          "description": "Installation, tuning and integration of SentryN3t into your network.",
+          "features": [
+            "Physical or virtual sensor",
+            "Asset discovery and inventory",
+            "Anomaly detection with AI/ML",
+            "Integration with your SIEM/XDR"
+          ],
+          "name": "Deployment",
+          "recommended": false
+        },
+        {
+          "description": "The above plus monitoring during extended business hours.",
+          "features": [
+            "Everything in Deployment",
+            "8x5 monitoring by ISN Labs",
+            "Triage and context-aware alerts",
+            "Periodic reporting"
+          ],
+          "name": "Deployment + 8x5 monitoring",
+          "recommended": true
+        },
+        {
+          "description": "Continuous monitoring and managed response.",
+          "features": [
+            "Everything in 8x5",
+            "24x7 monitoring",
+            "Incident escalation",
+            "Technical and executive reporting"
+          ],
+          "name": "Deployment + 24x7 monitoring",
+          "recommended": false
+        }
+      ],
+      "priceLabel": "Based on scope",
+      "recommendedLabel": "Recommended"
+    }
+  }
+}

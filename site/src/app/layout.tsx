@@ -1,23 +1,18 @@
-import type { Metadata } from 'next'
 import type { ReactNode } from 'react'
-import { displayFont, sansFont } from '@/app/fuentes'
-import './globals.css'
 
 /**
  * Layout raiz.
  *
- * Existe para que Next tenga un `<html>` bajo el que colgar la 404 de ultimo
- * recurso (la de las URLs sin idioma reconocible, seccion 4.13). El layout con
- * contenido real es `app/[locale]/layout.tsx`, que se crea en la Fase 3.
+ * Deliberadamente **no renderiza `<html>` ni `<body>`**: los renderiza
+ * `app/[locale]/layout.tsx`, que es el unico que sabe que valor va en `lang`.
+ * Un `<html lang>` fijo aqui obligaria a que el layout de idioma lo sobreescriba
+ * desde dentro, que no se puede.
+ *
+ * Todo el contenido del sitio vive bajo `/es/` o `/en/`; en `/` no hay nada,
+ * porque Netlify lo redirige con un 301 fijo (seccion 2.1). Lo unico que pasa
+ * por aqui sin idioma es `app/not-found.tsx`, la 404 de ultimo recurso, que
+ * monta su propio documento.
  */
-export const metadata: Metadata = {
-  title: 'ISN Labs',
-}
-
 export default function RootLayout({ children }: { children: ReactNode }) {
-  return (
-    <html lang="es" className={`${displayFont.variable} ${sansFont.variable} h-full antialiased`}>
-      <body className="flex min-h-full flex-col">{children}</body>
-    </html>
-  )
+  return children
 }

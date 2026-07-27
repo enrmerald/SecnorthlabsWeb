@@ -1,6 +1,7 @@
+import createNextIntlPlugin from 'next-intl/plugin'
 import type { NextConfig } from 'next'
 
-// next-intl se conecta aqui en la Fase 2, cuando exista src/i18n/request.ts.
+const withNextIntl = createNextIntlPlugin('./src/i18n/request.ts')
 
 const nextConfig: NextConfig = {
   // Obligatorio: genera out/ sin ningun runtime Next en produccion.
@@ -23,4 +24,4 @@ const nextConfig: NextConfig = {
 
 // redirects(), rewrites() y headers() NO funcionan con output: 'export'.
 // Todo eso vive en netlify.toml (Fase 10).
-export default nextConfig
+export default withNextIntl(nextConfig)

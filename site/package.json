@@ -2,6 +2,7 @@
   "name": "isnlabs-site",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "description": "Sitio estatico de ISN Labs. Se exporta por completo (output: 'export') y lo publica Netlify. No contiene codigo de servidor ni secretos.",
   "packageManager": "pnpm@11.5.0",
   "engines": {
