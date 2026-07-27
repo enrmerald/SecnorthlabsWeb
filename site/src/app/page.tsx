@@ -1,65 +1,54 @@
-import Image from "next/image";
+import { Button } from '@/components/ui/Button'
+import { Card } from '@/components/ui/Card'
+import { CheckList } from '@/components/ui/CheckList'
+import { SectionHeading } from '@/components/ui/SectionHeading'
+import { Tag } from '@/components/ui/Tag'
 
-export default function Home() {
+/**
+ * Provisional. La ruta real es `app/[locale]/[[...slug]]/page.tsx`, que se crea
+ * en la Fase 2 y resuelve todas las paginas por manifiesto; esta desaparece
+ * entonces y `/` pasa a ser una redireccion 301 fija a `/es/` en netlify.toml.
+ *
+ * Mientras tanto sirve para ver renderizados los tokens y los componentes del
+ * sistema de diseno contra el mockup image2.png.
+ */
+export default function PaginaProvisional() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
-  );
+    <main className="site-container seccion flex flex-col gap-10">
+      <SectionHeading
+        nivel="h1"
+        kicker="Sistema de diseño"
+        kickerPrefijo="/01"
+        titulo="ISN Labs"
+        descripcion="Tokens y componentes de la Fase 1. Esta página es provisional: la sustituye el enrutado por manifiesto de la Fase 2."
+      />
+
+      <div className="flex flex-wrap gap-3">
+        <Button variante="primario">Primario (CTA)</Button>
+        <Button variante="secundario">Secundario</Button>
+        <Button variante="ghost">Ghost / borde</Button>
+      </div>
+
+      <div className="flex flex-wrap gap-3">
+        <Tag acento="cian">NIS2</Tag>
+        <Tag acento="verde">OK</Tag>
+        <Tag acento="neutro">OT/ICS</Tag>
+      </div>
+
+      <div className="grid gap-6 md:grid-cols-2">
+        <Card acento="left" acentoColor="cian" className="p-6">
+          <p className="etiqueta text-cyan mb-2">C1</p>
+          <h2 className="subtitle mb-2">Monitorización continua</h2>
+          <p className="texto-cuerpo text-sm">PBCG, SOC 24/7, NDR y gestión de incidentes.</p>
+        </Card>
+
+        <Card acento="top" acentoColor="verde" destacada className="p-6">
+          <h2 className="subtitle mb-4">Detección</h2>
+          <CheckList
+            items={['Detección de anomalías', 'Alertas contextualizadas', 'Integración SIEM/XDR']}
+          />
+        </Card>
+      </div>
+    </main>
+  )
 }

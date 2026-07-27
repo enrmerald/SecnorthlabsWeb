@@ -1,26 +1,279 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* ═══════════════════════════════════════════════════════════════════════════
+   SISTEMA DE DISENO ISN LABS
+   ISNLA-DOC-0008-01 Fase 1 · ISNLA-DOC-0004-04 seccion 1 y mockup image2.png
+
+   Estos tokens son la fuente de verdad. Toda pagina se construye combinandolos.
+
+   REGLA: todo color sale de un token de @theme. Prohibido el literal suelto
+   tipo text-[#00ffff], que es como estaba medio codigo del proyecto anterior, y
+   prohibido inventarse una clase que no existe: en la web actual Navbar y
+   Footer usan bg-accent-cyan / text-accent-cyan, que no esta definido en
+   ninguna parte y por tanto no pinta nada.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+@theme {
+  /* ── Color ─────────────────────────────────────────────────────────────
+     Contrastes verificados sobre --color-bg; todos pasan WCAG 2.1 AA.        */
+  --color-bg: #0d0f11; /* fondo base de todas las paginas (dark-first)     */
+  --color-panel: #121518; /* bandas y secciones destacadas                   */
+  --color-card: #161a1e; /* tarjetas de servicio, precio, articulo          */
+  --color-border: #262d33; /* bordes de 1px de tarjetas y campos              */
+  --color-text: #e9edf0; /* texto principal            · ~17:1              */
+  --color-text-dim: #8c969e; /* texto secundario           · ~6:1               */
+  --color-cyan: #5bd8e8; /* destacados, enlaces, MSSP  · ~12:1              */
+  --color-green: #00e48d; /* boton primario, GRC, OK    · ~11:1              */
+  --color-alert: #e87878; /* estados de error o incidente                    */
+
+  /* ── Layout (mockup image2.png, recuadro LAYOUT) ────────────────────── */
+  --radius-tarjeta: 0.625rem; /* 10px, dentro del rango 8-14px del brief      */
+  --spacing-gutter: 1.5rem; /* 24px                                          */
+
+  /* ── Breakpoints ─────────────────────────────────────────────────────
+     Se sobreescribe 2xl para que coincida con el contenedor de 1440px.     */
+  --breakpoint-2xl: 90rem;
+
+  /* ── Duraciones ───────────────────────────────────────────────────── */
+  --default-transition-duration: 160ms;
 }
 
+/* Los tokens tipograficos apuntan a las variables que genera next/font, que se
+   declaran en el layout. Son dos capas distintas a proposito: si manana se
+   cambia de fuente se toca solo el layout, no los cientos de usos.
+   @theme inline (y no @theme) porque el valor es una referencia, no un literal. */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-display: var(--font-space-mono);
+  --font-sans: var(--font-noto-sans);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* ═══════════════════════════════════════════════════════════════════════════
+   BASE
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+@layer base {
+  html {
+    /* El desplazamiento suave de las anclas molesta a quien pide menos
+       movimiento; se activa solo si no lo ha desactivado. */
+    scroll-behavior: smooth;
+    /* Compensa la navegacion fija al saltar a un ancla (#it, #ot, #idi). */
+    scroll-padding-top: 5.5rem;
+    /* Suelo real del mercado: por debajo de 320px no se soporta, pero tampoco
+       debe aparecer scroll horizontal (seccion 1.6). */
+    -webkit-text-size-adjust: 100%;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    font-family: var(--font-sans);
+    font-size: 0.9375rem; /* 15px, cuerpo del brief */
+    line-height: 1.7;
+  }
+
+  /* Deliberadamente NO se pone `overflow-x: hidden` en body.
+     Haria dos danos: convierte body en contenedor de scroll y rompe
+     `position: sticky` en sus descendientes —justo lo que necesitan la
+     navegacion fija y el panel lateral de la calculadora—, y ademas esconde los
+     desbordes en lugar de arreglarlos, que es como se llega a una web que
+     "responde" pero no se puede usar. El suelo de 320px sin scroll horizontal
+     se garantiza con la prueba E2E de la seccion 12.5, que compara
+     scrollWidth con clientWidth en toda la matriz de anchuras. */
+
+  @media (min-width: 48rem) {
+    body {
+      font-size: 1rem; /* 16px */
+    }
+  }
+
+  /* Titulares, kickers, datos, botones y etiquetas: Space Mono. Es lo que
+     aporta el caracter tecnico de la marca. */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    line-height: 1.15;
+    text-wrap: balance;
+  }
+
+  /* El foco visible no se elimina nunca sin sustituto (Fase 9). */
+  :focus-visible {
+    outline: 2px solid var(--color-cyan);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  /* Por debajo de 16px, iOS hace zoom automatico al enfocar y descoloca la
+     pagina entera (seccion 1.6). Es un minimo, no una preferencia estetica. */
+  input,
+  select,
+  textarea {
+    font-size: max(1rem, 100%);
+    font-family: inherit;
+  }
+
+  ::selection {
+    background-color: var(--color-cyan);
+    color: var(--color-bg);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* ═══════════════════════════════════════════════════════════════════════════
+   UTILIDADES DE COMPOSICION
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+@layer components {
+  /* Contenedor fluido. El margen lateral de 56px del brief es el de
+     escritorio, no el de movil: a 320px serian 208px de contenido. */
+  .site-container {
+    width: min(100% - 2rem, 90rem); /* movil: 16px por lado */
+    margin-inline: auto;
+  }
+
+  @media (min-width: 48rem) {
+    .site-container {
+      width: min(100% - 4rem, 90rem); /* tablet: 32px */
+    }
+  }
+
+  @media (min-width: 64rem) {
+    .site-container {
+      width: min(100% - 7rem, 90rem); /* escritorio: 56px, el del brief */
+    }
+  }
+
+  /* ── Escala tipografica fluida ────────────────────────────────────────
+     El Display de 44-58px del sistema de diseno es el tamano de escritorio y
+     no puede ser el minimo en 320px.                                        */
+  .heading-display {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(2.1rem, 8vw, 3.625rem); /* 33.6 -> 58px */
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+  }
+
+  .section-title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(1.75rem, 5vw, 1.875rem); /* 28 -> 30px */
+    line-height: 1.2;
+  }
+
+  .subtitle {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.125rem; /* 18px */
+    line-height: 1.4;
+  }
+
+  .kicker {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 0.8125rem; /* 13px */
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .etiqueta {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 0.6875rem; /* 11px */
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  /* Los acentos son para titulares, kickers, etiquetas, iconos y botones.
+     NUNCA para parrafos: el cuerpo va en --color-text y el secundario en
+     --color-text-dim. Lo pide el brief en su seccion 12 de accesibilidad y es
+     lo que hace que la paleta funcione. */
+  .texto-cuerpo {
+    color: var(--color-text-dim);
+    max-width: 68ch;
+  }
+
+  /* Separacion vertical entre secciones, tambien fluida. */
+  .seccion {
+    padding-block: clamp(3rem, 9vw, 5.5rem);
+  }
+
+  /* Linea de puntos que rellena el hueco entre etiqueta y valor en el panel de
+     cobertura del hero. Se hace con un borde y no con caracteres repetidos
+     para que un lector de pantalla no lea cincuenta puntos. */
+  .linea-guia {
+    flex: 1 1 auto;
+    min-width: 1rem;
+    border-bottom: 1px dotted var(--color-border);
+    translate: 0 -0.25rem;
+  }
+
+  /* El resplandor del hero es un gradiente CSS, no una imagen: es lo que
+     mantiene el LCP por debajo de 2,5 s en movil real (Fase 9). */
+  .resplandor-hero {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(
+        60rem 30rem at 12% -10%,
+        color-mix(in oklab, var(--color-cyan) 9%, transparent),
+        transparent 65%
+      ),
+      radial-gradient(
+        45rem 24rem at 88% 0%,
+        color-mix(in oklab, var(--color-green) 6%, transparent),
+        transparent 60%
+      );
+  }
+}
+
+@layer utilities {
+  /* Enlace "Saltar al contenido": primer elemento enfocable de cada pagina.
+     Sin el, quien navega por teclado recorre la navegacion entera en cada una. */
+  .salto-contenido {
+    position: absolute;
+    left: 1rem;
+    top: 0;
+    z-index: 100;
+    translate: 0 -150%;
+    transition: translate 160ms ease;
+  }
+
+  .salto-contenido:focus-visible {
+    translate: 0 1rem;
+  }
+
+  /* Objetivo tactil minimo de 44x44px (seccion 1.6). Se aplica al area
+     pulsable, no al texto, para no deformar la maquetacion. */
+  .objetivo-tactil {
+    position: relative;
+  }
+
+  .objetivo-tactil::after {
+    content: "";
+    position: absolute;
+    inset: 50% auto auto 50%;
+    translate: -50% -50%;
+    min-width: 44px;
+    min-height: 44px;
+    width: 100%;
+    height: 100%;
+  }
 }
