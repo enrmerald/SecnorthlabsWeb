@@ -1,0 +1,37 @@
+# Endurecimiento de la instalacion (ISNLA-DOC-0008-01, Fase 0 punto 6).
+#
+# site/ es autocontenido a proposito: tiene su propio package.json, su propio
+# lockfile y su propio workspace. Cuando se separen los repositorios
+# (isnlabs-site / isnlabs-web-gateway) sera un movimiento de directorio, sin
+# tocar la configuracion. Y hoy permite que Netlify use base = "site" tal cual
+# lo escribe el plan en la Fase 11.
+packages:
+  - '.'
+
+# Barrera de cadena de suministro: no resolver versiones publicadas hace menos
+# de 24 h (1440 minutos). Es la primera de las tres capas de la seccion 12.4;
+# las otras dos son el cooldown de Dependabot y el age gate propio de CI.
+minimumReleaseAge: 1440
+
+engineStrict: true
+
+# Los scripts de instalacion son ejecucion de codigo en la maquina de build, asi
+# que se aprueban de uno en uno.
+#
+# En pnpm 11 la clave es allowBuilds (mapa), no onlyBuiltDependencies (lista):
+# allowBuilds la sustituyo en esta version mayor. El plan describe la variante
+# de pnpm 10 porque fijaba 10.34.5; aqui se usa pnpm 11.5.0 por indicacion
+# expresa, de modo que aplica la clave nueva.
+allowBuilds:
+  # Modulo nativo que el pipeline de imagenes necesita compilado (Fase 11.3).
+  sharp: true
+
+  # Resolvedor nativo de eslint-import-resolver. Solo interviene en el lint.
+  unrs-resolver: true
+
+  # Denegados a proposito: son binarios opcionales del toolchain de desarrollo y
+  # el build, el lint y los tests pasan sin ejecutar sus scripts de instalacion.
+  # Menos scripts ejecutados en la maquina de build, menos superficie. Si alguna
+  # vez hace falta alguno, se aprueba aqui de forma explicita y razonada.
+  '@parcel/watcher': false
+  '@swc/core': false
