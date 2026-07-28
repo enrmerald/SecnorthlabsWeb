@@ -2,6 +2,7 @@ import type { ReactNode } from 'react'
 import type { Locale, RouteDefinition, RouteId } from '@/config/routes'
 import { cargarMensajes } from '@/i18n/mensajes'
 import { SEO_POR_RUTA } from '@/lib/seo-por-ruta'
+import { PaginaNoEncontrada } from './NoEncontrada'
 
 /**
  * Registro de renderizadores: un componente por pagina, que recibe el idioma
@@ -36,6 +37,8 @@ function EnConstruccion({ route, locale }: PropsRenderizador) {
 
 const enConstruccion = (): Renderizador => EnConstruccion
 
+const renderNoEncontrada: Renderizador = ({ locale }) => <PaginaNoEncontrada locale={locale} />
+
 export const RENDERIZADORES: Record<RouteId, Renderizador> = {
   home: enConstruccion(),
   mssp: enConstruccion(),
@@ -52,5 +55,5 @@ export const RENDERIZADORES: Record<RouteId, Renderizador> = {
   privacy: enConstruccion(),
   legal: enConstruccion(),
   cookies: enConstruccion(),
-  notFound: enConstruccion(),
+  notFound: renderNoEncontrada,
 }
