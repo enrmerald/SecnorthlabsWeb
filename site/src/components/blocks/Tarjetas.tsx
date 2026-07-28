@@ -1,5 +1,7 @@
 import { Card } from '@/components/ui/Card'
+import { LogoMarca } from '@/components/ui/LogoMarca'
 import { Tag } from '@/components/ui/Tag'
+import type { Logotipo } from '@/config/logos'
 
 /**
  * Tarjetas simples que comparten forma entre paginas. Estan juntas porque
@@ -11,23 +13,30 @@ import { Tag } from '@/components/ui/Tag'
  * Licencia de tecnologia (mockup image6.png): Microsoft, Huntress, OPNsense y
  * Fortinet, todas «+ gestion ISN Labs».
  *
- * > **Se usa solo el nombre en texto, no el logotipo.** El brief exige usar los
- * > logos «segun sus normas de marca (no recolorear)», y esos ficheros no han
- * > llegado (pendiente P6). Descargarlos de Internet no es una opcion.
+ * El logotipo va dentro de una **capsula clara**, que es lo que permite usar la
+ * version positiva de cada marca —la disenada para fondo claro— sobre un sitio
+ * oscuro sin recolorear nada, cosa que el brief prohibe expresamente. El motivo
+ * completo esta en `config/logos.ts`.
+ *
+ * Si una marca no tiene logo registrado, la tarjeta se pinta sin el en lugar de
+ * romperse: el nombre en texto sigue estando en el titular.
  */
 export function LicenseCard({
   name,
   subtitle,
   description,
   footer,
+  logo,
 }: {
   name: string
   subtitle: string
   description: string
   footer: string
+  logo?: Logotipo
 }) {
   return (
     <Card as="li" className="flex flex-col gap-2 p-6">
+      {logo && <LogoMarca logo={logo} alto={26} capsula className="mb-4" />}
       <h3 className="font-display text-base font-bold">{name}</h3>
       <p className="font-display text-cyan text-xs">{subtitle}</p>
       <p className="texto-cuerpo mt-1 text-sm">{description}</p>

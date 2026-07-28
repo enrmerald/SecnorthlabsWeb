@@ -7,6 +7,7 @@ import { Card } from '@/components/ui/Card'
 import { Kicker } from '@/components/ui/Kicker'
 import { SectionHeading } from '@/components/ui/SectionHeading'
 import { Tag } from '@/components/ui/Tag'
+import { LOGOS_LICENCIAS } from '@/config/logos'
 import { getLocalizedPath, type Locale } from '@/config/routes'
 import { cargarMensajes } from '@/i18n/mensajes'
 
@@ -18,10 +19,10 @@ import { cargarMensajes } from '@/i18n/mensajes'
  *
  * 1. **Cero precios en toda la pagina.** El hueco lo ocupa `tiers.priceLabel`
  *    («Según alcance»). Textual del brief: «No publicar tarifas sin aprobación».
- * 2. **Solo el nombre en texto de Microsoft, Huntress, OPNsense, Fortinet y
- *    Ewala.** El brief exige usar sus logos «según sus normas de marca (no
- *    recolorear)» y esos ficheros no han llegado (pendiente P6). Descargarlos de
- *    Internet no es una opcion.
+ * 2. **Los logos se usan sin recolorear.** El brief lo exige. Como el sitio es
+ *    oscuro y cada marca entrega su version positiva, los cuatro van dentro de
+ *    una capsula clara: asi ninguno se toca y los cuatro quedan igual. El motivo
+ *    completo esta en `config/logos.ts`. Cierra el pendiente P6.
  */
 export function Software({ locale }: { locale: Locale }) {
   const { software, common } = cargarMensajes(locale)
@@ -114,6 +115,9 @@ export function Software({ locale }: { locale: Locale }) {
               subtitle={licencia.subtitle}
               description={licencia.description}
               footer={software.licenses.cardFooter}
+              // La clave es el `name` del fichero de mensajes. Si Marketing
+              // renombra una tarjeta, se queda sin logo, no sin tarjeta.
+              logo={LOGOS_LICENCIAS[licencia.name]}
             />
           ))}
         </ul>

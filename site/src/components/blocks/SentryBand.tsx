@@ -1,7 +1,9 @@
 import { Button } from '@/components/ui/Button'
 import { Card } from '@/components/ui/Card'
 import { Kicker } from '@/components/ui/Kicker'
+import { LogoMarca } from '@/components/ui/LogoMarca'
 import { Tag } from '@/components/ui/Tag'
+import { LOGO_EWALA } from '@/config/logos'
 
 /**
  * Banda de SentryN3t (mockup image3.png). Sale en la Home y en Software.
@@ -49,8 +51,19 @@ export function SentryBand({
               {cta}
               <span className="sr-only"> ({a11yExternal})</span>
             </Button>
-            {/* Obligatoria: SentryN3t es marca de Ewala, no producto propio. */}
-            <p className="text-text-dim text-xs lg:text-right">{note}</p>
+            {/* Obligatoria: SentryN3t es marca de Ewala, no producto propio.
+                Tras la division de Ewala, SentryN3t se queda con ellos y el
+                resto de servicios pasan a ISN Labs, asi que la atribucion
+                importa mas, no menos.
+
+                El logo va SIN capsula: se pinta sobre la tarjeta oscura con la
+                version clara de Ewala. Es un partner tecnologico, no una
+                licencia de la rejilla, y darle la misma placa que a las cuatro
+                de Software lo degradaria a "una marca mas de la lista". */}
+            <div className="flex flex-col gap-2 lg:items-end">
+              <LogoMarca logo={LOGO_EWALA} alto={20} />
+              <p className="text-text-dim text-xs lg:text-right">{note}</p>
+            </div>
           </div>
         </div>
 
