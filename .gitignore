@@ -60,3 +60,7 @@ id_ed25519*
 # Nada de eso puede entrar en el repositorio que Netlify clona para
 # construir el sitio. El fichero se distribuye por canal interno.
 docs/*.xlsx
+
+# Volcados de diagnostico: pueden contener claves de API y URLs internas.
+docs/salida-metadata-*.md
+docs/*-metadata-*.md

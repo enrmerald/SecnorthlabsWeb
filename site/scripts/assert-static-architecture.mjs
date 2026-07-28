@@ -1,10 +1,15 @@
 // verify:architecture (seccion 12.2).
 //
-// Falla el build si alguien reintroduce codigo de servidor en el repositorio
-// del sitio. Sin esta red, dentro de seis meses alguien anade un Route Handler
-// "solo para una cosita" y la web deja de ser estatica sin que nadie lo note.
+// Falla el build por dos motivos distintos:
 //
-// Se ejecuta en CI ANTES del build, para que el fallo sea barato.
+//   1. Alguien reintroduce codigo de servidor en las paginas: un Route Handler
+//      "solo para una cosita", un 'use server', una API de peticion.
+//   2. Algo de src/ importa el motor economico de pbcg/ o el codigo de la
+//      funcion. Eso publicaria las tarifas en el navegador.
+//
+// Sin esta red, cualquiera de las dos cosas pasa y nadie se entera hasta que
+// esta en produccion. Se ejecuta en CI ANTES del build, para que el fallo sea
+// barato.
 import { readdir, readFile, stat } from 'node:fs/promises'
 import { fileURLToPath } from 'node:url'
 import { dirname, join, relative, sep } from 'node:path'
@@ -82,14 +87,11 @@ const FORBIDDEN_PATHS = [
     reason: 'no soportado por output: export',
   },
   {
-    id: '.netlify/functions',
-    test: (p) => p.includes('.netlify/functions'),
-    reason: 'Netlify Functions',
-  },
-  {
+    // Se prohibe el directorio GENERADO por el CLI de Netlify, no el fuente
+    // `netlify/functions/`, que la variante hibrida si necesita.
     id: '.netlify/edge-functions',
     test: (p) => p.includes('.netlify/edge-functions'),
-    reason: 'Netlify Edge Functions',
+    reason: 'Edge Functions: no se usan, y corren en cada peticion',
   },
 ]
 
@@ -104,6 +106,36 @@ async function* walk(dir) {
     }
   }
 }
+
+/**
+ * El modelo economico ya no vive en otro repositorio.
+ *
+ * Al adoptar la variante hibrida —precio instantaneo, con el motor PBCG
+ * ejecutandose en una Netlify Function dentro de este mismo proyecto— se pierde
+ * la garantia estructural que daba la separacion de repositorios: antes el
+ * motor simplemente no estaba aqui, asi que no habia forma de filtrarlo.
+ *
+ * Lo que la sustituye es esta regla, y es la unica cosa que mantiene cerrado el
+ * bloqueante B01: **nada bajo `src/` puede importar de `pbcg/` ni de
+ * `netlify/`**. `src/` es lo que compila Next y lo que acaba, total o
+ * parcialmente, en el navegador. `pbcg/` y `netlify/` solo los ejecuta la
+ * funcion, en servidor.
+ *
+ * Si alguien escribe `import { calcular } from '@/../pbcg/src/calculate'` en un
+ * componente, las tarifas viajan al navegador y el build falla aqui.
+ */
+const IMPORTS_PROHIBIDOS_EN_SRC = [
+  {
+    id: 'import de pbcg/',
+    test: /from\s+['"][^'"]*\/?pbcg\/|require\(\s*['"][^'"]*\/?pbcg\//,
+    reason: 'el modelo economico no puede acabar en el navegador (B01)',
+  },
+  {
+    id: 'import de netlify/',
+    test: /from\s+['"][^'"]*\/?netlify\/|require\(\s*['"][^'"]*\/?netlify\//,
+    reason: 'el codigo de la funcion no puede acabar en el navegador',
+  },
+]
 
 /** @type {string[]} */
 const violations = []
@@ -123,10 +155,18 @@ for await (const absolute of walk(root)) {
     const line = source.split('\n').findIndex((text) => rule.test.test(text)) + 1
     violations.push(`${path}:${line} · ${rule.id} (${rule.reason})`)
   }
+
+  if (path.startsWith('src/')) {
+    for (const rule of IMPORTS_PROHIBIDOS_EN_SRC) {
+      if (!rule.test.test(source)) continue
+      const line = source.split('\n').findIndex((text) => rule.test.test(text)) + 1
+      violations.push(`${path}:${line} · ${rule.id} (${rule.reason})`)
+    }
+  }
 }
 
 // Un stat, no un walk: si existe el directorio, ya es una violacion.
-for (const dir of ['.netlify/functions', '.netlify/edge-functions']) {
+for (const dir of ['.netlify/edge-functions']) {
   const found = await stat(join(root, dir)).then(
     () => true,
     () => false,
@@ -139,8 +179,10 @@ if (violations.length > 0) {
   console.error('Ha vuelto a entrar codigo de servidor en el repositorio del sitio:\n')
   for (const violation of violations) console.error(`  ${violation}`)
   console.error(
-    '\nEste sitio se exporta por completo y lo publica un CDN. Todo el computo' +
-      '\nvive en el Web Gateway, en su propio repositorio (ISNLA-DOC-0008-01, 2.1).',
+    '\nLas paginas de este sitio se exportan por completo y las publica un CDN.' +
+      '\nEl unico computo es la Netlify Function de netlify/functions/, que usa el' +
+      '\nmotor de pbcg/. Nada de src/ puede importar de ninguno de los dos: es lo' +
+      '\nque impide que las tarifas acaben en el navegador (B01).',
   )
   process.exit(1)
 }

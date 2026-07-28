@@ -1,9 +1,0 @@
-# El gateway es un proyecto autocontenido: cuando se separen los repositorios
-# (ISNLA-DOC-0008-01, Fase 0 punto 3) sera un movimiento de directorio.
-packages:
-  - '.'
-
-minimumReleaseAge: 1440
-engineStrict: true
-
-allowBuilds: {}
