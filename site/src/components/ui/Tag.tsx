@@ -29,7 +29,10 @@ export function Tag({ acento = 'cian', sinPunto = false, className = '', childre
   return (
     <span
       className={[
-        'inline-flex items-center gap-1.5 whitespace-nowrap',
+        // Sin `whitespace-nowrap`: una etiqueta larga como «Obligatorio sector
+        // público» fija el ancho minimo de contenido de su celda de rejilla y
+        // desborda la pagina a 320px. Prefiere no partirse, pero puede.
+        'inline-flex items-center gap-1.5 text-balance',
         'rounded-full border px-3 py-1',
         'etiqueta',
         estilo.borde,

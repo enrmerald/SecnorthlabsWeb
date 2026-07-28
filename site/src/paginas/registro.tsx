@@ -2,12 +2,25 @@ import type { ReactNode } from 'react'
 import type { Locale, RouteDefinition, RouteId } from '@/config/routes'
 import { cargarMensajes } from '@/i18n/mensajes'
 import { SEO_POR_RUTA } from '@/lib/seo-por-ruta'
-import { PaginaNoEncontrada } from './NoEncontrada'
+import { Blog } from './Blog'
+import { CatalogoGrc, CatalogoIt, CatalogoOt } from './Catalogos'
+import { Compania } from './Compania'
+import { Contacto } from './Contacto'
+import { Grc } from './Grc'
+import { Home } from './Home'
+import { AvisoLegal, Cookies, Privacidad } from './Legales'
+import { Mssp } from './Mssp'
+import { NoEncontrada as PaginaNoEncontrada } from './NoEncontrada'
+import { Sectores } from './Sectores'
+import { Software } from './Software'
 
 /**
  * Registro de renderizadores: un componente por pagina, que recibe el idioma
  * (seccion 2.1.2). La ruta atrapatodo resuelve `locale + slug` a un `RouteId` y
  * delega aqui.
+ *
+ * **No se duplican componentes de pagina para ES y EN.** Un renderizador por
+ * pagina, y recibe el locale.
  *
  * El `Record<RouteId, …>` no es decorativo: si manana se anade un `RouteId` al
  * manifiesto y nadie escribe su renderizador, **no compila**.
@@ -20,9 +33,8 @@ export interface PropsRenderizador {
 export type Renderizador = (props: PropsRenderizador) => ReactNode | Promise<ReactNode>
 
 /**
- * Provisional: hasta la Fase 4 todas las paginas comparten un esqueleto que
- * solo pinta su titulo SEO. Existe para que el enrutado, los metadatos, el
- * sitemap y `verify:export` se puedan verificar antes de escribir el contenido.
+ * Esqueleto de las paginas que aun no tienen contenido. Solo queda la
+ * calculadora, que llega en la Fase 5 con su motor en el gateway.
  */
 function EnConstruccion({ route, locale }: PropsRenderizador) {
   const { title, description } = SEO_POR_RUTA[route.id](cargarMensajes(locale))
@@ -35,25 +47,21 @@ function EnConstruccion({ route, locale }: PropsRenderizador) {
   )
 }
 
-const enConstruccion = (): Renderizador => EnConstruccion
-
-const renderNoEncontrada: Renderizador = ({ locale }) => <PaginaNoEncontrada locale={locale} />
-
 export const RENDERIZADORES: Record<RouteId, Renderizador> = {
-  home: enConstruccion(),
-  mssp: enConstruccion(),
-  msspIt: enConstruccion(),
-  msspOt: enConstruccion(),
-  grc: enConstruccion(),
-  grcCatalog: enConstruccion(),
-  software: enConstruccion(),
-  sectors: enConstruccion(),
-  blog: enConstruccion(),
-  company: enConstruccion(),
-  contact: enConstruccion(),
-  calculator: enConstruccion(),
-  privacy: enConstruccion(),
-  legal: enConstruccion(),
-  cookies: enConstruccion(),
-  notFound: renderNoEncontrada,
+  home: ({ locale }) => <Home locale={locale} />,
+  mssp: ({ locale }) => <Mssp locale={locale} />,
+  msspIt: ({ locale }) => <CatalogoIt locale={locale} />,
+  msspOt: ({ locale }) => <CatalogoOt locale={locale} />,
+  grc: ({ locale }) => <Grc locale={locale} />,
+  grcCatalog: ({ locale }) => <CatalogoGrc locale={locale} />,
+  software: ({ locale }) => <Software locale={locale} />,
+  sectors: ({ locale }) => <Sectores locale={locale} />,
+  blog: ({ locale }) => <Blog locale={locale} />,
+  company: ({ locale }) => <Compania locale={locale} />,
+  contact: ({ locale }) => <Contacto locale={locale} />,
+  calculator: EnConstruccion,
+  privacy: ({ locale }) => <Privacidad locale={locale} />,
+  legal: ({ locale }) => <AvisoLegal locale={locale} />,
+  cookies: ({ locale }) => <Cookies locale={locale} />,
+  notFound: ({ locale }) => <PaginaNoEncontrada locale={locale} />,
 }

@@ -12,7 +12,7 @@ import { cargarMensajes } from '@/i18n/mensajes'
  * en cliente y rompe la hidratacion. Se sustituye por un gradiente CSS, que
  * ademas es lo que pide el objetivo de LCP del brief.
  */
-export function PaginaNoEncontrada({ locale }: { locale: Locale }) {
+export function NoEncontrada({ locale }: { locale: Locale }) {
   const { notFound } = cargarMensajes(locale).common
 
   return (

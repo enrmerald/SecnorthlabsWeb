@@ -23,7 +23,9 @@ export function Logotipo({ className = '' }: PropsLogotipo) {
       <span aria-hidden="true" className="tracking-[0.18em]">
         ISN
       </span>
-      <span aria-hidden="true" className="bg-text mx-1 h-px w-3 self-center" />
+      {/* El signo entre ISN y Labs es un subrayado corto a la altura de la
+          linea base, como en el mockup, no un guion centrado. */}
+      <span aria-hidden="true" className="bg-text mr-1 h-[0.09em] w-[0.42em] self-baseline" />
       <span aria-hidden="true">Labs</span>
     </span>
   )

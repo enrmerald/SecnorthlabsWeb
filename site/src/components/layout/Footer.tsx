@@ -36,9 +36,11 @@ export function Footer({ locale }: { locale: Locale }) {
             <ul className="flex flex-col gap-2.5">
               {columna.links.map((enlace) => (
                 <li key={enlace.href}>
+                  {/* `min-h-6` para cumplir el objetivo tactil minimo de WCAG
+                      2.2: sin el, un enlace de pie mide 21px de alto. */}
                   <Link
                     href={enlace.href}
-                    className="text-text-dim hover:text-cyan text-sm transition-colors"
+                    className="text-text-dim hover:text-cyan inline-flex min-h-6 items-center text-sm transition-colors"
                   >
                     {enlace.label}
                   </Link>
@@ -50,7 +52,7 @@ export function Footer({ locale }: { locale: Locale }) {
                   <button
                     type="button"
                     data-cmp-open
-                    className="text-text-dim hover:text-cyan text-left text-sm transition-colors"
+                    className="text-text-dim hover:text-cyan inline-flex min-h-6 items-center text-left text-sm transition-colors"
                   >
                     {columna.cookieSettings}
                   </button>

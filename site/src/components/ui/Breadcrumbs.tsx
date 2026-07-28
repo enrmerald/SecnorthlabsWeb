@@ -32,11 +32,20 @@ export function Breadcrumbs({ tramos, etiqueta, className = '' }: PropsBreadcrum
               )}
 
               {tramo.href && !esUltimo ? (
-                <Link href={tramo.href} className="hover:text-cyan transition-colors">
+                // `py-1` para llegar a los 24px de alto minimo de objetivo que
+                // pide WCAG 2.2: un enlace de doce pixeles de alto es
+                // practicamente imposible de acertar con el pulgar.
+                <Link
+                  href={tramo.href}
+                  className="hover:text-cyan inline-flex min-h-6 items-center py-1 transition-colors"
+                >
                   {tramo.label}
                 </Link>
               ) : (
-                <span aria-current={esUltimo ? 'page' : undefined} className="text-text">
+                <span
+                  aria-current={esUltimo ? 'page' : undefined}
+                  className="text-text inline-flex min-h-6 items-center py-1"
+                >
                   {tramo.label}
                 </span>
               )}

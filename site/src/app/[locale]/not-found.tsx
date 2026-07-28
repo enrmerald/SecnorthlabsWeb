@@ -1,6 +1,6 @@
 import { getLocale } from 'next-intl/server'
 import { DEFAULT_LOCALE, isLocale } from '@/config/routes'
-import { PaginaNoEncontrada } from '@/paginas/NoEncontrada'
+import { NoEncontrada } from '@/paginas/NoEncontrada'
 
 /**
  * 404 traducida, para un `notFound()` lanzado dentro de una ruta con idioma
@@ -15,5 +15,5 @@ import { PaginaNoEncontrada } from '@/paginas/NoEncontrada'
  */
 export default async function NoEncontradaIdioma() {
   const locale = await getLocale()
-  return <PaginaNoEncontrada locale={isLocale(locale) ? locale : DEFAULT_LOCALE} />
+  return <NoEncontrada locale={isLocale(locale) ? locale : DEFAULT_LOCALE} />
 }

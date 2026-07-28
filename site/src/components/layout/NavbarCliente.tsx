@@ -233,9 +233,15 @@ export function NavbarCliente({
             {navegacion.otroIdioma.label}
           </Link>
 
-          <Button href={navegacion.cta.href} variante="primario" className="hidden xl:inline-flex">
-            {navegacion.cta.label}
-          </Button>
+          {/* El CTA se oculta desde un contenedor y no con `hidden` sobre el
+              propio boton: `Button` ya trae `inline-flex` en sus clases base y
+              las dos utilidades de `display` compiten, con el resultado de que
+              el boton se pintaba tambien a 320px y desbordaba la pagina. */}
+          <div className="hidden xl:block">
+            <Button href={navegacion.cta.href} variante="primario">
+              {navegacion.cta.label}
+            </Button>
+          </div>
 
           <button
             ref={botonMenu}

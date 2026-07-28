@@ -55,7 +55,10 @@ export function Card({
     <Etiqueta
       id={id}
       className={[
-        'bg-card border rounded-[10px]',
+        // `min-w-0` porque un hijo de rejilla no se encoge por debajo de su
+        // ancho minimo de contenido salvo que se le diga: sin esto, una palabra
+        // larga dentro de una tarjeta desborda toda la pagina en movil.
+        'bg-card border rounded-[10px] min-w-0',
         destacada ? BORDE_DESTACADO[acentoColor] : 'border-border',
         barra,
         className,
