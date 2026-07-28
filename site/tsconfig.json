@@ -6,6 +6,10 @@
     "skipLibCheck": true,
     "strict": true,
     "noEmit": true,
+    // pbcg/ se importa con extension .ts explicita porque su CLI lo ejecuta
+    // Node con type stripping nativo, y Node exige el nombre real del fichero.
+    // Solo es admisible con noEmit, que es el caso: aqui no se emite nada.
+    "allowImportingTsExtensions": true,
     // Un import olvidado debe romper el build, no quedarse en el bundle.
     "noUnusedLocals": true,
     "noUnusedParameters": true,

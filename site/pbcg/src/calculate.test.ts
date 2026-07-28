@@ -1,8 +1,8 @@
 import { describe, expect, it } from 'vitest'
-import { calcular, calcularHorasAuditoriaAnuales, calcularTamano } from './calculate.js'
-import { PBCG_MODEL_VERSION } from './config.js'
-import { CalcInputSchema, ERROR_CPD_EXTERNO, ERROR_CPD_PROPIO } from './schemas.js'
-import type { CalcInput } from './types.js'
+import { calcular, calcularHorasAuditoriaAnuales, calcularTamano } from './calculate.ts'
+import { PBCG_MODEL_VERSION } from './config.ts'
+import { CalcInputSchema, ERROR_CPD_EXTERNO, ERROR_CPD_PROPIO } from './schemas.ts'
+import type { CalcInput } from './types.ts'
 
 /**
  * Bateria del motor PBCG (seccion 5.5).

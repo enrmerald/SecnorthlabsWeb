@@ -1,0 +1,1298 @@
+{
+  "$comentario": "Generado por site/pbcg/bin/generar-vectores.mjs. NO editar a mano: se regenera con `pnpm vectores` y el diff muestra que precios se han movido.",
+  "contractVersion": "1.0",
+  "modelVersion": "2026-07-v2",
+  "currency": "EUR",
+  "$unidades": "Todos los importes en centimos enteros.",
+  "casos": [
+    {
+      "id": "caso-de-oro",
+      "descripcion": "Columna B de la hoja CALCULADORA del dimensionador. 840 EUR, 815-900.",
+      "input": {
+        "sites": 1,
+        "users": 25,
+        "cpd": "external",
+        "physicalServersOwn": 0,
+        "virtualServersOwn": 0,
+        "physicalServersExternal": 1,
+        "virtualServersExternal": 3,
+        "otInstallations": 0,
+        "edr": "edr",
+        "licensesIncluded": true,
+        "backup": true,
+        "firewalls": 1,
+        "siem": false,
+        "patching": false,
+        "consultingHours": 2,
+        "module": "ensMedium"
+      },
+      "quote": {
+        "size": "S",
+        "licenceCents": 7500,
+        "auditCents": 33583,
+        "managedRangeCents": [
+          40500,
+          49000
+        ],
+        "totalRangeCents": [
+          81500,
+          90000
+        ],
+        "currency": "EUR"
+      },
+      "interno": {
+        "size": "S",
+        "technicalHours": 7.5,
+        "auditHoursAnnual": 62,
+        "totalCents": 84000
+      }
+    },
+    {
+      "id": "usuarios-25-limite-S",
+      "input": {
+        "sites": 1,
+        "users": 25,
+        "cpd": "external",
+        "physicalServersOwn": 0,
+        "virtualServersOwn": 0,
+        "physicalServersExternal": 0,
+        "virtualServersExternal": 0,
+        "otInstallations": 0,
+        "edr": "none",
+        "licensesIncluded": false,
+        "backup": false,
+        "firewalls": 0,
+        "siem": false,
+        "patching": false,
+        "consultingHours": 0,
+        "module": "none"
+      },
+      "quote": {
+        "size": "S",
+        "licenceCents": 0,
+        "auditCents": 0,
+        "managedRangeCents": [
+          0,
+          0
+        ],
+        "totalRangeCents": [
+          0,
+          0
+        ],
+        "currency": "EUR"
+      },
+      "interno": {
+        "size": "S",
+        "technicalHours": 0,
+        "auditHoursAnnual": 0,
+        "totalCents": 0
+      }
+    },
+    {
+      "id": "usuarios-26-pasa-a-M",
+      "input": {
+        "sites": 1,
+        "users": 26,
+        "cpd": "external",
+        "physicalServersOwn": 0,
+        "virtualServersOwn": 0,
+        "physicalServersExternal": 0,
+        "virtualServersExternal": 0,
+        "otInstallations": 0,
+        "edr": "none",
+        "licensesIncluded": false,
+        "backup": false,
+        "firewalls": 0,
+        "siem": false,
+        "patching": false,
+        "consultingHours": 0,
+        "module": "none"
+      },
+      "quote": {
+        "size": "M",
+        "licenceCents": 0,
+        "auditCents": 0,
+        "managedRangeCents": [
+          0,
+          0
+        ],
+        "totalRangeCents": [
+          0,
+          0
+        ],
+        "currency": "EUR"
+      },
+      "interno": {
+        "size": "M",
+        "technicalHours": 0,
+        "auditHoursAnnual": 0,
+        "totalCents": 0
+      }
+    },
+    {
+      "id": "usuarios-75-limite-M",
+      "input": {
+        "sites": 1,
+        "users": 75,
+        "cpd": "external",
+        "physicalServersOwn": 0,
+        "virtualServersOwn": 0,
+        "physicalServersExternal": 0,
+        "virtualServersExternal": 0,
+        "otInstallations": 0,
+        "edr": "none",
+        "licensesIncluded": false,
+        "backup": false,
+        "firewalls": 0,
+        "siem": false,
+        "patching": false,
+        "consultingHours": 0,
+        "module": "none"
+      },
+      "quote": {
+        "size": "M",
+        "licenceCents": 0,
+        "auditCents": 0,
+        "managedRangeCents": [
+          0,
+          0
+        ],
+        "totalRangeCents": [
+          0,
+          0
+        ],
+        "currency": "EUR"
+      },
+      "interno": {
+        "size": "M",
+        "technicalHours": 0,
+        "auditHoursAnnual": 0,
+        "totalCents": 0
+      }
+    },
+    {
+      "id": "usuarios-76-pasa-a-L",
+      "input": {
+        "sites": 1,
+        "users": 76,
+        "cpd": "external",
+        "physicalServersOwn": 0,
+        "virtualServersOwn": 0,
+        "physicalServersExternal": 0,
+        "virtualServersExternal": 0,
+        "otInstallations": 0,
+        "edr": "none",
+        "licensesIncluded": false,
+        "backup": false,
+        "firewalls": 0,
+        "siem": false,
+        "patching": false,
+        "consultingHours": 0,
+        "module": "none"
+      },
+      "quote": {
+        "size": "L",
+        "licenceCents": 0,
+        "auditCents": 0,
+        "managedRangeCents": [
+          0,
+          0
+        ],
+        "totalRangeCents": [
+          0,
+          0
+        ],
+        "currency": "EUR"
+      },
+      "interno": {
+        "size": "L",
+        "technicalHours": 0,
+        "auditHoursAnnual": 0,
+        "totalCents": 0
+      }
+    },
+    {
+      "id": "sedes-1-limite-S",
+      "input": {
+        "sites": 1,
+        "users": 10,
+        "cpd": "external",
+        "physicalServersOwn": 0,
+        "virtualServersOwn": 0,
+        "physicalServersExternal": 0,
+        "virtualServersExternal": 0,
+        "otInstallations": 0,
+        "edr": "none",
+        "licensesIncluded": false,
+        "backup": false,
+        "firewalls": 0,
+        "siem": false,
+        "patching": false,
+        "consultingHours": 0,
+        "module": "none"
+      },
+      "quote": {
+        "size": "S",
+        "licenceCents": 0,
+        "auditCents": 0,
+        "managedRangeCents": [
+          0,
+          0
+        ],
+        "totalRangeCents": [
+          0,
+          0
+        ],
+        "currency": "EUR"
+      },
+      "interno": {
+        "size": "S",
+        "technicalHours": 0,
+        "auditHoursAnnual": 0,
+        "totalCents": 0
+      }
+    },
+    {
+      "id": "sedes-4-pasa-a-L",
+      "input": {
+        "sites": 4,
+        "users": 10,
+        "cpd": "external",
+        "physicalServersOwn": 0,
+        "virtualServersOwn": 0,
+        "physicalServersExternal": 0,
+        "virtualServersExternal": 0,
+        "otInstallations": 0,
+        "edr": "none",
+        "licensesIncluded": false,
+        "backup": false,
+        "firewalls": 0,
+        "siem": false,
+        "patching": false,
+        "consultingHours": 0,
+        "module": "none"
+      },
+      "quote": {
+        "size": "L",
+        "licenceCents": 0,
+        "auditCents": 0,
+        "managedRangeCents": [
+          8000,
+          10000
+        ],
+        "totalRangeCents": [
+          8000,
+          10000
+        ],
+        "currency": "EUR"
+      },
+      "interno": {
+        "size": "L",
+        "technicalHours": 1.5,
+        "auditHoursAnnual": 0,
+        "totalCents": 8500
+      }
+    },
+    {
+      "id": "criterios-en-conflicto-manda-el-peor",
+      "input": {
+        "sites": 5,
+        "users": 10,
+        "cpd": "external",
+        "physicalServersOwn": 0,
+        "virtualServersOwn": 0,
+        "physicalServersExternal": 0,
+        "virtualServersExternal": 0,
+        "otInstallations": 0,
+        "edr": "none",
+        "licensesIncluded": false,
+        "backup": false,
+        "firewalls": 0,
+        "siem": false,
+        "patching": false,
+        "consultingHours": 0,
+        "module": "none"
+      },
+      "quote": {
+        "size": "L",
+        "licenceCents": 0,
+        "auditCents": 0,
+        "managedRangeCents": [
+          11000,
+          13000
+        ],
+        "totalRangeCents": [
+          11000,
+          13000
+        ],
+        "currency": "EUR"
+      },
+      "interno": {
+        "size": "L",
+        "technicalHours": 2,
+        "auditHoursAnnual": 0,
+        "totalCents": 11500
+      }
+    },
+    {
+      "id": "ot-sube-un-escalon",
+      "input": {
+        "sites": 1,
+        "users": 10,
+        "cpd": "external",
+        "physicalServersOwn": 0,
+        "virtualServersOwn": 0,
+        "physicalServersExternal": 0,
+        "virtualServersExternal": 0,
+        "otInstallations": 1,
+        "edr": "none",
+        "licensesIncluded": false,
+        "backup": false,
+        "firewalls": 0,
+        "siem": false,
+        "patching": false,
+        "consultingHours": 0,
+        "module": "none"
+      },
+      "quote": {
+        "size": "M",
+        "licenceCents": 0,
+        "auditCents": 0,
+        "managedRangeCents": [
+          11000,
+          13000
+        ],
+        "totalRangeCents": [
+          11000,
+          13000
+        ],
+        "currency": "EUR"
+      },
+      "interno": {
+        "size": "M",
+        "technicalHours": 2,
+        "auditHoursAnnual": 0,
+        "totalCents": 11500
+      }
+    },
+    {
+      "id": "cpd-propio-sube-un-escalon",
+      "input": {
+        "sites": 1,
+        "users": 10,
+        "cpd": "own",
+        "physicalServersOwn": 0,
+        "virtualServersOwn": 0,
+        "physicalServersExternal": 0,
+        "virtualServersExternal": 0,
+        "otInstallations": 0,
+        "edr": "none",
+        "licensesIncluded": false,
+        "backup": false,
+        "firewalls": 0,
+        "siem": false,
+        "patching": false,
+        "consultingHours": 0,
+        "module": "none"
+      },
+      "quote": {
+        "size": "M",
+        "licenceCents": 0,
+        "auditCents": 0,
+        "managedRangeCents": [
+          5500,
+          6500
+        ],
+        "totalRangeCents": [
+          5500,
+          6500
+        ],
+        "currency": "EUR"
+      },
+      "interno": {
+        "size": "M",
+        "technicalHours": 1,
+        "auditHoursAnnual": 0,
+        "totalCents": 5500
+      }
+    },
+    {
+      "id": "cpd-hibrido-sube-un-escalon",
+      "input": {
+        "sites": 1,
+        "users": 10,
+        "cpd": "hybrid",
+        "physicalServersOwn": 0,
+        "virtualServersOwn": 0,
+        "physicalServersExternal": 0,
+        "virtualServersExternal": 0,
+        "otInstallations": 0,
+        "edr": "none",
+        "licensesIncluded": false,
+        "backup": false,
+        "firewalls": 0,
+        "siem": false,
+        "patching": false,
+        "consultingHours": 0,
+        "module": "none"
+      },
+      "quote": {
+        "size": "M",
+        "licenceCents": 0,
+        "auditCents": 0,
+        "managedRangeCents": [
+          5500,
+          6500
+        ],
+        "totalRangeCents": [
+          5500,
+          6500
+        ],
+        "currency": "EUR"
+      },
+      "interno": {
+        "size": "M",
+        "technicalHours": 1,
+        "auditHoursAnnual": 0,
+        "totalCents": 5500
+      }
+    },
+    {
+      "id": "ya-en-L-con-OT-no-desborda",
+      "input": {
+        "sites": 1,
+        "users": 500,
+        "cpd": "own",
+        "physicalServersOwn": 1,
+        "virtualServersOwn": 0,
+        "physicalServersExternal": 0,
+        "virtualServersExternal": 0,
+        "otInstallations": 3,
+        "edr": "none",
+        "licensesIncluded": false,
+        "backup": false,
+        "firewalls": 0,
+        "siem": false,
+        "patching": false,
+        "consultingHours": 0,
+        "module": "none"
+      },
+      "quote": {
+        "size": "L",
+        "licenceCents": 0,
+        "auditCents": 0,
+        "managedRangeCents": [
+          38000,
+          46000
+        ],
+        "totalRangeCents": [
+          38000,
+          46000
+        ],
+        "currency": "EUR"
+      },
+      "interno": {
+        "size": "L",
+        "technicalHours": 7,
+        "auditHoursAnnual": 0,
+        "totalCents": 40000
+      }
+    },
+    {
+      "id": "modulo-nis2-tamano-S",
+      "input": {
+        "sites": 1,
+        "users": 10,
+        "cpd": "external",
+        "physicalServersOwn": 0,
+        "virtualServersOwn": 0,
+        "physicalServersExternal": 0,
+        "virtualServersExternal": 0,
+        "otInstallations": 0,
+        "edr": "none",
+        "licensesIncluded": false,
+        "backup": false,
+        "firewalls": 0,
+        "siem": false,
+        "patching": false,
+        "consultingHours": 0,
+        "module": "nis2"
+      },
+      "quote": {
+        "size": "S",
+        "licenceCents": 0,
+        "auditCents": 27083,
+        "managedRangeCents": [
+          0,
+          0
+        ],
+        "totalRangeCents": [
+          27000,
+          27000
+        ],
+        "currency": "EUR"
+      },
+      "interno": {
+        "size": "S",
+        "technicalHours": 0,
+        "auditHoursAnnual": 50,
+        "totalCents": 27000
+      }
+    },
+    {
+      "id": "modulo-nis2-tamano-M",
+      "input": {
+        "sites": 1,
+        "users": 50,
+        "cpd": "external",
+        "physicalServersOwn": 0,
+        "virtualServersOwn": 0,
+        "physicalServersExternal": 0,
+        "virtualServersExternal": 0,
+        "otInstallations": 0,
+        "edr": "none",
+        "licensesIncluded": false,
+        "backup": false,
+        "firewalls": 0,
+        "siem": false,
+        "patching": false,
+        "consultingHours": 0,
+        "module": "nis2"
+      },
+      "quote": {
+        "size": "M",
+        "licenceCents": 0,
+        "auditCents": 42250,
+        "managedRangeCents": [
+          0,
+          0
+        ],
+        "totalRangeCents": [
+          42500,
+          42500
+        ],
+        "currency": "EUR"
+      },
+      "interno": {
+        "size": "M",
+        "technicalHours": 0,
+        "auditHoursAnnual": 78,
+        "totalCents": 42500
+      }
+    },
+    {
+      "id": "modulo-nis2-tamano-L",
+      "input": {
+        "sites": 1,
+        "users": 200,
+        "cpd": "external",
+        "physicalServersOwn": 0,
+        "virtualServersOwn": 0,
+        "physicalServersExternal": 0,
+        "virtualServersExternal": 0,
+        "otInstallations": 0,
+        "edr": "none",
+        "licensesIncluded": false,
+        "backup": false,
+        "firewalls": 0,
+        "siem": false,
+        "patching": false,
+        "consultingHours": 0,
+        "module": "nis2"
+      },
+      "quote": {
+        "size": "L",
+        "licenceCents": 0,
+        "auditCents": 67167,
+        "managedRangeCents": [
+          0,
+          0
+        ],
+        "totalRangeCents": [
+          67000,
+          67000
+        ],
+        "currency": "EUR"
+      },
+      "interno": {
+        "size": "L",
+        "technicalHours": 0,
+        "auditHoursAnnual": 124,
+        "totalCents": 67000
+      }
+    },
+    {
+      "id": "modulo-ensMedium-tamano-S",
+      "input": {
+        "sites": 1,
+        "users": 10,
+        "cpd": "external",
+        "physicalServersOwn": 0,
+        "virtualServersOwn": 0,
+        "physicalServersExternal": 0,
+        "virtualServersExternal": 0,
+        "otInstallations": 0,
+        "edr": "none",
+        "licensesIncluded": false,
+        "backup": false,
+        "firewalls": 0,
+        "siem": false,
+        "patching": false,
+        "consultingHours": 0,
+        "module": "ensMedium"
+      },
+      "quote": {
+        "size": "S",
+        "licenceCents": 0,
+        "auditCents": 33583,
+        "managedRangeCents": [
+          0,
+          0
+        ],
+        "totalRangeCents": [
+          33500,
+          33500
+        ],
+        "currency": "EUR"
+      },
+      "interno": {
+        "size": "S",
+        "technicalHours": 0,
+        "auditHoursAnnual": 62,
+        "totalCents": 33500
+      }
+    },
+    {
+      "id": "modulo-ensMedium-tamano-M",
+      "input": {
+        "sites": 1,
+        "users": 50,
+        "cpd": "external",
+        "physicalServersOwn": 0,
+        "virtualServersOwn": 0,
+        "physicalServersExternal": 0,
+        "virtualServersExternal": 0,
+        "otInstallations": 0,
+        "edr": "none",
+        "licensesIncluded": false,
+        "backup": false,
+        "firewalls": 0,
+        "siem": false,
+        "patching": false,
+        "consultingHours": 0,
+        "module": "ensMedium"
+      },
+      "quote": {
+        "size": "M",
+        "licenceCents": 0,
+        "auditCents": 50917,
+        "managedRangeCents": [
+          0,
+          0
+        ],
+        "totalRangeCents": [
+          51000,
+          51000
+        ],
+        "currency": "EUR"
+      },
+      "interno": {
+        "size": "M",
+        "technicalHours": 0,
+        "auditHoursAnnual": 94,
+        "totalCents": 51000
+      }
+    },
+    {
+      "id": "modulo-ensMedium-tamano-L",
+      "input": {
+        "sites": 1,
+        "users": 200,
+        "cpd": "external",
+        "physicalServersOwn": 0,
+        "virtualServersOwn": 0,
+        "physicalServersExternal": 0,
+        "virtualServersExternal": 0,
+        "otInstallations": 0,
+        "edr": "none",
+        "licensesIncluded": false,
+        "backup": false,
+        "firewalls": 0,
+        "siem": false,
+        "patching": false,
+        "consultingHours": 0,
+        "module": "ensMedium"
+      },
+      "quote": {
+        "size": "L",
+        "licenceCents": 0,
+        "auditCents": 80167,
+        "managedRangeCents": [
+          0,
+          0
+        ],
+        "totalRangeCents": [
+          80000,
+          80000
+        ],
+        "currency": "EUR"
+      },
+      "interno": {
+        "size": "L",
+        "technicalHours": 0,
+        "auditHoursAnnual": 148,
+        "totalCents": 80000
+      }
+    },
+    {
+      "id": "modulo-ensHigh-tamano-S",
+      "input": {
+        "sites": 1,
+        "users": 10,
+        "cpd": "external",
+        "physicalServersOwn": 0,
+        "virtualServersOwn": 0,
+        "physicalServersExternal": 0,
+        "virtualServersExternal": 0,
+        "otInstallations": 0,
+        "edr": "none",
+        "licensesIncluded": false,
+        "backup": false,
+        "firewalls": 0,
+        "siem": false,
+        "patching": false,
+        "consultingHours": 0,
+        "module": "ensHigh"
+      },
+      "quote": {
+        "size": "S",
+        "licenceCents": 0,
+        "auditCents": 48750,
+        "managedRangeCents": [
+          0,
+          0
+        ],
+        "totalRangeCents": [
+          49000,
+          49000
+        ],
+        "currency": "EUR"
+      },
+      "interno": {
+        "size": "S",
+        "technicalHours": 0,
+        "auditHoursAnnual": 90,
+        "totalCents": 49000
+      }
+    },
+    {
+      "id": "modulo-ensHigh-tamano-M",
+      "input": {
+        "sites": 1,
+        "users": 50,
+        "cpd": "external",
+        "physicalServersOwn": 0,
+        "virtualServersOwn": 0,
+        "physicalServersExternal": 0,
+        "virtualServersExternal": 0,
+        "otInstallations": 0,
+        "edr": "none",
+        "licensesIncluded": false,
+        "backup": false,
+        "firewalls": 0,
+        "siem": false,
+        "patching": false,
+        "consultingHours": 0,
+        "module": "ensHigh"
+      },
+      "quote": {
+        "size": "M",
+        "licenceCents": 0,
+        "auditCents": 72583,
+        "managedRangeCents": [
+          0,
+          0
+        ],
+        "totalRangeCents": [
+          72500,
+          72500
+        ],
+        "currency": "EUR"
+      },
+      "interno": {
+        "size": "M",
+        "technicalHours": 0,
+        "auditHoursAnnual": 134,
+        "totalCents": 72500
+      }
+    },
+    {
+      "id": "modulo-ensHigh-tamano-L",
+      "input": {
+        "sites": 1,
+        "users": 200,
+        "cpd": "external",
+        "physicalServersOwn": 0,
+        "virtualServersOwn": 0,
+        "physicalServersExternal": 0,
+        "virtualServersExternal": 0,
+        "otInstallations": 0,
+        "edr": "none",
+        "licensesIncluded": false,
+        "backup": false,
+        "firewalls": 0,
+        "siem": false,
+        "patching": false,
+        "consultingHours": 0,
+        "module": "ensHigh"
+      },
+      "quote": {
+        "size": "L",
+        "licenceCents": 0,
+        "auditCents": 113750,
+        "managedRangeCents": [
+          0,
+          0
+        ],
+        "totalRangeCents": [
+          114000,
+          114000
+        ],
+        "currency": "EUR"
+      },
+      "interno": {
+        "size": "L",
+        "technicalHours": 0,
+        "auditHoursAnnual": 210,
+        "totalCents": 114000
+      }
+    },
+    {
+      "id": "licencias-edr",
+      "input": {
+        "sites": 1,
+        "users": 40,
+        "cpd": "external",
+        "physicalServersOwn": 0,
+        "virtualServersOwn": 0,
+        "physicalServersExternal": 0,
+        "virtualServersExternal": 0,
+        "otInstallations": 0,
+        "edr": "edr",
+        "licensesIncluded": true,
+        "backup": false,
+        "firewalls": 0,
+        "siem": false,
+        "patching": false,
+        "consultingHours": 0,
+        "module": "none"
+      },
+      "quote": {
+        "size": "M",
+        "licenceCents": 12000,
+        "auditCents": 0,
+        "managedRangeCents": [
+          16000,
+          19500
+        ],
+        "totalRangeCents": [
+          28000,
+          31500
+        ],
+        "currency": "EUR"
+      },
+      "interno": {
+        "size": "M",
+        "technicalHours": 3,
+        "auditHoursAnnual": 0,
+        "totalCents": 29000
+      }
+    },
+    {
+      "id": "licencias-mdr",
+      "input": {
+        "sites": 1,
+        "users": 40,
+        "cpd": "external",
+        "physicalServersOwn": 0,
+        "virtualServersOwn": 0,
+        "physicalServersExternal": 0,
+        "virtualServersExternal": 0,
+        "otInstallations": 0,
+        "edr": "mdr",
+        "licensesIncluded": true,
+        "backup": false,
+        "firewalls": 0,
+        "siem": false,
+        "patching": false,
+        "consultingHours": 0,
+        "module": "none"
+      },
+      "quote": {
+        "size": "M",
+        "licenceCents": 26320,
+        "auditCents": 0,
+        "managedRangeCents": [
+          16000,
+          19500
+        ],
+        "totalRangeCents": [
+          42500,
+          46000
+        ],
+        "currency": "EUR"
+      },
+      "interno": {
+        "size": "M",
+        "technicalHours": 3,
+        "auditHoursAnnual": 0,
+        "totalCents": 43500
+      }
+    },
+    {
+      "id": "sin-edr-no-hay-licencias",
+      "descripcion": "Aunque se marque la casilla: sin EDR el importe es cero.",
+      "input": {
+        "sites": 1,
+        "users": 40,
+        "cpd": "external",
+        "physicalServersOwn": 0,
+        "virtualServersOwn": 0,
+        "physicalServersExternal": 0,
+        "virtualServersExternal": 0,
+        "otInstallations": 0,
+        "edr": "none",
+        "licensesIncluded": true,
+        "backup": false,
+        "firewalls": 0,
+        "siem": false,
+        "patching": false,
+        "consultingHours": 0,
+        "module": "none"
+      },
+      "quote": {
+        "size": "M",
+        "licenceCents": 0,
+        "auditCents": 0,
+        "managedRangeCents": [
+          0,
+          0
+        ],
+        "totalRangeCents": [
+          0,
+          0
+        ],
+        "currency": "EUR"
+      },
+      "interno": {
+        "size": "M",
+        "technicalHours": 0,
+        "auditHoursAnnual": 0,
+        "totalCents": 0
+      }
+    },
+    {
+      "id": "edr-sin-licencias",
+      "input": {
+        "sites": 1,
+        "users": 40,
+        "cpd": "external",
+        "physicalServersOwn": 0,
+        "virtualServersOwn": 0,
+        "physicalServersExternal": 0,
+        "virtualServersExternal": 0,
+        "otInstallations": 0,
+        "edr": "edr",
+        "licensesIncluded": false,
+        "backup": false,
+        "firewalls": 0,
+        "siem": false,
+        "patching": false,
+        "consultingHours": 0,
+        "module": "none"
+      },
+      "quote": {
+        "size": "M",
+        "licenceCents": 0,
+        "auditCents": 0,
+        "managedRangeCents": [
+          16000,
+          19500
+        ],
+        "totalRangeCents": [
+          16000,
+          19500
+        ],
+        "currency": "EUR"
+      },
+      "interno": {
+        "size": "M",
+        "technicalHours": 3,
+        "auditHoursAnnual": 0,
+        "totalCents": 17000
+      }
+    },
+    {
+      "id": "todo-desactivado",
+      "descripcion": "Todo a cero: el total es cero.",
+      "input": {
+        "sites": 1,
+        "users": 10,
+        "cpd": "external",
+        "physicalServersOwn": 0,
+        "virtualServersOwn": 0,
+        "physicalServersExternal": 0,
+        "virtualServersExternal": 0,
+        "otInstallations": 0,
+        "edr": "none",
+        "licensesIncluded": false,
+        "backup": false,
+        "firewalls": 0,
+        "siem": false,
+        "patching": false,
+        "consultingHours": 0,
+        "module": "none"
+      },
+      "quote": {
+        "size": "S",
+        "licenceCents": 0,
+        "auditCents": 0,
+        "managedRangeCents": [
+          0,
+          0
+        ],
+        "totalRangeCents": [
+          0,
+          0
+        ],
+        "currency": "EUR"
+      },
+      "interno": {
+        "size": "S",
+        "technicalHours": 0,
+        "auditHoursAnnual": 0,
+        "totalCents": 0
+      }
+    },
+    {
+      "id": "valores-maximos",
+      "input": {
+        "sites": 50,
+        "users": 2000,
+        "cpd": "hybrid",
+        "physicalServersOwn": 200,
+        "virtualServersOwn": 500,
+        "physicalServersExternal": 200,
+        "virtualServersExternal": 500,
+        "otInstallations": 20,
+        "edr": "mdr",
+        "licensesIncluded": true,
+        "backup": true,
+        "firewalls": 50,
+        "siem": true,
+        "patching": true,
+        "consultingHours": 6,
+        "module": "ensHigh"
+      },
+      "quote": {
+        "size": "L",
+        "licenceCents": 1316000,
+        "auditCents": 113750,
+        "managedRangeCents": [
+          6917500,
+          8374000
+        ],
+        "totalRangeCents": [
+          8347500,
+          9804000
+        ],
+        "currency": "EUR"
+      },
+      "interno": {
+        "size": "L",
+        "technicalHours": 1277.5,
+        "auditHoursAnnual": 210,
+        "totalCents": 8711500
+      }
+    }
+  ],
+  "casosInvalidos": [
+    {
+      "id": "cpd-propio-con-servidores-externos",
+      "descripcion": "Bloqueante B06: no se normaliza en silencio. Poner a cero los servidores incompatibles produciria una cotizacion mas barata que la real.",
+      "input": {
+        "sites": 1,
+        "users": 10,
+        "cpd": "own",
+        "physicalServersOwn": 0,
+        "virtualServersOwn": 0,
+        "physicalServersExternal": 2,
+        "virtualServersExternal": 0,
+        "otInstallations": 0,
+        "edr": "none",
+        "licensesIncluded": false,
+        "backup": false,
+        "firewalls": 0,
+        "siem": false,
+        "patching": false,
+        "consultingHours": 0,
+        "module": "none"
+      },
+      "debeRechazarse": true,
+      "codigos": [
+        "cpdPropioConServidoresExternos"
+      ]
+    },
+    {
+      "id": "cpd-externo-con-servidores-propios",
+      "input": {
+        "sites": 1,
+        "users": 10,
+        "cpd": "external",
+        "physicalServersOwn": 0,
+        "virtualServersOwn": 3,
+        "physicalServersExternal": 0,
+        "virtualServersExternal": 0,
+        "otInstallations": 0,
+        "edr": "none",
+        "licensesIncluded": false,
+        "backup": false,
+        "firewalls": 0,
+        "siem": false,
+        "patching": false,
+        "consultingHours": 0,
+        "module": "none"
+      },
+      "debeRechazarse": true,
+      "codigos": [
+        "cpdExternoConServidoresPropios"
+      ]
+    },
+    {
+      "id": "hibrido-cambiado-a-propio-conservando-valores",
+      "descripcion": "La persona rellena los cuatro campos en Hibrido y cambia a Propio. Los externos siguen en el estado del formulario aunque sus campos esten ocultos.",
+      "input": {
+        "sites": 1,
+        "users": 10,
+        "cpd": "own",
+        "physicalServersOwn": 2,
+        "virtualServersOwn": 4,
+        "physicalServersExternal": 3,
+        "virtualServersExternal": 6,
+        "otInstallations": 0,
+        "edr": "none",
+        "licensesIncluded": false,
+        "backup": false,
+        "firewalls": 0,
+        "siem": false,
+        "patching": false,
+        "consultingHours": 0,
+        "module": "none"
+      },
+      "debeRechazarse": true,
+      "codigos": [
+        "cpdPropioConServidoresExternos"
+      ]
+    },
+    {
+      "id": "usuarios-negativos",
+      "input": {
+        "sites": 1,
+        "users": -1,
+        "cpd": "external",
+        "physicalServersOwn": 0,
+        "virtualServersOwn": 0,
+        "physicalServersExternal": 0,
+        "virtualServersExternal": 0,
+        "otInstallations": 0,
+        "edr": "none",
+        "licensesIncluded": false,
+        "backup": false,
+        "firewalls": 0,
+        "siem": false,
+        "patching": false,
+        "consultingHours": 0,
+        "module": "none"
+      },
+      "debeRechazarse": true,
+      "codigos": [
+        "Too small: expected number to be >=1"
+      ]
+    },
+    {
+      "id": "usuarios-decimales",
+      "input": {
+        "sites": 1,
+        "users": 10.5,
+        "cpd": "external",
+        "physicalServersOwn": 0,
+        "virtualServersOwn": 0,
+        "physicalServersExternal": 0,
+        "virtualServersExternal": 0,
+        "otInstallations": 0,
+        "edr": "none",
+        "licensesIncluded": false,
+        "backup": false,
+        "firewalls": 0,
+        "siem": false,
+        "patching": false,
+        "consultingHours": 0,
+        "module": "none"
+      },
+      "debeRechazarse": true,
+      "codigos": [
+        "Invalid input: expected int, received number"
+      ]
+    },
+    {
+      "id": "usuarios-por-encima-del-maximo",
+      "input": {
+        "sites": 1,
+        "users": 2001,
+        "cpd": "external",
+        "physicalServersOwn": 0,
+        "virtualServersOwn": 0,
+        "physicalServersExternal": 0,
+        "virtualServersExternal": 0,
+        "otInstallations": 0,
+        "edr": "none",
+        "licensesIncluded": false,
+        "backup": false,
+        "firewalls": 0,
+        "siem": false,
+        "patching": false,
+        "consultingHours": 0,
+        "module": "none"
+      },
+      "debeRechazarse": true,
+      "codigos": [
+        "Too big: expected number to be <=2000"
+      ]
+    },
+    {
+      "id": "horas-consultoria-no-permitidas",
+      "input": {
+        "sites": 1,
+        "users": 10,
+        "cpd": "external",
+        "physicalServersOwn": 0,
+        "virtualServersOwn": 0,
+        "physicalServersExternal": 0,
+        "virtualServersExternal": 0,
+        "otInstallations": 0,
+        "edr": "none",
+        "licensesIncluded": false,
+        "backup": false,
+        "firewalls": 0,
+        "siem": false,
+        "patching": false,
+        "consultingHours": 3,
+        "module": "none"
+      },
+      "debeRechazarse": true,
+      "codigos": [
+        "Invalid input"
+      ]
+    }
+  ]
+}

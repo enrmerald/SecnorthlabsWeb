@@ -1,5 +1,5 @@
-import { PBCG, PBCG_MODEL_VERSION, type Modulo, type Prueba, type Size } from './config.js'
-import type { CalcInput, InternalCalculationResult } from './types.js'
+import { PBCG, PBCG_MODEL_VERSION, type Modulo, type Prueba, type Size } from './config.ts'
+import type { CalcInput, InternalCalculationResult } from './types.ts'
 
 /**
  * Motor de calculo del PBCG. Sin React, sin DOM, sin traducciones: entrada →

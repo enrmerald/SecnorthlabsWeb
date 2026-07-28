@@ -1,4 +1,4 @@
-import type { Size } from './config.js'
+import type { Size } from './config.ts'
 
 /**
  * Tipos del motor PBCG.

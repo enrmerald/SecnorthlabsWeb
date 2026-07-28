@@ -25,7 +25,9 @@
     "check:age": "node scripts/check-package-age.mjs",
     "check:js": "node scripts/check-js-budget.mjs",
     "verify:architecture": "node scripts/assert-static-architecture.mjs",
-    "verify:export": "node scripts/assert-static-output.mjs"
+    "verify:export": "node scripts/assert-static-output.mjs",
+    "calcular": "node pbcg/bin/calculate.mjs",
+    "vectores": "node pbcg/bin/generar-vectores.mjs"
   },
   "dependencies": {
     "next": "16.2.12",
