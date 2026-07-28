@@ -1,0 +1,26 @@
+{
+  "name": "isnlabs-web-gateway",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Web Gateway de ISN Labs. Contiene el motor PBCG, el adaptador de EspoCRM, la bandeja de salida y el SMTP. NO tiene ninguna conexion con Netlify.",
+  "packageManager": "pnpm@11.5.0",
+  "engines": {
+    "node": "24.18.0",
+    "pnpm": "11.5.0"
+  },
+  "scripts": {
+    "lint": "eslint . --max-warnings=0",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "dependencies": {
+    "zod": "4.4.3"
+  },
+  "devDependencies": {
+    "@types/node": "24.13.3",
+    "typescript": "5.9.3",
+    "vitest": "4.1.10"
+  }
+}
