@@ -32,6 +32,27 @@ Thumbs.db
 *.sln
 *.sw?
 
+# ── Material criptografico ──────────────────────────────────────────────
+# NADA de esto entra en el repositorio, y menos aun en uno que Netlify clona.
+#
+# `claves/produccion/enc-priv.pem` es la unica cosa que impide que un volcado
+# del buzon de ingestion revele los datos personales de todos los leads. Si se
+# filtra, el incidente es notificable.
+#
+# Las reglas van por patron y no solo por directorio, para que mover la carpeta
+# o cambiarle el nombre no desactive la proteccion sin que nadie lo note.
+claves/
+**/claves/
+*.pem
+*.key
+*.p12
+*.pfx
+*.jks
+*.asc
+*.gpg
+id_rsa*
+id_ed25519*
+
 # ── Datos confidenciales ────────────────────────────────────────────────
 # ISNLA-DOC-0008-01 §5: la hoja VALIDACION del dimensionador contiene
 # nombres reales de clientes, horas contratadas y PVP por contrato, y la
