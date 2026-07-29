@@ -10,7 +10,7 @@
     "pnpm": "11.5.0"
   },
   "scripts": {
-    "dev": "next dev",
+    "dev": "pnpm content:build && next dev",
     "clean": "node scripts/clean.mjs",
     "images:build": "node scripts/images-build.mjs",
     "content:build": "node scripts/content-build.mjs",
@@ -19,7 +19,7 @@
     "preview": "node scripts/static-server.mjs out",
     "lint": "eslint . --max-warnings=0",
     "typecheck": "tsc --noEmit",
-    "test": "vitest run",
+    "test": "pnpm content:build && vitest run",
     "test:e2e": "playwright test",
     "check:i18n": "node scripts/check-i18n.mjs",
     "check:routes": "node scripts/check-routes.mjs",

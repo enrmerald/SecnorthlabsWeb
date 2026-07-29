@@ -10,8 +10,9 @@ import type { Articulo, ArticuloIndice, BlogCompilado, Categoria } from './esque
  * (seccion 1.4.1). Lo que llega al cliente son las props que se le pasan
  * explicitamente, y para eso existe `ArticuloIndice`.
  *
- * El fichero generado esta versionado para que el repositorio compile sin haber
- * ejecutado antes el pipeline; `content:build` lo regenera en cada build.
+ * `src/generated/` **no esta versionado** (ver `.gitignore`), asi que este JSON no
+ * existe en un clon limpio: lo crea `content:build`. Por eso `dev`, `test` y
+ * `build` lo ejecutan antes, y no hace falta acordarse de nada.
  */
 const ARTICULOS = compilado as unknown as BlogCompilado
 
