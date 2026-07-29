@@ -48,3 +48,7 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 test-results/
+
+# generados por `pnpm seo:build` (dependen de SITE_URL y del contexto de deploy)
+/public/sitemap.xml
+/public/robots.txt

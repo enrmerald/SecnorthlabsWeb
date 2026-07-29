@@ -3,11 +3,13 @@ import { CtaBand } from '@/components/blocks/CtaBand'
 import { FrameworkBand } from '@/components/blocks/FrameworkBand'
 import { PillarCard } from '@/components/blocks/PillarCard'
 import { SentryBand } from '@/components/blocks/SentryBand'
+import { JsonLd } from '@/components/seo/JsonLd'
 import { Button } from '@/components/ui/Button'
 import { SectionHeading } from '@/components/ui/SectionHeading'
 import { Tag } from '@/components/ui/Tag'
 import { getLocalizedPath, type Locale } from '@/config/routes'
 import { cargarMensajes } from '@/i18n/mensajes'
+import { organizacionJsonLd } from '@/lib/jsonld'
 
 /**
  * Home - `/es/` y `/en/` (seccion 4.1, mockup image3.png).
@@ -37,6 +39,10 @@ export function Home({ locale }: { locale: Locale }) {
 
   return (
     <main id="contenido">
+      {/* Organization y LocalBusiness van solo en la Home: son datos del sitio,
+          no de la pagina, y repetirlos en las 32 no aporta nada. */}
+      <JsonLd datos={organizacionJsonLd(locale)} />
+
       {/* ── Hero a dos columnas ── */}
       <section className="relative overflow-hidden">
         <div aria-hidden="true" className="resplandor-hero" />
