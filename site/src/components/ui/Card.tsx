@@ -1,4 +1,4 @@
-import type { ElementType, ReactNode } from 'react'
+import type { ElementType, HTMLAttributes, ReactNode } from 'react'
 
 /**
  * Tarjeta del sistema de diseno: fondo --color-card, borde de 1px y radio de
@@ -21,7 +21,13 @@ const BORDE_DESTACADO: Record<ColorAcento, string> = {
   verde: 'border-green/40',
 }
 
-interface PropsCard {
+/**
+ * Hereda los atributos HTML para poder pasar `id`, `role` o `data-*` sin ir
+ * anadiendo props una a una. El listado del blog, por ejemplo, marca cada
+ * tarjeta con `data-categoria` y filtra desde CSS, sin volver a renderizar la
+ * lista en el navegador.
+ */
+interface PropsCard extends HTMLAttributes<HTMLElement> {
   acento?: PosicionAcento
   acentoColor?: ColorAcento
   /** Refuerza el borde de toda la tarjeta con el color de acento. */
@@ -40,7 +46,7 @@ export function Card({
   as: Etiqueta = 'div',
   className = '',
   children,
-  id,
+  ...resto
 }: PropsCard) {
   // La barra se pinta con ::before y no con un div extra para que no aparezca
   // un elemento vacio en el arbol de accesibilidad.
@@ -53,7 +59,7 @@ export function Card({
 
   return (
     <Etiqueta
-      id={id}
+      {...resto}
       className={[
         // `min-w-0` porque un hijo de rejilla no se encoge por debajo de su
         // ancho minimo de contenido salvo que se le diga: sin esto, una palabra

@@ -19,21 +19,47 @@
       "description": "Análisis accionable de NIS2, DORA, ISO 27001, ENS, RGPD y respuesta a incidentes para CISOs y responsables de cumplimiento.",
       "title": "Blog de ciberseguridad y cumplimiento (NIS2, DORA, ISO) - ISN Labs"
     },
-    "soon": {
-      "body": "Publicaremos dos análisis al mes sobre NIS2, DORA, ISO 27001, ENS, RGPD y respuesta a incidentes. El ángulo será siempre el mismo: qué significa, a quién afecta y qué hacer.",
-      "kicker": "Próximamente",
-      "note": "Preferimos no publicar nada antes que publicar relleno.",
-      "title": "Estamos preparando la línea editorial",
-      "topics": [
-        "NIS2",
-        "DORA",
-        "ISO 27001",
-        "ENS",
-        "RGPD",
-        "OT / ICS",
-        "Respuesta a incidentes"
+    "list": {
+      "allLabel": "Todos los temas",
+      "articlesMany": "artículos",
+      "articlesOne": "artículo",
+      "empty": "Todavía no hay análisis publicados en este tema.",
+      "featuredLabel": "Último análisis",
+      "filterLabel": "Filtrar por tema",
+      "kicker": "Archivo",
+      "readMore": "Leer el análisis",
+      "readingSuffix": "min de lectura",
+      "title": "Todos los análisis"
+    },
+    "categories": {
+      "cloud": "Nube",
+      "cumplimiento": "Cumplimiento",
+      "idi": "I+D+i",
+      "mssp": "Servicio gestionado",
+      "ot": "OT e industrial",
+      "tendencias": "Tendencias"
+    },
+    "article": {
+      "authorLabel": "Por",
+      "backToList": "Ver todos los análisis",
+      "breadcrumb": [
+        {
+          "label": "Inicio",
+          "routeId": "home"
+        },
+        {
+          "label": "Blog",
+          "routeId": "blog"
+        }
       ],
-      "topicsLabel": "Sobre lo que escribiremos"
+      "ctaBody": "Te decimos qué te aplica y qué no en una sesión técnica de 30 minutos, sin compromiso.",
+      "ctaKicker": "Y en tu caso",
+      "ctaPrimary": "Calcula tu presupuesto",
+      "ctaSecondary": "Hablar con un especialista",
+      "ctaTitle": "¿Qué implica esto en tu organización?",
+      "relatedTitle": "Seguir leyendo",
+      "tagsLabel": "Temas",
+      "tocTitle": "En esta página"
     }
   },
   "calculator": {

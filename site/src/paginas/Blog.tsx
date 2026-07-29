@@ -1,32 +1,41 @@
+import Link from 'next/link'
+import { ImagenArticulo } from '@/components/blog/ImagenArticulo'
+import { ListaFiltrable } from '@/components/blog/ListaFiltrable'
+import { TarjetaArticulo } from '@/components/blog/TarjetaArticulo'
 import { HeroInterior } from '@/components/blocks/HeroInterior'
+import { Card } from '@/components/ui/Card'
 import { SectionHeading } from '@/components/ui/SectionHeading'
 import { Tag } from '@/components/ui/Tag'
 import type { Locale } from '@/config/routes'
+import { getBlogPostPath } from '@/config/routes'
 import { cargarMensajes } from '@/i18n/mensajes'
+import {
+  articuloDestacado,
+  categoriasConArticulos,
+  formatearFecha,
+  listarIndice,
+} from '@/lib/blog/datos'
 
 /**
- * Blog - `/es/blog/` (seccion 4.9, mockup image8.png).
+ * Listado del blog - `/es/blog/` (seccion 4.9, mockup image8.png).
  *
- * **Opcion A del plan: pagina «proximamente», indexable.**
+ * El contenido sale de `content/blog/<idioma>/`, compilado por `content:build`.
+ * Aqui no se lee ningun Markdown: el pipeline ya lo ha convertido, validado y
+ * ordenado, de modo que esta pagina es composicion y nada mas.
  *
- * No hay CMS ni contenido real todavia (pendiente P8), y **no se publica un
- * blog ficticio**. La primera version del plan proponia maquetar los seis
- * articulos de ejemplo del brief y ocultar solo el aviso de que eran
- * marcadores. Eso deja publicados seis titulares inventados con tiempos de
- * lectura inventados, en tarjetas que no llevan a ninguna parte: para una
- * consultora que vende criterio tecnico es un dano de credibilidad mayor que no
- * tener blog.
- *
- * El bloque de newsletter se retiro por decision de Direccion del 28/07/2026.
- *
- * ⚠️ Con eso, la justificacion de que /blog fuese indexable se queda corta: era
- * que «el bloque de newsletter si es real y funcional». Ahora la pagina solo
- * anuncia la linea editorial. Se mantiene indexable porque los 26 articulos
- * migrados llegan en el paso siguiente; si esa migracion se retrasara, habria
- * que pasar la ruta a noindex o desactivarla.
+ * El destacado es **el articulo mas reciente**, no una eleccion manual, y por eso
+ * no se repite en la rejilla de abajo: un mismo articulo dos veces en la misma
+ * pantalla parece un fallo de maquetacion.
  */
 export function Blog({ locale }: { locale: Locale }) {
   const { blog } = cargarMensajes(locale)
+
+  const destacado = articuloDestacado(locale)
+  const resto = listarIndice(locale).filter((articulo) => articulo.slug !== destacado?.slug)
+  const categorias = categoriasConArticulos(locale).map((id) => ({
+    id,
+    etiqueta: blog.categories[id],
+  }))
 
   return (
     <main id="contenido">
@@ -38,28 +47,95 @@ export function Blog({ locale }: { locale: Locale }) {
         subtitle={blog.hero.subtitle}
       />
 
-      <section className="site-container flex flex-col gap-8 pb-14">
-        <SectionHeading
-          kicker={blog.soon.kicker}
-          kickerPrefijo=">_"
-          titulo={blog.soon.title}
-          descripcion={blog.soon.body}
-        />
+      {destacado ? (
+        <>
+          <section className="site-container pb-14" aria-labelledby="destacado">
+            <Card
+              acento="top"
+              acentoColor="cian"
+              className="group relative grid overflow-hidden lg:grid-cols-2"
+            >
+              {destacado.image && (
+                <div className="border-border aspect-[16/9] overflow-hidden border-b lg:aspect-auto lg:h-full lg:border-b-0 lg:border-r">
+                  <ImagenArticulo
+                    nombre={destacado.image}
+                    alt={destacado.imageAlt}
+                    sizes="(min-width: 1024px) 50vw, 100vw"
+                    prioritaria
+                  />
+                </div>
+              )}
 
-        <div className="flex flex-col gap-4">
-          <p className="etiqueta text-text-dim">{blog.soon.topicsLabel}</p>
-          <ul className="flex flex-wrap gap-2.5">
-            {blog.soon.topics.map((tema) => (
-              <li key={tema}>
-                <Tag acento="cian">{tema}</Tag>
-              </li>
-            ))}
-          </ul>
-        </div>
+              <div className="flex flex-col gap-4 p-6 md:p-8">
+                <p className="etiqueta text-green" id="destacado">
+                  {blog.list.featuredLabel}
+                </p>
 
-        <p className="texto-cuerpo border-border border-t pt-6 text-sm">{blog.soon.note}</p>
-      </section>
+                <h2 className="section-title">
+                  <Link
+                    href={getBlogPostPath(locale, destacado.slug)}
+                    className="focus-visible:outline-cyan after:absolute after:inset-0 after:content-[''] focus-visible:outline-2 focus-visible:outline-offset-4"
+                  >
+                    {destacado.title}
+                  </Link>
+                </h2>
 
+                <p className="texto-cuerpo">{destacado.description}</p>
+
+                <div className="border-border mt-auto flex flex-wrap items-center gap-x-3 gap-y-2 border-t pt-4">
+                  <Tag acento="cian">{blog.categories[destacado.category]}</Tag>
+                  <time dateTime={destacado.date} className="text-text-dim font-display text-xs">
+                    {formatearFecha(destacado.date, locale)}
+                  </time>
+                  <span aria-hidden="true" className="text-border">
+                    ·
+                  </span>
+                  <span className="text-text-dim font-display text-xs">
+                    {destacado.readingMinutes} {blog.list.readingSuffix}
+                  </span>
+                </div>
+              </div>
+            </Card>
+          </section>
+
+          <section className="site-container flex flex-col gap-8 pb-20">
+            <SectionHeading
+              kicker={blog.list.kicker}
+              kickerPrefijo="/01"
+              titulo={blog.list.title}
+            />
+
+            <ListaFiltrable
+              categorias={categorias}
+              etiquetaTodos={blog.list.allLabel}
+              etiquetaFiltro={blog.list.filterLabel}
+            >
+              <ul
+                aria-label={blog.list.title}
+                className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
+              >
+                {resto.map((articulo, indice) => (
+                  <TarjetaArticulo
+                    key={articulo.slug}
+                    articulo={articulo}
+                    locale={locale}
+                    etiquetaCategoria={blog.categories[articulo.category]}
+                    sufijoLectura={blog.list.readingSuffix}
+                    prioritaria={indice < 3}
+                  />
+                ))}
+              </ul>
+            </ListaFiltrable>
+          </section>
+        </>
+      ) : (
+        // Un idioma puede ir por detras del otro: mientras un articulo no este
+        // traducido no existe en ese idioma, y es preferible decirlo a publicar
+        // una traduccion automatica.
+        <section className="site-container pb-20">
+          <p className="texto-cuerpo">{blog.list.empty}</p>
+        </section>
+      )}
     </main>
   )
 }

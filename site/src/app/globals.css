@@ -242,6 +242,137 @@
     }
   }
 
+  /* ── Cuerpo de un articulo del blog ───────────────────────────────────────
+     El HTML lo genera `content:build` desde Markdown, asi que aqui no se pueden
+     poner clases en cada etiqueta: se estilan los elementos dentro de .prosa.
+
+     La medida se limita a 68ch, igual que .texto-cuerpo: una linea de 150
+     caracteres en escritorio se lee mal, y este es el unico sitio del sitio con
+     texto largo de verdad. */
+  .prosa {
+    color: var(--color-text);
+    max-width: 68ch;
+    font-size: 1rem;
+    line-height: 1.75;
+  }
+
+  .prosa > * + * {
+    margin-block-start: 1.25rem;
+  }
+
+  .prosa h2,
+  .prosa h3,
+  .prosa h4 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    line-height: 1.25;
+    /* Mas aire encima que debajo: es lo que agrupa el titular con su parrafo en
+       lugar de dejarlo flotando entre dos bloques. */
+    margin-block: 2.5rem 0.75rem;
+    scroll-margin-top: 6rem; /* la navegacion es fija: sin esto el ancla tapa el titular */
+  }
+
+  .prosa h2 {
+    font-size: clamp(1.5rem, 4vw, 1.75rem);
+    color: var(--color-text);
+  }
+
+  .prosa h3 {
+    font-size: 1.1875rem;
+    color: var(--color-cyan);
+  }
+
+  .prosa h4 {
+    font-size: 1rem;
+  }
+
+  .prosa a {
+    color: var(--color-cyan);
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+
+  .prosa a:hover {
+    text-decoration-thickness: 2px;
+  }
+
+  .prosa strong {
+    color: var(--color-text);
+    font-weight: 700;
+  }
+
+  .prosa ul,
+  .prosa ol {
+    padding-inline-start: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .prosa ul {
+    list-style: disc;
+  }
+
+  .prosa ol {
+    list-style: decimal;
+  }
+
+  .prosa li::marker {
+    color: var(--color-green);
+  }
+
+  .prosa blockquote {
+    border-inline-start: 2px solid var(--color-cyan);
+    padding-inline-start: 1.25rem;
+    color: var(--color-text-dim);
+  }
+
+  .prosa hr {
+    border-color: var(--color-border);
+  }
+
+  .prosa img {
+    border-radius: 10px;
+    border: 1px solid var(--color-border);
+  }
+
+  /* Una tabla ancha no puede empujar el ancho de la pagina en movil (seccion
+     1.6): el scroll se contiene en su envoltorio, que lo pone el conversor de
+     Markdown. `tabindex` lo anade el propio contenedor en el HTML generado para
+     que se pueda desplazar con teclado. */
+  .tabla-scroll {
+    overflow-x: auto;
+    border: 1px solid var(--color-border);
+    border-radius: 10px;
+  }
+
+  .prosa table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9375rem;
+  }
+
+  .prosa th,
+  .prosa td {
+    padding: 0.75rem 1rem;
+    text-align: start;
+    vertical-align: top;
+    border-block-end: 1px solid var(--color-border);
+  }
+
+  .prosa th {
+    font-family: var(--font-display);
+    font-size: 0.8125rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-cyan);
+    background: var(--color-panel);
+  }
+
+  .prosa tbody tr:last-child :is(th, td) {
+    border-block-end: 0;
+  }
+
   /* El resplandor del hero es un gradiente CSS, no una imagen: es lo que
      mantiene el LCP por debajo de 2,5 s en movil real (Fase 9). */
   .resplandor-hero {
@@ -294,4 +425,34 @@
     width: 100%;
     height: 100%;
   }
+}
+
+/* ── Filtro por tema del listado del blog ──────────────────────────────────────
+   El filtrado es CSS y no JavaScript: las tarjetas se exportan todas en el HTML
+   -las ve el rastreador- y el componente de cliente solo cambia `data-filtro`.
+   Sin JavaScript se ven todas, que es el comportamiento correcto.
+
+   ⚠️ Estas reglas van FUERA de `@layer`, y no es un descuido. Dentro de
+   `@layer components` no funcionaban: la tarjeta lleva la utilidad `flex` de
+   Tailwind, que vive en la capa `utilities` y gana a cualquier `display` de una
+   capa anterior, de modo que el `display: none` no se aplicaba y el filtro no
+   ocultaba nada. El CSS sin capa tiene prioridad sobre todas las capas, que es
+   justo lo que hace falta aqui. */
+/* Las tres reglas tienen la MISMA especificidad (0,2,0) a proposito, para que
+   decida el orden y no el peso del selector. La primera version usaba
+   `[data-filtro]:not([data-filtro="todos"])`, que suma la especificidad de
+   `:not()` y ganaba a las reglas de abajo: el filtro ocultaba las tarjetas y
+   luego no volvia a mostrar ninguna. */
+[data-filtro] [data-categoria] {
+  display: none;
+}
+
+[data-filtro="todos"] [data-categoria],
+[data-filtro="cumplimiento"] [data-categoria="cumplimiento"],
+[data-filtro="mssp"] [data-categoria="mssp"],
+[data-filtro="ot"] [data-categoria="ot"],
+[data-filtro="cloud"] [data-categoria="cloud"],
+[data-filtro="tendencias"] [data-categoria="tendencias"],
+[data-filtro="idi"] [data-categoria="idi"] {
+  display: flex;
 }

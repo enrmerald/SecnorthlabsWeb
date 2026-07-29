@@ -266,6 +266,45 @@ export function pathToSegments(path: string, locale: Locale): string[] {
   return resto.split('/').filter(Boolean)
 }
 
+/**
+ * Ruta de un articulo del blog, derivada de la del listado.
+ *
+ * Los articulos **no estan en `ROUTES`**, y es deliberado: el manifiesto declara
+ * las paginas fijas del sitio, que son las que hay que poder auditar de un
+ * vistazo, mientras que los articulos los determina el contenido de
+ * `content/blog/`. Meterlos ahi obligaria a que este fichero -que cargan
+ * `check:routes` y `assert-static-output` con type stripping- dependiera del
+ * pipeline de contenido.
+ *
+ * Lo que si vive aqui es **la forma de la URL**, para que nadie la construya
+ * pegando cadenas: si manana el blog pasa a `/es/articulos/`, cambia el
+ * manifiesto y los 26 articulos se mueven con el.
+ */
+export function getBlogPostPath(locale: Locale, slug: string): string {
+  return `${getRoute('blog').paths[locale]}${slug}/`
+}
+
+/**
+ * Inversa de la anterior: reconoce `/es/blog/<slug>/` y devuelve el slug.
+ *
+ * Solo comprueba **la forma**; que ese articulo exista lo decide el contenido
+ * (`existeArticulo`). Separar las dos cosas es lo que permite que una URL con
+ * forma de articulo pero sin fichero acabe en la 404 y no en una pagina vacia.
+ */
+export function resolveBlogPostSlug(
+  locale: Locale,
+  segments: readonly string[],
+): string | undefined {
+  const blog = getRoute('blog')
+  if (!blog.enabled) return undefined
+
+  const base = pathToSegments(blog.paths[locale], locale)
+  if (segments.length !== base.length + 1) return undefined
+  if (!base.every((segmento, indice) => segmento === segments[indice])) return undefined
+
+  return segments[base.length]
+}
+
 /** Inversa de la anterior: idioma + segmentos -> ruta, o `undefined`. */
 export function resolveRoute(locale: Locale, segments: readonly string[]): RouteDefinition | undefined {
   const objetivo = segments.join('/')

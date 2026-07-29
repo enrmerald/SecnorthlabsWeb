@@ -50,6 +50,12 @@ const paginas = [
   { etiqueta: 'MSSP ES', path: 'es/soluciones/mssp/index.html' },
   { etiqueta: 'contacto ES', path: 'es/contacto/index.html' },
   { etiqueta: 'calculadora ES', path: 'es/calculadora/index.html' },
+  // El listado del blog es la pagina con mas elementos del sitio -26 tarjetas y
+  // el filtro por tema- y el detalle es la de mas texto. Si algun dia alguien
+  // convierte Markdown en el navegador o arrastra el JSON del contenido a un
+  // componente de cliente, se ve aqui.
+  { etiqueta: 'blog ES', path: 'es/blog/index.html' },
+  { etiqueta: 'articulo ES', path: 'es/blog/que-es-el-ens/index.html' },
 ]
 
 const cache = new Map()
