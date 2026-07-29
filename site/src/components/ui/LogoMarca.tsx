@@ -33,6 +33,14 @@ interface PropsLogoMarca {
    * cada marca sobre un sitio oscuro sin recolorear nada (ver `config/logos.ts`).
    */
   capsula?: boolean
+  /**
+   * Carga inmediata en lugar de diferida.
+   *
+   * Se usa **solo** en el logotipo de la cabecera, que esta en la primera
+   * pantalla: un `loading="lazy"` ahi retrasa lo primero que se ve. En el resto
+   * de logos lo diferido es lo correcto, porque estan bajo el pliegue.
+   */
+  prioritario?: boolean
   className?: string
 }
 
@@ -41,6 +49,7 @@ export function LogoMarca({
   alto = 24,
   ancho = 132,
   capsula = false,
+  prioritario = false,
   className = '',
 }: PropsLogoMarca) {
   // El ajuste por marca (`escala`) es el ultimo recurso, para lo que la caja no
@@ -70,7 +79,8 @@ export function LogoMarca({
       alt={logo.alt}
       width={anchoAtributo}
       height={altoAtributo}
-      loading="lazy"
+      loading={prioritario ? 'eager' : 'lazy'}
+      fetchPriority={prioritario ? 'high' : undefined}
       decoding="async"
       style={{ maxHeight: `${altoFinal}px`, maxWidth: `${anchoFinal}px` }}
       className="h-auto w-auto object-contain"

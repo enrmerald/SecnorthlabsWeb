@@ -1,7 +1,8 @@
 import Link from 'next/link'
 import type { Locale } from '@/config/routes'
 import { construirPie } from '@/lib/navegacion'
-import { Logotipo } from './Logotipo'
+import { LogoMarca } from '@/components/ui/LogoMarca'
+import { LOGO_ISNLABS } from '@/config/logos'
 
 /**
  * Pie del sitio (seccion 3.2, mockup image3.png).
@@ -23,8 +24,8 @@ export function Footer({ locale }: { locale: Locale }) {
     <footer className="border-border bg-bg mt-auto border-t">
       <div className="site-container grid gap-10 py-12 md:grid-cols-2 lg:grid-cols-[1.5fr_1fr_1fr_1fr]">
         <div className="flex flex-col gap-3">
-          <Link href={pie.inicio} className="w-fit">
-            <Logotipo className="text-lg" />
+          <Link href={pie.inicio} className="w-fit" aria-label={LOGO_ISNLABS.alt}>
+            <LogoMarca logo={LOGO_ISNLABS} alto={24} ancho={160} />
           </Link>
           <p className="font-display text-text-dim text-xs tracking-wide">{pie.claim}</p>
           <p className="text-text-dim text-xs">{pie.legalLine}</p>

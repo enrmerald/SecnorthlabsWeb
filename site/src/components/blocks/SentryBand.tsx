@@ -3,7 +3,7 @@ import { Card } from '@/components/ui/Card'
 import { Kicker } from '@/components/ui/Kicker'
 import { LogoMarca } from '@/components/ui/LogoMarca'
 import { Tag } from '@/components/ui/Tag'
-import { LOGO_EWALA } from '@/config/logos'
+import { LOGO_EWALA, LOGO_SENTRYNET } from '@/config/logos'
 
 /**
  * Banda de SentryN3t (mockup image3.png). Sale en la Home y en Software.
@@ -60,9 +60,17 @@ export function SentryBand({
                 version clara de Ewala. Es un partner tecnologico, no una
                 licencia de la rejilla, y darle la misma placa que a las cuatro
                 de Software lo degradaria a "una marca mas de la lista". */}
-            <div className="flex flex-col gap-2 lg:items-end">
-              <LogoMarca logo={LOGO_EWALA} alto={20} />
+            {/* Bloque de atribucion: los dos logotipos juntos y la nota de marca.
+                El de SentryN3t NO va sobre el titular, porque el H2 ya dice
+                «SentryN3t» y la palabra apareceria dos veces seguidas. Aqui, al
+                lado del de Ewala, se lee como lo que es: de quien es el producto.
+
+                El H2 sigue siendo texto, no imagen: es lo que leen los
+                rastreadores y lo que sostiene la jerarquia de encabezados. */}
+            <div className="border-border flex flex-col gap-3 border-t pt-4 lg:items-end lg:border-t-0 lg:pt-0">
+              <LogoMarca logo={LOGO_SENTRYNET} alto={24} ancho={160} />
               <p className="text-text-dim text-xs lg:text-right">{note}</p>
+              <LogoMarca logo={LOGO_EWALA} alto={16} ancho={90} />
             </div>
           </div>
         </div>

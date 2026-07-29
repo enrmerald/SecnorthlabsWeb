@@ -1,11 +1,15 @@
 /**
- * Wordmark de ISN Labs, blanco sobre fondo oscuro (mockups image2.png e
- * image3.png).
+ * Wordmark de ISN Labs escrito con tipografia, blanco sobre fondo oscuro.
  *
- * Es texto y no una imagen: escala sin perder nitidez, no anade una peticion al
- * LCP y se puede seleccionar y buscar. El brief pide respetar el area de
- * reserva y no deformar ni recolorear; cuando Marketing entregue el SVG
- * oficial, se sustituye aqui y en ningun sitio mas.
+ * **Es el respaldo, no el logotipo principal.** El oficial es la imagen de
+ * `LOGO_ISNLABS`, que es lo que pintan la navegacion y el pie.
+ *
+ * Este sigue existiendo porque hay dos sitios donde una imagen no sirve:
+ *
+ * - Las **plantillas de correo**: las fuentes web no cargan y muchos clientes
+ *   bloquean las imagenes por defecto, asi que hace falta una version que se
+ *   lea de todos modos.
+ * - La **404 de ultimo recurso**, que se sirve sin depender de ningun activo.
  */
 interface PropsLogotipo {
   /** Tamano en rem del texto. La barra escala con el. */

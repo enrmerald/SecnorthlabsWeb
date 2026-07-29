@@ -5,8 +5,9 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useCallback, useEffect, useId, useRef, useState } from 'react'
 import { Button } from '@/components/ui/Button'
+import { LogoMarca } from '@/components/ui/LogoMarca'
+import { LOGO_ISNLABS } from '@/config/logos'
 import type { DatosNavegacion } from '@/lib/navegacion'
-import { Logotipo } from './Logotipo'
 
 /**
  * Parte interactiva de la navegacion. Es el unico componente de la cabecera que
@@ -170,8 +171,11 @@ export function NavbarCliente({
   return (
     <header className="border-border bg-bg/95 sticky top-0 z-50 border-b backdrop-blur">
       <div className="site-container flex h-16 items-center justify-between gap-4 lg:h-[4.5rem]">
-        <Link href={navegacion.inicio} className="shrink-0 py-2">
-          <Logotipo className="text-xl" />
+        {/* El logotipo esta en la primera pantalla, asi que va con width/height
+            y sin `loading="lazy"`: es de los pocos activos que conviene que
+            cargue cuanto antes, y reservar su hueco evita que la cabecera salte. */}
+        <Link href={navegacion.inicio} className="shrink-0 py-2" aria-label={LOGO_ISNLABS.alt}>
+          <LogoMarca logo={LOGO_ISNLABS} alto={26} ancho={170} prioritario />
         </Link>
 
         {/* ── Escritorio ── */}

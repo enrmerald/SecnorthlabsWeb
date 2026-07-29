@@ -100,3 +100,33 @@ export const LOGO_EWALA: Logotipo = {
   alt: 'Ewala',
   ratio: 3.145,
 }
+
+/**
+ * Wordmark de ISN Labs, blanco sobre oscuro. Navegacion y pie.
+ *
+ * **`Logotipo.tsx` no se borra.** Sigue existiendo como respaldo por dos
+ * motivos: es lo que se usa en las plantillas de correo, donde las fuentes web
+ * no cargan y las imagenes se bloquean con frecuencia, y es lo que pinta la 404
+ * de ultimo recurso, que se sirve sin depender de ningun activo.
+ */
+export const LOGO_ISNLABS: Logotipo = {
+  src: '/logos/isnlabs-240.png',
+  src2x: '/logos/isnlabs-480.png',
+  alt: 'ISN Labs',
+  ratio: 6,
+}
+
+/**
+ * SentryN3t, en su banda de Home y Software.
+ *
+ * Sin capsula: es un logotipo claro sobre fondo oscuro, que es su uso previsto.
+ * Tras la division de Ewala, SentryN3t es producto de Ewala e ISN Labs lo
+ * despliega y opera como partner, asi que aparece junto al aviso de marca y
+ * nunca como producto propio.
+ */
+export const LOGO_SENTRYNET: Logotipo = {
+  src: '/logos/sentrynet-240.png',
+  src2x: '/logos/sentrynet-480.png',
+  alt: 'SentryN3t',
+  ratio: 6,
+}
