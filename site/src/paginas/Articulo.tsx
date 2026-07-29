@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { ImagenArticulo } from '@/components/blog/ImagenArticulo'
 import { CtaBand } from '@/components/blocks/CtaBand'
+import { Button } from '@/components/ui/Button'
 import { JsonLd } from '@/components/seo/JsonLd'
 import { Breadcrumbs } from '@/components/ui/Breadcrumbs'
 import { Card } from '@/components/ui/Card'
@@ -70,6 +71,22 @@ export function Articulo({
           <div className="site-container relative flex flex-col gap-5">
             <Breadcrumbs tramos={migas} etiqueta={common.a11y.breadcrumb} />
 
+            {/* Volver al listado, arriba y no solo al final del articulo.
+                Las migas ya llevan al blog, pero son de 12px y estan pensadas
+                para situarse, no para pulsarse: quien acaba de entrar desde una
+                busqueda y quiere ver que mas hay necesita un objetivo de verdad.
+                El de abajo se queda, porque quien termina de leer esta a 3.000
+                palabras de este. */}
+            <p>
+              <Link
+                href={getLocalizedPath('blog', locale)}
+                className="font-display text-text-dim hover:border-cyan hover:text-cyan focus-visible:outline-cyan border-border inline-flex min-h-9 items-center gap-2 rounded-full border px-3.5 text-xs font-bold tracking-wide uppercase transition-colors focus-visible:outline-2 focus-visible:outline-offset-2"
+              >
+                <span aria-hidden="true">←</span>
+                {blog.article.back}
+              </Link>
+            </p>
+
             <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
               <Tag acento="cian">{blog.categories[articulo.category]}</Tag>
               <span className="text-text-dim font-display text-xs">
@@ -113,36 +130,45 @@ export function Articulo({
           </div>
         )}
 
-        {/* Dos columnas en escritorio: el cuerpo se queda en su medida de lectura
-            de 68ch y el hueco de la derecha lo ocupa el indice, en lugar de
-            quedarse vacio. Por debajo de 1024px el indice desaparece: en movil,
-            una lista de secciones antes del texto solo retrasa el articulo. */}
-        <div className="site-container grid gap-12 pb-14 lg:grid-cols-[minmax(0,1fr)_16rem]">
+        {/* Dos columnas en escritorio: el cuerpo crece con la pantalla -la medida
+            de `.prosa` sube de 68ch a 78ch, y con ella el tamano de letra- y el
+            hueco de la derecha lo ocupa el indice. Por debajo de 1024px el indice
+            desaparece: en movil, una lista de secciones antes del texto solo
+            retrasa el articulo.
+
+            La columna del indice se estrecha (14rem) y el hueco se abre en xl:
+            asi el ancho que se recupera va al texto, que es lo que se lee. */}
+        <div className="site-container grid gap-10 pb-14 lg:grid-cols-[minmax(0,1fr)_14rem] lg:gap-12 xl:gap-16">
           <div className="min-w-0">
-            <div className="prosa" dangerouslySetInnerHTML={{ __html: articulo.html }} />
+            {/* El cuerpo va en tarjeta y no directamente sobre el fondo. Con 3.000
+                palabras sobre `--color-bg` el texto se lee bien -el contraste es
+                de 17:1- pero flota: no hay nada que diga donde empieza y acaba el
+                articulo. La tarjeta le da ese limite, y ademas separa el cuerpo
+                del indice sin necesidad de una linea divisoria. */}
+            <Card as="div" className="p-5 sm:p-8 lg:p-10">
+              <div className="prosa mx-auto" dangerouslySetInnerHTML={{ __html: articulo.html }} />
 
-            {articulo.tags.length > 0 && (
-              <div className="border-border mt-12 flex max-w-[68ch] flex-col gap-3 border-t pt-6">
-                <p className="etiqueta text-text-dim">{blog.article.tagsLabel}</p>
-                <ul className="flex flex-wrap gap-2.5">
-                  {articulo.tags.map((tag) => (
-                    <li key={tag}>
-                      <Tag acento="neutro" sinPunto>
-                        {tag}
-                      </Tag>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
+              {articulo.tags.length > 0 && (
+                <div className="border-border mx-auto mt-12 flex max-w-[78ch] flex-col gap-3 border-t pt-6">
+                  <p className="etiqueta text-text-dim">{blog.article.tagsLabel}</p>
+                  <ul className="flex flex-wrap gap-2.5">
+                    {articulo.tags.map((tag) => (
+                      <li key={tag}>
+                        <Tag acento="neutro" sinPunto>
+                          {tag}
+                        </Tag>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+            </Card>
 
-            <p className="mt-10">
-              <Link
-                href={getLocalizedPath('blog', locale)}
-                className="font-display text-cyan focus-visible:outline-cyan text-sm underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-offset-4"
-              >
+            <p className="mt-8">
+              <Button href={getLocalizedPath('blog', locale)} variante="ghost">
+                <span aria-hidden="true">←</span>
                 {blog.article.backToList}
-              </Link>
+              </Button>
             </p>
           </div>
 

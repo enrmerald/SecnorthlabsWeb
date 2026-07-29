@@ -256,6 +256,31 @@
     line-height: 1.75;
   }
 
+  /* ── La medida del articulo crece con la pantalla ─────────────────────────
+     Con una medida fija de 68ch, a partir de 1024px el texto se queda quieto y
+     deja un hueco enorme hasta el indice de la derecha. Y la solucion no es
+     estirar la linea sin mas: por encima de unos 80 caracteres el ojo pierde el
+     principio del renglon siguiente.
+
+     Asi que crecen las dos cosas a la vez, medida y tamano de letra. El texto
+     ocupa mas ancho fisico y la linea se mantiene en un numero de caracteres
+     legible, que es lo que hace la diferencia entre "mas ancho" y "peor de
+     leer". */
+  @media (min-width: 64rem) {
+    .prosa {
+      max-width: 74ch;
+      font-size: 1.0625rem; /* 17px */
+      line-height: 1.72;
+    }
+  }
+
+  @media (min-width: 90rem) {
+    .prosa {
+      max-width: 78ch;
+      font-size: 1.125rem; /* 18px */
+    }
+  }
+
   .prosa > * + * {
     margin-block-start: 1.25rem;
   }
@@ -336,20 +361,50 @@
     border: 1px solid var(--color-border);
   }
 
-  /* Una tabla ancha no puede empujar el ancho de la pagina en movil (seccion
+  /* ── Tablas ───────────────────────────────────────────────────────────────
+     Una tabla ancha no puede empujar el ancho de la pagina en movil (seccion
      1.6): el scroll se contiene en su envoltorio, que lo pone el conversor de
-     Markdown. `tabindex` lo anade el propio contenedor en el HTML generado para
-     que se pueda desplazar con teclado. */
+     Markdown, con `tabindex` para poder desplazarla con teclado.
+
+     El indicador de scroll es una sombra interior que solo se ve cuando queda
+     tabla por descubrir: `background-attachment: local` la pega al contenido, asi
+     que desaparece al llegar al borde. Sin ella, en movil no hay forma de saber
+     que la tabla sigue a la derecha. */
   .tabla-scroll {
     overflow-x: auto;
     border: 1px solid var(--color-border);
     border-radius: 10px;
+    background:
+      linear-gradient(to right, var(--color-panel) 30%, transparent),
+      linear-gradient(to left, var(--color-panel) 30%, transparent),
+      linear-gradient(to right, rgb(0 0 0 / 0.45), transparent 12px),
+      linear-gradient(to left, rgb(0 0 0 / 0.45), transparent 12px);
+    background-repeat: no-repeat;
+    background-size:
+      3rem 100%,
+      3rem 100%,
+      1rem 100%,
+      1rem 100%;
+    background-position:
+      0 0,
+      100% 0,
+      0 0,
+      100% 0;
+    background-attachment: local, local, scroll, scroll;
+  }
+
+  .tabla-scroll:focus-visible {
+    outline: 2px solid var(--color-cyan);
+    outline-offset: 2px;
   }
 
   .prosa table {
     width: 100%;
     border-collapse: collapse;
     font-size: 0.9375rem;
+    /* Las tablas del blog comparan marcos normativos: casi todas las celdas son
+       texto, y a medida completa se leen mejor que apretadas. */
+    line-height: 1.55;
   }
 
   .prosa th,
@@ -360,13 +415,37 @@
     border-block-end: 1px solid var(--color-border);
   }
 
-  .prosa th {
+  .prosa thead th {
     font-family: var(--font-display);
-    font-size: 0.8125rem;
+    font-size: 0.75rem;
     text-transform: uppercase;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.09em;
     color: var(--color-cyan);
-    background: var(--color-panel);
+    background: color-mix(in oklab, var(--color-cyan) 8%, var(--color-panel));
+    /* La cabecera se queda a la vista al desplazar una tabla larga: sin esto hay
+       que subir a releer que columna era cada una. */
+    position: sticky;
+    top: 0;
+    /* Borde inferior propio, porque `border` no viaja con position: sticky. */
+    box-shadow: inset 0 -1px 0 var(--color-border);
+    border-block-end: 0;
+    white-space: nowrap;
+  }
+
+  /* Filas alternas. Muy sutiles a proposito: lo justo para no perder el renglon
+     en una tabla de seis columnas, sin convertirla en un tablero de ajedrez. */
+  .prosa tbody tr:nth-child(even) {
+    background: color-mix(in oklab, var(--color-text) 3%, transparent);
+  }
+
+  .prosa tbody tr:hover {
+    background: color-mix(in oklab, var(--color-cyan) 7%, transparent);
+  }
+
+  /* La primera columna suele ser el concepto que compara la fila. */
+  .prosa tbody :is(th, td):first-child {
+    color: var(--color-text);
+    font-weight: 600;
   }
 
   .prosa tbody tr:last-child :is(th, td) {

@@ -41,16 +41,24 @@ export function TarjetaArticulo({
     <Card
       as="li"
       data-categoria={articulo.category}
-      className="group relative flex flex-col overflow-hidden transition-colors hover:border-cyan/40 focus-within:border-cyan/60"
+      // El realce del hover es de color y de fondo, no de sombra: el sistema de
+      // diseno no usa sombras, y una tarjeta que se eleva sobre un fondo de
+      // #0D0F11 no se percibe. La regla global de `prefers-reduced-motion` ya
+      // desactiva la transicion para quien pide menos movimiento.
+      className="group relative flex flex-col overflow-hidden transition-colors hover:border-cyan/40 hover:bg-panel focus-within:border-cyan/60"
     >
       {articulo.image && (
         <div className="border-border aspect-[16/9] overflow-hidden border-b">
-          <ImagenArticulo
-            nombre={articulo.image}
-            alt={articulo.imageAlt}
-            sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-            prioritaria={prioritaria}
-          />
+          {/* Acercamiento minimo (2%) al pasar por encima. Suficiente para que la
+              tarjeta responda, poco para que se note como efecto. */}
+          <div className="h-full transition-transform duration-300 group-hover:scale-[1.02]">
+            <ImagenArticulo
+              nombre={articulo.image}
+              alt={articulo.imageAlt}
+              sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+              prioritaria={prioritaria}
+            />
+          </div>
         </div>
       )}
 
@@ -65,7 +73,7 @@ export function TarjetaArticulo({
         <h3 className="font-display text-base leading-snug font-bold">
           <Link
             href={href}
-            className="focus-visible:outline-cyan after:absolute after:inset-0 after:content-[''] focus-visible:outline-2 focus-visible:outline-offset-4"
+            className="focus-visible:outline-cyan group-hover:text-cyan transition-colors after:absolute after:inset-0 after:content-[''] focus-visible:outline-2 focus-visible:outline-offset-4"
           >
             {articulo.title}
           </Link>

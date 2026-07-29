@@ -98,6 +98,73 @@ test.describe('paginas de articulo', () => {
     })
   }
 
+  test('hay una salida al listado antes de empezar a leer', async ({ page }) => {
+    // Las migas ya llevan al blog, pero son de 12px y estan para situarse. Quien
+    // entra desde una busqueda necesita un objetivo pulsable antes del articulo,
+    // no solo al final de tres mil palabras.
+    await page.goto(`/es/blog/${PRIMERO.slug}/`)
+
+    const volver = page.getByRole('link', { name: /volver al blog/i })
+    await expect(volver).toBeVisible()
+    await expect(volver).toHaveAttribute('href', '/es/blog/')
+
+    // Y por encima de la categoria, que es el orden pedido. La fila de la
+    // categoria se localiza por el tiempo de lectura, que la acompana: buscarla
+    // por clase cogia el propio boton de volver, que tambien es una pildora.
+    const arribaDe = async (locator: import('@playwright/test').Locator) =>
+      (await locator.boundingBox())?.y ?? Number.NaN
+
+    const volverY = await arribaDe(volver)
+    const categoriaY = await arribaDe(page.getByText(/min de lectura/).first())
+
+    expect(volverY).toBeLessThan(categoriaY)
+    // Y las migas por encima de todo.
+    expect(await arribaDe(page.getByRole('navigation').filter({ hasText: 'Inicio' }))).toBeLessThan(
+      volverY,
+    )
+  })
+
+  test('las tablas se pueden desplazar con el teclado y no desbordan la pagina', async ({
+    page,
+  }) => {
+    // El articulo de ENS vs ISO trae una tabla de tres columnas anchas: es el caso
+    // que rompia el ancho de la pagina en movil antes del envoltorio con scroll.
+    await page.setViewportSize({ width: 390, height: 900 })
+    await page.goto('/es/blog/ens-vs-iso-27001-diferencias/')
+
+    const envoltorio = page.locator('.tabla-scroll').first()
+    await expect(envoltorio).toBeVisible()
+    await expect(envoltorio).toHaveAttribute('tabindex', '0')
+    await expect(envoltorio).toHaveAttribute('role', 'region')
+
+    // La tabla desborda su envoltorio -por eso hay scroll- pero no la pagina.
+    const desbordes = await page.evaluate(() => {
+      const caja = document.querySelector('.tabla-scroll') as HTMLElement
+      return {
+        tabla: caja.scrollWidth > caja.clientWidth,
+        pagina: document.documentElement.scrollWidth > window.innerWidth + 1,
+      }
+    })
+    expect(desbordes.tabla).toBe(true)
+    expect(desbordes.pagina).toBe(false)
+  })
+
+  test('el cuerpo crece con la pantalla en lugar de quedarse fijo', async ({ page }) => {
+    await page.goto(`/es/blog/${PRIMERO.slug}/`)
+
+    const anchoEn = async (ancho: number) => {
+      await page.setViewportSize({ width: ancho, height: 1000 })
+      return page.locator('.prosa').evaluate((nodo) => nodo.getBoundingClientRect().width)
+    }
+
+    const a1024 = await anchoEn(1024)
+    const a1920 = await anchoEn(1920)
+
+    // Antes la medida era fija en 68ch y a partir de 1024 el texto se quedaba
+    // quieto, dejando un hueco enorme hasta el indice.
+    expect(a1920).toBeGreaterThan(a1024 + 40)
+  })
+
   test('no queda ningun enlace al blog anterior', async ({ page }) => {
     for (const articulo of ARTICULOS_ES.slice(0, 5)) {
       await page.goto(`/es/blog/${articulo.slug}/`)

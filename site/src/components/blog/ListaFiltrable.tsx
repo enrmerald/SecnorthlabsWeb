@@ -29,9 +29,11 @@ import type { Categoria } from '@/lib/blog/esquema'
 const TODOS = 'todos'
 
 interface PropsListaFiltrable {
-  categorias: { id: Categoria; etiqueta: string }[]
+  categorias: { id: Categoria; etiqueta: string; cuenta: number }[]
   etiquetaTodos: string
   etiquetaFiltro: string
+  /** Total de articulos de la rejilla, para el contador de «todos los temas». */
+  total: number
   children: ReactNode
 }
 
@@ -39,11 +41,12 @@ export function ListaFiltrable({
   categorias,
   etiquetaTodos,
   etiquetaFiltro,
+  total,
   children,
 }: PropsListaFiltrable) {
   const [activa, setActiva] = useState<string>(TODOS)
 
-  const opciones = [{ id: TODOS, etiqueta: etiquetaTodos }, ...categorias]
+  const opciones = [{ id: TODOS, etiqueta: etiquetaTodos, cuenta: total }, ...categorias]
 
   return (
     <div data-filtro={activa} className="flex flex-col gap-8">
@@ -51,7 +54,7 @@ export function ListaFiltrable({
           de pantalla anuncia cual esta activo, que es justo lo que el color
           comunica visualmente. */}
       <div role="group" aria-label={etiquetaFiltro} className="flex flex-wrap gap-2.5">
-        {opciones.map(({ id, etiqueta }) => {
+        {opciones.map(({ id, etiqueta, cuenta }) => {
           const seleccionada = activa === id
           return (
             <button
@@ -61,14 +64,25 @@ export function ListaFiltrable({
               onClick={() => setActiva(id)}
               // 44px de alto minimo: es el objetivo tactil de la seccion 1.6.
               className={[
-                'font-display min-h-11 rounded-full border px-4 text-xs font-bold tracking-wide uppercase transition-colors',
+                'font-display group inline-flex min-h-11 items-center gap-2 rounded-full border px-4 text-xs font-bold tracking-wide uppercase transition-colors',
                 'focus-visible:outline-cyan focus-visible:outline-2 focus-visible:outline-offset-2',
                 seleccionada
                   ? 'border-cyan/60 bg-cyan/10 text-cyan'
-                  : 'border-border text-text-dim hover:border-cyan/40 hover:text-text',
+                  : 'border-border text-text-dim hover:border-cyan/40 hover:bg-panel hover:text-text',
               ].join(' ')}
             >
               {etiqueta}
+              {/* El numero de articulos de cada tema. Se anuncia con el boton -no
+                  va oculto- porque saber que un tema tiene un articulo y otro
+                  doce cambia si merece la pena pulsarlo. */}
+              <span
+                className={[
+                  'rounded-full px-1.5 py-0.5 text-[0.625rem] leading-none tabular-nums transition-colors',
+                  seleccionada ? 'bg-cyan/20 text-cyan' : 'bg-border/60 text-text-dim',
+                ].join(' ')}
+              >
+                {cuenta}
+              </span>
             </button>
           )
         })}

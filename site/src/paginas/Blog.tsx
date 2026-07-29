@@ -32,10 +32,16 @@ export function Blog({ locale }: { locale: Locale }) {
 
   const destacado = articuloDestacado(locale)
   const resto = listarIndice(locale).filter((articulo) => articulo.slug !== destacado?.slug)
-  const categorias = categoriasConArticulos(locale).map((id) => ({
-    id,
-    etiqueta: blog.categories[id],
-  }))
+  // El contador cuenta sobre la rejilla, no sobre el total de articulos: el
+  // destacado esta fuera de ella, y un chip que dice «5» mostrando 4 tarjetas
+  // parece un error de filtrado.
+  const categorias = categoriasConArticulos(locale)
+    .map((id) => ({
+      id,
+      etiqueta: blog.categories[id],
+      cuenta: resto.filter((articulo) => articulo.category === id).length,
+    }))
+    .filter((categoria) => categoria.cuenta > 0)
 
   return (
     <main id="contenido">
@@ -109,6 +115,7 @@ export function Blog({ locale }: { locale: Locale }) {
               categorias={categorias}
               etiquetaTodos={blog.list.allLabel}
               etiquetaFiltro={blog.list.filterLabel}
+              total={resto.length}
             >
               <ul
                 aria-label={blog.list.title}
