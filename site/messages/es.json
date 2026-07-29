@@ -240,7 +240,7 @@
     },
     "brand": {
       "claim": "Cybersecurity, IA & Innovation",
-      "legalName": "Innovation and Security North Labs SL (ISNOL)",
+      "legalName": "Innovation and Security North Labs SL (ISN Labs)",
       "location": "Asturias, España",
       "name": "ISN Labs"
     },
@@ -328,7 +328,7 @@
       },
       "copyright": "© 2026 ISN Labs · Todos los derechos reservados",
       "ewalaNotice": "SentryN3t® es una marca de Ewala",
-      "legalLine": "Innovation and Security North Labs SL (ISNOL) · Asturias, España"
+      "legalLine": "Innovation and Security North Labs SL (ISN Labs) · Asturias, España"
     },
     "frameworks": [
       "NIS2",
