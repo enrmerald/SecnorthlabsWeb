@@ -3,7 +3,7 @@
 import { useEffect, useId, useRef, useState } from 'react'
 import { Button } from '@/components/ui/Button'
 import type { Locale } from '@/config/routes'
-import { RUTAS_API, enviar, nuevoSubmissionId, type RespuestaContacto } from '@/lib/api/cliente'
+import { RUTAS_API, enviar, esperarMinimoAntispam, nuevoSubmissionId, type RespuestaContacto } from '@/lib/api/cliente'
 import {
   CampoCasilla,
   CampoSelect,
@@ -195,6 +195,11 @@ export function FormularioContacto({
     setMostrarResumen(false)
     setEstado('enviando')
     setErrorGeneral(null)
+
+    // Retiene el envio si aun no se ha superado el tiempo minimo del antispam.
+    // El boton ya esta en 'enviando', asi que para quien lo usa es simplemente
+    // un envio que tarda un instante mas.
+    await esperarMinimoAntispam(renderizadoEn.current)
 
     const respuesta = await enviar<RespuestaContacto>(RUTAS_API.contacto, {
       schemaVersion: '1.0',

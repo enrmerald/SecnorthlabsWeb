@@ -6,7 +6,7 @@ import { Card } from '@/components/ui/Card'
 import { Kicker } from '@/components/ui/Kicker'
 import { CampoSelect, CampoTexto, GrupoSiNo } from '@/components/forms/campos'
 import type { Locale } from '@/config/routes'
-import { RUTAS_API, enviar, nuevoSubmissionId, type RespuestaCotizacion } from '@/lib/api/cliente'
+import { RUTAS_API, enviar, esperarMinimoAntispam, nuevoSubmissionId, type RespuestaCotizacion } from '@/lib/api/cliente'
 import { euros, horquilla } from '@/lib/formato'
 
 /**
@@ -228,6 +228,11 @@ export function CalculadoraCliente({
 
     setEstado('enviando')
     setErrorGeneral(null)
+
+    // Retiene el envio si aun no se ha superado el tiempo minimo del antispam.
+    // El boton ya esta en 'enviando', asi que para quien lo usa es simplemente
+    // un envio que tarda un instante mas.
+    await esperarMinimoAntispam(renderizadoEn.current)
 
     const respuesta = await enviar<RespuestaCotizacion>(RUTAS_API.cotizacion, {
       schemaVersion: '1.0',
