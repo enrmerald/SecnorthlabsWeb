@@ -61,23 +61,35 @@ export function Software({ locale }: { locale: Locale }) {
             <LogoSentryNet alto={38} />
           </h2>
           <p className="font-display text-cyan mt-3 text-sm">{software.sentry.tagline}</p>
-          <p className="texto-cuerpo mt-4">{software.sentry.description}</p>
 
-          <ul className="mt-6 flex flex-wrap gap-2.5">
-            {software.sentry.chips.map((chip) => (
-              <li key={chip}>
-                <Tag acento="verde">{chip}</Tag>
-              </li>
-            ))}
-          </ul>
+          {/* El modelo de licencia va a la derecha en escritorio y debajo en el
+              resto de anchuras. Son cuatro lineas cortas: como fila ocupaba todo
+              el ancho de la tarjeta para decir muy poco, y como columna encaja
+              junto al texto sin dejar hueco. Por debajo de `lg` no hay sitio para
+              dos columnas, asi que vuelve a apilarse -misma marca, un borde
+              superior en lugar de uno lateral- y no hay dos maquetaciones que
+              mantener, solo un borde que cambia de lado. */}
+          <div className="mt-4 grid gap-8 lg:grid-cols-[minmax(0,2fr)_minmax(0,1fr)]">
+            <div className="min-w-0">
+              <p className="texto-cuerpo">{software.sentry.description}</p>
 
-          <div className="border-border mt-8 border-t pt-6">
-            <h3 className="subtitle mb-3">{software.sentry.licenseModel.title}</h3>
-            <ul className="texto-cuerpo grid gap-2 text-sm sm:grid-cols-2">
-              {software.sentry.licenseModel.items.map((item) => (
-                <li key={item}>{item}</li>
-              ))}
-            </ul>
+              <ul className="mt-6 flex flex-wrap gap-2.5">
+                {software.sentry.chips.map((chip) => (
+                  <li key={chip}>
+                    <Tag acento="verde">{chip}</Tag>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="border-border min-w-0 border-t pt-6 lg:border-t-0 lg:border-l lg:pt-0 lg:pl-8">
+              <h3 className="subtitle mb-3">{software.sentry.licenseModel.title}</h3>
+              <ul className="texto-cuerpo grid gap-2 text-sm">
+                {software.sentry.licenseModel.items.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+            </div>
           </div>
 
           <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
