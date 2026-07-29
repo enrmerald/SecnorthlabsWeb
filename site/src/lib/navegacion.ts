@@ -96,9 +96,10 @@ export function construirNavegacion(locale: Locale): DatosNavegacion {
       items: resolverEnlaces(common.solutionsMenu.items, locale),
     },
     // El brief deja el CTA de la barra como "a definir". Apuntaba a la
-    // calculadora -el diagnostico o selector de plan que describe-, y mientras
-    // esa ruta esta retirada (`CALCULADORA_ACTIVA`) lleva al formulario de
-    // contacto, que es donde se atiende la misma peticion.
+    // calculadora -el diagnostico o selector de plan que describe-, y con esa
+    // ruta retirada (`CALCULADORA_ACTIVA`) lleva al formulario de contacto, que
+    // es donde se atiende la misma peticion. El texto lo dice sin rodeos
+    // («Contactanos»): un boton de barra promete el destino al que lleva.
     cta: { label: common.nav.cta, href: getLocalizedPath('contact', locale) },
     otroIdioma: { locale: otro, label: common.nav.languageToggle },
     a11y: common.a11y,
