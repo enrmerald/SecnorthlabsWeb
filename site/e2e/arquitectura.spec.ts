@@ -12,10 +12,15 @@ import { LOCALES, ROUTES } from '../src/config/routes'
 const rutasActivas = ROUTES.filter((route) => route.enabled)
 
 test.describe('exportacion estatica', () => {
-  test('la raiz redirige a /es/ con un 301', async ({ request }) => {
+  test('la raiz redirige a un idioma, sin servir contenido propio', async ({ request }) => {
+    // Desde el 29/07/2026 el destino depende del idioma del navegador y la
+    // redireccion es 302, no 301: el detalle se comprueba en `raiz-idioma.spec.ts`.
+    // Lo que se fija aqui es lo que interesa a la arquitectura: en `/` no hay
+    // pagina, solo un reparto.
     const respuesta = await request.get('/', { maxRedirects: 0 })
-    expect(respuesta.status()).toBe(301)
-    expect(respuesta.headers()['location']).toBe('/es/')
+
+    expect(respuesta.status()).toBe(302)
+    expect(respuesta.headers()['location']).toMatch(/^\/(es|en)\/$/)
   })
 
   for (const locale of LOCALES) {

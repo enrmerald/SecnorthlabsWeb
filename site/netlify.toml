@@ -94,10 +94,65 @@
   force = true
 
 # ── Todo el contenido vive bajo /es/ y /en/ ──────────────────────────────────
+#
+# La raiz reparte segun el idioma del navegador: cualquier variante de castellano
+# va a /es/, y todo lo demas a /en/. Decision de Direccion del 29/07/2026, que
+# cambia la de la seccion 2.1 del plan («no se detecta Accept-Language»).
+#
+# Tres detalles que hacen que esto funcione y no rompa el SEO:
+#
+#   1. **302 y no 301.** La 301 es permanente y los navegadores y las CDN la
+#      cachean sin mirar la cabecera: quien entrase primero con el navegador en
+#      espanol dejaria a los siguientes con /es/ fijado, sin poder salir. Con 302
+#      la decision se vuelve a tomar en cada visita, que es lo que pide una
+#      redireccion que depende de quien pregunta.
+#   2. **Se listan las variantes.** La condicion `Language` de Netlify compara con
+#      los valores de `Accept-Language`, asi que `es-419` o `es-AR` no coinciden
+#      solos con `es`. Se enumeran los dialectos con hablantes reales; el que
+#      falte cae en la regla de abajo, que es /en/ y sigue siendo una pagina util.
+#   3. **La raiz no es contenido.** Ni /es/ ni /en/ dependen de esta regla: las dos
+#      son URLs propias, indexables y con su canonica. Esto solo decide a donde
+#      va quien escribe el dominio a secas.
 [[redirects]]
   from = "/"
   to = "/es/"
-  status = 301
+  status = 302
+  force = true
+  conditions = { Language = [
+    "es",
+    "es-ES",
+    "es-419",
+    "es-AR",
+    "es-BO",
+    "es-CL",
+    "es-CO",
+    "es-CR",
+    "es-CU",
+    "es-DO",
+    "es-EC",
+    "es-GT",
+    "es-HN",
+    "es-MX",
+    "es-NI",
+    "es-PA",
+    "es-PE",
+    "es-PR",
+    "es-PY",
+    "es-SV",
+    "es-US",
+    "es-UY",
+    "es-VE",
+    "ca",
+    "gl",
+    "eu",
+  ] }
+
+# Cualquier otro idioma. Va despues a proposito: Netlify evalua de arriba abajo y
+# se queda con la primera regla que encaje.
+[[redirects]]
+  from = "/"
+  to = "/en/"
+  status = 302
   force = true
 
 # ── Cabeceras ────────────────────────────────────────────────────────────────

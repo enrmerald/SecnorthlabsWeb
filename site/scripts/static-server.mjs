@@ -8,6 +8,7 @@ import { createReadStream } from 'node:fs'
 import { stat } from 'node:fs/promises'
 import { fileURLToPath, pathToFileURL } from 'node:url'
 import { dirname, extname, join, normalize, resolve, sep } from 'node:path'
+import { idiomaPreferido } from './idioma-preferido.mjs'
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..')
 const publishDir = resolve(root, process.argv[2] ?? 'out')
@@ -136,10 +137,22 @@ const server = createServer(async (request, response) => {
     return
   }
 
-  // Netlify redirige / a /es/ con un 301 fijo (Fase 11.1). Se reproduce aqui
-  // para que la ruta raiz se comporte igual en local que en produccion.
+  // La raiz reparte por idioma del navegador, igual que las dos reglas de
+  // netlify.toml. Se reproduce aqui para que se pueda comprobar en local: es una
+  // regla que depende de una cabecera, y esas son justo las que nadie prueba
+  // hasta que fallan en produccion.
+  //
+  // `Vary: Accept-Language` no es decorativo: sin el, cualquier cache
+  // intermedia guardaria la respuesta del primer visitante y se la daria a todos
+  // los demas, con lo que la mitad acabaria en el idioma equivocado.
   if (pathname === '/') {
-    response.writeHead(301, { Location: '/es/' }).end()
+    response
+      .writeHead(302, {
+        Location: `/${idiomaPreferido(request.headers['accept-language'])}/`,
+        Vary: 'Accept-Language',
+        'Cache-Control': 'no-store',
+      })
+      .end()
     return
   }
 
