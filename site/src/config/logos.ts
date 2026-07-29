@@ -123,10 +123,26 @@ export const LOGO_ISNLABS: Logotipo = {
  * Tras la division de Ewala, SentryN3t es producto de Ewala e ISN Labs lo
  * despliega y opera como partner, asi que aparece junto al aviso de marca y
  * nunca como producto propio.
+ *
+ * **Son dos piezas, no una.** El logotipo horizontal que entrego la marca trae el
+ * icono mas bajo que el texto, y la desalineacion esta dentro del fichero: a
+ * cualquier tamano se reproduce igual. Se compone en `LogoSentryNet`, que centra
+ * las dos y resuelve el problema. Cada pieza esta recortada de su aire
+ * transparente -el icono traia 76 px sobrantes abajo- y emitida a alturas fijas
+ * de 64 y 128 px.
  */
-export const LOGO_SENTRYNET: Logotipo = {
-  src: '/logos/sentrynet-240.png',
-  src2x: '/logos/sentrynet-480.png',
+export const LOGO_SENTRYNET_ICONO: Logotipo = {
+  src: '/logos/sentrynet-icon-64.png',
+  src2x: '/logos/sentrynet-icon-128.png',
   alt: 'SentryN3t',
-  ratio: 6,
+  ratio: 1.078,
+}
+
+export const LOGO_SENTRYNET_WORDMARK: Logotipo = {
+  src: '/logos/sentrynet-wordmark-64.png',
+  src2x: '/logos/sentrynet-wordmark-128.png',
+  // Decorativo: el nombre accesible lo aporta el icono, y anunciar el logotipo
+  // dos veces seria peor que no anunciarlo.
+  alt: '',
+  ratio: 5.391,
 }

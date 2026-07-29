@@ -8,7 +8,8 @@ import { Kicker } from '@/components/ui/Kicker'
 import { SectionHeading } from '@/components/ui/SectionHeading'
 import { LogoMarca } from '@/components/ui/LogoMarca'
 import { Tag } from '@/components/ui/Tag'
-import { LOGOS_LICENCIAS, LOGO_EWALA, LOGO_SENTRYNET } from '@/config/logos'
+import { LogoSentryNet } from '@/components/ui/LogoSentryNet'
+import { LOGOS_LICENCIAS, LOGO_EWALA } from '@/config/logos'
 import { getLocalizedPath, type Locale } from '@/config/routes'
 import { cargarMensajes } from '@/i18n/mensajes'
 
@@ -57,7 +58,7 @@ export function Software({ locale }: { locale: Locale }) {
               anuncia «SentryN3t» como encabezado una sola vez. Ponerlo fuera con
               un h2 en sr-only lo diria dos veces. */}
           <h2 className="mt-4">
-            <LogoMarca logo={LOGO_SENTRYNET} alto={34} ancho={220} />
+            <LogoSentryNet alto={28} />
           </h2>
           <p className="font-display text-cyan mt-3 text-sm">{software.sentry.tagline}</p>
           <p className="texto-cuerpo mt-4">{software.sentry.description}</p>
