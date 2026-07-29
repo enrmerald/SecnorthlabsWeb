@@ -1,8 +1,7 @@
 import type { ReactNode } from 'react'
 import type { Locale, RouteDefinition, RouteId } from '@/config/routes'
-import { cargarMensajes } from '@/i18n/mensajes'
-import { SEO_POR_RUTA } from '@/lib/seo-por-ruta'
 import { Blog } from './Blog'
+import { Calculadora } from './Calculadora'
 import { CatalogoGrc, CatalogoIt, CatalogoOt } from './Catalogos'
 import { Compania } from './Compania'
 import { Contacto } from './Contacto'
@@ -32,21 +31,6 @@ export interface PropsRenderizador {
 
 export type Renderizador = (props: PropsRenderizador) => ReactNode | Promise<ReactNode>
 
-/**
- * Esqueleto de las paginas que aun no tienen contenido. Solo queda la
- * calculadora, que llega en la Fase 5 con su motor en el gateway.
- */
-function EnConstruccion({ route, locale }: PropsRenderizador) {
-  const { title, description } = SEO_POR_RUTA[route.id](cargarMensajes(locale))
-
-  return (
-    <main id="contenido" className="site-container seccion">
-      <h1 className="heading-display">{title}</h1>
-      <p className="texto-cuerpo mt-4">{description}</p>
-    </main>
-  )
-}
-
 export const RENDERIZADORES: Record<RouteId, Renderizador> = {
   home: ({ locale }) => <Home locale={locale} />,
   mssp: ({ locale }) => <Mssp locale={locale} />,
@@ -59,7 +43,7 @@ export const RENDERIZADORES: Record<RouteId, Renderizador> = {
   blog: ({ locale }) => <Blog locale={locale} />,
   company: ({ locale }) => <Compania locale={locale} />,
   contact: ({ locale }) => <Contacto locale={locale} />,
-  calculator: EnConstruccion,
+  calculator: ({ locale }) => <Calculadora locale={locale} />,
   privacy: ({ locale }) => <Privacidad locale={locale} />,
   legal: ({ locale }) => <AvisoLegal locale={locale} />,
   cookies: ({ locale }) => <Cookies locale={locale} />,

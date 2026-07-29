@@ -6,7 +6,7 @@
 import { createServer } from 'node:http'
 import { createReadStream } from 'node:fs'
 import { stat } from 'node:fs/promises'
-import { fileURLToPath } from 'node:url'
+import { fileURLToPath, pathToFileURL } from 'node:url'
 import { dirname, extname, join, normalize, resolve, sep } from 'node:path'
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..')
@@ -49,8 +49,67 @@ async function resolveFile(pathname) {
   )
 }
 
+/**
+ * Rutas de `/api/*` que en produccion resuelve Netlify a `netlify/functions/`.
+ *
+ * Se sirven tambien aqui para que `pnpm preview` sea un entorno completo y las
+ * pruebas E2E puedan ejercitar **la funcion real**, con su validacion y el motor
+ * de verdad. La alternativa era exigir el CLI de Netlify, que son cientos de
+ * megas para reproducir un enrutado de dos lineas.
+ *
+ * Las funciones son handlers `(Request) => Promise<Response>` de la API v2, que
+ * es la firma web estandar, asi que se pueden invocar directamente. Se importan
+ * con el type stripping nativo de Node, sin build previo.
+ */
+const FUNCIONES = {
+  '/api/quote': 'quote',
+  '/api/contact': 'contact',
+}
+
+const cacheFunciones = new Map()
+
+async function cargarFuncion(nombre) {
+  if (!cacheFunciones.has(nombre)) {
+    const ruta = pathToFileURL(join(root, 'netlify', 'functions', `${nombre}.ts`)).href
+    cacheFunciones.set(nombre, (await import(ruta)).default)
+  }
+  return cacheFunciones.get(nombre)
+}
+
+/** Traduce la peticion de Node a `Request` y la respuesta de vuelta. */
+async function atenderFuncion(nombre, request, response) {
+  const cuerpo = []
+  for await (const trozo of request) cuerpo.push(trozo)
+
+  const peticion = new Request(`http://localhost${request.url}`, {
+    method: request.method,
+    headers: request.headers,
+    ...(cuerpo.length > 0 ? { body: Buffer.concat(cuerpo) } : {}),
+  })
+
+  let resultado
+  try {
+    resultado = await (await cargarFuncion(nombre))(peticion)
+  } catch (error) {
+    console.error(`preview · la funcion "${nombre}" ha fallado:`, error)
+    response
+      .writeHead(500, { 'Content-Type': 'application/json' })
+      .end(JSON.stringify({ ok: false, error: 'generic' }))
+    return
+  }
+
+  response.writeHead(resultado.status, Object.fromEntries(resultado.headers))
+  response.end(Buffer.from(await resultado.arrayBuffer()))
+}
+
 const server = createServer(async (request, response) => {
   const { pathname } = new URL(request.url ?? '/', 'http://localhost')
+
+  const funcion = FUNCIONES[pathname]
+  if (funcion) {
+    await atenderFuncion(funcion, request, response)
+    return
+  }
 
   // Netlify redirige / a /es/ con un 301 fijo (Fase 11.1). Se reproduce aqui
   // para que la ruta raiz se comporte igual en local que en produccion.
