@@ -1709,12 +1709,12 @@
     },
     "others": {
       "items": [
-        "EDR / XDR",
+        "EDR / MDR",
         "NGFW firewalls",
         "Backup & DR",
         "Password manager",
         "MFA",
-        "SIEM"
+        "SIEM / XDR"
       ],
       "label": "Other technologies we integrate and manage"
     },
