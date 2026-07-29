@@ -64,3 +64,9 @@ docs/*.xlsx
 # Volcados de diagnostico: pueden contener claves de API y URLs internas.
 docs/salida-metadata-*.md
 docs/*-metadata-*.md
+
+# Servidor de revision local: no se versiona por indicacion del 29/07/2026.
+# Si el equipo necesita levantarlo sin pedirlo, hay que commitearlo.
+Dockerfile
+docker-compose.yml
+.dockerignore

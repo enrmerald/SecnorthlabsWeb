@@ -13,6 +13,17 @@ const root = join(dirname(fileURLToPath(import.meta.url)), '..')
 const publishDir = resolve(root, process.argv[2] ?? 'out')
 const port = Number(process.env.PORT ?? 4173)
 
+/**
+ * `PREVIEW_NOINDEX=1` marca todo el servidor como no indexable.
+ *
+ * Es OBLIGATORIO en el servidor de revision interno. Un entorno con contenido sin
+ * publicar accesible desde la red se acaba indexando, y entonces hay dos sitios
+ * con el mismo contenido compitiendo: Google elige uno, normalmente el que no
+ * quieres, y la web real arranca penalizada. Con la cabecera y el robots.txt no
+ * hace falta acordarse de nada.
+ */
+const noIndex = process.env.PREVIEW_NOINDEX === '1'
+
 const MIME_TYPES = {
   '.html': 'text/html; charset=utf-8',
   '.js': 'text/javascript; charset=utf-8',
@@ -104,6 +115,20 @@ async function atenderFuncion(nombre, request, response) {
 
 const server = createServer(async (request, response) => {
   const { pathname } = new URL(request.url ?? '/', 'http://localhost')
+
+  if (noIndex) {
+    // Cabecera en TODAS las respuestas, incluidas las de las funciones y los
+    // activos: `robots.txt` por si solo no cubre lo que ya se haya rastreado.
+    response.setHeader('X-Robots-Tag', 'noindex, nofollow, noarchive, nosnippet')
+  }
+
+  // Sustituye al robots.txt del artefacto mientras el servidor sea de revision.
+  if (noIndex && pathname === '/robots.txt') {
+    response
+      .writeHead(200, { 'Content-Type': 'text/plain; charset=utf-8' })
+      .end('User-agent: *\nDisallow: /\n')
+    return
+  }
 
   const funcion = FUNCIONES[pathname]
   if (funcion) {
