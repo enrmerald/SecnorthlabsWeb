@@ -68,6 +68,20 @@ test.describe('la raiz reparte por idioma', () => {
     expect(html).toContain('noindex')
   })
 
+  test('el reparto del cliente es un script bloqueante, no un efecto', async ({ request }) => {
+    // Con un `useEffect` -que corre despues del primer pintado- la eleccion de
+    // idioma aparecia un instante y desaparecia: un parpadeo que se confundia con
+    // un 404. Un `<script src>` sin `async` ni `defer` se ejecuta antes de pintar.
+    const html = await (await request.get('/index.html')).text()
+
+    const etiqueta = /<script[^>]*src="\/reparto-idioma\.js"[^>]*>/.exec(html)?.[0]
+    expect(etiqueta, 'no se carga /reparto-idioma.js').toBeTruthy()
+    expect(etiqueta).not.toMatch(/\basync\b|\bdefer\b/)
+
+    // Y el fichero se publica de verdad, no solo se referencia.
+    expect((await request.get('/reparto-idioma.js')).status()).toBe(200)
+  })
+
   test('la raiz no esta en el sitemap', async ({ request }) => {
     const xml = await (await request.get('/sitemap.xml')).text()
 

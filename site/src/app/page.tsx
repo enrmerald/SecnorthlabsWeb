@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { displayFont, sansFont } from '@/app/fuentes'
-import { RepartoIdioma } from '@/components/RepartoIdioma'
 import { LOCALES, getLocalizedPath } from '@/config/routes'
 import { EMPRESA } from '@/lib/empresa'
 import './globals.css'
@@ -29,6 +28,12 @@ import './globals.css'
  * cada uno con su canonica; esta pagina solo decide a donde va quien escribe el
  * dominio a secas, y no entra en el sitemap.
  *
+ * **El reparto lo hace un script bloqueante, no un efecto.** `public/reparto-idioma.js`
+ * se carga sin `async` ni `defer` como primer hijo del `<body>`, de modo que se
+ * ejecuta antes del primer pintado. Con el `useEffect` anterior -que corre despues
+ * de pintar- la eleccion de idioma aparecia un instante y desaparecia, un
+ * parpadeo que se confundia con un 404.
+ *
  * Los dos enlaces son visibles y funcionan **sin JavaScript**: si el script no
  * llega a ejecutarse, lo que queda es una eleccion de idioma, no una pagina en
  * blanco. Van sin traducir porque aqui todavia no se sabe el idioma: cada uno esta
@@ -52,7 +57,12 @@ export default function Raiz() {
     // predeterminado y la pagina se retira de la indexacion.
     <html lang="es" className={`${displayFont.variable} ${sansFont.variable} h-full`}>
       <body className="flex min-h-full flex-col">
-        <RepartoIdioma />
+        {/* Bloqueante y el primero de todo: sin `async` ni `defer`, el navegador
+            lo ejecuta antes de seguir leyendo el documento y antes de pintar. Va
+            en un fichero de `public/` y no en linea para no necesitar
+            'unsafe-inline' ni un hash en la CSP. */}
+        {/* eslint-disable-next-line @next/next/no-sync-scripts */}
+        <script src="/reparto-idioma.js" />
 
         <main className="site-container flex flex-1 flex-col items-center justify-center gap-8 py-24 text-center">
           <p className="kicker text-cyan">{EMPRESA.nombre}</p>
