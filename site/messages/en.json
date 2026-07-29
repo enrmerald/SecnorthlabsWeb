@@ -1677,24 +1677,27 @@
       "title": "How our licensing model works"
     },
     "licenses": {
-      "cardFooter": "License + ISN Labs management",
       "cards": [
         {
+          "footer": "License + ISN Labs management",
           "description": "The whole ecosystem: productivity, identity, MFA, endpoint protection (Defender XDR) and backup, with security criteria.",
           "name": "Microsoft",
           "subtitle": "365 · Defender · Entra · Intune"
         },
         {
+          "footer": "License + ISN Labs management",
           "description": "24/7 managed detection and response across endpoints and identity, operated by the ISN Labs team.",
           "name": "Huntress",
           "subtitle": "Managed MDR / EDR"
         },
         {
+          "footer": "Hardware + licenses + ISN Labs management",
           "description": "Firewall and VPN on OPNsense: a controlled perimeter, with no per-feature license cost.",
           "name": "OPNsense",
           "subtitle": "Firewall / perimeter"
         },
         {
+          "footer": "Hardware + licenses + ISN Labs management",
           "description": "FortiGate firewalls and the Fortinet ecosystem: managed perimeter, VPN and segmentation.",
           "name": "Fortinet",
           "subtitle": "NGFW / network security"

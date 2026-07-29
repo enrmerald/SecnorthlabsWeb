@@ -131,7 +131,10 @@ export function Software({ locale }: { locale: Locale }) {
               name={licencia.name}
               subtitle={licencia.subtitle}
               description={licencia.description}
-              footer={software.licenses.cardFooter}
+              // El pie lo declara cada tarjeta y no la seccion: OPNsense y
+              // Fortinet entran con equipo propio, asi que dicen «Hardware +
+              // licencias + gestion ISN Labs» y Microsoft y Huntress no.
+              footer={licencia.footer}
               // La clave es el `name` del fichero de mensajes. Si Marketing
               // renombra una tarjeta, se queda sin logo, no sin tarjeta.
               logo={LOGOS_LICENCIAS[licencia.name]}

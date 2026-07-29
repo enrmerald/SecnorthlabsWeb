@@ -1677,24 +1677,27 @@
       "title": "Cómo funciona nuestro modelo de licenciamiento"
     },
     "licenses": {
-      "cardFooter": "Licencia + gestión ISN Labs",
       "cards": [
         {
+          "footer": "Licencia + gestión ISN Labs",
           "description": "Todo el ecosistema: productividad, identidad, MFA, protección de endpoint (Defender XDR) y backup, con criterios de seguridad.",
           "name": "Microsoft",
           "subtitle": "365 · Defender · Entra · Intune"
         },
         {
+          "footer": "Licencia + gestión ISN Labs",
           "description": "Detección y respuesta gestionada 24/7 sobre endpoints e identidad, operada por el equipo de ISN Labs.",
           "name": "Huntress",
           "subtitle": "MDR / EDR gestionado"
         },
         {
+          "footer": "Hardware + licencias + gestión ISN Labs",
           "description": "Cortafuegos y VPN sobre OPNsense: perímetro controlado, sin coste de licencia por funcionalidad.",
           "name": "OPNsense",
           "subtitle": "Firewall / perímetro"
         },
         {
+          "footer": "Hardware + licencias + gestión ISN Labs",
           "description": "Firewalls FortiGate y ecosistema Fortinet: perímetro, VPN y segmentación gestionados.",
           "name": "Fortinet",
           "subtitle": "NGFW / seguridad de red"
