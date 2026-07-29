@@ -4,7 +4,7 @@ import type { Logotipo } from '@/config/logos'
  * Logotipo de un tercero, con o sin cápsula clara.
  *
  * Se usa `<img>` y no `next/image` a propósito: con `images.unoptimized: true`
- * —obligatorio en la exportación estática— `next/image` no aporta nada sobre un
+ * -obligatorio en la exportación estática- `next/image` no aporta nada sobre un
  * `<img>` y sí añade JavaScript de cliente. Los ficheros ya vienen optimizados
  * del pipeline.
  *

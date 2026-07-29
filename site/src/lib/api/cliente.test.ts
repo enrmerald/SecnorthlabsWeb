@@ -5,7 +5,7 @@ import { nuevoSubmissionId } from './cliente'
 /**
  * Estas pruebas existen por un fallo concreto.
  *
- * `crypto.randomUUID()` solo existe en contextos seguros —HTTPS o `localhost`—.
+ * `crypto.randomUUID()` solo existe en contextos seguros -HTTPS o `localhost`-.
  * El servidor de revisión interno se sirve por HTTP en una IP de la red local, y
  * ahí la función no existe: el `useEffect` que la llamaba lanzaba durante la fase
  * de commit de React, y sin error boundary React desmontaba el árbol entero. El
@@ -31,7 +31,7 @@ describe('nuevoSubmissionId', () => {
     expect(esUuid(id)).toBe(true)
   })
 
-  it('sin randomUUID —contexto NO seguro— sigue dando un UUID valido', () => {
+  it('sin randomUUID -contexto NO seguro- sigue dando un UUID valido', () => {
     // Es exactamente lo que expone el navegador sobre http:// en una IP:
     // `getRandomValues` si, `randomUUID` no.
     vi.stubGlobal('crypto', { getRandomValues: cryptoReal.getRandomValues.bind(cryptoReal) })

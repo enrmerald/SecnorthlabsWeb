@@ -1,4 +1,4 @@
-// check:routes — coherencia del manifiesto de rutas (seccion 2.1.1).
+// check:routes - coherencia del manifiesto de rutas (seccion 2.1.1).
 //
 // Con slugs distintos por idioma, dos rutas pueden colisionar en un idioma y no
 // en el otro, y el sintoma seria una pagina que simplemente no se genera. Aqui

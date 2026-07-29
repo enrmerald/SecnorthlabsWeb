@@ -1,4 +1,4 @@
-// check:i18n — paridad estructural entre es.json y en.json (seccion 2.5).
+// check:i18n - paridad estructural entre es.json y en.json (seccion 2.5).
 //
 // Con dos idiomas y slugs distintos, una divergencia de estructura se manifiesta
 // como una pagina inglesa reventada en produccion.

@@ -5,15 +5,15 @@ import { cargarMensajes } from '@/i18n/mensajes'
 import { MARKETING_TEXT_VERSION, PRIVACY_VERSION } from '@/lib/empresa'
 
 /**
- * Calculadora del PBCG — `/es/calculadora/` (Fase 5).
+ * Calculadora del PBCG - `/es/calculadora/` (Fase 5).
  *
  * Componente de build: lee los mensajes aqui y se los pasa al componente de
  * cliente como props. No monta ningun provider de traduccion ni envia el arbol
  * de mensajes al navegador (seccion 1.4.1).
  *
  * **Una sola columna, no dos.** El mockup dibuja un panel lateral fijo, pero eso
- * es de escritorio; el orden que pide la seccion 1.6 es vertical —parametros,
- * contacto, resultado— y mantenerlo en todas las anchuras evita tener dos
+ * es de escritorio; el orden que pide la seccion 1.6 es vertical -parametros,
+ * contacto, resultado- y mantenerlo en todas las anchuras evita tener dos
  * maquetaciones que divergen. El resultado sustituye al formulario cuando llega,
  * en lugar de convivir con el.
  */

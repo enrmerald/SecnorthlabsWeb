@@ -1,4 +1,4 @@
-// `pnpm preview` — sirve out/ en local.
+// `pnpm preview` - sirve out/ en local.
 //
 // No hay `next start` porque no hay servidor: lo unico que se publica es un
 // directorio de ficheros. Esto reproduce como los sirve Netlify (trailingSlash,

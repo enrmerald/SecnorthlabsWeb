@@ -155,7 +155,7 @@ test.describe('POST /api/quote', () => {
     test('un total inventado por el navegador se rechaza', async ({ request }) => {
       // No porque su nombre este en una lista negra, sino porque el esquema es
       // estricto y no admite claves que no espera. Es lo que hace que la lista
-      // de MIG-02 §6.6 no haga falta como filtro de subcadenas — la que incluye
+      // de MIG-02 §6.6 no haga falta como filtro de subcadenas - la que incluye
       // `hours` y romperia el campo legitimo `consultingHours`.
       const respuesta = await cotizar(request, { ...sobreValido(), total: 1, quote: { a: 1 } })
       expect(respuesta.status()).toBe(400)

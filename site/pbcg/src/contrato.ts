@@ -10,7 +10,7 @@ import type { CalcInput, Cpd, Edr, ModuloAuditoria } from './types.ts'
  *
  *     { "cpd": "external", "module": "ensMedium", "licensesIncluded": true }
  *
- * El motor esta en espanol, y sus 59 tests —incluido el caso de oro del Excel—
+ * El motor esta en espanol, y sus 59 tests -incluido el caso de oro del Excel-
  * estan escritos contra esos nombres:
  *
  *     { cpd: 'externo', modulo: 'ensMedia', licenciasIncluidas: true }
@@ -18,7 +18,7 @@ import type { CalcInput, Cpd, Edr, ModuloAuditoria } from './types.ts'
  * Alguien tiene que traducir. Si esa traduccion vive dispersa en la funcion, en
  * el agente local y en el cliente, se desincronizan, y el sintoma es **el peor
  * posible: no hay error**. Un `cpd` que llega como `"external"` y no se
- * reconoce se queda en `undefined`, el esquema lo rechaza —bien— o peor, si
+ * reconoce se queda en `undefined`, el esquema lo rechaza -bien- o peor, si
  * alguien pone un valor por defecto, se cotiza un CPD que el cliente no tiene.
  *
  * Es exactamente el mismo fallo que el plan describe con los campos de EspoCRM:

@@ -3,8 +3,8 @@
  * Genera `contracts/pbcg-golden-vectors.json` (ISNLA-DOC-0008-MIG-02 §16.4).
  *
  * Para que sirve: el servicio local de ingestion invoca este motor por CLI, pero
- * necesita poder comprobar **que su lado del contrato funciona** —que serializa
- * bien, que traduce bien los enums, que interpreta bien la respuesta— sin
+ * necesita poder comprobar **que su lado del contrato funciona** -que serializa
+ * bien, que traduce bien los enums, que interpreta bien la respuesta- sin
  * depender de tener el motor delante. Estos vectores son ese banco de pruebas
  * compartido: mismos casos, mismos resultados esperados, en un fichero que
  * cualquier lenguaje puede leer.

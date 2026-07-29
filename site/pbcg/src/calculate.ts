@@ -28,7 +28,7 @@ function mroundACentimos(euros: number): number {
   return Math.round(euros / PBCG.redondeo) * PBCG.redondeo * 100
 }
 
-/** Tamano del cliente — `CALCULADORA!E6`. */
+/** Tamano del cliente - `CALCULADORA!E6`. */
 export function calcularTamano(input: Pick<CalcInput, 'usuarios' | 'sedes' | 'instalacionesOT' | 'cpd'>): Size {
   const { usuariosS, usuariosM, sedesS, sedesM } = PBCG.umbrales
 
@@ -43,7 +43,7 @@ export function calcularTamano(input: Pick<CalcInput, 'usuarios' | 'sedes' | 'in
   return (['S', 'M', 'L'] as const)[n - 1] as Size
 }
 
-/** Horas tecnicas mensuales — `CALCULADORA!E7:E16` → `E17`. */
+/** Horas tecnicas mensuales - `CALCULADORA!E7:E16` → `E17`. */
 export function calcularHorasTecnicas(input: CalcInput): number {
   const { coef } = PBCG
   const srvTotal = input.srvFisPropio + input.srvVirPropio + input.srvFisExt + input.srvVirExt
@@ -70,7 +70,7 @@ export function calcularHorasTecnicas(input: CalcInput): number {
   return Math.round(h * 2) / 2
 }
 
-/** Horas anuales de auditoria por modulo y tamano — bloques de `AUDITORIAS`. */
+/** Horas anuales de auditoria por modulo y tamano - bloques de `AUDITORIAS`. */
 export function calcularHorasAuditoriaAnuales(modulo: Modulo, size: Size): number {
   const ejecuciones = PBCG.auditoriaEjecuciones[modulo]
   // Se recorre por **nombre de prueba**, nunca por indice.

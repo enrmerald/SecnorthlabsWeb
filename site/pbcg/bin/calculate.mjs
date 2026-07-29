@@ -2,8 +2,8 @@
 /**
  * CLI del motor PBCG (ISNLA-DOC-0008-MIG-02 §16.2).
  *
- * Existe para que el **servicio local de ingestion** —que es Python y vive en
- * otro repositorio— use exactamente este motor, con sus 59 tests y su caso de
+ * Existe para que el **servicio local de ingestion** -que es Python y vive en
+ * otro repositorio- use exactamente este motor, con sus 59 tests y su caso de
  * oro, en lugar de una reimplementacion.
  *
  * Portar el calculo a Python introduciria dos fuentes de verdad para el mismo

@@ -4,7 +4,7 @@ import { cargarMensajes } from '@/i18n/mensajes'
 
 /**
  * Contenido de la 404 traducida. Lo usan dos sitios: la ruta `/es/404/` que
- * genera el manifiesto —la que sirven las reglas del final de `netlify.toml`— y
+ * genera el manifiesto -la que sirven las reglas del final de `netlify.toml`- y
  * `app/[locale]/not-found.tsx`.
  *
  * La lluvia binaria animada de la 404 actual **no se porta**: usa

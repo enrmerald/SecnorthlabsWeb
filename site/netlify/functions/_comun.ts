@@ -44,7 +44,7 @@ export const error = (codigo: CodigoError, estado: number, campos?: Record<strin
  *
  * `.strict()` en todos los niveles: una clave desconocida es un `400`, no un
  * campo que se ignora. Es lo que impide que el navegador cuele un `total`
- * inventado — no porque su nombre esté en una lista negra, sino porque el
+ * inventado - no porque su nombre esté en una lista negra, sino porque el
  * esquema no lo admite.
  *
  * ⚠️ La lista de campos prohibidos de MIG-02 §6.6 incluye `hours`, que casaría

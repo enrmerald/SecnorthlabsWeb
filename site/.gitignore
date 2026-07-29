@@ -37,7 +37,7 @@ yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 
-# env files — .env.example SI se versiona (seccion 6.15)
+# env files - .env.example SI se versiona (seccion 6.15)
 .env*
 !.env.example
 

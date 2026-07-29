@@ -6,7 +6,7 @@ import { LOCALES, ROUTES } from '../src/config/routes'
  *
  * Un breakpoint no sustituye a mirar el contenido real: que el layout "cambie"
  * en 768px no significa que quepa. Esta bateria es la que detecto que el CTA de
- * la navegacion se pintaba a 320px y desbordaba la pagina — dos utilidades de
+ * la navegacion se pintaba a 320px y desbordaba la pagina - dos utilidades de
  * `display` compitiendo en el mismo elemento, algo que ninguna revision visual
  * de escritorio habria visto.
  */

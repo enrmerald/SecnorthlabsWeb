@@ -32,7 +32,7 @@ Se documenta aquí para que la decisión quede trazada y nadie la descubra dentr
 
 **Lo que NO empeora:**
 
-- Las tarifas y coeficientes **no viajan al navegador**. El código de una Netlify Function se ejecuta en servidor; el visitante nunca lo descarga. El bloqueante B01 original —«el modelo publicado en el JavaScript del cliente»— sigue cerrado.
+- Las tarifas y coeficientes **no viajan al navegador**. El código de una Netlify Function se ejecuta en servidor; el visitante nunca lo descarga. El bloqueante B01 original -«el modelo publicado en el JavaScript del cliente»- sigue cerrado.
 - El aviso del CVE-2025-55182 de React no aplica: una Netlify Function es un handler aislado, no un runtime de Next ni de React atendiendo Server Functions.
 - El sitio sigue exportándose por completo. Las páginas continúan siendo HTML estático generado en build; la función es una pieza aparte que Netlify despliega desde `netlify/functions/`, no algo que compile Next.
 
@@ -89,7 +89,7 @@ site/
 [leads-ingest@secnorthlabs.eu]
          ▲
          │ Microsoft Graph o IMAP+OAuth, solo salida
-[Servicio Docker local — REPOSITORIO EXTERNO]
+[Servicio Docker local - REPOSITORIO EXTERNO]
          ├─ verifica firma y descifra
          ├─ deduplica por submissionId
          └─ POST http://espocrm/api/v1/Lead
@@ -116,16 +116,16 @@ Ordenado por lo que bloquea. **B = bloquea escribir código. C = bloquea publica
 | 5 | Site ID de Netlify y secreto del proxy firmado | Sistemas | **B** |
 | 6 | Plan de Netlify contratado | Dirección | **B** |
 | 7 | Export del blog actual: artículos, formato e idiomas | Marketing | **B** |
-| 8 | Texto que se muestra al usuario tras enviar | Dirección | **B** — propuesta más abajo |
+| 8 | Texto que se muestra al usuario tras enviar | Dirección | **B** - propuesta más abajo |
 | 9 | Decisión pnpm 10 o 11 | Desarrollo | **B** |
 | 10 | Elección de analítica | Dirección | **B** para la Fase 8 |
-| 11 | Confirmar precios de licencia EDR y MDR | Dirección | **C** — afectan al precio publicado |
+| 11 | Confirmar precios de licencia EDR y MDR | Dirección | **C** - afectan al precio publicado |
 | 12 | Retención de las carpetas del buzón | Cumplimiento | **C** |
 | 13 | DPA de Resend aceptado y política de privacidad actualizada | Cumplimiento | **C** |
 | 14 | Export de URLs indexadas de Search Console | Marketing | **C** |
 | 15 | Teléfono de incidentes 24/7: existe o no | Dirección | **C** |
-| 16 | LinkedIn de empresa | Marketing | — |
-| 17 | Logos oficiales de Microsoft, Huntress, OPNsense, Fortinet, Ewala | Marketing | — |
+| 16 | LinkedIn de empresa | Marketing | - |
+| 17 | Logos oficiales de Microsoft, Huntress, OPNsense, Fortinet, Ewala | Marketing | - |
 | 18 | EspoCRM: equipo, usuario de API, campos y su Metadata | Sistemas | Bloquea el **servicio externo**, no a mí |
 
 ---
@@ -168,7 +168,7 @@ p=none   →   p=quarantine   →   p=reject
 
 ### A.3 Verificación
 
-En el panel de Resend, **Verify DNS Records**. La propagación puede tardar de minutos a horas. No sigas hasta que los tres pilares —SPF, DKIM y el dominio— estén en verde.
+En el panel de Resend, **Verify DNS Records**. La propagación puede tardar de minutos a horas. No sigas hasta que los tres pilares -SPF, DKIM y el dominio- estén en verde.
 
 ### A.4 Crear las API keys
 
@@ -237,7 +237,7 @@ Mover a `Pending` si el asunto empieza por `[ISNLABS-INGEST-V1]` **y** el remite
 
 > **Esta regla no es un control de seguridad.** Cualquiera puede escribir ese asunto. La autenticidad la determina la firma criptográfica que verifica el importador. La regla solo sirve para que el buzón esté ordenado.
 
-### B.5 Acceso del programa — según el proveedor
+### B.5 Acceso del programa - según el proveedor
 
 **Si el buzón está en Microsoft 365** (recomendado), usa **Microsoft Graph**:
 
@@ -274,7 +274,7 @@ LEAD_MAILBOX_TO         = leads-ingest@secnorthlabs.eu
 MAIL_PROVIDER           = microsoft_graph | imap
 ```
 
-Lo demás —tenant, client ID, huella del certificado, IDs de carpeta— lo necesita el **servicio local**, no yo.
+Lo demás -tenant, client ID, huella del certificado, IDs de carpeta- lo necesita el **servicio local**, no yo.
 
 ---
 
@@ -308,7 +308,7 @@ chmod 600 *.pem
 
 Repite lo mismo en `claves/staging`. **Claves distintas por entorno, sin excepción**: si una *deploy preview* pudiera firmar con la clave de producción, un enlace de prueba metería leads falsos en el CRM real.
 
-### C.2 Reparto — la parte que importa
+### C.2 Reparto - la parte que importa
 
 | Clave | Netlify | Host local |
 |---|:---:|:---:|
@@ -402,7 +402,7 @@ También: la ventana de rate limiting de Netlify solo admite **entre 60 y 180 se
 
 ---
 
-## 7 · Bloque E · Blog — lo que necesito para migrar
+## 7 · Bloque E · Blog - lo que necesito para migrar
 
 Es lo que más me falta y no puedo empezar sin ello.
 
@@ -501,7 +501,7 @@ Las 24 h laborables **sí** están en el copy aprobado del brief (`contact.form.
 
 Pides plantillas HTML con el estilo de la web. Son **tres**, y una de ellas a propósito no lleva estilo.
 
-### G.1 Correo de ingestión — deliberadamente feo y sin datos
+### G.1 Correo de ingestión - deliberadamente feo y sin datos
 
 Este correo va al buzón que lee el programa. **No debe contener ningún dato personal legible**: ni nombre, ni empresa, ni correo, ni teléfono, ni precio, ni el asunto. Todo el contenido de negocio va cifrado en el adjunto.
 
@@ -517,9 +517,9 @@ Submission: 550e8400-...
 Environment: production
 ```
 
-> ⚠️ **Aquí no aplico el estilo de la web, y es intencionado.** Maquetarlo bonito no aporta nada —no lo lee una persona— y cada elemento que se añade es una oportunidad de colar un dato personal en un sistema de terceros donde no debe estar. Si algún día alguien quiere «ver los leads en el correo», la respuesta es que los vea en EspoCRM.
+> ⚠️ **Aquí no aplico el estilo de la web, y es intencionado.** Maquetarlo bonito no aporta nada -no lo lee una persona- y cada elemento que se añade es una oportunidad de colar un dato personal en un sistema de terceros donde no debe estar. Si algún día alguien quiere «ver los leads en el correo», la respuesta es que los vea en EspoCRM.
 
-### G.2 Correo de presupuesto al interesado — sí con la marca
+### G.2 Correo de presupuesto al interesado - sí con la marca
 
 Aquí sí va la plantilla completa con el estilo ISN Labs. Contiene:
 

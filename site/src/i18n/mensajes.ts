@@ -6,7 +6,7 @@ import es from '../../messages/es.json'
  * Carga de mensajes **en build** (seccion 2.1.4).
  *
  * Los dos ficheros se importan estaticamente para que el bundler los resuelva en
- * el build y no quede ninguna lectura dinamica en runtime — que con
+ * el build y no quede ninguna lectura dinamica en runtime - que con
  * `output: 'export'` no habria donde ejecutar.
  *
  * Esto **no** significa que los dos idiomas viajen al navegador: las paginas son

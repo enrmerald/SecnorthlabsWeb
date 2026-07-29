@@ -9,8 +9,8 @@ import { cargarMensajes } from '@/i18n/mensajes'
  * Las tres paginas de catalogo (secciones 4.3, 4.4 y 4.6; mockups image11.png a
  * image13.png).
  *
- * IT y OT comparten forma exacta —bloques con codigo, titulo, descripcion y sus
- * servicios— y solo cambian el acento, el contenido y el destino de la CTA
+ * IT y OT comparten forma exacta -bloques con codigo, titulo, descripcion y sus
+ * servicios- y solo cambian el acento, el contenido y el destino de la CTA
  * secundaria. GRC es distinta: rejilla plana de once servicios sin bloques.
  */
 
@@ -82,7 +82,7 @@ function CatalogoPorBloques({
   )
 }
 
-/** Catalogo IT — 7 bloques C1-C7, 23 servicios. */
+/** Catalogo IT - 7 bloques C1-C7, 23 servicios. */
 export function CatalogoIt({ locale }: { locale: Locale }) {
   return (
     <CatalogoPorBloques
@@ -95,7 +95,7 @@ export function CatalogoIt({ locale }: { locale: Locale }) {
   )
 }
 
-/** Catalogo OT — 5 bloques B1-B5, 14 servicios. Acento verde. */
+/** Catalogo OT - 5 bloques B1-B5, 14 servicios. Acento verde. */
 export function CatalogoOt({ locale }: { locale: Locale }) {
   return (
     <CatalogoPorBloques
@@ -108,7 +108,7 @@ export function CatalogoOt({ locale }: { locale: Locale }) {
   )
 }
 
-/** Catalogo GRC — rejilla plana de 11 servicios A1-A11, mas la nota de I+D+i. */
+/** Catalogo GRC - rejilla plana de 11 servicios A1-A11, mas la nota de I+D+i. */
 export function CatalogoGrc({ locale }: { locale: Locale }) {
   const { grcCatalog } = cargarMensajes(locale)
 

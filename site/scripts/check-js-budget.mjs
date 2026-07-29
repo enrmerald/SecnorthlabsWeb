@@ -1,4 +1,4 @@
-// check:js — presupuesto de JavaScript (seccion 12.6).
+// check:js - presupuesto de JavaScript (seccion 12.6).
 //
 // El INP no lo decide el numero de componentes, lo decide cuanto JavaScript
 // tiene que descargar, analizar y ejecutar el navegador. Sin medirlo en cada
@@ -34,7 +34,7 @@ const outDir = join(root, 'out')
  *    probo con `next/dynamic` sobre los dos componentes de cliente y el
  *    resultado fue 0,6 KB MAS, sin ninguna division. Se revirtio.
  *
- * Bajar de 100 KB exige cambiar de framework —Astro, o HTML con islas— o
+ * Bajar de 100 KB exige cambiar de framework -Astro, o HTML con islas- o
  * renunciar a la navegacion de cliente. Es una decision de arquitectura que
  * corresponde a direccion, no un ajuste.
  *

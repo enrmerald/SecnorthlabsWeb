@@ -8,7 +8,7 @@ import { Noto_Sans, Space_Mono } from 'next/font/google'
  * para el cuerpo. `next/font/google` las auto-aloja en el artefacto y aplica
  * `font-display: swap` sin configuracion extra, de modo que **en produccion no
  * se hace ni una peticion a Google Fonts**. Ademas de peso, esa peticion seria
- * una transferencia de la IP del visitante a un tercero — y hoy el proyecto
+ * una transferencia de la IP del visitante a un tercero - y hoy el proyecto
  * anterior las carga por `@import` (Fase 11.3).
  *
  * Viven en su propio modulo porque las usan dos layouts: el raiz, para la 404

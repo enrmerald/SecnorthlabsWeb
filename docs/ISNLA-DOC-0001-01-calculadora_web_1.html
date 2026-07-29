@@ -154,14 +154,14 @@
       <!-- resultado: visible tras la puerta -->
       <div id="result">
         <h2>Cuota mensual orientativa</h2>
-        <div class="for" id="para">—</div>
+        <div class="for" id="para">-</div>
         <div class="biglabel">Servicio gestionado</div>
-        <div class="range" id="rango">—</div>
+        <div class="range" id="rango">-</div>
         <div class="permonth">€/mes · impuestos no incluidos</div>
         <div class="desglose">
-          <div class="d"><span>Licencias</span><span id="dLic">—</span></div>
-          <div class="d"><span>Auditorías NIS2/ENS</span><span id="dMod">—</span></div>
-          <div class="d total"><span>TOTAL</span><span id="dTot">—</span></div>
+          <div class="d"><span>Licencias</span><span id="dLic">-</span></div>
+          <div class="d"><span>Auditorías NIS2/ENS</span><span id="dMod">-</span></div>
+          <div class="d total"><span>TOTAL</span><span id="dTot">-</span></div>
         </div>
         <div class="cta2">
           <button id="enviar">Recibir propuesta detallada</button>
@@ -261,8 +261,8 @@ function calc(){
   const totHi = mround(base * (1 + CFG.hMax) + modulo + lic, CFG.redondeo);
 
   $('rango').textContent = eur(baseLo) + ' – ' + eur(baseHi);
-  $('dLic').textContent = lic ? eur(mround(lic, CFG.redondeo)) : '—';
-  $('dMod').textContent = modulo ? eur(mround(modulo, CFG.redondeo)) : '—';
+  $('dLic').textContent = lic ? eur(mround(lic, CFG.redondeo)) : '-';
+  $('dMod').textContent = modulo ? eur(mround(modulo, CFG.redondeo)) : '-';
   $('dTot').textContent = eur(totLo) + ' – ' + eur(totHi);
 }
 
@@ -280,7 +280,7 @@ $('ver').addEventListener('click', () => {
 
   state.lead = { nombre, apellidos, email, telefono };
   state.unlocked = true;
-  /* INTEGRACIÓN LEAD: enviar aquí el registro al CRM (Dynamics) —
+  /* INTEGRACIÓN LEAD: enviar aquí el registro al CRM (Dynamics) -
      POST { ...state.lead, parametros: leerFormulario(), origen: 'calculadora-web' } */
   $('gate').style.display = 'none';
   $('result').style.display = 'block';

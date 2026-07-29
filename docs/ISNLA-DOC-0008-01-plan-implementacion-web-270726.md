@@ -17,7 +17,7 @@
 | 01 | 27/07/2026 | Versión inicial a partir de los cinco documentos de marketing |
 | 01-a | 27/07/2026 | Incorporada la indicación de dirección sobre formularios y EspoCRM: [Fase 6](#fase-6--formularios-gateway-e-integración-con-espocrm) reescrita por completo, con validación técnica del consejo recibido (ver [Anexo A](#anexo-a--validación-del-consejo-recibido-sobre-espocrm)). Corregido el antispam: reCAPTCHA descartado |
 | 01-b | 27/07/2026 | Primera revisión técnica aplicada. **Cambios de fondo:** el motor de la calculadora pasa a ser exclusivamente de servidor (B01); el respaldo de leads pasa de JSONL a bandeja de salida transaccional (B03); se corrige la base jurídica de los formularios separando información de consentimiento (B04); todo el plan se actualiza a Next.js 16 (B05); la incoherencia de CPD pasa a error bloqueante (B06); se añaden las fases 10, 11 y 12 de seguridad HTTP, despliegue y pruebas E2E (B07). Corregido un error propio sobre el prefijo `c` de EspoCRM. Ver [Anexo B](#anexo-b--trazabilidad-de-la-revisión-técnica) |
-| **01-d** | 27/07/2026 | **Migración a arquitectura estática** (ISNLA-DOC-0008-MIG-01). El sitio pasa a `output: 'export'` publicado en Netlify, **sin ningún runtime Next.js en producción**. Todo el código de servidor —motor PBCG, acceso a EspoCRM, SMTP y bandeja de salida— se traslada a un **Web Gateway** independiente, en repositorio propio y desplegado junto a EspoCRM en red privada. Los formularios llegan al gateway por un **proxy firmado de Netlify** (`x-nf-sign`). La i18n pasa a `/es/` y `/en/` con slugs traducidos y manifiesto central de rutas. Migración a pnpm y Node fijados, Dependabot con espera mínima de 24 h, y diseño mobile-first desde 320 px. **Esto resuelve estructuralmente B01 y el pendiente P26 (CSP).** Corregidos dos errores del documento de migración: `allowBuilds` no existe en pnpm 10 y el `window_size` de Netlify no admite 600 s. Ver [Anexo C](#anexo-c--migración-a-arquitectura-estática) |
+| **01-d** | 27/07/2026 | **Migración a arquitectura estática** (ISNLA-DOC-0008-MIG-01). El sitio pasa a `output: 'export'` publicado en Netlify, **sin ningún runtime Next.js en producción**. Todo el código de servidor -motor PBCG, acceso a EspoCRM, SMTP y bandeja de salida- se traslada a un **Web Gateway** independiente, en repositorio propio y desplegado junto a EspoCRM en red privada. Los formularios llegan al gateway por un **proxy firmado de Netlify** (`x-nf-sign`). La i18n pasa a `/es/` y `/en/` con slugs traducidos y manifiesto central de rutas. Migración a pnpm y Node fijados, Dependabot con espera mínima de 24 h, y diseño mobile-first desde 320 px. **Esto resuelve estructuralmente B01 y el pendiente P26 (CSP).** Corregidos dos errores del documento de migración: `allowBuilds` no existe en pnpm 10 y el `window_size` de Netlify no admite 600 s. Ver [Anexo C](#anexo-c--migración-a-arquitectura-estática) |
 | 01-c | 27/07/2026 | Segunda revisión técnica aplicada. **Cambios de fondo:** la bandeja de salida se divide en `submission` + `delivery_job` para poder representar estados por destino (B08); las recotizaciones pasan a un endpoint propio que **no** toca el CRM ni envía correo (B09); el modelo de permisos de EspoCRM pasa a basarse en equipo y se define la estrategia ante duplicados (B10). Se elige una estrategia concreta de CSP, se escalona el HSTS, se corrige el despliegue `standalone`, se elimina el campo de renting (con lo que **P21 deja de bloquear**), se separan resultado interno y DTO público, se versiona el modelo económico y se define el orden exacto de redondeo. Barrido de contradicciones residuales sobre privacidad, breadcrumbs, GRC, blog y CMP. Ver [Anexo B.7](#b7-segunda-revisión-técnica-b08b10) |
 
 ---
@@ -211,7 +211,7 @@ Qué se puede empezar ya y qué está bloqueado, tras la migración:
 |---|---|---|
 | `ISNLA-DOC-0004-04-Mockups-y-especificaciones-web-090726.docx` | Brief maestro: sistema de diseño, arquitectura de 8+3 páginas, estructura sección a sección, SEO por página, especificación del formulario, notas técnicas y 13 mockups PNG de alta fidelidad embebidos | Fuente de verdad de **estructura, diseño y SEO** |
 | `ISNLA-DOC-0006-01-i18n-textos-web-es-090726.json` | 282 claves con **todo el copy en español**, 12 namespaces | Se convierte en `site/messages/es.json` |
-| `ISNLA-DOC-0007-01-i18n-textos-web-en-090726.json` | El mismo árbol en inglés — verificado: **282 claves idénticas, 33 arrays con la misma longitud, cero divergencias** | Se convierte en `site/messages/en.json` |
+| `ISNLA-DOC-0007-01-i18n-textos-web-en-090726.json` | El mismo árbol en inglés - verificado: **282 claves idénticas, 33 arrays con la misma longitud, cero divergencias** | Se convierte en `site/messages/en.json` |
 | `ISNLA-DOC-0001-01-Dimensionador_PBCG_1.xlsx` | Cinco hojas: PORTADA, PARAMETROS, AUDITORIAS, CALCULADORA, VALIDACION. El modelo económico completo con fórmulas | Fuente de verdad del **cálculo** |
 | `ISNLA-DOC-0001-01-calculadora_web_1.html` | Prototipo funcional autocontenido: interfaz, puerta de captación de lead y JavaScript del cálculo | Referencia de **flujo y experiencia de usuario**, no de cifras |
 
@@ -334,7 +334,7 @@ Solo se portan los parámetros necesarios para calcular el PVP que ve el cliente
 
    > ⚠️ **Corrección al documento de migración.** Proponía `allowBuilds` (mapa) junto con pnpm 10.34.5, y son incompatibles: `allowBuilds` **sustituyó** a `onlyBuiltDependencies` **en pnpm 11**. Con la versión 10 fijada hay que usar `onlyBuiltDependencies`. Si algún día se sube a pnpm 11, la migración es mecánica (`pnpx codemod run pnpm-v10-to-v11`), pero conviene comprobar antes que Dependabot declara soporte para pnpm 11.
    >
-   > Los demás ajustes que proponía el documento —`strictDepBuilds`, `blockExoticSubdeps`, `trustPolicy: no-downgrade`, `dangerouslyAllowAllBuilds: false`— **hay que verificar uno por uno contra la documentación de la versión instalada** antes de escribirlos: varios son adiciones recientes y un ajuste que no existe se ignora en silencio, dando una falsa sensación de protección. La lista de `onlyBuiltDependencies` se genera tras una instalación limpia y se revisa a mano.
+   > Los demás ajustes que proponía el documento -`strictDepBuilds`, `blockExoticSubdeps`, `trustPolicy: no-downgrade`, `dangerouslyAllowAllBuilds: false`- **hay que verificar uno por uno contra la documentación de la versión instalada** antes de escribirlos: varios son adiciones recientes y un ajuste que no existe se ignora en silencio, dando una falsa sensación de protección. La lista de `onlyBuiltDependencies` se genera tras una instalación limpia y se revisa a mano.
    >
    > **No añadir `shamefullyHoist: true`** salvo incompatibilidad reproducible y documentada.
 
@@ -350,7 +350,7 @@ Solo se portan los parámetros necesarios para calcular el PVP que ve el cliente
    | `@playwright/test` *(dev)* | E2E |
    | `@axe-core/playwright` *(dev)* | Accesibilidad automatizada |
 
-   **Ya no se instalan en el sitio**: `server-only`, `better-sqlite3` y `nodemailer` — son del gateway. Tampoco `framer-motion` ni `wouter`, que estaban declarados sin uso en el proyecto actual.
+   **Ya no se instalan en el sitio**: `server-only`, `better-sqlite3` y `nodemailer` - son del gateway. Tampoco `framer-motion` ni `wouter`, que estaban declarados sin uso en el proyecto actual.
 
 8. **Scripts del `package.json`.** `next lint` **se eliminó en Next 16** y `next build` ya no ejecuta el linter: hay que invocar ESLint directamente, o el proyecto se queda sin lint sin que nadie lo note.
 
@@ -430,7 +430,7 @@ En `site/src/app/globals.css`, con Tailwind 4 (`@theme`, igual que ya se hace en
 
 **Regla que hay que respetar:** los acentos (cian y verde) son para titulares destacados, kickers, etiquetas, iconos y botones. **Nunca para párrafos.** El cuerpo va en `--color-text` y el secundario en `--color-text-dim`. Lo pide el brief en §12 (accesibilidad) y es lo que hace que la paleta funcione.
 
-Contrastes verificados sobre `#0D0F11` — todos pasan WCAG 2.1 AA:
+Contrastes verificados sobre `#0D0F11` - todos pasan WCAG 2.1 AA:
 
 | Color | Ratio aprox. | Uso permitido |
 |---|---|---|
@@ -443,7 +443,7 @@ Contrastes verificados sobre `#0D0F11` — todos pasan WCAG 2.1 AA:
 
 ### 1.2 Tipografía
 
-Space Mono (display/interfaz) + Noto Sans (cuerpo), vía `next/font/google` — se auto-alojan en el build y aplican `display: swap` sin configuración extra:
+Space Mono (display/interfaz) + Noto Sans (cuerpo), vía `next/font/google` - se auto-alojan en el build y aplican `display: swap` sin configuración extra:
 
 ```ts
 // site/src/app/[locale]/layout.tsx
@@ -541,9 +541,9 @@ Se añade a la lista, aunque técnicamente funcionen, todo lo que señale que al
 
 > **Matiz honesto sobre `route.ts`:** con `output: 'export'` los Route Handlers **sí funcionan**, pero solo `GET` y solo resolviéndose a un fichero estático en el build. Prohibirlos por completo es una decisión de endurecimiento, no una imposición técnica: evita que alguien empiece con un `GET` inocente y acabe necesitando leer la petición. Si algún día hace falta generar un JSON estático, se hace con un script de build.
 >
-> Y `server-only` **no es malo** —su función es precisamente evitar filtraciones—; se prohíbe porque en esta arquitectura ya no hay código de servidor en el sitio, así que su presencia significa que alguien lo ha reintroducido.
+> Y `server-only` **no es malo** -su función es precisamente evitar filtraciones-; se prohíbe porque en esta arquitectura ya no hay código de servidor en el sitio, así que su presencia significa que alguien lo ha reintroducido.
 
-**Control automático** — `site/scripts/assert-static-architecture.mjs`, que se ejecuta en CI **antes** del build y falla si encuentra cualquiera de lo anterior, más Netlify Functions o Edge Functions. Es la red que impide que la arquitectura se degrade sin que nadie se dé cuenta.
+**Control automático** - `site/scripts/assert-static-architecture.mjs`, que se ejecuta en CI **antes** del build y falla si encuentra cualquiera de lo anterior, más Netlify Functions o Edge Functions. Es la red que impide que la arquitectura se degrade sin que nadie se dé cuenta.
 
 ### 1.5 Bloques de página (`site/src/components/blocks/`)
 
@@ -574,7 +574,7 @@ El diseño se implementa **primero para móvil** y se amplía después. No se ma
 | Estados de carga con espacio reservado | Evita CLS al aparecer el resultado |
 | CTA principal visible **sin ocupar media pantalla** de forma permanente | |
 
-**Tipografía fluida** — el Display de 44–58 px del sistema de diseño es el tamaño de escritorio, y **no puede ser el mínimo en 320 px**:
+**Tipografía fluida** - el Display de 44–58 px del sistema de diseño es el tamaño de escritorio, y **no puede ser el mínimo en 320 px**:
 
 ```css
 .heading-display { font-size: clamp(2.1rem, 8vw, 3.625rem); line-height: 1.05; }
@@ -583,7 +583,7 @@ El diseño se implementa **primero para móvil** y se amplía después. No se ma
 
 **Tablets (768–1024 px):** probar vertical **y** horizontal, no dar por hecho que una tablet es un escritorio, evitar rejillas de cuatro columnas, mantener el tamaño táctil y no usar `hover` para desplegables.
 
-**Calculadora en móvil** — orden vertical: parámetros → resumen compacto → puerta → resultado → CTA. **Sin panel *sticky* y sin dos columnas por debajo de 1024 px.** El panel lateral fijo del mockup es de escritorio.
+**Calculadora en móvil** - orden vertical: parámetros → resumen compacto → puerta → resultado → CTA. **Sin panel *sticky* y sin dos columnas por debajo de 1024 px.** El panel lateral fijo del mockup es de escritorio.
 
 ---
 
@@ -601,7 +601,7 @@ El diseño se implementa **primero para móvil** y se amplía después. No se ma
 
 **No se detecta `Accept-Language`, no se guarda cookie de idioma, no se redirige por ubicación y el idioma no cambia sin acción del usuario.** Esto da URLs deterministas, caché trivial, comportamiento reproducible, una cookie menos que declarar y ninguna sorpresa para el visitante.
 
-> **Cambio respecto a la versión anterior del plan.** Antes se usaba `localePrefix: 'as-needed'` con español en la raíz. Se sustituye porque, además de necesitar `proxy.ts` —que **no existe con `output: 'export'`**—, mezclaba dos formas de URL para el mismo contenido.
+> **Cambio respecto a la versión anterior del plan.** Antes se usaba `localePrefix: 'as-needed'` con español en la raíz. Se sustituye porque, además de necesitar `proxy.ts` -que **no existe con `output: 'export'`**-, mezclaba dos formas de URL para el mismo contenido.
 
 **Los slugs sí se traducen.** Es la decisión contraria a la de la versión anterior, y es la correcta para SEO en inglés:
 
@@ -715,7 +715,7 @@ Debe conservar la página lógica y los fragmentos conocidos (traduciendo tambi�
 `site/messages/es.json` y `site/messages/en.json` se construyen así:
 
 1. **Copiar tal cual** el contenido de los dos JSON de `docs/` (282 claves, 12 namespaces: `common`, `home`, `mssp`, `grc`, `software`, `sectors`, `blog`, `company`, `contact`, `msspItCatalog`, `msspOtCatalog`, `grcCatalog`).
-2. **Añadir los namespaces legales que el brief no incluye**, portados desde `web/src/i18n/locales/{es,en}.json`: `privacy`, `legal`, `cookies`. Ese texto es jurídico real de ISNOL — se copia **palabra por palabra**, sin reescribir ni «mejorar».
+2. **Añadir los namespaces legales que el brief no incluye**, portados desde `web/src/i18n/locales/{es,en}.json`: `privacy`, `legal`, `cookies`. Ese texto es jurídico real de ISNOL - se copia **palabra por palabra**, sin reescribir ni «mejorar».
 3. **Añadir el namespace nuevo `calculator`** con todas las etiquetas de la calculadora (Fase 5).
 4. **Añadir el namespace nuevo `consent`** con los textos del banner de cookies (Fase 8).
 
@@ -784,7 +784,7 @@ Con dos idiomas y slugs distintos, una divergencia de estructura entre `es.json`
 [{ "title": "…", "description": "…" }]      [{ "label": "…", "text": "…" }]
 ```
 
-Mismo número de elementos, estructura incompatible. Versión que **recorre también el interior de los arrays** — `site/scripts/check-i18n.mjs`:
+Mismo número de elementos, estructura incompatible. Versión que **recorre también el interior de los arrays** - `site/scripts/check-i18n.mjs`:
 
 ```js
 import es from '../messages/es.json' with { type: 'json' }
@@ -819,7 +819,7 @@ if (soloEs.length || soloEn.length) {
 console.log(`OK · ${a.length} nodos con estructura idéntica`)
 ```
 
-Compara nombre de clave, tipo del valor y forma de cada elemento de array. Complementa —no sustituye— la validación con `zod` de [2.3](#23-cómo-se-leen-los-arrays-de-objetos), que es la que garantiza que la estructura sea además *la que espera el componente*.
+Compara nombre de clave, tipo del valor y forma de cada elemento de array. Complementa -no sustituye- la validación con `zod` de [2.3](#23-cómo-se-leen-los-arrays-de-objetos), que es la que garantiza que la estructura sea además *la que espera el componente*.
 
 **Y una regla de contenido, no de estructura:** el inglés **no se genera automáticamente en producción**. El copy legal y de consentimiento lo traduce un profesional o lo valida jurídicamente; una traducción automática de una cláusula de privacidad es un riesgo, no un ahorro.
 
@@ -833,7 +833,7 @@ Fija arriba, fondo `--color-bg` con borde inferior de 1 px. De izquierda a derec
 
 - **Logotipo** `ISN_Labs` (wordmark blanco sobre oscuro). Enlaza a `/`.
 - **Menú**: Soluciones (desplegable) · Sectores · Software · Compañía · Blog · Contacto. Claves `common.nav.*`. La página activa se subraya en cian (se ve en los mockups).
-- **Desplegable «Soluciones»** — claves `common.solutionsMenu.*`, con estos destinos, deducidos de los `href` del pie del brief y de las anclas de la página MSSP:
+- **Desplegable «Soluciones»** - claves `common.solutionsMenu.*`, con estos destinos, deducidos de los `href` del pie del brief y de las anclas de la página MSSP:
 
   | Entrada | Destino |
   |---|---|
@@ -850,7 +850,7 @@ Fija arriba, fondo `--color-bg` con borde inferior de 1 px. De izquierda a derec
 
 Cuatro zonas: marca (wordmark + `common.brand.claim` + `common.footer.legalLine`) y tres columnas (`common.footer.columns.solutions | company | legal`), todas leídas del array de `links`.
 
-Debajo: `common.footer.copyright` y, a la derecha, `common.footer.ewalaNotice` («SentryN3t® es una marca de Ewala») — **es obligatorio y no se omite**.
+Debajo: `common.footer.copyright` y, a la derecha, `common.footer.ewalaNotice` («SentryN3t® es una marca de Ewala») - **es obligatorio y no se omite**.
 
 En la columna Legal, los tres enlaces legales. El botón **«Configurar cookies»** (`common.footer.columns.legal.cookieSettings.label`) se renderiza **de forma condicional**: solo si el CMP está activo, es decir, solo en el escenario B de la [Fase 8](#fase-8--legales-y-consentimiento-cmp). Un botón que abre un gestor de consentimiento inexistente es peor que no tenerlo.
 
@@ -910,7 +910,7 @@ Todas siguen el mismo patrón: componente de servidor, `await params`, `setReque
 | 13 | `/politica-privacidad` | `privacy` | Baja |
 | 14 | `/aviso-legal` | `legal` | Baja |
 | 15 | `/cookies` | `cookies` | Baja |
-| — | `not-found` | — | — |
+| - | `not-found` | - | - |
 
 **El número de rutas no es fijo: depende de decisiones pendientes.** El blog puede existir e indexarse, existir con `noindex` o no existir (P24). Afirmar «siempre 15 rutas × 2 idiomas» y a la vez dejar el blog condicional es una contradicción que rompería el sitemap o las pruebas.
 
@@ -934,26 +934,26 @@ Con el blog activo son 15 rutas + 404 en dos idiomas; sin él, 14.
 
 ---
 
-### 4.1 Home — `/` · namespace `home`
+### 4.1 Home - `/` · namespace `home`
 
 Mockup `image3.png`. De arriba a abajo:
 
 1. **Hero** a dos columnas.
    - *Izquierda*: fila de cuatro `Tag` (`hero.tags`), H1 con `hero.title` en blanco + `hero.titleHighlight` en **cian**, subtítulo, y dos botones (`ctaPrimary` verde → `/contacto`, `ctaSecondary` ghost → `/contacto`).
-   - *Derecha*: **`CoveragePanel`** — tarjeta con cabecera `> servicio gestionado` + indicador `● operativo` en verde, título `panel.title`, cinco filas de `panel.rows` (✓ verde + etiqueta + línea de puntos + valor en cian a la derecha) y pie `panel.footer`.
+   - *Derecha*: **`CoveragePanel`** - tarjeta con cabecera `> servicio gestionado` + indicador `● operativo` en verde, título `panel.title`, cinco filas de `panel.rows` (✓ verde + etiqueta + línea de puntos + valor en cian a la derecha) y pie `panel.footer`.
    - En móvil el panel baja debajo del texto.
-2. **`FrameworkBand`** — banda con fondo `--color-panel`: label `common.frameworksLabel` en pequeño y centrado, y los siete marcos de `common.frameworks` en Space Mono grande y espaciado.
-3. **`/01 Qué hacemos`** — kicker `pillars.kicker`, H2 `pillars.title`, y cuatro `PillarCard` (rejilla 4→2→1) desde `pillars.items`: barra de acento **superior** (cian los dos MSSP, verde GRC e I+D+i), etiqueta, título, descripción y enlace `Ver servicios →`. Destinos: `/soluciones/mssp/it`, `/soluciones/mssp/ot`, `/soluciones/grc`, `/soluciones/grc#idi`.
-4. **`SentryBand`** — tarjeta ancha: kicker `sentry.kicker`, H2 `sentry.title`, descripción, cuatro `Tag` de `sentry.chips`, y botón verde `sentry.cta` → `sentry.ctaUrl` (`https://www.ewala.es`) con `target="_blank" rel="noopener noreferrer"`, más la nota `sentry.note` debajo.
-5. **`CtaBand`** — centrada, fondo `--color-panel`: `ctaBand.title` + `ctaBand.titleHighlight` en **verde**, subtítulo, botón primario `Descubre tu plan` → `/calculadora` y ghost `Contactar` → `/contacto`.
+2. **`FrameworkBand`** - banda con fondo `--color-panel`: label `common.frameworksLabel` en pequeño y centrado, y los siete marcos de `common.frameworks` en Space Mono grande y espaciado.
+3. **`/01 Qué hacemos`** - kicker `pillars.kicker`, H2 `pillars.title`, y cuatro `PillarCard` (rejilla 4→2→1) desde `pillars.items`: barra de acento **superior** (cian los dos MSSP, verde GRC e I+D+i), etiqueta, título, descripción y enlace `Ver servicios →`. Destinos: `/soluciones/mssp/it`, `/soluciones/mssp/ot`, `/soluciones/grc`, `/soluciones/grc#idi`.
+4. **`SentryBand`** - tarjeta ancha: kicker `sentry.kicker`, H2 `sentry.title`, descripción, cuatro `Tag` de `sentry.chips`, y botón verde `sentry.cta` → `sentry.ctaUrl` (`https://www.ewala.es`) con `target="_blank" rel="noopener noreferrer"`, más la nota `sentry.note` debajo.
+5. **`CtaBand`** - centrada, fondo `--color-panel`: `ctaBand.title` + `ctaBand.titleHighlight` en **verde**, subtítulo, botón primario `Descubre tu plan` → `/calculadora` y ghost `Contactar` → `/contacto`.
 
 > **Nota crítica del brief:** *«SentryN3t NO aparece en el hero (es tecnología de partner): se destaca en su banda inferior y en la página Software»*. La web actual hace justo lo contrario.
 
-**JSON-LD**: `Organization` + `LocalBusiness` (Asturias) — ver Fase 7.
+**JSON-LD**: `Organization` + `LocalBusiness` (Asturias) - ver Fase 7.
 
 ---
 
-### 4.2 MSSP — `/soluciones/mssp` · namespace `mssp`
+### 4.2 MSSP - `/soluciones/mssp` · namespace `mssp`
 
 Mockup `image4.png`. Breadcrumbs + Hero interior (`hero.title` blanco + `hero.titleHighlight` cian + subtítulo).
 
@@ -967,34 +967,34 @@ Mockup `image4.png`. Breadcrumbs + Hero interior (`hero.title` blanco + `hero.ti
 
 ---
 
-### 4.3 Catálogo IT — `/soluciones/mssp/it` · namespace `msspItCatalog`
+### 4.3 Catálogo IT - `/soluciones/mssp/it` · namespace `msspItCatalog`
 
 Breadcrumbs + Hero. Después, recorrer `categories` (**7 bloques C1–C7, 23 servicios**) con `CatalogBlock`: código (`C1`) en cian + título + descripción del bloque, y debajo las tarjetas de `services` (título + descripción).
 
 `CtaBand` final con `Contáctanos` → `/contacto` y `Calcula tu presupuesto` → `/calculadora`.
 
-### 4.4 Catálogo OT — `/soluciones/mssp/ot` · namespace `msspOtCatalog`
+### 4.4 Catálogo OT - `/soluciones/mssp/ot` · namespace `msspOtCatalog`
 
 Idéntico al anterior con acento verde. **5 bloques B1–B5, 14 servicios.** CTA secundaria → `/soluciones/mssp/it`.
 
 ---
 
-### 4.5 GRC — `/soluciones/grc` · namespace `grc`
+### 4.5 GRC - `/soluciones/grc` · namespace `grc`
 
-- **`/01` Marcos principales**: cuatro `Card` de `consulting.cards` (ENS, ISO 42001, ISO 27001, NIS2), cada una con `Tag`, título grande, descripción y `Saber más`. El brief marca cada marco como *landing SEO propia en fase 2*. Hasta que existan esas landings, **las cuatro tarjetas se renderizan sin enlace** — no apuntan a `/contacto`, según la regla general de [4.9](#49-blog--blog--namespace-blog).
+- **`/01` Marcos principales**: cuatro `Card` de `consulting.cards` (ENS, ISO 42001, ISO 27001, NIS2), cada una con `Tag`, título grande, descripción y `Saber más`. El brief marca cada marco como *landing SEO propia en fase 2*. Hasta que existan esas landings, **las cuatro tarjetas se renderizan sin enlace** - no apuntan a `/contacto`, según la regla general de [4.9](#49-blog--blog--namespace-blog).
 - **`DiscoverBox`** → `/soluciones/grc/catalogo`.
 - **`/02` I+D+i** (`id="idi"`): dos ítems de `idi.items` con etiquetas D1/D2.
 - **`why`** (tres ítems) + `CtaBand` (`Hablar con GRC` → `/contacto`, `Ver servicios MSSP` → `/soluciones/mssp`).
 
 > **Nota del brief:** no prometer plazos concretos de certificación en el copy.
 
-### 4.6 Catálogo GRC — `/soluciones/grc/catalogo` · namespace `grcCatalog`
+### 4.6 Catálogo GRC - `/soluciones/grc/catalogo` · namespace `grcCatalog`
 
 Rejilla plana de **11 servicios A1–A11** (`services`), cada uno con código + título + descripción. Nota `idiNote` al final y `CtaBand`.
 
 ---
 
-### 4.7 Software — `/software` · namespace `software`
+### 4.7 Software - `/software` · namespace `software`
 
 Página marcada como **clave** en el brief.
 
@@ -1010,7 +1010,7 @@ Página marcada como **clave** en el brief.
 
 ---
 
-### 4.8 Sectores — `/sectores` · namespace `sectors`
+### 4.8 Sectores - `/sectores` · namespace `sectors`
 
 Hero + rejilla de **siete `SectorCard`** (`items`: título, descripción, `Tag` con el driver regulatorio) en tres columnas en escritorio y una en móvil. Debajo, la nota `note` sobre el RGPD transversal. `CtaBand` con `Contactar`.
 
@@ -1018,13 +1018,13 @@ Los siete sectores y su driver: Industria y fabricación (NIS2 · IEC 62443), Ag
 
 ---
 
-### 4.9 Blog — `/blog` · namespace `blog`
+### 4.9 Blog - `/blog` · namespace `blog`
 
 **No hay CMS ni contenido real todavía** (el brief lo deja como *«definir CMS»*, y sus seis artículos están declarados como placeholders).
 
 > ⚠️ **No se publica un blog ficticio.** La primera versión de este plan proponía maquetar los seis artículos de ejemplo y ocultar solo el aviso `articlesNote` en producción. Eso deja publicados seis titulares inventados con tiempos de lectura inventados, en tarjetas que no llevan a ninguna parte o que redirigen a `/contacto`. Para una consultora que vende criterio técnico es un daño de credibilidad mayor que no tener blog, y las tarjetas sin destino son una experiencia engañosa.
 
-**Qué se hace en su lugar** — una de estas tres, a decidir con Marketing (pendiente P8):
+**Qué se hace en su lugar** - una de estas tres, a decidir con Marketing (pendiente P8):
 
 | Opción | Implementación |
 |---|---|
@@ -1040,7 +1040,7 @@ Cuando haya contenido real: filtros por categoría (`categories`), artículo des
 
 ---
 
-### 4.10 Compañía — `/compania` · namespace `company`
+### 4.10 Compañía - `/compania` · namespace `company`
 
 Hero + fila de cuatro `stats` + `/01 mission` (kicker, `line1` y `line2` como dos líneas destacadas, `body`) + `/02 values` (cuatro ítems) + `/03 team` (ocho `TeamRoleCard` de `team.roles`) + `CtaBand`.
 
@@ -1048,21 +1048,21 @@ Se muestran **roles, no nombres**. El brief pide fotos reales en fase 2; por aho
 
 ---
 
-### 4.11 Contacto — `/contacto` · namespace `contact`
+### 4.11 Contacto - `/contacto` · namespace `contact`
 
 Mockup `image10.png`. Página **clave**. Dos columnas: formulario a la izquierda (Fase 6) y raíl derecho con tres tarjetas:
 
-- **`rail.contactDirect`** — cuatro pares label/valor. Email como `mailto:`, teléfono como `tel:`.
-- **`rail.whatNext`** — tres pasos numerados en círculos verdes.
-- **`rail.incident`** — tarjeta con **borde y título en `--color-alert`**. El teléfono debe ser enlace `tel:` en móvil. Solo se renderiza si existe `INCIDENT_PHONE`, que se lee en build y llega como prop.
+- **`rail.contactDirect`** - cuatro pares label/valor. Email como `mailto:`, teléfono como `tel:`.
+- **`rail.whatNext`** - tres pasos numerados en círculos verdes.
+- **`rail.incident`** - tarjeta con **borde y título en `--color-alert`**. El teléfono debe ser enlace `tel:` en móvil. Solo se renderiza si existe `INCIDENT_PHONE`, que se lee en build y llega como prop.
 
-### 4.12 Calculadora — `/calculadora` · namespace `calculator`
+### 4.12 Calculadora - `/calculadora` · namespace `calculator`
 
 Ver [Fase 5](#fase-5--calculadora-pbcg) completa.
 
 ---
 
-### 4.13–4.15 Legales — `/politica-privacidad`, `/aviso-legal`, `/cookies`
+### 4.13–4.15 Legales - `/politica-privacidad`, `/aviso-legal`, `/cookies`
 
 Se **portan desde `web/src/components/sections/{Privacidad,Aviso,Cookies}.tsx`**:
 
@@ -1104,11 +1104,11 @@ Es decir: el plan decía «modelo protegido con captación obligatoria» y monta
 La migración a arquitectura estática lo resuelve de forma **más fuerte que `server-only`**: el motor no está en el repositorio que Netlify compila, así que no puede filtrarse ni por descuido ni por un `import` mal puesto.
 
 ```text
-[Navegador — sitio estático]
+[Navegador - sitio estático]
   Datos de contacto + parámetros técnicos
         │
         ▼  POST /api/quote/initial   (proxy firmado de Netlify)
-[Web Gateway — otro repositorio, otra máquina]
+[Web Gateway - otro repositorio, otra máquina]
   1. Verifica la firma de Netlify
   2. Valida el lead
   3. Valida los parámetros técnicos (zod)
@@ -1146,7 +1146,7 @@ isnlabs-web-gateway/src/domain/pbcg/     ← NADA de esto llega a Netlify
 3. La respuesta contiene solo el `PublicQuoteDto`, con lo que el usuario va a ver en pantalla. Nada de coeficientes ni de desglose de horas internas.
 4. `assert-static-architecture.mjs` y `assert-static-output.mjs` comprueban en cada build que no hay rastro del modelo en `out/` ([Fase 12](#fase-12--pruebas-ci-y-e2e)).
 
-### 5.2 Parámetros — `gateway/src/domain/pbcg/config.ts`
+### 5.2 Parámetros - `gateway/src/domain/pbcg/config.ts`
 
 Espejo literal de la hoja `PARAMETROS` y de los dos bloques editables de `AUDITORIAS`. Un único fichero, comentado con la celda de origen para que quien actualice tarifas sepa exactamente qué tocar.
 
@@ -1228,7 +1228,7 @@ Se calculan las horas de auditoría a partir de los dos bloques editables (como 
 
 > **Por qué no arrays.** La versión anterior usaba `[8, 12, 20]` para S/M/L y `[2, 1, 0, 1, 0, 1]` para las ejecuciones, con la nota «mismo orden que arriba». Basta con que alguien inserte una prueba nueva en medio de un bloque y no del otro para que todos los presupuestos salgan mal, sin ningún error visible: los números siguen siendo números. Con claves nombradas, ese fallo es un error de compilación.
 
-### 5.3 Lógica de cálculo — `gateway/src/domain/pbcg/calculate.ts`
+### 5.3 Lógica de cálculo - `gateway/src/domain/pbcg/calculate.ts`
 
 Sin React, sin DOM, sin traducciones. Entrada → salida. **Solo de servidor.**
 
@@ -1282,7 +1282,7 @@ srvTotal   = srvFisPropio + srvVirPropio + srvFisExt + srvVirExt
 srvFisicos = srvFisPropio + srvFisExt
 ```
 
-#### Paso 2 · Tamaño del cliente (S/M/L) — `CALCULADORA!E6`
+#### Paso 2 · Tamaño del cliente (S/M/L) - `CALCULADORA!E6`
 
 ```
 uN = usuarios <= 25 ? 1 : usuarios <= 75 ? 2 : 3
@@ -1294,7 +1294,7 @@ tamano = ['S', 'M', 'L'][n - 1]
 
 Regla textual del Excel: *«el tamaño lo marca el peor de los dos criterios; tener OT, CPD propio o híbrido sube un escalón (máx. L)»*.
 
-#### Paso 3 · Horas técnicas mensuales — `E7:E16` → `E17`
+#### Paso 3 · Horas técnicas mensuales - `E7:E16` → `E17`
 
 ```
 h = 0
@@ -1312,7 +1312,7 @@ si cpd !== 'externo'  → h += cpdPropioOHibrido
 h = Math.round(h * 2) / 2        // bloques de 0,5 h, como el contrato
 ```
 
-#### Paso 4 · Horas de auditoría mensuales — `E18`
+#### Paso 4 · Horas de auditoría mensuales - `E18`
 
 ```
 si modulo === 'ninguno' → hAud = 0
@@ -1322,7 +1322,7 @@ si no → hAud = Σ_prueba ( auditoriaHoras[prueba][tamano]
 
 Se recorre por **nombre de prueba**, no por índice.
 
-#### Paso 5 · Resultado económico — `E22:E28`
+#### Paso 5 · Resultado económico - `E22:E28`
 
 **Los factores de la horquilla salen de la configuración, no escritos a mano.** La versión anterior definía `horquillaAbajo: 0.05` / `horquillaArriba: 0.15` y luego usaba `0.95` y `1.15` literales: dos fuentes de verdad para el mismo número, de modo que cambiar la configuración no habría cambiado el resultado.
 
@@ -1475,7 +1475,7 @@ El servidor devuelve `400` con el código de error, y el botón de la calculador
 
 > **Caso concreto a probar:** el usuario elige «Híbrido», rellena los cuatro campos de servidores, y luego cambia a «Propio». Los valores externos siguen en el estado del formulario aunque sus campos estén ocultos. Debe saltar el error, no calcularse un presupuesto barato. Está en la batería de tests de [5.5](#55-batería-de-tests--gatewaysrcdomainpbcgcalculatetestts).
 
-### 5.5 Batería de tests — `gateway/src/domain/pbcg/calculate.test.ts`
+### 5.5 Batería de tests - `gateway/src/domain/pbcg/calculate.test.ts`
 
 #### Test de oro
 
@@ -1501,7 +1501,7 @@ El propio Excel trae un caso resuelto (columna B de `CALCULADORA`). Debe pasar a
 
 Cuadrar un caso no demuestra que el modelo esté bien: demuestra que ese caso está bien. Batería mínima:
 
-**Fronteras de tamaño** — es donde vive el error típico de `<` frente a `<=`:
+**Fronteras de tamaño** - es donde vive el error típico de `<` frente a `<=`:
 
 - Usuarios **25, 26, 75 y 76** → S, M, M, L.
 - Sedes **1, 2, 3 y 4** → S, M, M, L.
@@ -1537,9 +1537,9 @@ Cuadrar un caso no demuestra que el modelo esté bien: demuestra que ese caso es
 - Números negativos, decimales donde se espera entero, `NaN`, `Infinity`, cadenas.
 - Valores por encima del máximo.
 - Incoherencia CPD ↔ servidores, en los dos sentidos.
-- **Cambio de híbrido a propio conservando los valores antiguos** — el caso descrito en [5.4](#54-validación-de-entrada-y-errores-bloqueantes).
+- **Cambio de híbrido a propio conservando los valores antiguos** - el caso descrito en [5.4](#54-validación-de-entrada-y-errores-bloqueantes).
 
-**Invariantes** — se comprueban sobre entradas generadas, no sobre casos escritos a mano:
+**Invariantes** - se comprueban sobre entradas generadas, no sobre casos escritos a mano:
 
 ```ts
 // 1. El total siempre cae dentro de la horquilla
@@ -1566,23 +1566,23 @@ grep -rE "\b6\.58\b|edrUsuario|tarifaTecnica|auditoriaEjecuciones" src/ out/   #
 
 Es más fuerte que la versión anterior: antes dependía de que nadie borrara un `import 'server-only'`; ahora **no hay nada que borrar**, porque el fichero no está en ese repositorio.
 
-### 5.6 Interfaz — `site/src/components/calculadora/`
+### 5.6 Interfaz - `site/src/components/calculadora/`
 
 Rediseñada con el sistema de diseño ISN Labs. **El prototipo HTML es blanco y monoespaciado a propósito** (parece una hoja de cálculo); no se replica su aspecto, solo su flujo. Dos columnas, con el panel derecho *sticky*.
 
 El flujo completo está en [5.7](#57-los-tres-endpoints-de-la-calculadora), porque es la parte donde la primera versión se equivocó.
 
-**Descarte de respuestas fuera de orden.** Las recotizaciones son asíncronas, así que una petición lenta con 25 usuarios puede llegar **después** de otra con 50 y sobrescribir el resultado nuevo con el viejo. El usuario vería un precio que no corresponde a lo que tiene en pantalla. Se resuelve con `AbortController` —cancelar la anterior al lanzar la siguiente— y además un contador secuencial: se descarta cualquier respuesta cuyo número sea menor que el último aplicado. Hacen falta las dos cosas: `AbortController` no garantiza que la cancelación llegue antes de que el servidor responda.
+**Descarte de respuestas fuera de orden.** Las recotizaciones son asíncronas, así que una petición lenta con 25 usuarios puede llegar **después** de otra con 50 y sobrescribir el resultado nuevo con el viejo. El usuario vería un precio que no corresponde a lo que tiene en pantalla. Se resuelve con `AbortController` -cancelar la anterior al lanzar la siguiente- y además un contador secuencial: se descarta cualquier respuesta cuyo número sea menor que el último aplicado. Hacen falta las dos cosas: `AbortController` no garantiza que la cancelación llegue antes de que el servidor responda.
 
-#### Columna izquierda — tres bloques (`fieldset` con `legend`)
+#### Columna izquierda - tres bloques (`fieldset` con `legend`)
 
 1. **Tu organización**: sedes (1–50), usuarios de IT (1–2000), CPD (select externo/propio/híbrido), servidores, instalaciones OT (0–20).
    Los campos de servidores **se muestran u ocultan según el CPD**: `propio` y `externo` enseñan cada uno su par; `híbrido`, los cuatro.
 2. **Servicios gestionados**: EDR/MDR (`Ya lo tengo cubierto` / `EDR gestionado (Defender)` / `MDR gestionado (Huntress)`), licencias incluidas Sí/No, supervisión de backup Sí/No, número de firewalls, SIEM-XDR Sí/No, parcheo Sí/No, horas de consultoría (0/2/4/6).
-   > El campo de renting de firewall **no existe en esta versión** — ver [5.3](#53-lógica-de-cálculo--gatewaysrcdomainpbcgcalculatets).
+   > El campo de renting de firewall **no existe en esta versión** - ver [5.3](#53-lógica-de-cálculo--gatewaysrcdomainpbcgcalculatets).
 3. **Cumplimiento normativo**: módulo de auditorías (Sin auditorías / NIS2 Ready / ENS Media / ENS Alta).
 
-#### Columna derecha — dos estados
+#### Columna derecha - dos estados
 
 **`LeadGate`** (estado inicial): *«Dinos quién eres y te mostramos la cuota orientativa al momento. Sin llamadas comerciales no solicitadas.»* Campos: nombre\*, apellidos\*, email profesional\*, teléfono. Validación en cliente (formato de email) y **casilla obligatoria que acredita que se ha mostrado y leído la información básica sobre protección de datos**, con enlace a `/politica-privacidad`. Misma redacción y mismo tratamiento que en [6.1](#61-campos-y-validación--componentsformscontactformtsx): no es un consentimiento genérico.
 
@@ -1633,7 +1633,7 @@ Se separa en tres endpoints con responsabilidades distintas:
 | `POST /api/presupuesto/recalcular` | Sí | Solo `latest_quote` | **No** | **No** |
 | `POST /api/presupuesto/propuesta` | Sí, y **congela** | `quote_snapshot` | **Sí**, una actualización | **Sí** |
 
-#### 1 · Primera cotización — `cotizar`
+#### 1 · Primera cotización - `cotizar`
 
 Se invoca **una sola vez**, al enviar la puerta:
 
@@ -1643,7 +1643,7 @@ Se invoca **una sola vez**, al enviar la puerta:
 4. Encola la creación del Lead.
 5. Devuelve `submissionToken` + `PublicQuoteDto`.
 
-#### 2 · Recotizaciones — `recalcular`
+#### 2 · Recotizaciones - `recalcular`
 
 Se invoca cada vez que el usuario ajusta un parámetro, con *debounce* de 400 ms:
 
@@ -1653,7 +1653,7 @@ Se invoca cada vez que el usuario ajusta un parámetro, con *debounce* de 400 ms
 4. **No crea trabajos de entrega. No toca EspoCRM. No envía correo.**
 5. Devuelve el `PublicQuoteDto` nuevo.
 
-#### 3 · Propuesta detallada — `propuesta`
+#### 3 · Propuesta detallada - `propuesta`
 
 Se invoca al pulsar «Recibir propuesta detallada»:
 
@@ -1689,8 +1689,8 @@ Dirección pide *«un formulario o varios donde los clientes saquen precios o pr
 
 | # | Formulario | Página | Endpoint | ¿Crea Lead en EspoCRM? | Base jurídica |
 |---|---|---|---|---|---|
-| 1 | Contacto general | `/contacto` | `POST /api/contacto` | Sí | Atender una solicitud del interesado — **a validar (P22)** |
-| 2 | Puerta de la calculadora | `/calculadora` | `POST /api/presupuesto/cotizar` | Sí, con los parámetros y la horquilla | Medidas precontractuales solicitadas por el interesado — **a validar (P22)** |
+| 1 | Contacto general | `/contacto` | `POST /api/contacto` | Sí | Atender una solicitud del interesado - **a validar (P22)** |
+| 2 | Puerta de la calculadora | `/calculadora` | `POST /api/presupuesto/cotizar` | Sí, con los parámetros y la horquilla | Medidas precontractuales solicitadas por el interesado - **a validar (P22)** |
 | 3 | «Recibir propuesta detallada» | `/calculadora` | `POST /api/presupuesto/propuesta` | Actualiza el Lead del paso 2 | Igual que el 2 |
 | 4 | Newsletter | `/blog` | `POST /api/newsletter` | **No** | Consentimiento de marketing |
 
@@ -1702,7 +1702,7 @@ Dirección pide *«un formulario o varios donde los clientes saquen precios o pr
 
 Los formularios 2 y 3 son el mismo prospecto: el 3 **actualiza** el registro creado por el 2, no crea otro. Cómo se relacionan sin exponer identificadores internos: [6.5](#69-el-navegador-nunca-ve-un-id-de-espocrm).
 
-### 6.1 Campos y validación — `components/forms/ContactForm.tsx`
+### 6.1 Campos y validación - `components/forms/ContactForm.tsx`
 
 | Campo | Tipo | Obligatorio | Validación |
 |---|---|---|---|
@@ -1717,7 +1717,7 @@ Los formularios 2 y 3 son el mismo prospecto: el 3 **actualiza** el registro cre
 | Información de privacidad | checkbox | **Sí** | Ver redacción abajo. Enlaza a `/politica-privacidad` |
 | Marketing (opt-in) | checkbox | No | Consentimiento **separado, sin premarcar** |
 
-> ⚠️ **Nombre y apellidos van en dos campos separados**, no en uno solo. El brief y la primera versión de este plan usaban un único campo «Nombre y apellidos», y la integración con EspoCRM lo partía tomando la primera palabra como `firstName`. Eso falla con «María José García Pérez», con «Van der Berg» y con cualquier nombre o apellido compuesto — es decir, con una parte grande de los nombres españoles. Dos campos: `firstName` y `lastName`. La clave `contact.form.fields.name` se desdobla en `firstName` y `lastName` en los ficheros de mensajes.
+> ⚠️ **Nombre y apellidos van en dos campos separados**, no en uno solo. El brief y la primera versión de este plan usaban un único campo «Nombre y apellidos», y la integración con EspoCRM lo partía tomando la primera palabra como `firstName`. Eso falla con «María José García Pérez», con «Van der Berg» y con cualquier nombre o apellido compuesto - es decir, con una parte grande de los nombres españoles. Dos campos: `firstName` y `lastName`. La clave `contact.form.fields.name` se desdobla en `firstName` y `lastName` en los ficheros de mensajes.
 
 **Redacción de la casilla obligatoria (B04).** La AEPD distingue expresamente entre *informar* y *obtener consentimiento*, y desaconseja las casillas del tipo «He leído y acepto las condiciones de la política de privacidad» cuando lo que hace falta es consentimiento real. La casilla sí puede usarse para **acreditar que se facilitó la información** (responsabilidad proactiva), que es exactamente su función aquí:
 
@@ -1729,14 +1729,14 @@ Junto al formulario, y visible sin desplegar nada, debe figurar la **informació
 
 La casilla de marketing se mantiene aparte: **«Deseo recibir comunicaciones comerciales de ISN Labs»**, opcional y sin premarcar.
 
-Validación **en cliente al perder el foco** (`onBlur`), con mensaje bajo el campo, y **de nuevo en el servidor** con el mismo esquema `zod`. Los mensajes de error ya están escritos en `contact.form.errors.*`. Campos con `aria-invalid` + `aria-describedby`, y tras un envío fallido, **un resumen de errores al principio del formulario que recibe el foco** — ver [Fase 9](#fase-9--accesibilidad-rendimiento-y-limpieza).
+Validación **en cliente al perder el foco** (`onBlur`), con mensaje bajo el campo, y **de nuevo en el servidor** con el mismo esquema `zod`. Los mensajes de error ya están escritos en `contact.form.errors.*`. Campos con `aria-invalid` + `aria-describedby`, y tras un envío fallido, **un resumen de errores al principio del formulario que recibe el foco** - ver [Fase 9](#fase-9--accesibilidad-rendimiento-y-limpieza).
 
 ### 6.2 El sitio no tiene servidor: contrato del frontend
 
 El navegador llama a rutas **del propio dominio**, que Netlify proxifica firmadas hacia el gateway. Para el código del sitio, esto es simplemente `fetch`:
 
 ```ts
-// site/src/lib/api/client.ts  — sin secretos, sin CORS, mismo origen
+// site/src/lib/api/client.ts  - sin secretos, sin CORS, mismo origen
 const res = await fetch('/api/contact', {
   method: 'POST',
   headers: { 'Content-Type': 'application/json' },
@@ -1806,7 +1806,7 @@ Es la pieza que permite que el navegador hable con el gateway **sin CORS, sin se
 | Sin CORS | Al ser mismo origen, no hay preflight ni cabeceras que configurar |
 | Staging | **Otro secreto y otro gateway.** El claim `deploy_context` permite además rechazar un *deploy preview* que apunte a producción |
 
-> ⚠️ **Caveat de Netlify:** la firma JWS **solo funciona proxificando a sitios externos**, no entre aplicaciones de Netlify. Aquí no es problema —el gateway está en un VPS propio—, pero conviene saberlo antes de mover algo a Netlify.
+> ⚠️ **Caveat de Netlify:** la firma JWS **solo funciona proxificando a sitios externos**, no entre aplicaciones de Netlify. Aquí no es problema -el gateway está en un VPS propio-, pero conviene saberlo antes de mover algo a Netlify.
 >
 > ⚠️ **Las cabeceras estáticas de `netlify.toml` no se aplican al contenido proxificado.** El gateway tiene que poner las suyas ([6.6](#66-respuestas-del-gateway)).
 
@@ -1855,7 +1855,7 @@ POST /internal/jobs/run   GET  /internal/metrics
 El gateway comprueba, en este orden, y ante cualquier fallo responde **403 o 404 genérico** sin explicar el motivo:
 
 1. La cabecera `x-nf-sign` existe.
-2. El algoritmo es **HS256** — rechazar `alg: none` y cualquier otro.
+2. El algoritmo es **HS256** - rechazar `alg: none` y cualquier otro.
 3. La firma valida contra el secreto compartido.
 4. `iss === 'netlify'`.
 5. `exp` no ha vencido.
@@ -1880,7 +1880,7 @@ X-Content-Type-Options: nosniff
 
 **Nunca devuelven:** trazas, la respuesta cruda de EspoCRM, identificadores internos del CRM, rutas del servidor, versiones, SQL, credenciales, nombres de tabla ni detalles del SMTP. El cuerpo de error es un **código** más un `requestId`, y el texto que ve el usuario lo pone el sitio a partir de `contact.form.errors.*`.
 
-### 6.7 Contrato de la petición — `POST /api/contact`
+### 6.7 Contrato de la petición - `POST /api/contact`
 
 **Petición** (`Content-Type: application/json`):
 
@@ -1922,11 +1922,11 @@ Los textos que ve el usuario salen de `contact.form.errors.*`; el endpoint devue
 2. **Comprobación de tiempo** (`_t`): si han pasado menos de ~3 segundos desde que se renderizó el formulario, es un bot. Mismo tratamiento silencioso. Cuesta cinco líneas y filtra la mayoría del spam automatizado.
 3. **Rate limiting por IP** (`lib/rateLimit.ts`): ventana deslizante en memoria, 5 envíos / 10 min.
    > En un VPS propio con un solo proceso Node, el contador en memoria **es suficiente y correcto**. Solo haría falta un almacén externo (Redis) si algún día se pasa a varias instancias o a *serverless*. Dejarlo comentado en el código.
-4. **Captcha** — ver [6.8](#612-captcha-recaptcha-contradice-el-argumento-de-soberanía). **No usar reCAPTCHA.**
+4. **Captcha** - ver [6.8](#612-captcha-recaptcha-contradice-el-argumento-de-soberanía). **No usar reCAPTCHA.**
 5. **Revalidar todos los campos en servidor**, con las mismas reglas que el cliente. No confiar en la validación del navegador ni en el `required` del HTML.
 6. **Registrar la evidencia**: `submissionId`, `timestamp` ISO, `locale` y **versión del texto de privacidad mostrado** (constante `PRIVACY_VERSION`, que se sube a mano cada vez que cambie la política). Sin la versión no se puede demostrar *qué* información se facilitó.
-   > **La IP completa no es obligatoria.** La primera versión de este plan la daba por necesaria «para probar el consentimiento». No lo es: identificador de solicitud, fecha, versión del texto y acción realizada son evidencia suficiente. Si se guarda la IP, hay que justificarlo por necesidad y minimización — y en ese caso, plantear guardar solo un hash o la IP truncada. Decisión de quien lleve cumplimiento (P22).
-7. **Persistir en la bandeja de salida** — ver [6.6](#610-bandeja-de-salida-submission--delivery_job). **Este es el punto en el que el envío se considera aceptado.**
+   > **La IP completa no es obligatoria.** La primera versión de este plan la daba por necesaria «para probar el consentimiento». No lo es: identificador de solicitud, fecha, versión del texto y acción realizada son evidencia suficiente. Si se guarda la IP, hay que justificarlo por necesidad y minimización - y en ese caso, plantear guardar solo un hash o la IP truncada. Decisión de quien lleve cumplimiento (P22).
+7. **Persistir en la bandeja de salida** - ver [6.6](#610-bandeja-de-salida-submission--delivery_job). **Este es el punto en el que el envío se considera aceptado.**
 8. **Crear el Lead en EspoCRM** ([6.7](#611-mapeo-a-la-entidad-lead-de-espocrm)), con timeout.
 9. **Enviar correo** al buzón comercial + autorespuesta al usuario, con timeout.
 10. **Responder** `{ ok: true, submissionToken }`.
@@ -2006,7 +2006,7 @@ delivery_job                        ← qué hay que hacer con él. Varias filas
 8. **Nunca se escriben datos personales en los logs.** En el log va el `requestId` y el `submission.id`.
 9. La retención y el borrado se automatizan con `delete_after`, en cascada sobre `delivery_job`.
 
-**Configuración de SQLite** — no son opcionales:
+**Configuración de SQLite** - no son opcionales:
 
 ```sql
 PRAGMA journal_mode = WAL;      -- concurrencia lectura/escritura
@@ -2018,7 +2018,7 @@ PRAGMA busy_timeout = 5000;     -- evita "database is locked" bajo carga
 
 > ⚠️ **Copia de seguridad: no copiar el `.db` a ciegas.** En modo WAL, copiar el fichero mientras hay escrituras produce una base **corrupta o incompleta**, porque parte de los datos está en el `-wal`. Hay que usar la **API de backup de SQLite** (`VACUUM INTO 'destino.db'` o el `backup()` de `better-sqlite3`), o detener limpiamente las escrituras antes de copiar. Es un fallo que no se nota hasta el día que hay que restaurar.
 
-> **El correo no es una copia de seguridad.** La versión anterior lo presentaba como «la segunda copia». No lo es: también puede fallar —y ahora tiene su propio `delivery_job` que lo demuestra—, no es consultable ni reprocesable, y crea otra copia de datos personales en un buzón, con su propia retención. La copia buena es la bandeja de salida; el correo es una notificación.
+> **El correo no es una copia de seguridad.** La versión anterior lo presentaba como «la segunda copia». No lo es: también puede fallar -y ahora tiene su propio `delivery_job` que lo demuestra-, no es consultable ni reprocesable, y crea otra copia de datos personales en un buzón, con su propia retención. La copia buena es la bandeja de salida; el correo es una notificación.
 
 ### 6.11 Mapeo a la entidad Lead de EspoCRM
 
@@ -2035,9 +2035,9 @@ PRAGMA busy_timeout = 5000;     -- evita "database is locked" bajo carga
 | Teléfono | `phoneNumber` | |
 | **Cargo / rol** | **`title`** | ⚠️ Es un campo **estándar** de Lead. No hace falta el campo personalizado `cRole` que proponía la recomendación recibida |
 | Mensaje | `description` | |
-| — | `status` | Fijar `"New"` |
-| — | `source` | Fijar **`"Web Site"`** — ver aviso abajo |
-| — | `assignedUserId` | Opcional, para que el lead caiga asignado a alguien |
+| - | `status` | Fijar `"New"` |
+| - | `source` | Fijar **`"Web Site"`** - ver aviso abajo |
+| - | `assignedUserId` | Opcional, para que el lead caiga asignado a alguien |
 
 > ⚠️ **`source` es un enum con opciones cerradas**, no texto libre. Sus valores por defecto son: `""`, `"Call"`, `"Email"`, `"Existing Customer"`, `"Partner"`, `"Public Relations"`, `"Web Site"`, `"Campaign"`, `"Other"`. Mandar `"calculadora-web"` como propone la recomendación recibida **hará fallar o descartar el campo**. El origen fino va en un campo personalizado.
 >
@@ -2047,7 +2047,7 @@ PRAGMA busy_timeout = 5000;     -- evita "database is locked" bajo carga
 
 **Campos personalizados que hay que crear en EspoCRM antes de programar nada.** Administración → Entity Manager → Lead → Fields. Si se envía un atributo que no existe, EspoCRM lo ignora y el dato se pierde **sin error visible**: es la forma más fácil de perder medio formulario sin enterarse.
 
-Los nombres separan **información de privacidad** de **consentimiento de marketing**, que son dos cosas distintas (B04). Llamar `cConsent` a la casilla obligatoria, como hacía la versión anterior, deja escrito en el CRM que el interesado «consintió» algo que en realidad solo se le informó — y eso es precisamente la confusión que la AEPD señala.
+Los nombres separan **información de privacidad** de **consentimiento de marketing**, que son dos cosas distintas (B04). Llamar `cConsent` a la casilla obligatoria, como hacía la versión anterior, deja escrito en el CRM que el interesado «consintió» algo que en realidad solo se le informó - y eso es precisamente la confusión que la AEPD señala.
 
 | Campo a crear | Tipo | Contenido |
 |---|---|---|
@@ -2081,7 +2081,7 @@ Los nombres separan **información de privacidad** de **consentimiento de market
 
 Este es el único punto de la recomendación recibida que hay que **cambiar**, no solo matizar.
 
-reCAPTCHA es de Google: envía la IP del visitante y señales de comportamiento a un responsable estadounidense, y funciona en todas las páginas donde se carga, no solo al enviar. Si el argumento de venta de ISN Labs es soberanía del dato y RGPD limpio —y la web es la de una consultora de ciberseguridad—, poner reCAPTCHA en el formulario es una incoherencia que un cliente técnico puede señalar en la primera reunión. Además obliga a declarar la transferencia internacional en la política de privacidad y a bloquearlo tras el banner de cookies, lo que rompe el formulario para quien rechace.
+reCAPTCHA es de Google: envía la IP del visitante y señales de comportamiento a un responsable estadounidense, y funciona en todas las páginas donde se carga, no solo al enviar. Si el argumento de venta de ISN Labs es soberanía del dato y RGPD limpio -y la web es la de una consultora de ciberseguridad-, poner reCAPTCHA en el formulario es una incoherencia que un cliente técnico puede señalar en la primera reunión. Además obliga a declarar la transferencia internacional en la política de privacidad y a bloquearlo tras el banner de cookies, lo que rompe el formulario para quien rechace.
 
 Opciones por orden de preferencia:
 
@@ -2103,10 +2103,10 @@ Validado y ampliado sobre la lista que llegó de dirección:
 - [ ] **Llamada por red privada o localhost** si EspoCRM está en el mismo VPS.
 - [ ] **HTTPS en todo**, con HSTS. Certificados renovados automáticamente.
 - [ ] **Panel de administración de EspoCRM no expuesto a Internet**: VPN o lista blanca de IPs. La API de Lead puede estar accesible solo desde la IP del servidor web.
-- [ ] **Firewall / WAF delante** — aquí sí tiene sentido usar OPNsense o Fortinet, que son parte del catálogo propio.
+- [ ] **Firewall / WAF delante** - aquí sí tiene sentido usar OPNsense o Fortinet, que son parte del catálogo propio.
 - [ ] **Rate limiting también del lado de EspoCRM**, no solo en el proxy.
 - [ ] **Actualizaciones al día.** EspoCRM publica parches de seguridad con regularidad; conviene suscribirse a sus avisos.
-- [ ] **Copias de seguridad cifradas** y **probadas restaurando** — no vale con que el job diga «OK». Es literalmente uno de los servicios que ISN Labs vende.
+- [ ] **Copias de seguridad cifradas** y **probadas restaurando** - no vale con que el job diga «OK». Es literalmente uno de los servicios que ISN Labs vende.
 - [ ] **Sin CORS**: el navegador llama a `/api/…` del mismo origen y Netlify proxifica, así que el gateway **no necesita ninguna cabecera `Access-Control-Allow-Origin`**. No añadirla «por si acaso»: abriría el gateway a peticiones desde cualquier página.
 - [ ] **Estrategia definida ante duplicados.** Ver [6.9.2](#6132-b10--qué-hacer-cuando-espocrm-devuelve-409).
 - [ ] **Registro de accesos** al endpoint y alerta si el rate limiting salta de forma anómala.
@@ -2115,7 +2115,7 @@ Validado y ampliado sobre la lista que llegó de dirección:
 
 La primera versión decía «solo crear Leads». La primera corrección lo cambió a «crear + editar los Leads **propios** (`own`)», porque un `PUT` exige permiso de edición. **Sigue sin funcionar**, y el motivo es sutil:
 
-> El plan permite fijar `assignedUserId` al crear el Lead. Si el usuario de API crea el Lead y lo asigna inmediatamente a un comercial, **el Lead deja de ser «propio» del usuario de API**, y el permiso `own` de edición ya no aplica. La actualización posterior de la propuesta detallada fallaría con un error de permisos — y solo se descubriría cuando un cliente real pidiera una propuesta.
+> El plan permite fijar `assignedUserId` al crear el Lead. Si el usuario de API crea el Lead y lo asigna inmediatamente a un comercial, **el Lead deja de ser «propio» del usuario de API**, y el permiso `own` de edición ya no aplica. La actualización posterior de la propuesta detallada fallaría con un error de permisos - y solo se descubriría cuando un cliente real pidiera una propuesta.
 
 EspoCRM distingue permisos de creación, lectura y edición con niveles propio / equipo / todos, y el comportamiento exacto depende de la ACL configurada. **Hay que probarlo contra la instancia real, no suponerlo.**
 
@@ -2192,7 +2192,7 @@ ESPOCRM_TEAM_ID=                    # equipo al que se asignan los Leads
 
 # ── Antispam ──
 ALTCHA_HMAC_KEY=                 # solo si se implanta Altcha
-# NO usar RECAPTCHA_* — ver 6.8
+# NO usar RECAPTCHA_* - ver 6.8
 
 # ── Firma de tokens ──
 SUBMISSION_TOKEN_SECRET=         # HMAC del submissionToken (6.5). Aleatorio, ≥32 bytes
@@ -2212,9 +2212,9 @@ MARKETING_TEXT_VERSION=2026-07-27
 > - `SITE_URL` se usa en metadatos, sitemap y canonical, todo ello en servidor.
 > - `INCIDENT_PHONE` se lee en el componente de servidor y se pasa como prop al bloque visual.
 >
-> Y hay una razón operativa además de la de principio: **las variables `NEXT_PUBLIC_*` se incrustan en el bundle durante el build**, así que la misma imagen Docker no se puede promocionar de staging a producción — habría que reconstruir para cambiar la URL. Sin ellas, una única imagen sirve para los dos entornos.
+> Y hay una razón operativa además de la de principio: **las variables `NEXT_PUBLIC_*` se incrustan en el bundle durante el build**, así que la misma imagen Docker no se puede promocionar de staging a producción - habría que reconstruir para cambiar la URL. Sin ellas, una única imagen sirve para los dos entornos.
 
-**Validación al arrancar** — `gateway/src/config/env.ts`:
+**Validación al arrancar** - `gateway/src/config/env.ts`:
 
 ```ts
 import 'server-only'
@@ -2241,7 +2241,7 @@ Confirmación al usuario: `contact.form.successMessage` («Gracias. Te respondem
 
 ### 6.16 Sobre el documento de handoff mencionado
 
-La comunicación de dirección menciona un documento de handoff adjunto (contrato del endpoint, ejemplo de proxy en Node/Express y mapeo de campos). **Ese adjunto no ha llegado al equipo de desarrollo.** Las secciones [6.4](#64-el-web-gateway) a [6.11](#611-mapeo-a-la-entidad-lead-de-espocrm) cumplen esa función; si el handoff aparece, hay que contrastarlo con ellas. Su ejemplo de proxy en Express **sí encaja ahora conceptualmente** —el Web Gateway es exactamente eso—, aunque este plan usa Fastify y añade la verificación de la firma de Netlify, que el handoff no contemplaba.
+La comunicación de dirección menciona un documento de handoff adjunto (contrato del endpoint, ejemplo de proxy en Node/Express y mapeo de campos). **Ese adjunto no ha llegado al equipo de desarrollo.** Las secciones [6.4](#64-el-web-gateway) a [6.11](#611-mapeo-a-la-entidad-lead-de-espocrm) cumplen esa función; si el handoff aparece, hay que contrastarlo con ellas. Su ejemplo de proxy en Express **sí encaja ahora conceptualmente** -el Web Gateway es exactamente eso-, aunque este plan usa Fastify y añade la verificación de la firma de Netlify, que el handoff no contemplaba.
 
 Del mismo modo, las notas de i18n de esa comunicación describen la carga con **i18next + react-helmet**, que era lo correcto para la SPA Vite. Con Next.js se usa `next-intl` (Fase 2) y los metadatos nativos de Next (Fase 3.3). **El contenido de los dos JSON se reutiliza íntegro**: lo único que cambia es el mecanismo de carga, no el copy ni la estructura de claves.
 
@@ -2250,9 +2250,9 @@ Del mismo modo, las notas de i18n de esa comunicación describen la carga con **
 ## Fase 7 · SEO técnico
 
 1. **Metadatos por página** con `lib/metadata.ts` (Fase 3.3), tomando `title` y `description` de la clave `seo` de cada namespace. Ya vienen redactados y con la longitud medida en el brief §13.
-2. **`app/sitemap.ts`** — se genera **iterando `ROUTES`** ([4 · mapa de rutas](#mapa-de-rutas)), incluyendo solo las que tengan `enabled: true` **y** `indexable: true`, con sus `alternates.languages`. Nunca una lista escrita a mano en paralelo.
+2. **`app/sitemap.ts`** - se genera **iterando `ROUTES`** ([4 · mapa de rutas](#mapa-de-rutas)), incluyendo solo las que tengan `enabled: true` **y** `indexable: true`, con sus `alternates.languages`. Nunca una lista escrita a mano en paralelo.
    > **Corregir el error del sitemap actual**, que lista `/privacidad` cuando la ruta real es `/politica-privacidad`, y actualizar los `lastmod` (hoy ponen `2024-03-20`).
-3. **`app/robots.ts`** — `Allow: /` y referencia al sitemap.
+3. **`app/robots.ts`** - `Allow: /` y referencia al sitemap.
 4. **`hreflang` y canonical.** Cada versión lleva **canonical hacia sí misma, en su propio idioma**: la página ES apunta a la URL ES y la EN a la URL EN. **No canonicalizar todo al español**, que anularía la versión inglesa. Y `x-default` → **la versión ES**.
 
    ```html
@@ -2309,7 +2309,7 @@ Faltaban por completo en la primera versión, y son lo que se ve al compartir un
 | `manifest.webmanifest` | `app/manifest.ts` |
 | Logo rastreable | PNG/SVG en URL estable, el mismo que se declara en `Organization` |
 
-> El `index.html` actual tiene `<meta property="og:image" content="" />` — vacío. Hoy, cualquier enlace del sitio compartido en LinkedIn o WhatsApp sale sin imagen.
+> El `index.html` actual tiene `<meta property="og:image" content="" />` - vacío. Hoy, cualquier enlace del sitio compartido en LinkedIn o WhatsApp sale sin imagen.
 
 ### 7.3 SEM y conversiones por idioma
 
@@ -2356,7 +2356,7 @@ Verificar la implementación con Tag Assistant o el depurador de la plataforma e
 
 ### Escenario A · Sin cookies ni almacenamiento no necesarios
 
-Si la analítica elegida está **verificadamente** exenta —sin identificadores, sin escribir en el dispositivo, correctamente configurada y con la IP tratada de forma que no permita identificar— puede no ser necesario mostrar banner. Seguirían siendo obligatorias la **política de cookies** y la información sobre los elementos técnicos utilizados.
+Si la analítica elegida está **verificadamente** exenta -sin identificadores, sin escribir en el dispositivo, correctamente configurada y con la IP tratada de forma que no permita identificar- puede no ser necesario mostrar banner. Seguirían siendo obligatorias la **política de cookies** y la información sobre los elementos técnicos utilizados.
 
 ### Escenario B · GA4, publicidad o cookies analíticas
 
@@ -2377,7 +2377,7 @@ Requisitos que la AEPD exige y que hay que poder demostrar:
 - Configuración **granular** por categoría, no todo o nada.
 - **Registro de versión y fecha** de la decisión, para poder acreditarla.
 
-**Página `/cookies`** — el texto actual (ocho párrafos) más una **tabla de cookies y tecnologías utilizadas**: nombre, finalidad, categoría, duración y titular. Es lo que exige la AEPD y hoy no está. La tabla debe reflejar lo que el sitio usa **de verdad**, así que se rellena al final, cuando esté decidida la analítica.
+**Página `/cookies`** - el texto actual (ocho párrafos) más una **tabla de cookies y tecnologías utilizadas**: nombre, finalidad, categoría, duración y titular. Es lo que exige la AEPD y hoy no está. La tabla debe reflejar lo que el sitio usa **de verdad**, así que se rellena al final, cuando esté decidida la analítica.
 
 ---
 
@@ -2411,7 +2411,7 @@ Requisitos que la AEPD exige y que hay que poder demostrar:
 
 - Errores asociados con `aria-describedby` y campo marcado con `aria-invalid`.
 - Tras un envío fallido, **un resumen de errores al principio del formulario que recibe el foco**, con enlaces a cada campo. Es la diferencia entre poder corregir el formulario y abandonarlo.
-- No anunciar cada cambio de precio mientras el usuario está escribiendo — ver [5.6](#56-interfaz--sitesrccomponentscalculadora).
+- No anunciar cada cambio de precio mientras el usuario está escribiendo - ver [5.6](#56-interfaz--sitesrccomponentscalculadora).
 
 **Verificación:**
 
@@ -2431,7 +2431,7 @@ Una vez la web nueva esté verificada:
 
 1. Borrar `web/`. La SPA Vite queda en el commit de baseline de la Fase 0.
 2. Borrar el `index.html` de «En Construcción» de la raíz, o dejarlo si sirve de página de mantenimiento del hosting.
-3. Verificar que **no queda ni una referencia a «North Labs» como nombre público** — solo «ISN Labs», y «Innovation and Security North Labs SL» exclusivamente en las páginas legales y las facturas.
+3. Verificar que **no queda ni una referencia a «North Labs» como nombre público** - solo «ISN Labs», y «Innovation and Security North Labs SL» exclusivamente en las páginas legales y las facturas.
 4. Actualizar `CLAUDE.md` a la arquitectura nueva. Casi todo lo que describe hoy deja de ser cierto: SPA Vite, secciones ancladas, tres sistemas de color, clases `accent-cyan` muertas, ficheros vacíos `Botón.tsx`/`Tarjeta.tsx`, huérfano `AdminMensajes.tsx`.
 
 ---
@@ -2442,7 +2442,7 @@ Una vez la web nueva esté verificada:
 
 ### 10.1 Content-Security-Policy: la migración resuelve el problema
 
-El plan anterior tenía un pendiente abierto (P26) porque pedía a la vez SSG y CSP estricta, y eran incompatibles: **los nonces exigen renderizado dinámico** —textual de la documentación: *«you must use dynamic rendering to add nonces»*, con la optimización estática y la ISR desactivadas— mientras la alternativa por hashes (`experimental.sri`) es experimental.
+El plan anterior tenía un pendiente abierto (P26) porque pedía a la vez SSG y CSP estricta, y eran incompatibles: **los nonces exigen renderizado dinámico** -textual de la documentación: *«you must use dynamic rendering to add nonces»*, con la optimización estática y la ISR desactivadas- mientras la alternativa por hashes (`experimental.sri`) es experimental.
 
 > ✅ **Sin runtime, el conflicto desaparece.** No hay servidor que pueda generar un nonce por petición, así que no hay nada que decidir: la CSP es una **cabecera estática servida por Netlify**. **P26 queda cerrado.**
 
@@ -2462,7 +2462,7 @@ El plan anterior tenía un pendiente abierto (P26) porque pedía a la vez SSG y 
 4. **No pasar a bloqueo hasta haber verificado**: el export de Next, la analítica si finalmente hay, las fuentes, las imágenes, el proxy `/api`, las previsualizaciones de Open Graph y la herramienta de consentimiento si existe.
 5. Pasar a `Content-Security-Policy` en modo bloqueo.
 
-`connect-src 'self'` basta para los formularios: el navegador llama a `/api/…`, del mismo origen, porque Netlify proxifica. Si algún día se llamara al gateway directamente habría que abrir su host aquí **y** montar CORS — otra razón para mantener el proxy.
+`connect-src 'self'` basta para los formularios: el navegador llama a `/api/…`, del mismo origen, porque Netlify proxifica. Si algún día se llamara al gateway directamente habría que abrir su host aquí **y** montar CORS - otra razón para mantener el proxy.
 
 > `style-src` arranca con `'unsafe-inline'` porque Next inyecta algunos estilos en línea. Es mucho menos grave que en `script-src`, pero conviene medir si se puede retirar.
 
@@ -2484,7 +2484,7 @@ El plan anterior tenía un pendiente abierto (P26) porque pedía a la vez SSG y 
 
 #### El HSTS sigue siendo progresivo
 
-Lo gestiona Netlify sobre el dominio, pero la precaución no cambia: `includeSubDomains` **bloquea cualquier subdominio que no sirva HTTPS** —incluido `api.secnorthlabs.eu`, que ahora existe— y el `preload` **no se revierte rápido**.
+Lo gestiona Netlify sobre el dominio, pero la precaución no cambia: `includeSubDomains` **bloquea cualquier subdominio que no sirva HTTPS** -incluido `api.secnorthlabs.eu`, que ahora existe- y el `preload` **no se revierte rápido**.
 
 | Paso | Valor | Cuándo pasar al siguiente |
 |---|---|---|
@@ -2629,7 +2629,7 @@ La base de datos de EspoCRM pertenece **solo** a `crm_private`.
 
 > ⚠️ **`127.0.0.1` no apunta al otro contenedor**, apunta al propio. Hay que usar el nombre DNS del servicio. Es un fallo clásico y el síntoma es «connection refused» en el formulario de contacto.
 
-**Virtual host de Nginx** — publica exclusivamente `/web/v1/`:
+**Virtual host de Nginx** - publica exclusivamente `/web/v1/`:
 
 ```nginx
 server {
@@ -2671,7 +2671,7 @@ server {
 7. **Copia de seguridad con la API de backup de SQLite**, nunca copiando el `.db` en caliente ([6.10](#610-bandeja-de-salida-submission--delivery_job)).
 8. **Rotación de credenciales**: clave HMAC de EspoCRM, SMTP, `SUBMISSION_TOKEN_SECRET` y `NETLIFY_GATEWAY_SIGNING_SECRET`.
    > Rotar el secreto de firma de Netlify hay que hacerlo **en los dos lados a la vez**, o el gateway rechaza todo el tráfico. Conviene admitir temporalmente dos secretos válidos durante la rotación.
-9. **Panel de EspoCRM solo por WireGuard**, con DNS interno y MFA. Si no hay VPN: virtual host independiente, allowlist de IP, MFA, WAF y rate limiting — y **nunca** una ruta poco predecible como única protección.
+9. **Panel de EspoCRM solo por WireGuard**, con DNS interno y MFA. Si no hay VPN: virtual host independiente, allowlist de IP, MFA, WAF y rate limiting - y **nunca** una ruta poco predecible como única protección.
 
 ### 11.3 Imágenes: pipeline en build
 
@@ -2686,7 +2686,7 @@ Como no hay optimizador en runtime (`images.unoptimized: true`), se genera todo 
 
 > Si el hero no necesita fotografía, mejor CSS y SVG local: es lo que mantiene el LCP por debajo de 2,5 s en móvil real.
 
-**Fuentes:** autohospedadas en el artefacto, solo los pesos que se usan, subset latino, `font-display: swap`, `preload` únicamente de la crítica y fallback con métricas próximas. **Ninguna petición a Google Fonts en producción** — hoy el proyecto las carga por `@import`, y eso además es una transferencia de la IP del visitante a un tercero.
+**Fuentes:** autohospedadas en el artefacto, solo los pesos que se usan, subset latino, `font-display: swap`, `preload` únicamente de la crítica y fallback con métricas próximas. **Ninguna petición a Google Fonts en producción** - hoy el proyecto las carga por `@import`, y eso además es una transferencia de la IP del visitante a un tercero.
 
 ### 11.4 Observabilidad y alertas
 
@@ -2742,7 +2742,7 @@ pnpm test:e2e
 - Sin `curl | bash` ni `pnpm dlx` con versiones flotantes.
 - Node y pnpm exactos, branch protection, environment para producción y logs sin secretos.
 
-### 12.2 `verify:architecture` — que la migración no se deshaga sola
+### 12.2 `verify:architecture` - que la migración no se deshaga sola
 
 `scripts/assert-static-architecture.mjs` **falla el build** si aparece en el repositorio del sitio cualquiera de:
 
@@ -2758,7 +2758,7 @@ import 'server-only'
 
 Es la diferencia entre una decisión de arquitectura y un comentario en un documento que nadie lee. Sin este script, en seis meses alguien añadirá un Route Handler «solo para una cosita» y la web dejará de ser estática sin que nadie lo note.
 
-### 12.3 `verify:export` — inspeccionar el artefacto
+### 12.3 `verify:export` - inspeccionar el artefacto
 
 `scripts/assert-static-output.mjs` comprueba sobre `out/`:
 
@@ -2826,14 +2826,14 @@ updates:
 
 > **Verificar antes de dar por hecho el soporte de pnpm.** Dependabot usa `package-ecosystem: "npm"` para lockfiles de pnpm, pero conviene confirmar en la documentación de ecosistemas soportados qué versiones de pnpm cubre, sobre todo antes de plantearse subir a pnpm 11. Y si `default-days` se omite, Dependabot aplica 3 días por defecto.
 
-**El age gate** — `scripts/check-package-age.mjs`:
+**El age gate** - `scripts/check-package-age.mjs`:
 
 1. Compara `pnpm-lock.yaml` entre la base y la cabeza del PR.
 2. Extrae los paquetes y versiones nuevas o modificadas.
 3. Consulta la metadata del registry y lee `time[version]`.
 4. **Falla** si la edad es menor de 24 h, si falta el timestamp, si la versión es *prerelease* o si el paquete viene de una URL o un git no permitidos.
 5. Imprime **solo** paquete, versión y tiempo restante.
-6. No usa ninguna dependencia npm para validarse a sí mismo — sería circular.
+6. No usa ninguna dependencia npm para validarse a sí mismo - sería circular.
 
 ```text
 AGE_GATE_FAILED
@@ -2858,7 +2858,7 @@ Minimum required age: 24h. Retry after: 2h 43m.
 
 ### 12.5 Pruebas E2E
 
-**Arquitectura estática** — son las que verifican que la migración es real:
+**Arquitectura estática** - son las que verifican que la migración es real:
 
 - `out/` existe y **no hay ninguna función serverless**.
 - Netlify sirve el HTML **sin invocar cómputo**.
@@ -2875,7 +2875,7 @@ Minimum required age: 24h. Retry after: 2h 43m.
 - Open Graph y JSON-LD localizados.
 - 404 en ES y EN, incluida una ruta profunda inventada, y **las rutas reales no interceptadas** por las reglas comodín.
 
-**Móvil** — matriz completa de [1.6](#16-mobile-first):
+**Móvil** - matriz completa de [1.6](#16-mobile-first):
 
 - 320 px sin scroll horizontal, y el resto de anchuras.
 - Tablet en vertical y horizontal.
@@ -2894,10 +2894,10 @@ Minimum required age: 24h. Retry after: 2h 43m.
 - CRM caído: submission persistida y el usuario ve éxito. SMTP caído: `delivery_job` pendiente. El worker recupera ambos.
 - **La bandeja de salida sobrevive a un reinicio** del contenedor.
 - Token de propuesta alterado o caducado: rechazado.
-- **`recalculate` no toca EspoCRM ni envía correo** — la verificación de B09.
+- **`recalculate` no toca EspoCRM ni envía correo** - la verificación de B09.
 - `proposal` actualiza el Lead **una sola vez**.
 
-**EspoCRM, mínimo privilegio** — con la credencial HMAC real del gateway. Debe poder crear el Lead, leerlo y editarlo dentro del equipo. **No debe poder** listar todos los Leads, exportar, borrar, ni acceder a Accounts, Contacts, Users ni administración. Probar también `409`, `403`, timeout, y que **desactivar el usuario de API invalida el acceso**. Conservar la evidencia de los tests negativos.
+**EspoCRM, mínimo privilegio** - con la credencial HMAC real del gateway. Debe poder crear el Lead, leerlo y editarlo dentro del equipo. **No debe poder** listar todos los Leads, exportar, borrar, ni acceder a Accounts, Contacts, Users ni administración. Probar también `409`, `403`, timeout, y que **desactivar el usuario de API invalida el acceso**. Conservar la evidencia de los tests negativos.
 
 **Cadena de suministro:**
 
@@ -2935,7 +2935,7 @@ Reordenado por la migración. **Un commit por paso**: no mezclar en el mismo la 
 
 | Paso | Trabajo | Repositorio |
 |---|---|---|
-| **M0** | **Congelar el plan actual**: commit, etiqueta, inventario. No desarrollar más Route Handlers | — |
+| **M0** | **Congelar el plan actual**: commit, etiqueta, inventario. No desarrollar más Route Handlers | - |
 | **M1** | **Separar la información sensible**: sacar el Excel VALIDACION del repositorio que verá Netlify, crear `isnlabs-web-gateway`, **revisar el historial de git** por si hubo datos confidenciales y, si los hubo, reescribirlo y rotar accesos | ambos |
 | **M2** | **pnpm y Node fijados**, migración aislada, CI verde sin ningún cambio funcional | site |
 | **M3** | **Rutas**: manifiesto, `/es` y `/en`, slugs, selector, sitemap, redirección raíz, 404 por idioma | site |
@@ -2961,7 +2961,7 @@ Reordenado por la migración. **Un commit por paso**: no mezclar en el mismo la 
 
 ## Verificación
 
-### Automática — repositorio del sitio
+### Automática - repositorio del sitio
 
 ```bash
 pnpm install --frozen-lockfile
@@ -2977,7 +2977,7 @@ pnpm test:e2e
 
 El script de paridad estructural ES/EN está en [2.5](#25-paridad-estructural-esen).
 
-### Automática — repositorio del gateway
+### Automática - repositorio del gateway
 
 ```bash
 pnpm test                   # el caso de oro del PBCG y la batería completa
@@ -2994,7 +2994,7 @@ pnpm test:integration       # firma de Netlify, outbox, EspoCRM simulado
 
 Si no cuadra, el error está en `calculate.ts`, no en la interfaz.
 
-### Manual — el sitio
+### Manual - el sitio
 
 - Todas las rutas con `enabled: true` cargan en `/es/` y en `/en/`, y **el selector de idioma mantiene la página lógica** con el slug traducido.
 - `curl -I https://…/` devuelve **301** a `/es/`.
@@ -3003,7 +3003,7 @@ Si no cuadra, el error está en `calculate.ts`, no en la interfaz.
 - Canonical autorreferencial y hreflang recíproco en ambos idiomas.
 - A 375 px de ancho: sin scroll horizontal, el teléfono pulsable y el teclado virtual sin tapar el botón de enviar.
 
-### Manual — que la migración es real
+### Manual - que la migración es real
 
 ```bash
 # 1. El artefacto no contiene nada de servidor
@@ -3024,7 +3024,7 @@ for var in NETLIFY_GATEWAY_SIGNING_SECRET ESPOCRM_API_KEY SMTP_PASS; do
 done
 ```
 
-### Manual — el gateway y EspoCRM
+### Manual - el gateway y EspoCRM
 
 - **`curl -X POST https://api.secnorthlabs.eu/web/v1/contact` sin cabecera `x-nf-sign` → rechazado.** Es la prueba de que el gateway no está abierto.
 - `curl https://api.secnorthlabs.eu/` → **404**. Cualquier ruta fuera de `/web/v1/` → 404.
@@ -3066,7 +3066,7 @@ Bloquean la publicación, no el desarrollo. Recopilados de los avisos de los pro
 | 17 | **Entrada en el RAT y plazo de conservación de leads** | Responsable de cumplimiento | Finalidad, base jurídica, categorías, plazo y destinatarios. Y procedimiento de borrado de los leads no convertidos |
 | 18 | **A quién se asignan los leads** | Comercial | Valor de `ESPOCRM_ASSIGNED_USER_ID`, o dejarlos sin asignar en una bandeja común |
 | 19 | **Buzón comercial de destino** | Comercial | Valor de `CONTACT_TO_EMAIL`. Es una notificación, no la copia de seguridad |
-| 20 | **Decisión de antispam** | Dirección | Se propone honeypot + tiempo + rate limiting, y Altcha si aparece spam real. **Requiere descartar reCAPTCHA de forma explícita** — ver [6.8](#612-captcha-recaptcha-contradice-el-argumento-de-soberanía) |
+| 20 | **Decisión de antispam** | Dirección | Se propone honeypot + tiempo + rate limiting, y Altcha si aparece spam real. **Requiere descartar reCAPTCHA de forma explícita** - ver [6.8](#612-captcha-recaptcha-contradice-el-argumento-de-soberanía) |
 
 ### Pendientes bloqueantes añadidos por la revisión técnica
 
@@ -3084,7 +3084,7 @@ Estos cuatro **impiden cerrar el desarrollo**, y tres de ellos condicionan el pa
 | # | Pendiente | Responsable | Por qué bloquea |
 |---|---|---|---|
 | **P25** | **Estrategia ante Leads duplicados en EspoCRM** | Comercial / CRM | Un `409` sin estrategia definida deja el envío sin `espo_lead_id`, y entonces la solicitud de propuesta detallada no sabe qué Lead actualizar. Tres opciones en [6.9.2](#6132-b10--qué-hacer-cuando-espocrm-devuelve-409); se recomienda la A |
-| P26 | **Elegir la estrategia de CSP** | — | ✅ **Cerrado por la migración.** Sin runtime no hay conflicto: la CSP es una cabecera estática de Netlify. Ver [10.1](#101-content-security-policy-la-migración-resuelve-el-problema) |
+| P26 | **Elegir la estrategia de CSP** | - | ✅ **Cerrado por la migración.** Sin runtime no hay conflicto: la CSP es una cabecera estática de Netlify. Ver [10.1](#101-content-security-policy-la-migración-resuelve-el-problema) |
 | **P27** | **Auditoría de subdominios antes del HSTS** | Sistemas | `includeSubDomains` bloquea cualquier subdominio sin HTTPS, y `preload` es difícil de revertir. Ver el escalonado de [10.2](#102-cabeceras-del-sitio-en-netlifytoml) |
 
 ### Pendientes añadidos por la migración a arquitectura estática
@@ -3109,7 +3109,7 @@ Y el pendiente **P12 (elección de analítica) es bloqueante** de la Fase 8 comp
 
 Dirección pidió validar la recomendación técnica que circuló el 27/07/2026. Este es el resultado, contrastado con la documentación oficial de EspoCRM y con la definición real de la entidad `Lead`.
 
-**Veredicto general: la arquitectura propuesta es correcta y la aprobamos.** El núcleo del consejo —no llamar a EspoCRM desde el navegador, mantener la API key en el servidor, usuario de API con permisos mínimos— es exactamente la práctica correcta y resuelve el riesgo principal. Hay tres correcciones y un cambio.
+**Veredicto general: la arquitectura propuesta es correcta y la aprobamos.** El núcleo del consejo -no llamar a EspoCRM desde el navegador, mantener la API key en el servidor, usuario de API con permisos mínimos- es exactamente la práctica correcta y resuelve el riesgo principal. Hay tres correcciones y un cambio.
 
 ### A.1 Confirmado como correcto
 
@@ -3159,10 +3159,10 @@ Alternativa propuesta: honeypot + comprobación de tiempo + rate limiting para e
 
 ### A.5 Fuentes consultadas
 
-- [EspoCRM · REST API](https://docs.espocrm.com/development/api/) — métodos de autenticación, formato de la URL base y creación de registros.
-- [EspoCRM · Web-to-Lead](https://docs.espocrm.com/administration/web-to-lead/) — endpoint de Lead Capture, naturaleza pública de su API key, opt-in, captcha y CORS.
-- [EspoCRM · definición de la entidad Lead](https://github.com/espocrm/espocrm/blob/master/application/Espo/Modules/Crm/Resources/metadata/entityDefs/Lead.json) — nombres de campo y opciones de los enums `source` y `status`.
-- [EspoCRM · Entity Manager](https://docs.espocrm.com/administration/entity-manager/) — creación de campos personalizados.
+- [EspoCRM · REST API](https://docs.espocrm.com/development/api/) - métodos de autenticación, formato de la URL base y creación de registros.
+- [EspoCRM · Web-to-Lead](https://docs.espocrm.com/administration/web-to-lead/) - endpoint de Lead Capture, naturaleza pública de su API key, opt-in, captcha y CORS.
+- [EspoCRM · definición de la entidad Lead](https://github.com/espocrm/espocrm/blob/master/application/Espo/Modules/Crm/Resources/metadata/entityDefs/Lead.json) - nombres de campo y opciones de los enums `source` y `status`.
+- [EspoCRM · Entity Manager](https://docs.espocrm.com/administration/entity-manager/) - creación de campos personalizados.
 
 ---
 
@@ -3224,11 +3224,11 @@ Los siete bloqueantes quedaron resueltos en el texto. Lo que faltaba eran decisi
 
 Las afirmaciones sobre versiones y APIs se comprobaron contra la documentación oficial antes de aplicarlas:
 
-- [Next.js · Renaming Middleware to Proxy](https://nextjs.org/docs/messages/middleware-to-proxy) — confirma la deprecación de `middleware` y el codemod.
-- [Next.js · ESLint](https://nextjs.org/docs/app/api-reference/config/eslint) — confirma que `next lint` se eliminó en la versión 16.
-- [next-intl · Routing setup](https://next-intl.dev/docs/routing/setup) — confirma `src/proxy.ts`, `generateStaticParams`, `setRequestLocale` y el paso explícito del `locale` en `generateMetadata`.
-- [EspoCRM · Entity Manager](https://docs.espocrm.com/administration/entity-manager/) — confirma el prefijo `c` automático y el parámetro `customPrefixDisabled`.
-- [AEPD · FAQ-0248, sobre si el usuario tiene que dar consentimiento a la cláusula de privacidad](https://www.aepd.es/preguntas-frecuentes/2-tus-obligaciones-como-responsable-del-tratamiento/6-el-deber-de-informacion/FAQ-0248-sobre-si-el-usuario-tiene-que-dar-consentimiento-a-clausula-de-privacidad) — confirma la distinción entre informar y consentir, y el valor de la casilla como acreditación de la información facilitada.
+- [Next.js · Renaming Middleware to Proxy](https://nextjs.org/docs/messages/middleware-to-proxy) - confirma la deprecación de `middleware` y el codemod.
+- [Next.js · ESLint](https://nextjs.org/docs/app/api-reference/config/eslint) - confirma que `next lint` se eliminó en la versión 16.
+- [next-intl · Routing setup](https://next-intl.dev/docs/routing/setup) - confirma `src/proxy.ts`, `generateStaticParams`, `setRequestLocale` y el paso explícito del `locale` en `generateMetadata`.
+- [EspoCRM · Entity Manager](https://docs.espocrm.com/administration/entity-manager/) - confirma el prefijo `c` automático y el parámetro `customPrefixDisabled`.
+- [AEPD · FAQ-0248, sobre si el usuario tiene que dar consentimiento a la cláusula de privacidad](https://www.aepd.es/preguntas-frecuentes/2-tus-obligaciones-como-responsable-del-tratamiento/6-el-deber-de-informacion/FAQ-0248-sobre-si-el-usuario-tiene-que-dar-consentimiento-a-clausula-de-privacidad) - confirma la distinción entre informar y consentir, y el valor de la casilla como acreditación de la información facilitada.
 
 ### B.7 Segunda revisión técnica (B08–B10)
 
@@ -3270,14 +3270,14 @@ Una segunda revisión, tras aplicar la primera, encontró dos fallos nuevos **in
 
 #### Fuentes verificadas para esta segunda revisión
 
-- [Next.js · Content Security Policy](https://nextjs.org/docs/app/guides/content-security-policy) — confirma que los nonces exigen renderizado dinámico y desactivan la optimización estática, y que el SRI por hashes es experimental y solo App Router.
-- [Next.js · `output`](https://nextjs.org/docs/app/api-reference/config/next-config-js/output) — confirma que el `server.js` de `standalone` no copia `public` ni `.next/static`, y da el comando exacto de copia y arranque.
+- [Next.js · Content Security Policy](https://nextjs.org/docs/app/guides/content-security-policy) - confirma que los nonces exigen renderizado dinámico y desactivan la optimización estática, y que el SRI por hashes es experimental y solo App Router.
+- [Next.js · `output`](https://nextjs.org/docs/app/api-reference/config/next-config-js/output) - confirma que el `server.js` de `standalone` no copia `public` ni `.next/static`, y da el comando exacto de copia y arranque.
 
-> **Una matización a la revisión recibida:** afirmaba que el SRI experimental está «ligado a Webpack, no a Turbopack». La documentación de Next no dice eso — lo describe como experimental y solo para App Router, sin restringirlo a un empaquetador. El plan recoge la limitación real (experimental, App Router, solo scripts de build) sin añadir una que no está documentada. Aun así, la conclusión de la revisión se mantiene: hay que elegir una estrategia y no dejar las tres implícitas.
+> **Una matización a la revisión recibida:** afirmaba que el SRI experimental está «ligado a Webpack, no a Turbopack». La documentación de Next no dice eso - lo describe como experimental y solo para App Router, sin restringirlo a un empaquetador. El plan recoge la limitación real (experimental, App Router, solo scripts de build) sin añadir una que no está documentada. Aun así, la conclusión de la revisión se mantiene: hay que elegir una estrategia y no dejar las tres implícitas.
 
 ### B.8 Estado resultante
 
-**Aprobado para implementación por fases.** Las fases 0 a 5 —infraestructura, diseño, i18n, páginas estáticas y motor PBCG— no dependen de ningún pendiente y pueden empezar de inmediato.
+**Aprobado para implementación por fases.** Las fases 0 a 5 -infraestructura, diseño, i18n, páginas estáticas y motor PBCG- no dependen de ningún pendiente y pueden empezar de inmediato.
 
 Quedan condicionadas: la **integración real con EspoCRM** (P14, P15, P25), el **CMP** (P12), el **SEO y las redirecciones** (P4, P23, P24) y la **puesta en producción** (P26, P27). Y la **base jurídica** (P22) antes de publicar cualquier formulario.
 
@@ -3332,7 +3332,7 @@ Aplicación de **ISNLA-DOC-0008-MIG-01**. Este anexo registra qué cambió, qué
 
 **1 · `allowBuilds` no existe en pnpm 10.** El documento fijaba pnpm **10.34.5** y a la vez usaba `allowBuilds`, que es un mapa introducido en **pnpm 11** como sustituto de `onlyBuiltDependencies`. Con la versión 10 fijada, `allowBuilds` **se ignora en silencio** y se pierde justo el control que se pretendía tener sobre los scripts de instalación. Se usa `onlyBuiltDependencies` (lista). Corregido en la [Fase 0](#fase-0--preparación).
 
-Y por la misma razón, los demás ajustes de endurecimiento que proponía —`strictDepBuilds`, `blockExoticSubdeps`, `trustPolicy`— **hay que verificarlos uno por uno contra la versión instalada**: un ajuste que no existe no da error, simplemente no protege.
+Y por la misma razón, los demás ajustes de endurecimiento que proponía -`strictDepBuilds`, `blockExoticSubdeps`, `trustPolicy`- **hay que verificarlos uno por uno contra la versión instalada**: un ajuste que no existe no da error, simplemente no protege.
 
 **2 · El `window_size` de Netlify no admite 600 segundos.** El documento definía ventanas de 600 s para expresar «5 por 10 minutos». **El rango válido es 60–180 s.** Los límites de negocio de 10 minutos se implementan en el gateway, y Netlify hace la protección gruesa con ventanas de 180 s. Corregido en [6.3](#63-el-proxy-firmado-de-netlify).
 
@@ -3340,11 +3340,11 @@ Se añade además un límite que el documento no mencionaba: Netlify permite **2
 
 ### C.5 Matizaciones
 
-**Los Route Handlers sí funcionan con `output: 'export'`** — solo `GET` y resolviéndose a un fichero estático en build. El documento los prohibía como si fuera una imposición técnica. Se mantiene la prohibición, pero **como decisión de endurecimiento**, y así queda escrito: evita que alguien empiece con un `GET` inocente y acabe necesitando leer la petición. Un junior que lea «no se puede» y luego compruebe que sí se puede, dejará de confiar en el resto del documento.
+**Los Route Handlers sí funcionan con `output: 'export'`** - solo `GET` y resolviéndose a un fichero estático en build. El documento los prohibía como si fuera una imposición técnica. Se mantiene la prohibición, pero **como decisión de endurecimiento**, y así queda escrito: evita que alguien empiece con un `GET` inocente y acabe necesitando leer la petición. Un junior que lea «no se puede» y luego compruebe que sí se puede, dejará de confiar en el resto del documento.
 
 **`server-only` no es peligroso.** El documento lo incluía en la lista de prohibiciones sin explicar por qué, y su función es precisamente evitar filtraciones. Se prohíbe porque en esta arquitectura **no hay código de servidor en el sitio**, así que su presencia significa que alguien lo ha reintroducido. Es un detector, no una amenaza.
 
-**Sobre el aviso de React Server Components:** el documento hacía bien en corregir la idea de que un Server Component sea inseguro por sí mismo. Lo peligroso es el runtime que atiende peticiones. Por eso la regla es *«mínimo de Client Components y ningún runtime»*, no *«pocos Server Components»* — y eso además es lo que reduce el JavaScript enviado al navegador.
+**Sobre el aviso de React Server Components:** el documento hacía bien en corregir la idea de que un Server Component sea inseguro por sí mismo. Lo peligroso es el runtime que atiende peticiones. Por eso la regla es *«mínimo de Client Components y ningún runtime»*, no *«pocos Server Components»* - y eso además es lo que reduce el JavaScript enviado al navegador.
 
 ### C.6 Lo que la migración **no** cambia
 
@@ -3363,13 +3363,13 @@ Se conservan íntegros: el sistema de diseño y sus tokens, el copy de los dos J
 
 ### C.8 Fuentes verificadas
 
-- [Netlify · Rewrites and proxies](https://docs.netlify.com/manage/routing/redirects/rewrites-proxies/) — proxy firmado, `x-nf-sign`, claims del JWS y scope `Runtime`.
-- [Netlify · Rate limiting](https://docs.netlify.com/manage/security/secure-access-to-sites/rate-limiting/) — sintaxis, rango de `window_size` y número de reglas por plan.
-- [Next.js · Static exports](https://nextjs.org/docs/app/guides/static-exports) — funciones soportadas y no soportadas.
-- [Next.js · Content Security Policy](https://nextjs.org/docs/app/guides/content-security-policy) — los nonces exigen renderizado dinámico.
-- [React · Critical security vulnerability in React Server Components](https://react.dev/blog/2025/12/03/critical-security-vulnerability-in-react-server-components) — CVE-2025-55182 y el alcance real.
-- [pnpm · Settings](https://pnpm.io/settings) y [pnpm 11 release notes](https://pnpm.io/blog/releases/11.0) — `onlyBuiltDependencies` frente a `allowBuilds`.
-- [GitHub · Dependabot options reference](https://docs.github.com/en/code-security/reference/supply-chain-security/dependabot-options-reference) — `cooldown` y que no aplica a actualizaciones de seguridad.
+- [Netlify · Rewrites and proxies](https://docs.netlify.com/manage/routing/redirects/rewrites-proxies/) - proxy firmado, `x-nf-sign`, claims del JWS y scope `Runtime`.
+- [Netlify · Rate limiting](https://docs.netlify.com/manage/security/secure-access-to-sites/rate-limiting/) - sintaxis, rango de `window_size` y número de reglas por plan.
+- [Next.js · Static exports](https://nextjs.org/docs/app/guides/static-exports) - funciones soportadas y no soportadas.
+- [Next.js · Content Security Policy](https://nextjs.org/docs/app/guides/content-security-policy) - los nonces exigen renderizado dinámico.
+- [React · Critical security vulnerability in React Server Components](https://react.dev/blog/2025/12/03/critical-security-vulnerability-in-react-server-components) - CVE-2025-55182 y el alcance real.
+- [pnpm · Settings](https://pnpm.io/settings) y [pnpm 11 release notes](https://pnpm.io/blog/releases/11.0) - `onlyBuiltDependencies` frente a `allowBuilds`.
+- [GitHub · Dependabot options reference](https://docs.github.com/en/code-security/reference/supply-chain-security/dependabot-options-reference) - `cooldown` y que no aplica a actualizaciones de seguridad.
 
 ---
 

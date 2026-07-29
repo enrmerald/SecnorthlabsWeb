@@ -14,7 +14,7 @@ import type { Logotipo } from '@/config/logos'
  * Fortinet, todas «+ gestion ISN Labs».
  *
  * El logotipo va dentro de una **capsula clara**, que es lo que permite usar la
- * version positiva de cada marca —la disenada para fondo claro— sobre un sitio
+ * version positiva de cada marca -la disenada para fondo claro- sobre un sitio
  * oscuro sin recolorear nada, cosa que el brief prohibe expresamente. El motivo
  * completo esta en `config/logos.ts`.
  *

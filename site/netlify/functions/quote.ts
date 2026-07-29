@@ -17,7 +17,7 @@ import {
 } from './_comun.ts'
 
 /**
- * `POST /api/quote` — cotización del PBCG con el precio en pantalla.
+ * `POST /api/quote` - cotización del PBCG con el precio en pantalla.
  *
  * ═══════════════════════════════════════════════════════════════════════════
  * ESTA ES LA VARIANTE HÍBRIDA de MIG-02 §0.4, adoptada por decisión de Dirección
@@ -26,7 +26,7 @@ import {
  *
  * Lo que eso NO significa: las tarifas no viajan al navegador. El código de una
  * Netlify Function se ejecuta en servidor y el visitante nunca lo descarga. El
- * bloqueante B01 original —el modelo publicado en el JavaScript del cliente—
+ * bloqueante B01 original -el modelo publicado en el JavaScript del cliente-
  * sigue cerrado, y `verify:architecture` lo comprueba en cada build prohibiendo
  * que `src/` importe de `pbcg/`.
  *

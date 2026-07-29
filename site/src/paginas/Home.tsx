@@ -10,7 +10,7 @@ import { getLocalizedPath, type Locale } from '@/config/routes'
 import { cargarMensajes } from '@/i18n/mensajes'
 
 /**
- * Home — `/es/` y `/en/` (seccion 4.1, mockup image3.png).
+ * Home - `/es/` y `/en/` (seccion 4.1, mockup image3.png).
  *
  * Componente de build entero: no lleva ni una linea de JavaScript propio.
  *

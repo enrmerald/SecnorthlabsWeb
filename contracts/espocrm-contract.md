@@ -22,7 +22,7 @@ El volcado que se intentó el 28/07/2026 llegó **filtrado por permisos**: devol
 15 entidades y `Lead` con un único campo (`source`). El usuario de API no tiene
 visibilidad de metadatos suficiente, así que hay que usar una de estas dos vías:
 
-**Opción 1 — con clave de administrador:**
+**Opción 1 - con clave de administrador:**
 
 ```bash
 curl -s -H "X-Api-Key: <CLAVE_DE_ADMIN>" \
@@ -30,7 +30,7 @@ curl -s -H "X-Api-Key: <CLAVE_DE_ADMIN>" \
   | jq '.entityDefs.Lead.fields | keys'
 ```
 
-**Opción 2 — desde la interfaz:** Administración → Entity Manager → Lead →
+**Opción 2 - desde la interfaz:** Administración → Entity Manager → Lead →
 Fields. Cada campo muestra su nombre de API en la ficha de detalle.
 
 ## Campos estándar
@@ -46,12 +46,12 @@ Verificados contra la definición de la entidad `Lead`.
 | `contact.phone` | `phoneNumber` | |
 | `contact.title` | `title` | Es campo **estándar**. No hace falta uno personalizado |
 | `data.message` | `description` | |
-| — | `status` | Fijar `"New"` |
-| — | `source` | Fijar `"Web Site"` |
+| - | `status` | Fijar `"New"` |
+| - | `source` | Fijar `"Web Site"` |
 
 ### Valores de enum confirmados
 
-`source` — verificado el 28/07/2026 contra la instancia real:
+`source` - verificado el 28/07/2026 contra la instancia real:
 
 ```
 "" · Call · Email · Existing Customer · Partner · Public Relations · Web Site · Campaign · Other
@@ -61,7 +61,7 @@ Verificados contra la definición de la entidad `Lead`.
 > `"calculadora-web"` hará que el campo falle o se descarte. El origen fino va
 > en el campo personalizado `origin`.
 
-`status` — **no verificado**: el volcado filtrado no devolvió sus opciones. Los
+`status` - **no verificado**: el volcado filtrado no devolvió sus opciones. Los
 valores por defecto de EspoCRM son `New`, `Assigned`, `In Process`, `Converted`,
 `Recycled`, `Dead`, pero **pueden haberse modificado desde Entity Manager**.
 
@@ -70,7 +70,7 @@ valores por defecto de EspoCRM son `New`, `Assigned`, `In Process`, `Converted`,
 Los nombres separan **información de privacidad** de **consentimiento de
 marketing**, que son dos cosas distintas. Llamar `cConsent` a la casilla
 obligatoria dejaría escrito en el CRM que el interesado «consintió» algo de lo
-que solo se le informó — precisamente la confusión que la AEPD señala.
+que solo se le informó - precisamente la confusión que la AEPD señala.
 
 | Campo a crear | Tipo | Contenido | Nombre real de API |
 |---|---|---|---|
@@ -98,8 +98,8 @@ pantalla.** Es la regla de la sección 5 del plan aplicada a la salida.
 ## Deduplicación
 
 Por **`webSubmissionId`**, no por email: dos solicitudes del mismo correo pueden
-ser dos oportunidades legítimas —una consulta en marzo y un presupuesto en
-julio— y consolidarlas perdería información comercial.
+ser dos oportunidades legítimas -una consulta en marzo y un presupuesto en
+julio- y consolidarlas perdería información comercial.
 
 Procedimiento: buscar por `webSubmissionId` → si existe, no crear → si no,
 crear y registrar el ID → si la creación devuelve un resultado incierto (timeout,

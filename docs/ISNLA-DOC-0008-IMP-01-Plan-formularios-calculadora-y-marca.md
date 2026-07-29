@@ -36,9 +36,9 @@ Hay dependencias reales: los mensajes son la base de los formularios, y el contr
 
 | # | Paso | Depende de | Commit |
 |---|---|---|---|
-| 1 | Retirar la newsletter | — | `chore(site): retirar la newsletter` |
-| 2 | Reescribir el namespace `calculator` al flujo con precio en pantalla | — | `feat(site): textos de la calculadora` |
-| 3 | Logotipos de ISN Labs y SentryN3t | — | `feat(site): logotipos de marca` |
+| 1 | Retirar la newsletter | - | `chore(site): retirar la newsletter` |
+| 2 | Reescribir el namespace `calculator` al flujo con precio en pantalla | - | `feat(site): textos de la calculadora` |
+| 3 | Logotipos de ISN Labs y SentryN3t | - | `feat(site): logotipos de marca` |
 | 4 | Netlify Function `quote` + `netlify.toml` | 2 | `feat(site): funcion de cotizacion` |
 | 5 | Cliente de API a `/api/quote` | 4 | incluido en 4 |
 | 6 | `ContactForm` completo | 2, 4 | `feat(site): formulario de contacto` |
@@ -59,7 +59,7 @@ site/messages/{es,en}.json                           quitar blog.newsletter.*
 site/src/config/routes.ts                            sin cambios
 ```
 
-**Consecuencia que hay que aceptar:** la justificación de que `/blog` fuese indexable era que «el bloque de newsletter sí es real y funcional». Al retirarlo, `/blog` queda como una página que dice «próximamente» y nada más — hasta que se migren los 26 artículos, que es el paso siguiente. Se mantiene indexable porque el contenido va a llegar; si la migración se retrasase, habría que replantearlo.
+**Consecuencia que hay que aceptar:** la justificación de que `/blog` fuese indexable era que «el bloque de newsletter sí es real y funcional». Al retirarlo, `/blog` queda como una página que dice «próximamente» y nada más - hasta que se migren los 26 artículos, que es el paso siguiente. Se mantiene indexable porque el contenido va a llegar; si la migración se retrasase, habría que replantearlo.
 
 ---
 
@@ -69,7 +69,7 @@ El namespace actual promete lo contrario de lo que se va a construir. Hay que qu
 
 | Clave | Problema |
 |---|---|
-| `leadGate.subtitle` | «Te mostramos la cuota orientativa al momento» — ahora sí es cierto, pero la redacción cambia |
+| `leadGate.subtitle` | «Te mostramos la cuota orientativa al momento» - ahora sí es cierto, pero la redacción cambia |
 | `result.recalculating`, `result.updated` | No hay recotización continua |
 | `errors.tokenCaducado` | No hay `submissionToken` |
 | `result.cta` «Recibir propuesta detallada» | Ya no hay un segundo paso: una sola solicitud |
@@ -109,7 +109,7 @@ Van **sin cápsula**: son logotipos claros sobre fondo oscuro, que es su uso pre
 
 ### El wordmark de texto no se borra
 
-`Logotipo.tsx` seguirá existiendo como respaldo. Motivo: la imagen tarda en cargar y el logotipo está en la primera pantalla, así que un `<img>` sin más produce un salto visible. Se resuelve con `width`/`height` y el hueco reservado, pero **el wordmark de texto sigue siendo lo que se usa en el correo** —donde las fuentes web no cargan pero tampoco se puede depender de imágenes bloqueadas— y en la 404 de último recurso.
+`Logotipo.tsx` seguirá existiendo como respaldo. Motivo: la imagen tarda en cargar y el logotipo está en la primera pantalla, así que un `<img>` sin más produce un salto visible. Se resuelve con `width`/`height` y el hueco reservado, pero **el wordmark de texto sigue siendo lo que se usa en el correo** -donde las fuentes web no cargan pero tampoco se puede depender de imágenes bloqueadas- y en la 404 de último recurso.
 
 ---
 

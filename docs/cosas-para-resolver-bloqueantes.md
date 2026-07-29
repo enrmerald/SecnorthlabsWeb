@@ -7,16 +7,16 @@
 5	Site ID de Netlify y secreto del proxy firmado	Sistemas	B
 6	Plan de Netlify contratado	Dirección	B
 7	Export del blog actual: artículos, formato e idiomas	Marketing	B
-8	Texto que se muestra al usuario tras enviar	Dirección	B — propuesta más abajo
+8	Texto que se muestra al usuario tras enviar	Dirección	B - propuesta más abajo
 9	Decisión pnpm 10 o 11	Desarrollo	B
 10	Elección de analítica	Dirección	B para la Fase 8
-11	Confirmar precios de licencia EDR y MDR	Dirección	C — afectan al precio publicado
+11	Confirmar precios de licencia EDR y MDR	Dirección	C - afectan al precio publicado
 12	Retención de las carpetas del buzón	Cumplimiento	C
 13	DPA de Resend aceptado y política de privacidad actualizada	Cumplimiento	C
 14	Export de URLs indexadas de Search Console	Marketing	C
 15	Teléfono de incidentes 24/7: existe o no	Dirección	C
-16	LinkedIn de empresa	Marketing	—
-17	Logos oficiales de Microsoft, Huntress, OPNsense, Fortinet, Ewala	Marketing	—
+16	LinkedIn de empresa	Marketing	-
+17	Logos oficiales de Microsoft, Huntress, OPNsense, Fortinet, Ewala	Marketing	-
 18	EspoCRM: equipo, usuario de API, campos y su Metadata	Sistemas	Bloquea el servicio externo, no a mí
 
 # 1. Cuenta registrada con: soportedesarrollo@ewala.es  Dominio: secnorthlabs.eu

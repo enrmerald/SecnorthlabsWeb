@@ -5,7 +5,7 @@ import { getLocalizedPath, type Locale } from '@/config/routes'
 import { cargarMensajes } from '@/i18n/mensajes'
 
 /**
- * Sectores — `/es/sectores/` (seccion 4.8, mockup image7.png).
+ * Sectores - `/es/sectores/` (seccion 4.8, mockup image7.png).
  *
  * Siete sectores en rejilla de tres columnas en escritorio y una en movil, con
  * su driver regulatorio como etiqueta, y la nota sobre el RGPD transversal.

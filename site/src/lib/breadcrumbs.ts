@@ -12,7 +12,7 @@ export interface TramoMensaje {
  *
  * `routeId: null` significa dos cosas distintas y las dos acaban sin enlace: o
  * es la pagina actual, o es un nivel intermedio que no tiene pagina propia
- * —«Soluciones» no existe como URL, pero si aparece en la jerarquia del brief—.
+ * -«Soluciones» no existe como URL, pero si aparece en la jerarquia del brief-.
  *
  * Una ruta desactivada tampoco se enlaza: la regla general del plan es que o el
  * destino es real, o el elemento no se enlaza.

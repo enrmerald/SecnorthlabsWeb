@@ -110,8 +110,8 @@ async function* walk(dir) {
 /**
  * El modelo economico ya no vive en otro repositorio.
  *
- * Al adoptar la variante hibrida —precio instantaneo, con el motor PBCG
- * ejecutandose en una Netlify Function dentro de este mismo proyecto— se pierde
+ * Al adoptar la variante hibrida -precio instantaneo, con el motor PBCG
+ * ejecutandose en una Netlify Function dentro de este mismo proyecto- se pierde
  * la garantia estructural que daba la separacion de repositorios: antes el
  * motor simplemente no estaba aqui, asi que no habia forma de filtrarlo.
  *

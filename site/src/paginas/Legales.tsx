@@ -6,7 +6,7 @@ import { EMPRESA } from '@/lib/empresa'
 import type { TramoBreadcrumb } from '@/lib/tipos'
 
 /**
- * Paginas legales — `/politica-privacidad/`, `/aviso-legal/` y `/cookies/`
+ * Paginas legales - `/politica-privacidad/`, `/aviso-legal/` y `/cookies/`
  * (secciones 4.13 a 4.15).
  *
  * **El texto se porta palabra por palabra desde la SPA actual.** No se reescribe
@@ -16,8 +16,8 @@ import type { TramoBreadcrumb } from '@/lib/tipos'
  *
  * Un cambio si se ha hecho, y es una correccion de dato: los datos del
  * responsable estaban **incrustados en el JSX** de `Privacidad.tsx` y
- * `Aviso.tsx`, no en el JSON, y la razon social que figuraba —«Innovation &
- * NORTH LABS SL»— no es la denominacion registrada. Ahora salen de
+ * `Aviso.tsx`, no en el JSON, y la razon social que figuraba -«Innovation &
+ * NORTH LABS SL»- no es la denominacion registrada. Ahora salen de
  * `lib/empresa.ts`, que es la unica fuente de datos de empresa del sitio.
  */
 

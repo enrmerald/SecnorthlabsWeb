@@ -70,7 +70,7 @@ export function NavbarCliente({
   // sobre la pagina nueva.
   //
   // Se ajusta durante el render y no en un efecto. Un efecto que llama a
-  // setState provoca un render en cascada —React lo senala— y ademas deja
+  // setState provoca un render en cascada -React lo senala- y ademas deja
   // pintar un fotograma con el menu todavia abierto. Esta es la forma que
   // documenta React para reaccionar a un cambio de entrada. Cubre tambien la
   // navegacion con los botones de atras y adelante del navegador.
@@ -212,8 +212,8 @@ export function NavbarCliente({
             </button>
 
             {desplegableAbierto && (
-              /* Desplegable: superficie elevada de verdad —borde, sombra y un
-                 fondo mas claro que la barra—, entrada corta y una barra de
+              /* Desplegable: superficie elevada de verdad -borde, sombra y un
+                 fondo mas claro que la barra-, entrada corta y una barra de
                  acento que aparece en el elemento apuntado. Cada entrada es un
                  objetivo de 44px, no una linea de texto de dieciseis. */
               <ul

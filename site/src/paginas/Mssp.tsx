@@ -8,7 +8,7 @@ import { getLocalizedPath, type Locale } from '@/config/routes'
 import { cargarMensajes } from '@/i18n/mensajes'
 
 /**
- * MSSP — `/es/soluciones/mssp/` (seccion 4.2, mockup image4.png).
+ * MSSP - `/es/soluciones/mssp/` (seccion 4.2, mockup image4.png).
  *
  * Dos secciones simetricas con distinto acento: `/01` IT en cian con CTA a la
  * calculadora, `/02` OT en verde con CTA a contacto. Los `id` de las secciones

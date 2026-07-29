@@ -9,7 +9,7 @@ Fuente de verdad compartida por los **tres consumidores** del contrato:
 | Servicio local | Repositorio externo, Python | Descifra, verifica y escribe en EspoCRM |
 
 **Si esto no está en un solo sitio, los tres se desincronizan y el síntoma es el
-peor posible: no hay error.** Un campo que no casa no revienta nada — el dato
+peor posible: no hay error.** Un campo que no casa no revienta nada - el dato
 llega, no se reconoce y desaparece. Es el mismo fallo que el plan describe con
 los nombres de campo de EspoCRM.
 

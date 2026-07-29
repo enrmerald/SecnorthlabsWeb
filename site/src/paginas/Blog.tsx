@@ -5,7 +5,7 @@ import type { Locale } from '@/config/routes'
 import { cargarMensajes } from '@/i18n/mensajes'
 
 /**
- * Blog — `/es/blog/` (seccion 4.9, mockup image8.png).
+ * Blog - `/es/blog/` (seccion 4.9, mockup image8.png).
  *
  * **Opcion A del plan: pagina «proximamente», indexable.**
  *

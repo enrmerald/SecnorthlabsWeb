@@ -13,7 +13,7 @@ import { getLocalizedPath, type Locale } from '@/config/routes'
 import { cargarMensajes } from '@/i18n/mensajes'
 
 /**
- * Software y licencias — `/es/software/` (seccion 4.7, mockup image6.png).
+ * Software y licencias - `/es/software/` (seccion 4.7, mockup image6.png).
  * Pagina marcada como **clave** en el brief.
  *
  * Dos restricciones que condicionan todo lo que se pinta aqui:
@@ -48,7 +48,7 @@ export function Software({ locale }: { locale: Locale }) {
 
           {/* Aqui el logotipo SI acompana al titular, al contrario que en la
               banda de la Home: ese H2 es una frase que repite el nombre
-              («SentryN3t — NDR con IA…») y este es el nombre a secas, asi que el
+              («SentryN3t - NDR con IA…») y este es el nombre a secas, asi que el
               logotipo lo ilustra en lugar de duplicarlo. El H2 sigue siendo
               texto, que es lo que leen los rastreadores. */}
           {/* El logotipo va DENTRO del h2, no al lado. El encabezado de esta

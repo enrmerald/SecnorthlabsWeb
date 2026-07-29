@@ -86,8 +86,8 @@
 
   /* Deliberadamente NO se pone `overflow-x: hidden` en body.
      Haria dos danos: convierte body en contenedor de scroll y rompe
-     `position: sticky` en sus descendientes —justo lo que necesitan la
-     navegacion fija y el panel lateral de la calculadora—, y ademas esconde los
+     `position: sticky` en sus descendientes -justo lo que necesitan la
+     navegacion fija y el panel lateral de la calculadora-, y ademas esconde los
      desbordes en lugar de arreglarlos, que es como se llega a una web que
      "responde" pero no se puede usar. El suelo de 320px sin scroll horizontal
      se garantiza con la prueba E2E de la seccion 12.5, que compara

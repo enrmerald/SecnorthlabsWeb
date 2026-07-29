@@ -8,7 +8,7 @@ import { EMPRESA, INCIDENT_PHONE, PRIVACY_VERSION, MARKETING_TEXT_VERSION } from
 import { getLocalizedPath } from "@/config/routes";
 
 /**
- * Contacto — `/es/contacto/` (seccion 4.11, mockup image10.png). Pagina clave.
+ * Contacto - `/es/contacto/` (seccion 4.11, mockup image10.png). Pagina clave.
  *
  * Dos columnas: formulario a la izquierda y rail derecho con tres tarjetas.
  */

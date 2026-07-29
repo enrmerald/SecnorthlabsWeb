@@ -9,8 +9,8 @@ Implementa `ISNLA-DOC-0008-01` (plan de implementacion, revision 01-d).
 ## La regla que explica todo lo demas
 
 **En produccion no corre ningun runtime de Next.** El artefacto `out/` contiene
-solo HTML, CSS, JavaScript, imagenes y fuentes. Todo el computo —motor de la
-calculadora PBCG, acceso a EspoCRM, SMTP y bandeja de salida— vive en el **Web
+solo HTML, CSS, JavaScript, imagenes y fuentes. Todo el computo -motor de la
+calculadora PBCG, acceso a EspoCRM, SMTP y bandeja de salida- vive en el **Web
 Gateway**, que es otro despliegue y, en cuanto se separen los repositorios, otro
 repositorio.
 
@@ -70,7 +70,7 @@ que invocar ESLint directamente, que es lo que hace `pnpm lint`.
 site/
 ├── assets/images/       originales, FUERA de public/, procesados en build
 ├── e2e/                 Playwright
-├── messages/            es.json y en.json — todo el copy visible
+├── messages/            es.json y en.json - todo el copy visible
 ├── scripts/             clean, images, y los verificadores de arquitectura
 ├── src/
 │   ├── app/[locale]/    App Router. Una sola ruta atrapatodo, por manifiesto

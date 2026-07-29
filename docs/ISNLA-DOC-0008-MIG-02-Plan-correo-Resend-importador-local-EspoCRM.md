@@ -80,7 +80,7 @@ SMTP se usa para **enviar** mensajes.
 
 Para recibir o leer el buzón se utilizará:
 
-- **Microsoft Graph**, si el buzón está en Microsoft 365 — opción recomendada;
+- **Microsoft Graph**, si el buzón está en Microsoft 365 - opción recomendada;
 - **IMAP sobre TLS con OAuth 2.0**, si el proveedor no es Microsoft 365;
 - nunca POP3;
 - nunca autenticación básica si el proveedor admite OAuth;
@@ -1283,7 +1283,7 @@ Por eso:
 
 # 12 · Método de lectura del buzón
 
-## 12.1 Microsoft 365 — recomendado
+## 12.1 Microsoft 365 - recomendado
 
 Usar Microsoft Graph.
 
@@ -1352,7 +1352,7 @@ Si queda inválido:
 3. deduplicar por IDs;
 4. no recrear Leads.
 
-## 12.5 IMAP — fallback
+## 12.5 IMAP - fallback
 
 Si el buzón no es Microsoft 365:
 
@@ -2490,7 +2490,7 @@ Si se usa Docker:
 
 ---
 
-# 29 · Power Automate detallado — solo alternativa
+# 29 · Power Automate detallado - solo alternativa
 
 ## 29.1 Requisitos
 

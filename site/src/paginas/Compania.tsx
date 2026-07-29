@@ -7,7 +7,7 @@ import { getLocalizedPath, type Locale } from '@/config/routes'
 import { cargarMensajes } from '@/i18n/mensajes'
 
 /**
- * Compania — `/es/compania/` (seccion 4.10, mockup image9.png).
+ * Compania - `/es/compania/` (seccion 4.10, mockup image9.png).
  *
  * Hero, fila de cuatro diferenciadores, `/01` por que existimos, `/02` como
  * trabajamos y `/03` equipo con ocho roles.

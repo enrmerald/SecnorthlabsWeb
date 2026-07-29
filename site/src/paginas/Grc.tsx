@@ -9,7 +9,7 @@ import { getLocalizedPath, type Locale } from '@/config/routes'
 import { cargarMensajes } from '@/i18n/mensajes'
 
 /**
- * GRC — `/es/soluciones/grc/` (seccion 4.5, mockup image5.png).
+ * GRC - `/es/soluciones/grc/` (seccion 4.5, mockup image5.png).
  *
  * > **Las cuatro tarjetas de marco se renderizan SIN enlace.** El brief marca
  * > cada marco (ENS, ISO 42001, ISO 27001, NIS2) como landing SEO propia en

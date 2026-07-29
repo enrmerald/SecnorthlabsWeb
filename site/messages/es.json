@@ -17,7 +17,7 @@
     },
     "seo": {
       "description": "Análisis accionable de NIS2, DORA, ISO 27001, ENS, RGPD y respuesta a incidentes para CISOs y responsables de cumplimiento.",
-      "title": "Blog de ciberseguridad y cumplimiento (NIS2, DORA, ISO) — ISN Labs"
+      "title": "Blog de ciberseguridad y cumplimiento (NIS2, DORA, ISO) - ISN Labs"
     },
     "soon": {
       "body": "Publicaremos dos análisis al mes sobre NIS2, DORA, ISO 27001, ENS, RGPD y respuesta a incidentes. El ángulo será siempre el mismo: qué significa, a quién afecta y qué hacer.",
@@ -144,7 +144,7 @@
     },
     "seo": {
       "description": "Estima en un minuto la cuota mensual del Plan Base de Ciberseguridad Gestionada según tu número de sedes, usuarios, servidores y módulo de cumplimiento.",
-      "title": "Calculadora del Plan Base de Ciberseguridad Gestionada — ISN Labs"
+      "title": "Calculadora del Plan Base de Ciberseguridad Gestionada - ISN Labs"
     },
     "servicios": {
       "backup": {
@@ -329,7 +329,7 @@
       "ctaSecondary": "Contactar",
       "seo": {
         "description": "La página que buscas no existe o ha cambiado de dirección.",
-        "title": "Página no encontrada — ISN Labs"
+        "title": "Página no encontrada - ISN Labs"
       },
       "subtitle": "La dirección que has abierto no corresponde a ninguna página del sitio. Puede que haya cambiado o que el enlace esté mal escrito.",
       "title": "Esta página",
@@ -667,7 +667,7 @@
     },
     "seo": {
       "description": "Cuéntanos tu contexto IT/OT y te respondemos en menos de 24 h laborables. Diagnóstico inicial sin compromiso.",
-      "title": "Contacto — Solicita información o una demo | ISN Labs"
+      "title": "Contacto - Solicita información o una demo | ISN Labs"
     }
   },
   "cookies": {
@@ -688,7 +688,7 @@
     },
     "seo": {
       "description": "Qué cookies y tecnologías utiliza la web de ISN Labs, con qué finalidad y cómo gestionarlas.",
-      "title": "Política de cookies — ISN Labs"
+      "title": "Política de cookies - ISN Labs"
     },
     "title": "POLÍTICA DE",
     "titleHighlight": "COOKIES"
@@ -771,7 +771,7 @@
     },
     "seo": {
       "description": "Adecuación y certificación ENS, ISO 27001, ISO 42001 y NIS2, más RGPD, DPO as a Service y Plan Director. Cumplimiento proporcional.",
-      "title": "Consultoría GRC: ENS, ISO 27001, ISO 42001 y NIS2 — ISN Labs"
+      "title": "Consultoría GRC: ENS, ISO 27001, ISO 42001 y NIS2 - ISN Labs"
     },
     "why": {
       "items": [
@@ -823,7 +823,7 @@
     "idiNote": "Consulta también nuestros servicios de I+D+i (proyectos en colaboración y financiación) en la página de GRC.",
     "seo": {
       "description": "Todos los servicios de Gobierno, Riesgo y Cumplimiento: ENS, ISO 27001/27701/22301/42001, NIS2, RGPD, DPO as a Service, SGSI, Plan Director y vCISO.",
-      "title": "Catálogo de servicios GRC — ISN Labs"
+      "title": "Catálogo de servicios GRC - ISN Labs"
     },
     "services": [
       {
@@ -974,7 +974,7 @@
       "description": "Detección de anomalías en el tráfico de red sin agentes, sin firmas y sin impacto en la operación. Inventario pasivo de cada activo y visibilidad total antes de que ocurra el incidente. Producto europeo, alineado con NIS2 e IEC 62443. Lo desplegamos, operamos e integramos como parte de tu servicio gestionado.",
       "kicker": "Tecnología destacada",
       "note": "En ewala.es · marca de Ewala",
-      "title": "SentryN3t — NDR con IA para OT/IoT/IT"
+      "title": "SentryN3t - NDR con IA para OT/IoT/IT"
     },
     "seo": {
       "description": "Seguridad gestionada (MSSP) y cumplimiento (GRC) bajo un mismo techo. Detección con IA en IT y OT, NIS2, DORA, ISO 27001, ENS y RGPD.",
@@ -1045,7 +1045,7 @@
     },
     "seo": {
       "description": "Condiciones de acceso, navegación y uso de la web de ISN Labs, propiedad intelectual, enlaces y jurisdicción aplicable.",
-      "title": "Aviso legal — ISN Labs"
+      "title": "Aviso legal - ISN Labs"
     },
     "title": "AVISO",
     "titleHighlight": "LEGAL"
@@ -1130,14 +1130,14 @@
           "Reporte periódico 8x5 o 24x7"
         ],
         "label": "Servicio principal",
-        "title": "Monitorización continua — detección y respuesta"
+        "title": "Monitorización continua - detección y respuesta"
       },
       "kicker": "MSSP · Ciberseguridad OT / Industrial",
       "title": "Seguridad industrial sin frenar la producción"
     },
     "seo": {
       "description": "Plan Base de Ciberseguridad Gestionada (PBCG), SOC 24/7 y monitorización OT con SentryN3t. Un solo equipo para IT y OT.",
-      "title": "Servicios MSSP IT y OT | Ciberseguridad gestionada — ISN Labs"
+      "title": "Servicios MSSP IT y OT | Ciberseguridad gestionada - ISN Labs"
     }
   },
   "msspItCatalog": {
@@ -1314,7 +1314,7 @@
     },
     "seo": {
       "description": "Todos los servicios MSSP IT: monitorización (PBCG, SOC 24/7, NDR), auditorías, perímetro, endpoints, soporte, testing y formación.",
-      "title": "Catálogo de servicios de Ciberseguridad IT — ISN Labs"
+      "title": "Catálogo de servicios de Ciberseguridad IT - ISN Labs"
     }
   },
   "msspOtCatalog": {
@@ -1441,7 +1441,7 @@
     },
     "seo": {
       "description": "Todos los servicios MSSP OT: arquitectura e inventario, NDR SentryN3t, perímetro industrial, auditoría OT/ICS y formación de planta.",
-      "title": "Catálogo de servicios de Ciberseguridad OT / Industrial — ISN Labs"
+      "title": "Catálogo de servicios de Ciberseguridad OT / Industrial - ISN Labs"
     }
   },
   "privacy": {
@@ -1533,7 +1533,7 @@
     },
     "seo": {
       "description": "Cómo trata ISN Labs (Innovation and Security North Labs SL) los datos personales: finalidades, base de legitimación, conservación y derechos.",
-      "title": "Política de privacidad — ISN Labs"
+      "title": "Política de privacidad - ISN Labs"
     },
     "title": "Política de",
     "titleHighlight": "Privacidad"
@@ -1599,7 +1599,7 @@
     "note": "El RGPD/LOPDGDD aplica de forma transversal a todos los sectores.",
     "seo": {
       "description": "Protección IT/OT para industria, agroalimentario, energía, sanidad y cadena de suministro (NIS2), administración pública (ENS) y finanzas (DORA).",
-      "title": "Ciberseguridad por sectores: industria, energía, salud — ISN Labs"
+      "title": "Ciberseguridad por sectores: industria, energía, salud - ISN Labs"
     }
   },
   "software": {
@@ -1718,7 +1718,7 @@
     },
     "seo": {
       "description": "NDR SentryN3t (Ewala) y licencias Microsoft, Huntress, OPNsense y Fortinet, desplegadas y gestionadas por ISN Labs. Propuesta a medida.",
-      "title": "Software y licencias: SentryN3t, Microsoft, Huntress, OPNsense, Fortinet — ISN Labs"
+      "title": "Software y licencias: SentryN3t, Microsoft, Huntress, OPNsense, Fortinet - ISN Labs"
     },
     "tiers": {
       "cta": "Solicitar",

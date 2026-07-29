@@ -6,18 +6,18 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 Dos carpetas y una raiz, sin workspace que las una:
 
-- **`site/`** — **todo el sitio**. Next.js 16 (App Router) con `output: 'export'`,
+- **`site/`** - **todo el sitio**. Next.js 16 (App Router) con `output: 'export'`,
   las 32 paginas estaticas, las dos Netlify Functions de ingestion y el motor
   PBCG. Aqui ocurre todo el desarrollo.
-- **`contracts/`** — contrato de ingestion, mapeo de enums y los vectores de oro
+- **`contracts/`** - contrato de ingestion, mapeo de enums y los vectores de oro
   del PBCG, compartidos con el servicio local de importacion, que es externo a
   este repositorio.
-- **`docs/`** — especificacion (`ISNLA-DOC-XXXX-YY-...`). No se compila.
+- **`docs/`** - especificacion (`ISNLA-DOC-XXXX-YY-...`). No se compila.
   **`docs/*.xlsx` esta en `.gitignore`**: contiene tarifas y datos reales de
   clientes. Y `docs/*-metadata-*.md`, que puede llevar claves de API.
-- **`index.html`** (raiz) — pagina «En Construccion». Es lo que sirve el dominio
+- **`index.html`** (raiz) - pagina «En Construccion». Es lo que sirve el dominio
   hoy. No comparte codigo con nada.
-- **`claves/`** — material criptografico. **Nunca en git** (ver `.gitignore`).
+- **`claves/`** - material criptografico. **Nunca en git** (ver `.gitignore`).
 
 ### Dentro de `site/`
 
@@ -38,12 +38,12 @@ sustituye a la garantia que daba tener el motor en otro repositorio.
 
 ### Lo que ya no existe
 
-- **`web/`** — la SPA de Vite. Eliminada: su texto legal esta portado palabra por
+- **`web/`** - la SPA de Vite. Eliminada: su texto legal esta portado palabra por
   palabra (98 de 101 cadenas identicas; las 3 restantes eran los enlaces «volver
   al inicio», sustituidos por migas de pan) y su inventario de URLs quedo
   recogido en las redirecciones de `netlify.toml`. Sigue en el commit de baseline
   `dba82ef` si hace falta consultarla.
-- **`gateway/`** — el Web Gateway publico con Fastify. Cancelado por
+- **`gateway/`** - el Web Gateway publico con Fastify. Cancelado por
   ISNLA-DOC-0008-MIG-02: EspoCRM no se expone, y la ingestion pasa por correo
   cifrado con un importador local. El motor se movio a `site/pbcg/`.
 
@@ -89,35 +89,35 @@ No hay CI ni framework de tests unificado entre carpetas.
 
 **Una sola ruta física resuelve las 15 páginas del sitio.** `src/app/[locale]/[[...slug]]/page.tsx` es un catch-all con `generateStaticParams()` y `dynamicParams = false` (obligatorio con exportación estática). No hay un `page.tsx` por sección: el contenido real vive en `src/paginas/` (Home, Mssp, Grc, Catalogos, Software, Sectores, Compania, Contacto, Blog, Legales, NoEncontrada), y `src/paginas/registro.tsx` mapea cada `RouteId` a su componente renderer.
 
-**`src/config/routes.ts` es el manifiesto central de rutas** — única fuente de verdad, consumida por navegación, pie, selector de idioma, `generateStaticParams`, metadatos, sitemap y breadcrumbs. Define 15 `RouteId` (home, mssp, msspIt, msspOt, grc, grcCatalog, software, sectors, company, contact, calculator, blog, privacy, legal, cookies, notFound) con slugs **traducidos** por idioma (`/es/soluciones/mssp/` ↔ `/en/solutions/mssp/`). No añadas una ruta sin registrarla aquí; `check:routes` falla si no coincide.
+**`src/config/routes.ts` es el manifiesto central de rutas** - única fuente de verdad, consumida por navegación, pie, selector de idioma, `generateStaticParams`, metadatos, sitemap y breadcrumbs. Define 15 `RouteId` (home, mssp, msspIt, msspOt, grc, grcCatalog, software, sectors, company, contact, calculator, blog, privacy, legal, cookies, notFound) con slugs **traducidos** por idioma (`/es/soluciones/mssp/` ↔ `/en/solutions/mssp/`). No añadas una ruta sin registrarla aquí; `check:routes` falla si no coincide.
 
-**i18n vive bajo `/es/` y `/en/`, nunca en `/`.** No hay detección de `Accept-Language`, ni cookie de idioma, ni redirección por ubicación — el idioma solo cambia con acción explícita del usuario. `src/i18n/mensajes.ts` + `request.ts` (next-intl) cargan `messages/es.json` y `messages/en.json`; ambos deben mantener el mismo árbol de claves (verificado por `check:i18n`).
+**i18n vive bajo `/es/` y `/en/`, nunca en `/`.** No hay detección de `Accept-Language`, ni cookie de idioma, ni redirección por ubicación - el idioma solo cambia con acción explícita del usuario. `src/i18n/mensajes.ts` + `request.ts` (next-intl) cargan `messages/es.json` y `messages/en.json`; ambos deben mantener el mismo árbol de claves (verificado por `check:i18n`).
 
 **La calculadora PBCG (ruta `calculator`) está registrada pero sin implementar.** En `registro.tsx` apunta al renderer genérico `EnConstruccion` (placeholder). El motor de cálculo ya existe y está probado en `gateway/`, pero la UI cliente en `site/` es la pieza pendiente de la Fase 5.
 
-**Regla dura de arquitectura, con enforcement automático:** nada de `'use server'`, `app/api/`, `route.ts`, `middleware.ts`, `proxy.ts`, `runtime = 'nodejs'|'edge'`, `output: 'standalone'`, `cookies()`, `revalidatePath/Tag()`, ni `import 'server-only'` en `site/`. `scripts/assert-static-architecture.mjs` (invocado como `verify:architecture`) falla el build si encuentra cualquiera de estos. La regla de componentes es la inversa de la intuición común: usar el mínimo de Client Components (`'use client'` solo para interacción real — menú móvil, formularios, calculadora), y no desplegar ningún runtime en producción; Server Components de build no son "más peligrosos", son los que generan HTML sin enviar JS.
+**Regla dura de arquitectura, con enforcement automático:** nada de `'use server'`, `app/api/`, `route.ts`, `middleware.ts`, `proxy.ts`, `runtime = 'nodejs'|'edge'`, `output: 'standalone'`, `cookies()`, `revalidatePath/Tag()`, ni `import 'server-only'` en `site/`. `scripts/assert-static-architecture.mjs` (invocado como `verify:architecture`) falla el build si encuentra cualquiera de estos. La regla de componentes es la inversa de la intuición común: usar el mínimo de Client Components (`'use client'` solo para interacción real - menú móvil, formularios, calculadora), y no desplegar ningún runtime en producción; Server Components de build no son "más peligrosos", son los que generan HTML sin enviar JS.
 
 **`netlify.toml` todavía no existe** en ningún sitio del repo, pese a que `next.config.ts` ya delega ahí `redirects`/`rewrites`/`headers` (no soportados con `output: 'export'`). Es un hueco pendiente antes de poder desplegar.
 
 ## Arquitectura de `gateway/`
 
-**Motivo de existir:** si el modelo económico del PBCG viviera en `site/`, Netlify lo compilaría dentro del JavaScript público — tarifas, coeficientes y el algoritmo completo quedarían legibles por cualquier visitante, y la puerta de captación de leads sería evitable abriendo las devtools. La separación en un repositorio/servidor sin conexión a Netlify es la mitigación (bloqueante B01 del plan).
+**Motivo de existir:** si el modelo económico del PBCG viviera en `site/`, Netlify lo compilaría dentro del JavaScript público - tarifas, coeficientes y el algoritmo completo quedarían legibles por cualquier visitante, y la puerta de captación de leads sería evitable abriendo las devtools. La separación en un repositorio/servidor sin conexión a Netlify es la mitigación (bloqueante B01 del plan).
 
 **Estado real (no confundir con el plan aspiracional):**
 
 | Pieza | Estado |
 |---|---|
 | Motor PBCG (`src/domain/pbcg/`: `calculate.ts`, `config.ts`, `schemas.ts`, `types.ts`) | ✅ Implementado y probado contra el "caso de oro" del Excel |
-| Bandeja de salida (`submission` + `delivery_job`, SQLite) | ⬜ Pendiente — sin código ni dependencia todavía |
-| Servidor Fastify + verificación de firma de Netlify | ⬜ Pendiente — **no hay Fastify instalado ni ningún endpoint HTTP** |
+| Bandeja de salida (`submission` + `delivery_job`, SQLite) | ⬜ Pendiente - sin código ni dependencia todavía |
+| Servidor Fastify + verificación de firma de Netlify | ⬜ Pendiente - **no hay Fastify instalado ni ningún endpoint HTTP** |
 | Adaptador de EspoCRM | ⛔ Bloqueado por pendientes de negocio (rol/equipo, campos, duplicados) |
 
 **Reglas que no se negocian** (de `gateway/README.md`):
-1. El repositorio del sitio no contiene ninguna tarifa ni coeficiente — ni en código, JSON, comentarios o tests. `site/`'s `verify:export` lo comprueba en cada build.
+1. El repositorio del sitio no contiene ninguna tarifa ni coeficiente - ni en código, JSON, comentarios o tests. `site/`'s `verify:export` lo comprueba en cada build.
 2. El gateway recalcula siempre; no confía en ningún total, horquilla ni número de horas que llegue del navegador.
-3. La respuesta al cliente es solo el `PublicQuoteDto` (vía `toPublicDto()`) — nunca coeficientes, desglose de horas internas, tarifa efectiva ni margen.
+3. La respuesta al cliente es solo el `PublicQuoteDto` (vía `toPublicDto()`) - nunca coeficientes, desglose de horas internas, tarifa efectiva ni margen.
 4. De la hoja `PARAMETROS` del Excel no se porta coste interno (`B7`, `B8`); de `CALCULADORA` no se portan tarifa efectiva (`E29`) ni margen bruto (`E30`).
-5. Ningún dato personal en los logs — solo `requestId` y `submission.id`.
+5. Ningún dato personal en los logs - solo `requestId` y `submission.id`.
 
 ## Idioma del proyecto
 

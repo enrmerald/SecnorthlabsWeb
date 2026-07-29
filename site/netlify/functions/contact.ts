@@ -12,7 +12,7 @@ import {
 } from './_comun.ts'
 
 /**
- * `POST /api/contact` — formulario de contacto general.
+ * `POST /api/contact` - formulario de contacto general.
  *
  * Es el mismo flujo que `quote` sin el cálculo: valida, cifra y envía al buzón de
  * ingestión. No consulta EspoCRM, no guarda en base de datos y no acepta
