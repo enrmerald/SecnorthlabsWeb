@@ -1,19 +1,19 @@
 import { HeroInterior } from "@/components/blocks/HeroInterior";
+import { FormularioContacto } from "@/components/forms/FormularioContacto";
 import { StepList } from "@/components/blocks/Tarjetas";
 import { Card } from "@/components/ui/Card";
 import type { Locale } from "@/config/routes";
 import { cargarMensajes } from "@/i18n/mensajes";
-import { EMPRESA, INCIDENT_PHONE } from "@/lib/empresa";
+import { EMPRESA, INCIDENT_PHONE, PRIVACY_VERSION, MARKETING_TEXT_VERSION } from "@/lib/empresa";
+import { getLocalizedPath } from "@/config/routes";
 
 /**
  * Contacto — `/es/contacto/` (seccion 4.11, mockup image10.png). Pagina clave.
  *
- * Dos columnas: formulario a la izquierda (Fase 6) y rail derecho con tres
- * tarjetas. El formulario se conecta en el paso siguiente; el rail ya es
- * definitivo porque no depende del gateway.
+ * Dos columnas: formulario a la izquierda y rail derecho con tres tarjetas.
  */
 export function Contacto({ locale }: { locale: Locale }) {
-  const { contact } = cargarMensajes(locale);
+  const { contact, common } = cargarMensajes(locale);
   const { rail } = contact;
 
   return (
@@ -28,12 +28,18 @@ export function Contacto({ locale }: { locale: Locale }) {
 
       <div className="site-container grid gap-8 pb-16 lg:grid-cols-[1.6fr_1fr] lg:items-start">
         <Card className="p-6 sm:p-8">
-          <h2 className="subtitle">{contact.form.title}</h2>
-          {/* El formulario llega en la Fase 6, con su validacion en cliente y su
-              envio al gateway por el proxy firmado de Netlify. */}
-          <p className="texto-cuerpo mt-4 text-sm">
-            {contact.form.privacyNote}
-          </p>
+          <h2 className="subtitle mb-6">{contact.form.title}</h2>
+          {/* Los textos se leen aqui, en build, y llegan al componente de cliente
+              como props: no se monta ningun provider ni viaja el arbol de
+              mensajes al navegador (seccion 1.4.1). */}
+          <FormularioContacto
+            textos={contact.form}
+            locale={locale}
+            privacyHref={getLocalizedPath("privacy", locale)}
+            privacyVersion={PRIVACY_VERSION}
+            marketingVersion={MARKETING_TEXT_VERSION}
+            a11yRequerido={common.a11y.required}
+          />
         </Card>
 
         <div className="flex flex-col gap-6">

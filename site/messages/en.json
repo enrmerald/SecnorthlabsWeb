@@ -522,7 +522,10 @@
         "message": "The message is too long (max. 1000 characters).",
         "need": "Select an option.",
         "rateLimited": "Too many attempts. Please wait a moment and try again.",
-        "summaryTitle": "Please review these fields before sending"
+        "summaryTitle": "Please review these fields before sending",
+        "testMode": "Test mode: email delivery is switched off, so the request has not been recorded.",
+        "network": "We could not connect. Check your connection and try again.",
+        "validation": "Please review the details: something is not valid."
       },
       "fields": {
         "company": {

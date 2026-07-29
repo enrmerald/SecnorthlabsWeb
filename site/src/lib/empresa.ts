@@ -57,3 +57,13 @@ export const SITE_URL = (process.env.SITE_URL ?? 'https://secnorthlabs.eu').repl
 export const INCIDENT_PHONE = process.env.INCIDENT_PHONE?.trim() || null
 
 export const urlAbsoluta = (path: string): string => `${SITE_URL}${path}`
+
+/**
+ * Version del texto informativo de proteccion de datos que se muestra.
+ *
+ * Se guarda con cada envio, porque sin ella no se puede acreditar **que
+ * informacion** se facilito: la casilla marcada por si sola no dice qué leyo la
+ * persona. Se sube a mano cada vez que cambie el texto.
+ */
+export const PRIVACY_VERSION = process.env.PRIVACY_VERSION ?? '2026-07-28'
+export const MARKETING_TEXT_VERSION = process.env.MARKETING_TEXT_VERSION ?? '2026-07-28'

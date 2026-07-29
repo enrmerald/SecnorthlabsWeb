@@ -522,7 +522,10 @@
         "message": "El mensaje es demasiado largo (máx. 1000 caracteres).",
         "need": "Selecciona una opción.",
         "rateLimited": "Demasiados intentos. Espera un momento e inténtalo de nuevo.",
-        "summaryTitle": "Revisa estos campos antes de enviar"
+        "summaryTitle": "Revisa estos campos antes de enviar",
+        "testMode": "Modo de pruebas: el envío de correo está desactivado, así que la solicitud no ha quedado registrada.",
+        "network": "No hemos podido conectar. Comprueba tu conexión e inténtalo de nuevo.",
+        "validation": "Revisa los datos: alguno no es válido."
       },
       "fields": {
         "company": {
