@@ -26,10 +26,28 @@ site/
 ├── src/                  Next.js. NO puede importar de pbcg/ ni de netlify/
 ├── netlify/functions/    quote.ts y contact.ts. Netlify las despliega aparte
 ├── pbcg/                 motor + 59 tests + CLI. Solo lo ejecuta la funcion
+├── content/blog/         los articulos, en Markdown: es/ y en/
+├── assets/images/        originales de las imagenes. NO se publican tal cual
 ├── messages/             es.json y en.json
-├── e2e/                  372 pruebas en cuatro anchuras
+├── e2e/                  512 pruebas en cuatro anchuras
 └── netlify.toml
 ```
+
+### El blog se escribe en Markdown, y se compila en build
+
+Un articulo es **un fichero** en `content/blog/<idioma>/<slug>.md`; el nombre del
+fichero es la URL. `content:build` valida la cabecera con zod, convierte el
+Markdown a HTML y emite `src/generated/blog.json`, que es lo unico que leen las
+paginas.
+
+El conversor (`markdown-it`) **se queda en el build**: no viaja al navegador, asi
+que publicar veinte articulos mas no mueve el presupuesto de `check:js`. El mismo
+patron que `images:build`: fuente en `content/`, salida en `src/generated/`.
+
+`content:build` falla el build si una cabecera esta mal, si una imagen del cuerpo
+no sale de `assets/images/`, si queda un shortcode de Hugo sin convertir o si un
+enlace interno apunta a un articulo que no existe. El flujo completo de autoria
+esta en `site/content/blog/README.md`.
 
 **La regla que sostiene todo lo demas:** `verify:architecture` falla el build si
 un fichero de `src/` importa de `pbcg/` o de `netlify/`. Es lo unico que impide
