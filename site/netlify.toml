@@ -35,6 +35,64 @@
   status = 200
   force = true
 
+# ── Redirecciones desde la SPA anterior (Fase 7.1) ───────────────────────────
+# Las URLs que hoy estan indexadas NO pueden devolver 404. Inventario tomado del
+# sitemap.xml y de las rutas de la SPA de web/ antes de borrarla:
+#
+#   sitemap.xml declaraba:  /  /privacidad  /aviso-legal  /cookies
+#   la SPA servia:          /  /politica-privacidad  /aviso-legal  /cookies
+#
+# Fijate en la discrepancia: se envio a Google /privacidad, que la SPA nunca
+# sirvio. Se redirige igualmente, porque puede seguir en su cola de rastreo.
+#
+# ⚠️ Esto NO sustituye al inventario real de Search Console (pendiente P23). Es
+# lo que se puede afirmar con lo que habia en el repositorio; si hay URLs
+# indexadas que no estaban en ese sitemap, faltan aqui.
+
+[[redirects]]
+  from = "/politica-privacidad"
+  to = "/es/politica-privacidad/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/privacidad"
+  to = "/es/politica-privacidad/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/aviso-legal"
+  to = "/es/aviso-legal/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/cookies"
+  to = "/es/cookies/"
+  status = 301
+  force = true
+
+# Anclas de la SPA: no generaban URL propia, pero pueden estar enlazadas desde
+# fuera con la forma /about, /product o /contact.
+[[redirects]]
+  from = "/about"
+  to = "/es/compania/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/product"
+  to = "/es/software/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/contact"
+  to = "/es/contacto/"
+  status = 301
+  force = true
+
 # ── Todo el contenido vive bajo /es/ y /en/ ──────────────────────────────────
 [[redirects]]
   from = "/"

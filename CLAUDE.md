@@ -4,17 +4,48 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Estructura del repositorio
 
-El repositorio contiene **cinco zonas independientes**, sin workspace raíz que las una (no hay `pnpm-workspace.yaml` ni `package.json` en la raíz — cada carpeta se instala y compila por separado):
+Dos carpetas y una raiz, sin workspace que las una:
 
-- **`site/`** — el sitio nuevo en construcción: Next.js 16 (App Router) con `output: 'export'`, sin ningún runtime en producción. Es la reescritura completa de `web/` bajo la marca **ISN Labs**, siguiendo `docs/ISNLA-DOC-0008-01-plan-implementacion-web-270726.md`. **Aquí ocurre casi todo el desarrollo activo.**
-- **`gateway/`** — servidor de backend independiente (`isnlabs-web-gateway`) que contiene el motor de cálculo PBCG y, a futuro, el adaptador de EspoCRM, la bandeja de salida y el SMTP. Deliberadamente **sin ninguna dependencia de ni conexión con Netlify**: nada de lo que hay aquí puede acabar en el bundle que descarga un visitante.
-- **`web/`** — la SPA Vite + React 19 anterior, marca "North Labs" / SentryN3t. Ya no es donde ocurre el desarrollo nuevo; se conserva como referencia hasta que `site/` porte su texto legal palabra por palabra (Fase 9 del plan). Su CLAUDE.md/documentación previa sigue siendo válida para ese propósito puntual.
-- **`index.html`** (raíz) — página estática "En Construcción" autocontenida (CSS inline, sin build). Es lo que sirve actualmente el dominio en producción. No comparte código con ninguna de las carpetas anteriores.
-- **`docs/`** — documentación de especificación (`ISNLA-DOC-XXXX-YY-...`): mockups, dimensionador Excel, calculadora HTML de referencia, JSON i18n del brief, y el **plan de implementación** (`ISNLA-DOC-0008-01`, ~3400 líneas) que rige todo lo que se construye en `site/` y `gateway/`. Material de referencia, no se compila. **`docs/*.xlsx` está en `.gitignore`**: contiene tarifas y datos reales de clientes que no pueden entrar en ningún repo que Netlify clone.
+- **`site/`** — **todo el sitio**. Next.js 16 (App Router) con `output: 'export'`,
+  las 32 paginas estaticas, las dos Netlify Functions de ingestion y el motor
+  PBCG. Aqui ocurre todo el desarrollo.
+- **`contracts/`** — contrato de ingestion, mapeo de enums y los vectores de oro
+  del PBCG, compartidos con el servicio local de importacion, que es externo a
+  este repositorio.
+- **`docs/`** — especificacion (`ISNLA-DOC-XXXX-YY-...`). No se compila.
+  **`docs/*.xlsx` esta en `.gitignore`**: contiene tarifas y datos reales de
+  clientes. Y `docs/*-metadata-*.md`, que puede llevar claves de API.
+- **`index.html`** (raiz) — pagina «En Construccion». Es lo que sirve el dominio
+  hoy. No comparte codigo con nada.
+- **`claves/`** — material criptografico. **Nunca en git** (ver `.gitignore`).
 
-`site/` tiene su propio `CLAUDE.md` (que importa `site/AGENTS.md`, con advertencias sobre roturas de API de esta versión de Next frente al conocimiento de entrenamiento del modelo — léelo antes de tocar código ahí). Consúltalo al trabajar dentro de `site/`.
+### Dentro de `site/`
 
-> **Deuda técnica reconocida** (ver `gateway/README.md`): `site/` y `gateway/` conviven hoy en el mismo repo git. El plan lo permite como paso intermedio, pero hay que dividirlos antes de producción — en esta forma Netlify tiene acceso técnico al código del gateway durante el checkout, aunque no lo use en el build.
+```text
+site/
+├── src/                  Next.js. NO puede importar de pbcg/ ni de netlify/
+├── netlify/functions/    quote.ts y contact.ts. Netlify las despliega aparte
+├── pbcg/                 motor + 59 tests + CLI. Solo lo ejecuta la funcion
+├── messages/             es.json y en.json
+├── e2e/                  372 pruebas en cuatro anchuras
+└── netlify.toml
+```
+
+**La regla que sostiene todo lo demas:** `verify:architecture` falla el build si
+un fichero de `src/` importa de `pbcg/` o de `netlify/`. Es lo unico que impide
+que las tarifas del modelo economico acaben en el navegador (bloqueante B01), y
+sustituye a la garantia que daba tener el motor en otro repositorio.
+
+### Lo que ya no existe
+
+- **`web/`** — la SPA de Vite. Eliminada: su texto legal esta portado palabra por
+  palabra (98 de 101 cadenas identicas; las 3 restantes eran los enlaces «volver
+  al inicio», sustituidos por migas de pan) y su inventario de URLs quedo
+  recogido en las redirecciones de `netlify.toml`. Sigue en el commit de baseline
+  `dba82ef` si hace falta consultarla.
+- **`gateway/`** — el Web Gateway publico con Fastify. Cancelado por
+  ISNLA-DOC-0008-MIG-02: EspoCRM no se expone, y la ingestion pasa por correo
+  cifrado con un importador local. El motor se movio a `site/pbcg/`.
 
 ## Comandos
 

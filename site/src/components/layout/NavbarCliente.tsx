@@ -160,16 +160,31 @@ export function NavbarCliente({
     return () => document.removeEventListener('pointerdown', alPulsarFuera)
   }, [desplegableAbierto])
 
+  /**
+   * El estado NO seleccionado usa `text-text`, no el gris secundario.
+   *
+   * Con `text-text-dim` (#8C969E) los seis enlaces de la barra quedaban
+   * apagados: se leia como una navegacion deshabilitada y solo destacaba el
+   * activo. El contraste de un elemento de navegacion tiene que ser suficiente
+   * por si mismo, y la diferencia con el activo se marca con color y con la
+   * barra inferior, no atenuando todo lo demas.
+   *
+   * La pagina activa lleva una barra con `after` en lugar de `underline`: el
+   * subrayado de texto sigue las curvas de las letras y con Space Mono queda
+   * irregular; una barra de dos pixeles se lee como un indicador.
+   */
   const claseEnlace = (activa: boolean) =>
     [
-      'font-display text-sm transition-colors',
+      'font-display relative text-sm transition-colors',
+      "after:absolute after:-bottom-1.5 after:left-0 after:h-0.5 after:w-full after:rounded-full after:content-['']",
+      'after:transition-transform after:duration-200 after:origin-left',
       activa
-        ? 'text-cyan underline decoration-cyan decoration-2 underline-offset-8'
-        : 'text-text-dim hover:text-text',
+        ? 'text-cyan after:bg-cyan after:scale-x-100'
+        : 'text-text hover:text-cyan after:bg-cyan after:scale-x-0 hover:after:scale-x-100',
     ].join(' ')
 
   return (
-    <header className="border-border bg-bg/95 sticky top-0 z-50 border-b backdrop-blur">
+    <header className="border-border bg-bg/85 sticky top-0 z-50 border-b backdrop-blur-xl">
       <div className="site-container flex h-16 items-center justify-between gap-4 lg:h-[4.5rem]">
         {/* El logotipo esta en la primera pantalla, asi que va con width/height
             y sin `loading="lazy"`: es de los pocos activos que conviene que
@@ -187,7 +202,7 @@ export function NavbarCliente({
               aria-expanded={desplegableAbierto}
               aria-controls={idDesplegable}
               onClick={() => setDesplegableAbierto((abierto) => !abierto)}
-              className={`${claseEnlace(false)} flex items-center gap-1`}
+              className={`${claseEnlace(false)} flex items-center gap-1.5 ${desplegableAbierto ? 'text-cyan' : ''}`}
             >
               {navegacion.soluciones.label}
               <ChevronDown
@@ -197,16 +212,24 @@ export function NavbarCliente({
             </button>
 
             {desplegableAbierto && (
+              /* Desplegable: superficie elevada de verdad —borde, sombra y un
+                 fondo mas claro que la barra—, entrada corta y una barra de
+                 acento que aparece en el elemento apuntado. Cada entrada es un
+                 objetivo de 44px, no una linea de texto de dieciseis. */
               <ul
                 id={idDesplegable}
-                className="border-border bg-card absolute top-full left-0 mt-3 min-w-56 rounded-[10px] border p-2 shadow-lg"
+                className="border-border bg-card animar-desplegable absolute top-full left-0 mt-3 min-w-64 overflow-hidden rounded-xl border p-1.5 shadow-2xl shadow-black/50"
               >
                 {navegacion.soluciones.items.map((item) => (
                   <li key={item.href}>
                     <Link
                       href={item.href}
-                      className="text-text-dim hover:bg-panel hover:text-cyan block rounded-md px-3 py-2 text-sm transition-colors"
+                      className="font-display text-text hover:bg-panel hover:text-cyan group relative flex min-h-11 items-center gap-3 rounded-lg px-3 text-sm transition-colors"
                     >
+                      <span
+                        aria-hidden="true"
+                        className="bg-cyan h-4 w-0.5 origin-center scale-y-0 rounded-full transition-transform duration-150 group-hover:scale-y-100"
+                      />
                       {item.label}
                     </Link>
                   </li>
@@ -232,7 +255,9 @@ export function NavbarCliente({
             href={enlaceIdioma}
             hrefLang={navegacion.otroIdioma.locale}
             aria-label={a11y.languageSwitch}
-            className="font-display border-border text-text-dim hover:border-cyan hover:text-cyan inline-flex size-11 items-center justify-center rounded-md border text-xs font-bold transition-colors"
+            // Fondo propio y texto a plena intensidad: antes era gris sobre
+            // transparente y no se leia como un control pulsable.
+            className="font-display border-border bg-panel text-text hover:border-cyan hover:text-cyan hover:bg-card inline-flex size-11 items-center justify-center rounded-md border text-xs font-bold transition-colors"
           >
             {navegacion.otroIdioma.label}
           </Link>
@@ -290,14 +315,14 @@ export function NavbarCliente({
             style={{ paddingBottom: 'env(safe-area-inset-bottom, 0px)' }}
           >
             <nav aria-label={a11y.mainNav} className="site-container flex flex-col gap-1 py-4">
-              <p className="kicker text-text-dim px-1 pt-3 pb-1">
+              <p className="kicker text-cyan px-2 pt-3 pb-1">
                 {navegacion.soluciones.label}
               </p>
               {navegacion.soluciones.items.map((item) => (
                 <Link
                   key={item.href}
                   href={item.href}
-                  className="text-text-dim hover:text-cyan flex min-h-11 items-center rounded-md px-1 text-sm transition-colors"
+                  className="text-text hover:bg-panel hover:text-cyan flex min-h-11 items-center rounded-md px-2 text-sm transition-colors"
                 >
                   {item.label}
                 </Link>

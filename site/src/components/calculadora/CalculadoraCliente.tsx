@@ -3,6 +3,7 @@
 import { useEffect, useId, useMemo, useRef, useState } from 'react'
 import { Button } from '@/components/ui/Button'
 import { Card } from '@/components/ui/Card'
+import { Kicker } from '@/components/ui/Kicker'
 import { CampoSelect, CampoTexto, GrupoSiNo } from '@/components/forms/campos'
 import type { Locale } from '@/config/routes'
 import { RUTAS_API, enviar, nuevoSubmissionId, type RespuestaCotizacion } from '@/lib/api/cliente'
@@ -348,9 +349,7 @@ export function CalculadoraCliente({
   return (
     <form onSubmit={alEnviar} className="flex flex-col gap-8" noValidate>
       {/* ── Tu organizacion ── */}
-      <fieldset className="flex flex-col gap-5">
-        <legend className="subtitle mb-2">{o.legend}</legend>
-
+      <BloqueCampos numero="/01" titulo={o.legend}>
         <div className="grid gap-5 sm:grid-cols-2">
           <CampoTexto
             id={idDe('sites')}
@@ -465,16 +464,14 @@ export function CalculadoraCliente({
         />
 
         {errorCoherencia && (
-          <p role="alert" className="border-alert bg-alert/10 text-alert rounded-[10px] border p-3 text-sm">
+          <p role="alert" className="border-alert bg-alert/15 text-alert rounded-[10px] border p-3 text-sm">
             {errorCoherencia}
           </p>
         )}
-      </fieldset>
+      </BloqueCampos>
 
       {/* ── Servicios gestionados ── */}
-      <fieldset className="flex flex-col gap-5">
-        <legend className="subtitle mb-2">{s.legend}</legend>
-
+      <BloqueCampos numero="/02" titulo={s.legend}>
         <CampoSelect
           id={idDe('edr')}
           nombre="edr"
@@ -546,11 +543,10 @@ export function CalculadoraCliente({
             opciones={[0, 2, 4, 6].map((h) => ({ valor: String(h), etiqueta: String(h) }))}
           />
         </div>
-      </fieldset>
+      </BloqueCampos>
 
       {/* ── Cumplimiento normativo ── */}
-      <fieldset className="flex flex-col gap-5">
-        <legend className="subtitle mb-2">{textos.cumplimiento.legend}</legend>
+      <BloqueCampos numero="/03" titulo={textos.cumplimiento.legend}>
         <CampoSelect
           id={idDe('module')}
           nombre="module"
@@ -562,13 +558,18 @@ export function CalculadoraCliente({
             etiqueta: textos.cumplimiento.modulo.options[CLAVE_MODULO[v]] ?? v,
           }))}
         />
-      </fieldset>
+      </BloqueCampos>
 
-      {/* ── Datos de contacto ── */}
-      <Card className="flex flex-col gap-5 p-6">
-        <div>
+      {/* ── Datos de contacto ──
+          Destacada y con acento superior: es el paso que cierra el recorrido, y
+          conviene que se distinga de los tres de parametros. */}
+      <Card destacada acentoColor="verde" acento="top" className="flex flex-col gap-5 p-6 sm:p-7">
+        <div className="flex flex-col gap-2">
+          <Kicker prefijo="/04" color="verde">
+            {textos.steps.contact}
+          </Kicker>
           <h2 className="subtitle">{textos.gate.title}</h2>
-          <p className="texto-cuerpo mt-2 text-sm">{textos.gate.subtitle}</p>
+          <p className="texto-cuerpo text-sm">{textos.gate.subtitle}</p>
         </div>
 
         <div className="grid gap-5 sm:grid-cols-2">
@@ -638,6 +639,39 @@ export function CalculadoraCliente({
 
       <NotasLegales textos={textos} />
     </form>
+  )
+}
+
+/**
+ * Cada grupo de campos va en su propia tarjeta y numerado.
+ *
+ * Sin contenedor los tres bloques flotaban sobre el fondo de la pagina y el
+ * formulario se leia como una lista larga indiferenciada. La tarjeta los separa
+ * y el `/01 /02 /03` es el mismo recurso que abre las secciones en el resto del
+ * sitio, asi que la calculadora deja de parecer una pagina aparte.
+ */
+function BloqueCampos({
+  numero,
+  titulo,
+  children,
+}: {
+  numero: string
+  titulo: string
+  children: React.ReactNode
+}) {
+  return (
+    <Card className="p-6 sm:p-7">
+      <fieldset className="flex flex-col gap-5">
+        {/* `legend` de verdad, no un `div` con pinta de titulo: es lo que asocia
+            el grupo de campos con su nombre para un lector de pantalla. */}
+        <legend className="mb-1 flex flex-col gap-2">
+          <Kicker prefijo={numero} color="verde">
+            {titulo}
+          </Kicker>
+        </legend>
+        {children}
+      </fieldset>
+    </Card>
   )
 }
 

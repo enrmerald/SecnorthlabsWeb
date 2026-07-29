@@ -17,14 +17,29 @@ import type { ReactNode } from 'react'
  *   funcione el autorrelleno del sistema.
  */
 
+/**
+ * Los campos van sobre `--color-panel`, NO sobre `--color-bg`.
+ *
+ * Con `bg-bg` el campo tiene exactamente el mismo color que el fondo de la
+ * pagina y solo se distingue por su borde de un pixel: negro sobre negro. Sobre
+ * `panel` se lee como una superficie hundida y el hueco donde hay que escribir
+ * se ve sin tener que buscarlo.
+ */
 const CLASE_BASE = [
-  'bg-bg border rounded-[10px] px-4 py-2.5 min-h-11 w-full',
-  'text-text placeholder:text-text-dim/70',
+  'bg-panel border rounded-[10px] px-4 py-2.5 min-h-11 w-full',
+  'text-text placeholder:text-text-dim/60',
   'outline-none transition-colors',
+  // Al enfocar, el campo se aclara un poco mas: refuerza donde esta el cursor
+  // sin depender solo del anillo de foco.
+  'focus-visible:bg-card',
 ].join(' ')
 
 const claseEstado = (error?: string) =>
-  error ? 'border-alert focus-visible:border-alert' : 'border-border focus-visible:border-cyan'
+  error
+    ? 'border-alert focus-visible:border-alert'
+    : // `hover:border-text-dim` da una senal de que el campo es interactivo antes
+      // de pulsarlo, que el borde estatico de 1px no transmite.
+      'border-border hover:border-text-dim focus-visible:border-cyan'
 
 interface Comun {
   id: string
@@ -47,7 +62,9 @@ function Envoltorio({
 }: Comun & { children: ReactNode }) {
   return (
     <div className="flex flex-col gap-1.5">
-      <label htmlFor={id} className="font-display text-xs font-bold">
+      {/* `text-text` y no el gris secundario: una etiqueta de campo es
+          informacion necesaria para rellenarlo, no un comentario al margen. */}
+      <label htmlFor={id} className="font-display text-text text-[0.8125rem] font-bold">
         {label}
         {requerido && (
           <>
@@ -64,7 +81,7 @@ function Envoltorio({
       {children}
 
       {ayuda && !error && (
-        <p id={`${id}-ayuda`} className="text-text-dim text-xs">
+        <p id={`${id}-ayuda`} className="text-text-dim/90 text-xs">
           {ayuda}
         </p>
       )}
@@ -281,7 +298,7 @@ export function GrupoSiNo({
 }) {
   return (
     <fieldset className="flex flex-col gap-1.5">
-      <legend className="font-display mb-1.5 text-xs font-bold">{legend}</legend>
+      <legend className="font-display text-text mb-1.5 text-[0.8125rem] font-bold">{legend}</legend>
       <div className="flex gap-2">
         {[
           { v: true, t: textoSi },
@@ -292,8 +309,11 @@ export function GrupoSiNo({
             className={[
               'font-display flex min-h-11 flex-1 cursor-pointer items-center justify-center rounded-[10px] border px-4 text-sm transition-colors',
               valor === v
-                ? 'border-green bg-green/10 text-green font-bold'
-                : 'border-border text-text-dim hover:border-text-dim',
+                ? 'border-green bg-green/15 text-green font-bold'
+                : // El no seleccionado tambien tiene que leerse: con
+                  // `text-text-dim` sobre transparente la opcion descartada
+                  // quedaba practicamente invisible y parecia deshabilitada.
+                  'border-border bg-panel text-text hover:border-text-dim hover:bg-card',
             ].join(' ')}
           >
             <input

@@ -224,6 +224,24 @@
     translate: 0 -0.25rem;
   }
 
+  /* Entrada del desplegable de la navegacion. Corta a proposito: por encima de
+     unos 150 ms un menu se siente lento en lugar de suave. La regla global de
+     `prefers-reduced-motion` de la seccion base ya la desactiva. */
+  .animar-desplegable {
+    animation: desplegable 140ms ease-out;
+  }
+
+  @keyframes desplegable {
+    from {
+      opacity: 0;
+      translate: 0 -0.375rem;
+    }
+    to {
+      opacity: 1;
+      translate: 0 0;
+    }
+  }
+
   /* El resplandor del hero es un gradiente CSS, no una imagen: es lo que
      mantiene el LCP por debajo de 2,5 s en movil real (Fase 9). */
   .resplandor-hero {
