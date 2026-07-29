@@ -58,7 +58,7 @@ export function Software({ locale }: { locale: Locale }) {
               anuncia «SentryN3t» como encabezado una sola vez. Ponerlo fuera con
               un h2 en sr-only lo diria dos veces. */}
           <h2 className="mt-4">
-            <LogoSentryNet alto={28} />
+            <LogoSentryNet alto={38} />
           </h2>
           <p className="font-display text-cyan mt-3 text-sm">{software.sentry.tagline}</p>
           <p className="texto-cuerpo mt-4">{software.sentry.description}</p>

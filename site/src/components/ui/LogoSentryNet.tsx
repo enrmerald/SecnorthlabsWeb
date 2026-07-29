@@ -1,73 +1,92 @@
-import { LOGO_SENTRYNET_ICONO, LOGO_SENTRYNET_WORDMARK } from '@/config/logos'
+import { LOGO_SENTRYNET_ICONO, LOGO_SENTRYNET_TEXTO } from '@/config/logos'
 
 /**
- * Logotipo de SentryN3t: icono + wordmark compuestos.
+ * Logotipo de SentryN3t: icono + texto, en SVG.
  *
  * ═══════════════════════════════════════════════════════════════════════════
- * POR QUE DOS IMAGENES Y NO UNA
+ * DE DONDE SALEN ESTOS TRES NUMEROS
  *
- * El logotipo horizontal que traia la marca (`sentrynet-horizontal-dark-md.png`)
- * viene con el icono **mas bajo que el texto**. No es un problema de escalado:
- * la desalineacion esta dentro del propio fichero, asi que a cualquier tamano se
- * reproduce igual.
+ * De medir la captura de referencia que entrego la marca, pixel a pixel: alto del
+ * icono, alto de las letras y distancia entre sus centros. En esa referencia el
+ * icono y las letras miden **casi lo mismo** -proporcion 0,97- y el icono queda un
+ * 11% mas alto que el centro de las letras.
  *
- * Componiendolo aqui, el navegador centra las dos piezas con `items-center` y la
- * alineacion es exacta. Ademas se pudo recortar el aire transparente de cada
- * una -el icono traia 76 px sobrantes abajo, el wordmark otros distintos-, que
- * era justamente lo que hacia imposible alinearlas dandoles la misma altura de
- * caja.
+ * Se probaron quince combinaciones de ratio y desplazamiento midiendo el render de
+ * cada una; estas son las que reproducen la referencia (0,957 y -10,9%).
+ *
+ * ⚠️ **No coinciden con los de la otra aplicacion de la marca** (0,85 de icono y
+ * 0,1 de desplazamiento). El motivo mas probable es que su `sn3t-icon.svg` tenga
+ * distinto aire dentro del `viewBox` que la copia de este repositorio: con el mismo
+ * ratio, el icono sale aqui un 30% mas alto que las letras. Lo que se ha replicado
+ * es **el resultado visible**, que es lo que se pidio, no los numeros de partida.
+ * Si algun dia se unifican los ficheros, esto hay que volver a medirlo.
+ *
+ * El desplazamiento es la parte que no se adivina: el SVG del texto incluye el
+ * descendente de la «y» de «Sentry», asi que su caja es mas alta que las letras.
+ * Centrar las dos cajas deja las letras visualmente altas respecto al icono. Al
+ * bajar el texto, lo que se centra son **las letras** y no su caja, que es lo que
+ * el ojo compara.
  * ═══════════════════════════════════════════════════════════════════════════
  *
- * Se usa `<img>` y no `next/image` por lo mismo que en `LogoMarca`: con
- * `images.unoptimized: true` -obligatorio en la exportacion estatica-
- * `next/image` no optimiza nada y si anade JavaScript de cliente.
- *
- * El nombre accesible lo pone el icono (`alt="SentryN3t"`) y el wordmark queda
- * como decorativo (`alt=""`): son dos imagenes de un solo logotipo, y anunciar
- * «SentryN3t SentryN3t» seria peor que no anunciarlo.
+ * Por que SVG y no los PNG que habia antes: son 9 KB los dos, se ven nitidos a
+ * cualquier tamano y en cualquier densidad de pantalla, y no hace falta generar
+ * variantes 2x. Con `images.unoptimized` -obligatorio en la exportacion estatica-
+ * un PNG no tenia ninguna ventaja.
  */
+
+/** Medidos contra la captura de referencia. Ver el bloque de arriba antes de tocarlos. */
+const RATIO_ICONO = 0.64
+const RATIO_TEXTO = 0.72
+const DESPLAZAMIENTO_TEXTO = 0.12
+
 interface PropsLogoSentryNet {
-  /** Altura del wordmark en pixeles. El icono se ajusta a el opticamente. */
+  /**
+   * Altura de referencia de la composicion, en pixeles. No es la altura del icono
+   * ni la del texto: las dos se derivan de ella con los ratios de la marca.
+   */
   alto?: number
+  /** Solo el icono, a la altura completa. Para espacios muy estrechos. */
+  soloIcono?: boolean
   className?: string
 }
 
-export function LogoSentryNet({ alto = 24, className = '' }: PropsLogoSentryNet) {
-  // El icono va un 20% mas alto que las letras. Es el ajuste optico habitual: el
-  // wordmark recortado son solo mayusculas, mientras que el icono es una forma
-  // cerrada, y a la misma altura exacta se percibe pequeno.
-  //
-  // El valor sale de comparar 1,1 / 1,25 / 1,4 renderizados: por debajo el icono
-  // se queda corto y parece un adorno, y por encima domina al nombre, que es lo
-  // que la marca quiere que se lea.
-  const altoIcono = Math.round(alto * 1.2)
-  const anchoIcono = Math.round(altoIcono * LOGO_SENTRYNET_ICONO.ratio)
-  const anchoWordmark = Math.round(alto * LOGO_SENTRYNET_WORDMARK.ratio)
+export function LogoSentryNet({
+  alto = 38,
+  soloIcono = false,
+  className = '',
+}: PropsLogoSentryNet) {
+  const altoIcono = Math.round(alto * (soloIcono ? 1 : RATIO_ICONO))
+  const altoTexto = Math.round(alto * RATIO_TEXTO)
 
   return (
     <span className={`inline-flex items-center gap-2 ${className}`.trim()}>
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         src={LOGO_SENTRYNET_ICONO.src}
-        srcSet={`${LOGO_SENTRYNET_ICONO.src} 1x, ${LOGO_SENTRYNET_ICONO.src2x} 2x`}
-        alt={LOGO_SENTRYNET_ICONO.alt}
-        width={anchoIcono}
+        // El nombre accesible lo aporta el texto, salvo cuando el texto no esta.
+        alt={soloIcono ? LOGO_SENTRYNET_ICONO.alt : ''}
+        width={Math.round(altoIcono * LOGO_SENTRYNET_ICONO.ratio)}
         height={altoIcono}
-        loading="lazy"
         decoding="async"
-        style={{ height: altoIcono, width: anchoIcono }}
+        style={{ height: altoIcono, width: 'auto' }}
       />
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        src={LOGO_SENTRYNET_WORDMARK.src}
-        srcSet={`${LOGO_SENTRYNET_WORDMARK.src} 1x, ${LOGO_SENTRYNET_WORDMARK.src2x} 2x`}
-        alt=""
-        width={anchoWordmark}
-        height={alto}
-        loading="lazy"
-        decoding="async"
-        style={{ height: alto, width: anchoWordmark }}
-      />
+
+      {!soloIcono && (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
+          src={LOGO_SENTRYNET_TEXTO.src}
+          alt={LOGO_SENTRYNET_TEXTO.alt}
+          width={Math.round(altoTexto * LOGO_SENTRYNET_TEXTO.ratio)}
+          height={altoTexto}
+          decoding="async"
+          style={{
+            height: altoTexto,
+            width: 'auto',
+            position: 'relative',
+            top: altoTexto * DESPLAZAMIENTO_TEXTO,
+          }}
+        />
+      )}
     </span>
   )
 }

@@ -69,7 +69,7 @@ export function SentryBand({
                 El H2 sigue siendo texto, no imagen: es lo que leen los
                 rastreadores y lo que sostiene la jerarquia de encabezados. */}
             <div className="border-border flex flex-col gap-3 border-t pt-4 lg:items-end lg:border-t-0 lg:pt-0">
-              <LogoSentryNet alto={20} />
+              <LogoSentryNet alto={28} />
               <p className="text-text-dim text-xs lg:text-right">{note}</p>
               <LogoMarca logo={LOGO_EWALA} alto={16} ancho={90} />
             </div>

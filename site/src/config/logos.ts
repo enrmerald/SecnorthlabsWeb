@@ -126,23 +126,24 @@ export const LOGO_ISNLABS: Logotipo = {
  *
  * **Son dos piezas, no una.** El logotipo horizontal que entrego la marca trae el
  * icono mas bajo que el texto, y la desalineacion esta dentro del fichero: a
- * cualquier tamano se reproduce igual. Se compone en `LogoSentryNet`, que centra
- * las dos y resuelve el problema. Cada pieza esta recortada de su aire
- * transparente -el icono traia 76 px sobrantes abajo- y emitida a alturas fijas
- * de 64 y 128 px.
+ * cualquier tamano se reproduce igual. Se compone en `LogoSentryNet`, que replica
+ * las proporciones con las que la otra aplicacion de la marca compone estos
+ * mismos SVG.
+ *
+ * Los ratios estan en el componente, no aqui: son de la composicion, no del
+ * fichero. Lo que si es del fichero es la proporcion de su `viewBox`.
  */
 export const LOGO_SENTRYNET_ICONO: Logotipo = {
-  src: '/logos/sentrynet-icon-64.png',
-  src2x: '/logos/sentrynet-icon-128.png',
+  src: '/logos/sn3t-icon.svg',
   alt: 'SentryN3t',
-  ratio: 1.078,
+  // viewBox 0 0 54 54.
+  ratio: 1,
 }
 
-export const LOGO_SENTRYNET_WORDMARK: Logotipo = {
-  src: '/logos/sentrynet-wordmark-64.png',
-  src2x: '/logos/sentrynet-wordmark-128.png',
-  // Decorativo: el nombre accesible lo aporta el icono, y anunciar el logotipo
-  // dos veces seria peor que no anunciarlo.
-  alt: '',
-  ratio: 5.391,
+export const LOGO_SENTRYNET_TEXTO: Logotipo = {
+  src: '/logos/sn3t-text-dark.svg',
+  alt: 'SentryN3t',
+  // viewBox -2 14 685 142. Solo existe la variante para fondo oscuro porque el
+  // sitio es oscuro en todas sus paginas; la clara vive en la otra aplicacion.
+  ratio: 4.824,
 }
