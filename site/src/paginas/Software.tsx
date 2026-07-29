@@ -6,8 +6,9 @@ import { Button } from '@/components/ui/Button'
 import { Card } from '@/components/ui/Card'
 import { Kicker } from '@/components/ui/Kicker'
 import { SectionHeading } from '@/components/ui/SectionHeading'
+import { LogoMarca } from '@/components/ui/LogoMarca'
 import { Tag } from '@/components/ui/Tag'
-import { LOGOS_LICENCIAS } from '@/config/logos'
+import { LOGOS_LICENCIAS, LOGO_EWALA, LOGO_SENTRYNET } from '@/config/logos'
 import { getLocalizedPath, type Locale } from '@/config/routes'
 import { cargarMensajes } from '@/i18n/mensajes'
 
@@ -45,8 +46,20 @@ export function Software({ locale }: { locale: Locale }) {
             {software.sentry.kicker}
           </Kicker>
 
-          <h2 className="section-title mt-4">{software.sentry.name}</h2>
-          <p className="font-display text-cyan mt-2 text-sm">{software.sentry.tagline}</p>
+          {/* Aqui el logotipo SI acompana al titular, al contrario que en la
+              banda de la Home: ese H2 es una frase que repite el nombre
+              («SentryN3t — NDR con IA…») y este es el nombre a secas, asi que el
+              logotipo lo ilustra en lugar de duplicarlo. El H2 sigue siendo
+              texto, que es lo que leen los rastreadores. */}
+          {/* El logotipo va DENTRO del h2, no al lado. El encabezado de esta
+              seccion es el nombre del producto, y el logotipo es ese nombre
+              dibujado: su `alt` aporta el texto, asi que un lector de pantalla
+              anuncia «SentryN3t» como encabezado una sola vez. Ponerlo fuera con
+              un h2 en sr-only lo diria dos veces. */}
+          <h2 className="mt-4">
+            <LogoMarca logo={LOGO_SENTRYNET} alto={34} ancho={220} />
+          </h2>
+          <p className="font-display text-cyan mt-3 text-sm">{software.sentry.tagline}</p>
           <p className="texto-cuerpo mt-4">{software.sentry.description}</p>
 
           <ul className="mt-6 flex flex-wrap gap-2.5">
@@ -72,10 +85,13 @@ export function Software({ locale }: { locale: Locale }) {
               <span className="sr-only"> ({common.a11y.externalLink})</span>
             </Button>
 
-            <div className="text-text-dim flex flex-col gap-1 text-xs sm:text-right">
-              {software.sentry.notes.map((nota) => (
-                <p key={nota}>{nota}</p>
-              ))}
+            <div className="flex flex-col gap-2 sm:items-end">
+              <div className="text-text-dim flex flex-col gap-1 text-xs sm:text-right">
+                {software.sentry.notes.map((nota) => (
+                  <p key={nota}>{nota}</p>
+                ))}
+              </div>
+              <LogoMarca logo={LOGO_EWALA} alto={16} ancho={90} />
             </div>
           </div>
         </Card>

@@ -67,14 +67,25 @@ test.describe('objetivos tactiles y teclado virtual', () => {
     }
   })
 
-  test('los campos usan fuente de 16px o mas', async ({ page }) => {
+  test('TODOS los campos usan fuente de 16px o mas', async ({ page }) => {
     // Por debajo, iOS hace zoom automatico al enfocar y descoloca la pagina.
-    await page.goto('/es/blog/')
-    const tamano = await page
-      .getByRole('textbox')
-      .first()
-      .evaluate((el) => Number.parseFloat(getComputedStyle(el).fontSize))
-    expect(tamano).toBeGreaterThanOrEqual(16)
+    // Se comprueban todos y no solo el primero: basta con que a uno se le
+    // escape la clase para que la pagina salte al enfocarlo.
+    //
+    // Apunta a /contacto y no a /blog: el campo del blog era el de la
+    // newsletter, retirada el 28/07/2026.
+    for (const ruta of ['/es/contacto/', '/es/calculadora/']) {
+      await page.goto(ruta)
+      const campos = await page.locator('input:not([type=checkbox]), select, textarea').all()
+      expect(campos.length, `${ruta} no tiene campos`).toBeGreaterThan(0)
+
+      for (const campo of campos) {
+        if (!(await campo.isVisible())) continue
+        const tamano = await campo.evaluate((el) => Number.parseFloat(getComputedStyle(el).fontSize))
+        const nombre = (await campo.getAttribute('name')) ?? '(sin nombre)'
+        expect(tamano, `${ruta} · campo "${nombre}"`).toBeGreaterThanOrEqual(16)
+      }
+    }
   })
 })
 

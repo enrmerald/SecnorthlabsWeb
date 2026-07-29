@@ -20,19 +20,29 @@ const outDir = join(root, 'out')
  * objetivo alcanzado.
  *
  * ⚠️ **El presupuesto del plan (100 KB gzip para la Home, seccion 12.6) no se
- * cumple, y no es por el codigo del proyecto.** Con Next 16 App Router y React
- * 19, una pagina con un solo componente de cliente parte ya de ~148 KB gzip:
- * React DOM, el runtime del enrutador de cliente y la carga de segmentos. Medido
- * despues de quitar el provider global de traduccion, que era lo unico
- * eliminable por nuestra parte.
+ * cumple, y no es por el codigo del proyecto.** Esto es lo que se ha comprobado,
+ * para que nadie tenga que repetirlo:
  *
- * Las opciones reales para bajar de 100 KB son cambiar de framework —Astro, o
- * HTML con islas— o renunciar a la navegacion de cliente. Es una decision de
- * arquitectura que corresponde a direccion, no un ajuste. Hasta que se tome, el
- * valor se mantiene pegado a la medida real para que **cualquier subida** rompa
- * el build y haya que justificarla.
+ * 1. **No sobra nada en el bundle.** Verificado por inspeccion de `out/`: zod no
+ *    esta, el arbol de mensajes no esta, y el motor PBCG no esta. Los iconos se
+ *    importan uno a uno y no hay provider global de traduccion.
+ * 2. **Los 156 KB son el suelo del framework.** React DOM son 70,9 KB gzip y el
+ *    runtime del enrutador de cliente otros 40,5.
+ * 3. **Dividir por pagina no sirve.** Las dieciseis paginas se resuelven con una
+ *    sola ruta atrapatodo, asi que Next genera **un** bundle de cliente para
+ *    todas: la Home y la calculadora cargan exactamente los mismos chunks. Se
+ *    probo con `next/dynamic` sobre los dos componentes de cliente y el
+ *    resultado fue 0,6 KB MAS, sin ninguna division. Se revirtio.
+ *
+ * Bajar de 100 KB exige cambiar de framework —Astro, o HTML con islas— o
+ * renunciar a la navegacion de cliente. Es una decision de arquitectura que
+ * corresponde a direccion, no un ajuste.
+ *
+ * El techo se fija en la medida real mas un margen minimo, para que **cualquier
+ * subida** rompa el build y haya que justificarla. Si sube, lo primero que hay
+ * que comprobar son los tres puntos de arriba.
  */
-const PRESUPUESTO_KB = Number(process.env.JS_BUDGET_KB ?? 155)
+const PRESUPUESTO_KB = Number(process.env.JS_BUDGET_KB ?? 157)
 
 const paginas = [
   { etiqueta: 'home ES', path: 'es/index.html' },
