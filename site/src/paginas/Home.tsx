@@ -25,7 +25,6 @@ export function Home({ locale }: { locale: Locale }) {
   const { home, common } = mensajes
 
   const contacto = getLocalizedPath('contact', locale)
-  const calculadora = getLocalizedPath('calculator', locale)
 
   // Destinos de los cuatro pilares, en el orden en que estan en los mensajes:
   // MSSP IT, MSSP OT, GRC e I+D+i. El acento sigue al mockup: cian los dos MSSP,
@@ -129,8 +128,11 @@ export function Home({ locale }: { locale: Locale }) {
         title={home.ctaBand.title}
         titleHighlight={home.ctaBand.titleHighlight}
         subtitle={home.ctaBand.subtitle}
-        primario={{ label: home.ctaBand.ctaPrimary, href: calculadora }}
-        secundario={{ label: home.ctaBand.ctaSecondary, href: contacto }}
+        // Con la calculadora retirada (`CALCULADORA_ACTIVA`) los dos botones
+        // llevaban al mismo sitio, y dos botones al mismo destino no son una
+        // eleccion. Queda el primario, hacia el formulario de contacto; el texto
+        // del secundario espera en el JSON a que vuelva la calculadora.
+        primario={{ label: home.ctaBand.ctaPrimary, href: contacto }}
       />
     </main>
   )

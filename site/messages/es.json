@@ -1109,7 +1109,7 @@
         "text": "SOC 24/7, EDR/MDR/XDR, auditorías, seguridad perimetral, backup, hardening, pentesting, gestión de vulnerabilidades y formación."
       },
       "featured": {
-        "cta": "Calcula tu presupuesto",
+        "cta": "Pide tu presupuesto",
         "description": "Monitorización y revisión periódica de tu seguridad IT: backups, EDR, SIEM/XDR y firewall bajo control experto, con alerta temprana y reporting. La base sobre la que crece todo lo demás.",
         "includes": [
           "Revisión de backups y restauraciones",
@@ -1313,7 +1313,7 @@
     ],
     "cta": {
       "ctaPrimary": "Contáctanos",
-      "ctaSecondary": "Calcula tu presupuesto",
+      "ctaSecondary": "Ver el catálogo OT",
       "title": "¿Quieres que revisemos tu seguridad IT?"
     },
     "hero": {

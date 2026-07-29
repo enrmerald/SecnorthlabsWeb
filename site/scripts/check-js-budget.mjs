@@ -49,7 +49,8 @@ const paginas = [
   { etiqueta: 'home EN', path: 'en/index.html' },
   { etiqueta: 'MSSP ES', path: 'es/soluciones/mssp/index.html' },
   { etiqueta: 'contacto ES', path: 'es/contacto/index.html' },
-  { etiqueta: 'calculadora ES', path: 'es/calculadora/index.html' },
+  // La calculadora estaba aqui. Mientras `CALCULADORA_ACTIVA` sea `false` no se
+  // genera, y contacto cubre lo mismo: es el otro formulario de cliente.
   // El listado del blog es la pagina con mas elementos del sitio -26 tarjetas y
   // el filtro por tema- y el detalle es la de mas texto. Si algun dia alguien
   // convierte Markdown en el navegador o arrastra el JSON del contenido a un

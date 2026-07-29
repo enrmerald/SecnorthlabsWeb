@@ -74,7 +74,9 @@ test.describe('objetivos tactiles y teclado virtual', () => {
     //
     // Apunta a /contacto y no a /blog: el campo del blog era el de la
     // newsletter, retirada el 28/07/2026.
-    for (const ruta of ['/es/contacto/', '/es/calculadora/']) {
+    // La calculadora estaba en esta lista; con `CALCULADORA_ACTIVA` en `false` no
+    // se genera, y contacto es el otro formulario con campos de texto.
+    for (const ruta of ['/es/contacto/']) {
       await page.goto(ruta)
       const campos = await page.locator('input:not([type=checkbox]), select, textarea').all()
       expect(campos.length, `${ruta} no tiene campos`).toBeGreaterThan(0)

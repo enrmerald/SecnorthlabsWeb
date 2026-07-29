@@ -50,6 +50,20 @@ const BLOG_ENABLED = true
 const BLOG_INDEXABLE = true
 
 /**
+ * La calculadora del PBCG queda **retirada** hasta que se cierre como se calcula
+ * el presupuesto (decision de Direccion del 29/07/2026). Mientras tanto la unica
+ * puerta de entrada es el formulario de contacto.
+ *
+ * Se apaga aqui y no borrando nada: la pagina, el componente de cliente, el motor
+ * de `pbcg/` y la funcion `quote` siguen en su sitio y pasando sus pruebas. Con
+ * esto la ruta desaparece de la navegacion, del pie, del sitemap, del build y de
+ * las pruebas de una sola vez, y `/es/calculadora/` responde 404. Volver a
+ * publicarla es poner `true` y devolver los CTA que apuntaban a ella (Home,
+ * MSSP IT, catalogo IT, articulos del blog y el boton de la barra).
+ */
+const CALCULADORA_ACTIVA = false
+
+/**
  * Namespace de mensajes de cada pagina.
  *
  * Es una union de literales y no `string` a proposito: el aumento de tipos de
@@ -175,8 +189,8 @@ export const ROUTES: readonly RouteDefinition[] = [
   },
   {
     id: 'calculator',
-    enabled: true,
-    indexable: true,
+    enabled: CALCULADORA_ACTIVA,
+    indexable: CALCULADORA_ACTIVA,
     namespace: 'calculator',
     paths: { es: '/es/calculadora/', en: '/en/calculator/' },
   },

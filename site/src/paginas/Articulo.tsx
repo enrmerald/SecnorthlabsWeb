@@ -236,11 +236,11 @@ export function Articulo({
       <CtaBand
         title={blog.article.ctaTitle}
         subtitle={blog.article.ctaBody}
+        // El primario iba a la calculadora. Retirada esa ruta
+        // (`CALCULADORA_ACTIVA`), queda un solo boton: se promociona el texto del
+        // secundario, que ya hablaba de contacto, en lugar de dejar dos botones
+        // hacia el mismo formulario. `ctaPrimary` espera en el JSON.
         primario={{
-          label: blog.article.ctaPrimary,
-          href: getLocalizedPath('calculator', locale),
-        }}
-        secundario={{
           label: blog.article.ctaSecondary,
           href: getLocalizedPath('contact', locale),
         }}

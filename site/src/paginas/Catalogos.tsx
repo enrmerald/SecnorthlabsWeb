@@ -89,8 +89,11 @@ export function CatalogoIt({ locale }: { locale: Locale }) {
       locale={locale}
       datos={cargarMensajes(locale).msspItCatalog}
       acentoColor="cian"
-      // La secundaria del catalogo IT lleva a la calculadora del PBCG.
-      ctaSecundariaHref={getLocalizedPath('calculator', locale)}
+      // La secundaria del catalogo IT llevaba a la calculadora del PBCG. Con esa
+      // ruta retirada (`CALCULADORA_ACTIVA`) cruza al catalogo OT, que es el
+      // espejo de lo que hace OT y el unico destino util que le queda: la
+      // primaria ya va a contacto.
+      ctaSecundariaHref={getLocalizedPath('msspOt', locale)}
     />
   )
 }

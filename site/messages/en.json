@@ -1109,7 +1109,7 @@
         "text": "24/7 SOC, EDR/MDR/XDR, audits, perimeter security, backup, hardening, pentesting, vulnerability management and training."
       },
       "featured": {
-        "cta": "Calculate your budget",
+        "cta": "Request your quote",
         "description": "Periodic monitoring and review of your IT security: backups, EDR, SIEM/XDR and firewall under expert control, with early alerting and reporting. The foundation everything else grows on.",
         "includes": [
           "Backup and restore review",
@@ -1313,7 +1313,7 @@
     ],
     "cta": {
       "ctaPrimary": "Contact us",
-      "ctaSecondary": "Calculate your budget",
+      "ctaSecondary": "See the OT catalogue",
       "title": "Want us to review your IT security?"
     },
     "hero": {

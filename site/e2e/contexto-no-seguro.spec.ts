@@ -23,10 +23,13 @@ test.describe('sin contexto seguro (HTTP en una IP)', () => {
     })
   })
 
-  for (const [ruta, minimoCampos] of [
-    ['/es/contacto/', 8],
-    ['/es/calculadora/', 15],
-  ] as const) {
+  // ⚠️ La calculadora tambien se comprobaba aqui, y era el caso mas exigente: 15
+  // campos y una llamada a `/api/quote`. Mientras `CALCULADORA_ACTIVA` sea
+  // `false` esa pagina no se genera, asi que solo queda contacto. Al reactivarla
+  // hay que devolver estas dos pruebas: el fallo que motivo el fichero
+  // -`crypto.randomUUID` inexistente sin contexto seguro- afectaba a los dos
+  // formularios por igual.
+  for (const [ruta, minimoCampos] of [['/es/contacto/', 8]] as const) {
     test(`${ruta} se renderiza y no lanza`, async ({ page }) => {
       const errores: string[] = []
       page.on('pageerror', (e) => errores.push(e.message))
@@ -42,20 +45,7 @@ test.describe('sin contexto seguro (HTTP en una IP)', () => {
     })
   }
 
-  test('la calculadora sigue devolviendo el precio', async ({ page }) => {
-    // No basta con que se pinte: el submissionId del respaldo tiene que ser un
-    // UUID valido o la funcion lo rechaza con un 400.
-    await page.goto('/es/calculadora/')
-
-    const form = page.locator('form')
-    await form.getByLabel(/^nombre/i).fill('Ana')
-    await form.getByLabel(/^apellidos/i).fill('García Pérez')
-    await form.getByRole('textbox', { name: /empresa/i }).fill('Acme S.A.')
-    await form.getByLabel(/^email profesional/i).fill('ana@acme.com')
-    await form.locator('input[type=checkbox]').check()
-    await form.getByRole('button', { name: /ver mi estimación/i }).click()
-
-    // El importe del caso de oro con los valores por defecto del formulario.
-    await expect(page.getByText(/€\/mes/)).toBeVisible({ timeout: 10_000 })
-  })
+  // Aqui iba «la calculadora sigue devolviendo el precio», que enviaba el
+  // formulario y comprobaba el importe del caso de oro contra `/api/quote`. Se
+  // recupera junto con la ruta cuando `CALCULADORA_ACTIVA` vuelva a `true`.
 })

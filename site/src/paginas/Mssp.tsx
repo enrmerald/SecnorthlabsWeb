@@ -10,9 +10,10 @@ import { cargarMensajes } from '@/i18n/mensajes'
 /**
  * MSSP - `/es/soluciones/mssp/` (seccion 4.2, mockup image4.png).
  *
- * Dos secciones simetricas con distinto acento: `/01` IT en cian con CTA a la
- * calculadora, `/02` OT en verde con CTA a contacto. Los `id` de las secciones
- * son los destinos del desplegable «Soluciones» de la navegacion.
+ * Dos secciones simetricas con distinto acento: `/01` IT en cian y `/02` OT en
+ * verde, las dos con CTA a contacto mientras la calculadora esta retirada. Los
+ * `id` de las secciones son los destinos del desplegable «Soluciones» de la
+ * navegacion.
  *
  * > El JSON dice `cta.ctaSecondary: "Ver software"` y el mockup pinta «Ver
  * > licencias». **Manda el JSON**, que es el entregable de copy.
@@ -21,7 +22,6 @@ export function Mssp({ locale }: { locale: Locale }) {
   const { mssp } = cargarMensajes(locale)
 
   const contacto = getLocalizedPath('contact', locale)
-  const calculadora = getLocalizedPath('calculator', locale)
 
   return (
     <main id="contenido">
@@ -42,7 +42,9 @@ export function Mssp({ locale }: { locale: Locale }) {
           title={mssp.it.featured.title}
           description={mssp.it.featured.description}
           includes={mssp.it.featured.includes}
-          cta={{ label: mssp.it.featured.cta, href: calculadora }}
+          // Iba a la calculadora; con esa ruta retirada (`CALCULADORA_ACTIVA`) el
+          // presupuesto se pide por el formulario, y el texto del boton lo dice.
+          cta={{ label: mssp.it.featured.cta, href: contacto }}
           acentoColor="cian"
         />
 
