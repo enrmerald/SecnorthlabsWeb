@@ -1,0 +1,92 @@
+# Netlify · sitio estatico + dos funciones de ingestion.
+#
+# Las paginas se exportan por completo en build y las sirve el CDN. Lo unico que
+# ejecuta codigo son las dos funciones de netlify/functions/, que Netlify
+# despliega aparte: Next no las compila ni las conoce.
+
+[build]
+  base = "site"
+  command = "corepack enable && pnpm install --frozen-lockfile && pnpm build"
+  publish = "out"
+  functions = "netlify/functions"
+
+[build.environment]
+  NODE_VERSION = "24.18.0"
+  PNPM_VERSION = "11.5.0"
+  # No es opcional: sin ella el plugin de Next puede intentar montar funciones
+  # para SSR y convertir en hibrido lo que queremos estatico.
+  NETLIFY_NEXT_PLUGIN_SKIP = "true"
+
+# ── Rutas de las funciones ───────────────────────────────────────────────────
+# El navegador llama a /api/*, del mismo origen: sin CORS y sin preflight.
+# No hay `signed =`: el sitio y las funciones estan en el mismo proyecto, asi que
+# no hay salto entre sitios que firmar, y la firma JWS de Netlify solo funciona
+# proxificando a sitios externos.
+
+[[redirects]]
+  from = "/api/quote"
+  to = "/.netlify/functions/quote"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/api/contact"
+  to = "/.netlify/functions/contact"
+  status = 200
+  force = true
+
+# ── Todo el contenido vive bajo /es/ y /en/ ──────────────────────────────────
+[[redirects]]
+  from = "/"
+  to = "/es/"
+  status = 301
+  force = true
+
+# ── Cabeceras ────────────────────────────────────────────────────────────────
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    X-Frame-Options = "DENY"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=(), payment=(), usb=()"
+    Cross-Origin-Opener-Policy = "same-origin"
+    Cross-Origin-Resource-Policy = "same-origin"
+    # CSP en modo informe primero. NO se pasa a bloqueo sin medir con trafico
+    # real: una CSP escrita de memoria rompe la pagina en silencio.
+    # `connect-src 'self'` basta porque /api/* es del mismo origen.
+    Content-Security-Policy-Report-Only = "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'"
+
+# Activos con hash en el nombre: un ano, inmutables.
+[[headers]]
+  for = "/_next/static/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/logos/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
+
+# HTML: revalidar siempre, o un despliegue no se ve.
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+# ── 404 por idioma. AL FINAL: Netlify evalua de arriba abajo y una regla
+# comodin por encima de una ruta real se la come. ─────────────────────────────
+[[redirects]]
+  from = "/en/*"
+  to = "/en/404/"
+  status = 404
+
+[[redirects]]
+  from = "/es/*"
+  to = "/es/404/"
+  status = 404
+
+[[redirects]]
+  from = "/*"
+  to = "/es/404/"
+  status = 404

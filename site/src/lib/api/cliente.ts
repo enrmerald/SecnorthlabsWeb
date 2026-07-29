@@ -1,59 +1,91 @@
 /**
- * Cliente de la API (seccion 6.2).
+ * Cliente de la API.
  *
- * El sitio no tiene servidor. El navegador llama a rutas **del propio dominio**
- * y Netlify las proxifica **firmadas** hacia el Web Gateway, que es quien tiene
- * el motor PBCG, el acceso a EspoCRM y el SMTP.
- *
- * Consecuencias para el codigo de aqui:
+ * El navegador llama a rutas **del propio dominio**, que Netlify resuelve a las
+ * funciones de `netlify/functions/`. El sitio y las funciones viven en el mismo
+ * proyecto de Netlify, así que:
  *
  * - **Mismo origen**: no hay CORS, ni preflight, ni cabeceras que configurar.
- * - **Ningun secreto**: la firma la pone Netlify en el borde; el navegador solo
- *   ve `/api/…`.
- * - **El servidor recalcula siempre.** Nada de lo que se envie desde aqui como
- *   total, horquilla, tamano u horas se tiene por fiable: si viaja en el cuerpo,
- *   el gateway lo ignora.
+ * - **No hay proxy firmado.** MIG-02 §7 lo pedía porque el mailer iba a ser otro
+ *   proyecto; al meterlo dentro de `site` ya no hay salto entre sitios que
+ *   firmar. Y la firma JWS de Netlify solo funciona proxificando a sitios
+ *   externos, de modo que tampoco habría funcionado.
+ * - **Ningún secreto llega al navegador.** Las claves de Resend y de cifrado
+ *   viven en las variables de entorno de la función, en servidor.
+ * - **El servidor recalcula siempre.** Nada de lo que se envíe desde aquí como
+ *   total, horquilla, tamaño u horas se tiene por fiable: si viaja en el cuerpo,
+ *   la función lo ignora, porque su esquema no lo admite.
  *
- * El endpoint devuelve **codigos**, no frases: el texto que ve la persona sale
- * de los ficheros de mensajes, para no duplicar copy en el servidor y para que
- * se traduzca.
+ * La función devuelve **códigos**, no frases: el texto que ve la persona sale de
+ * los ficheros de mensajes, para no duplicar copy en el servidor y para que se
+ * traduzca.
  */
+import type { Locale } from '@/config/routes'
 
-/** Rutas que consume el sitio. Netlify las traduce a `/web/v1/…`. */
+/** Las dos únicas rutas que consume el sitio. */
 export const RUTAS_API = {
   contacto: '/api/contact',
-  cotizacionInicial: '/api/quote/initial',
-  recotizacion: '/api/quote/recalculate',
-  propuesta: '/api/quote/proposal',
-  newsletter: '/api/newsletter',
+  cotizacion: '/api/quote',
 } as const
 
-export type CodigoError =
-  | 'validation'
-  | 'rateLimited'
-  | 'tokenExpired'
-  | 'network'
-  | 'generic'
+export type CodigoError = 'validation' | 'rateLimited' | 'network' | 'generic'
 
 export type RespuestaApi<T> =
   | { ok: true; datos: T }
   | { ok: false; error: CodigoError; campos?: Record<string, string> }
 
-/** Cuerpo maximo que acepta el gateway. Se comprueba tambien aqui para no
- *  gastar una peticion que va a devolver 413. */
+/** Lo que la función devuelve al cotizar. Espejo de `netlify/functions/quote.ts`. */
+export interface RespuestaCotizacion {
+  ok: true
+  /** Referencia corta que la persona puede citar si escribe. */
+  reference: string
+  quote: {
+    size: 'S' | 'M' | 'L'
+    licenceCents: number
+    auditCents: number
+    managedRangeCents: [number, number]
+    totalRangeCents: [number, number]
+    currency: 'EUR'
+  }
+  /**
+   * `sent` = se ha enviado el correo con la estimación y el aviso de ingestión.
+   * `skipped` = **modo prueba**: se ha calculado pero no se ha enviado nada.
+   *
+   * La interfaz **tiene que mostrar** el caso `skipped`. Enseñar un precio sin
+   * decir que no ha quedado registrado hace que alguien dé por hecho que hay un
+   * lead esperando en el CRM.
+   */
+  delivery: 'sent' | 'skipped'
+}
+
+export interface RespuestaContacto {
+  ok: true
+  reference: string
+  delivery: 'sent' | 'skipped'
+}
+
+/** Cabecera del sobre, común a los dos tipos (MIG-02 §6.3). */
+export interface SobreBase {
+  schemaVersion: '1.0'
+  submissionId: string
+  locale: Locale
+  createdAt: string
+  privacy: { acknowledged: boolean; noticeVersion: string }
+  marketing: { optIn: boolean; textVersion: string }
+  antispam: { honeypot: string; renderedAt: number }
+}
+
+/** Límite que aplica la función. Se comprueba aquí para no gastar un 413. */
 const TAMANO_MAXIMO_BYTES = 32 * 1024
 
 interface OpcionesEnvio {
-  /** Cancela la peticion anterior al lanzar otra. Lo usa la recotizacion. */
   signal?: AbortSignal
-  /** Evita que un doble clic genere dos envios. La valida el servidor. */
-  claveIdempotencia?: string
 }
 
 export async function enviar<T>(
   ruta: string,
   cuerpo: unknown,
-  { signal, claveIdempotencia }: OpcionesEnvio = {},
+  { signal }: OpcionesEnvio = {},
 ): Promise<RespuestaApi<T>> {
   const serializado = JSON.stringify(cuerpo)
 
@@ -65,22 +97,18 @@ export async function enviar<T>(
   try {
     respuesta = await fetch(ruta, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        ...(claveIdempotencia ? { 'Idempotency-Key': claveIdempotencia } : {}),
-      },
+      headers: { 'Content-Type': 'application/json' },
       body: serializado,
       signal,
     })
   } catch (error) {
-    // Un abort es una cancelacion deliberada, no un fallo de red: se propaga
-    // para que quien llamo pueda ignorarlo en lugar de pintar un error.
+    // Un abort es una cancelación deliberada, no un fallo de red: se propaga
+    // para que quien llamó pueda ignorarlo en lugar de pintar un error.
     if (error instanceof DOMException && error.name === 'AbortError') throw error
     return { ok: false, error: 'network' }
   }
 
   if (respuesta.status === 429) return { ok: false, error: 'rateLimited' }
-  if (respuesta.status === 410) return { ok: false, error: 'tokenExpired' }
 
   let datos: unknown
   try {
@@ -90,33 +118,22 @@ export async function enviar<T>(
   }
 
   if (!respuesta.ok || !esRespuestaOk(datos)) {
-    const campos =
-      typeof datos === 'object' && datos !== null && 'fields' in datos
-        ? (datos.fields as Record<string, string>)
-        : undefined
-    const codigo =
-      typeof datos === 'object' && datos !== null && 'error' in datos
-        ? String(datos.error)
-        : 'generic'
-
-    // Los codigos que llegan del gateway se validan contra la lista conocida en
-    // lugar de reenviarse tal cual: el cliente los usa para elegir un mensaje
-    // traducido, y uno inesperado dejaria la interfaz sin nada que mostrar.
-    return { ok: false, error: normalizarCodigo(codigo), campos }
+    const objeto = typeof datos === 'object' && datos !== null ? (datos as Record<string, unknown>) : {}
+    return {
+      ok: false,
+      error: normalizarCodigo(String(objeto.error ?? 'generic')),
+      campos: objeto.fields as Record<string, string> | undefined,
+    }
   }
 
   return { ok: true, datos: datos as T }
 }
 
-const CODIGOS_CONOCIDOS = new Set<string>([
-  'validation',
-  'rateLimited',
-  'tokenExpired',
-  'network',
-  'generic',
-])
+const CODIGOS_CONOCIDOS = new Set<string>(['validation', 'rateLimited', 'network', 'generic'])
 
 function normalizarCodigo(codigo: string): CodigoError {
+  // Un código inesperado se degrada a genérico: si se reenviara tal cual, la
+  // interfaz no encontraría su mensaje traducido y se quedaría en blanco.
   return CODIGOS_CONOCIDOS.has(codigo) ? (codigo as CodigoError) : 'generic'
 }
 
@@ -125,7 +142,10 @@ function esRespuestaOk(datos: unknown): boolean {
 }
 
 /**
- * Clave de idempotencia generada en el cliente y validada en el servidor
- * (seccion 6.10, regla 7). Sin ella, un doble clic crea dos envios.
+ * Identificador del envío, generado en el cliente.
+ *
+ * Es la clave de deduplicación: el mismo `submissionId` reenviado no debe crear
+ * dos Leads. Se genera **una vez por formulario**, no por intento, para que un
+ * reintento tras un fallo de red no cuente como envío nuevo.
  */
-export const nuevaClaveIdempotencia = (): string => crypto.randomUUID()
+export const nuevoSubmissionId = (): string => crypto.randomUUID()

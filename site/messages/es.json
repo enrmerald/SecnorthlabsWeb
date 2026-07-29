@@ -15,15 +15,6 @@
       "title": "Blog",
       "titleHighlight": "Análisis, normativa y buenas prácticas"
     },
-    "newsletter": {
-      "cta": "Suscribirme",
-      "error": "No se pudo completar la suscripción. Inténtalo de nuevo.",
-      "placeholder": "tu@empresa.com",
-      "privacyNote": "Al suscribirte aceptas nuestra Política de Privacidad. Puedes darte de baja cuando quieras.",
-      "subtitle": "Novedades de ciberseguridad y GRC, con nuestro ángulo accionable. Sin spam.",
-      "success": "¡Listo! Revisa tu correo para confirmar la suscripción.",
-      "title": "Recibe el análisis mensual de ISN Labs"
-    },
     "seo": {
       "description": "Análisis accionable de NIS2, DORA, ISO 27001, ENS, RGPD y respuesta a incidentes para CISOs y responsables de cumplimiento.",
       "title": "Blog de ciberseguridad y cumplimiento (NIS2, DORA, ISO) — ISN Labs"
@@ -60,13 +51,16 @@
       }
     },
     "errors": {
-      "cpdExternoConServidoresPropios": "Has indicado CPD externo pero hay servidores propios. Selecciona CPD híbrido o elimina los servidores propios.",
       "cpdPropioConServidoresExternos": "Has indicado CPD propio pero hay servidores externos. Selecciona CPD híbrido o elimina los servidores externos.",
-      "entero": "Introduce un número entero.",
-      "generic": "No se pudo calcular la cuota. Inténtalo de nuevo en unos segundos.",
+      "cpdExternoConServidoresPropios": "Has indicado CPD externo pero hay servidores propios. Selecciona CPD híbrido o elimina los servidores propios.",
       "rango": "El valor está fuera del rango admitido.",
+      "entero": "Introduce un número entero.",
+      "valor": "Ese valor no es válido.",
+      "validation": "Revisa los datos: alguno no es válido.",
       "rateLimited": "Demasiadas peticiones. Espera un momento e inténtalo de nuevo.",
-      "tokenCaducado": "La sesión ha caducado. Vuelve a introducir tus datos para recalcular."
+      "network": "No hemos podido conectar. Comprueba tu conexión e inténtalo de nuevo.",
+      "generic": "No hemos podido calcular la estimación. Inténtalo de nuevo en unos segundos.",
+      "blocked": "Corrige el aviso de arriba para poder calcular la estimación."
     },
     "exclusions": [
       "Impuestos",
@@ -87,15 +81,9 @@
           "routeId": null
         }
       ],
-      "subtitle": "Responde a unas pocas preguntas sobre tu entorno y te damos una horquilla orientativa del Plan Base de Ciberseguridad Gestionada. Sin llamadas comerciales no solicitadas.",
+      "subtitle": "Responde a unas preguntas sobre tu entorno y te damos al momento la cuota estimada del Plan Base de Ciberseguridad Gestionada, con su desglose.",
       "title": "Descubre qué plan de seguridad",
       "titleHighlight": "necesitas"
-    },
-    "leadGate": {
-      "submit": "Ver mi cuota orientativa",
-      "submitting": "Calculando…",
-      "subtitle": "Te mostramos la cuota orientativa al momento. Sin llamadas comerciales no solicitadas.",
-      "title": "Dinos quién eres"
     },
     "legalNote": "Estimación orientativa, no vinculante. La cuota final depende del alcance validado en una sesión técnica gratuita de 30 minutos.",
     "no": "No",
@@ -135,20 +123,24 @@
       }
     },
     "result": {
+      "title": "Tu estimación",
+      "perMonth": "€/mes",
+      "taxesNote": "Impuestos no incluidos",
+      "sizeLabel": "Tamaño estimado de tu organización",
       "breakdown": {
-        "audits": "Auditorías NIS2 / ENS",
-        "licences": "Licencias",
         "title": "Desglose",
-        "total": "TOTAL"
+        "managed": "Servicio gestionado",
+        "licences": "Licencias",
+        "audits": "Auditorías NIS2 / ENS",
+        "total": "Total"
       },
-      "cta": "Recibir propuesta detallada",
-      "ctaSent": "Propuesta solicitada. Te escribimos en menos de 24 h laborables.",
-      "managedLabel": "Servicio gestionado",
-      "perMonth": "€/mes · impuestos no incluidos",
-      "recalculating": "Actualizando la cuota…",
-      "sizeLabel": "Tamaño estimado",
-      "title": "Cotización preparada para {nombre}",
-      "updated": "Cuota actualizada"
+      "emailSent": "Te hemos enviado esta estimación a {email}, con el desglose y las exclusiones.",
+      "referenceLabel": "Referencia",
+      "restart": "Modificar los datos",
+      "testMode": {
+        "title": "Modo de pruebas",
+        "text": "La estimación es la real, calculada con el modelo aprobado. Pero el envío de correo está desactivado: no se ha registrado ninguna solicitud ni se ha enviado nada."
+      }
     },
     "seo": {
       "description": "Estima en un minuto la cuota mensual del Plan Base de Ciberseguridad Gestionada según tu número de sedes, usuarios, servidores y módulo de cumplimiento.",
@@ -183,7 +175,26 @@
         "label": "SIEM-XDR"
       }
     },
-    "si": "Sí"
+    "si": "Sí",
+    "gate": {
+      "title": "Dinos quién eres y te damos la cifra",
+      "subtitle": "Calculamos la estimación al momento con los datos que has introducido y te la enviamos también por correo. Sin llamadas comerciales no solicitadas.",
+      "submit": "Ver mi estimación",
+      "submitting": "Calculando…"
+    },
+    "steps": {
+      "params": "Tus datos técnicos",
+      "contact": "Tus datos de contacto",
+      "result": "Tu estimación"
+    },
+    "contactFields": {
+      "legend": "Para enviarte la estimación",
+      "firstName": "Nombre",
+      "lastName": "Apellidos",
+      "company": "Empresa",
+      "email": "Email profesional",
+      "phone": "Teléfono (opcional)"
+    }
   },
   "common": {
     "a11y": {

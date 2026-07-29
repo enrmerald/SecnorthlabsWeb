@@ -160,9 +160,36 @@ function invertir<A extends string, B extends string>(mapa: Record<A, B>): Recor
   return salida
 }
 
-/** Los valores validos, para que el esquema de la funcion no los repita. */
+/**
+ * Los valores validos, para que el esquema de la funcion no los repita.
+ *
+ * Se declaran como tuplas literales y no con `Object.keys()`, porque
+ * `Object.keys` devuelve `string[]` y el `z.enum()` de la funcion perderia los
+ * literales: el payload validado saldria con `cpd: string` y no encajaria en
+ * `DatosCotizacionContrato`.
+ *
+ * El `satisfies` mas la comprobacion de longitud de abajo garantizan que las
+ * tuplas y los mapas no se separen: si se anade un valor a un mapa y no aqui,
+ * salta al cargar el modulo.
+ */
 export const VALORES_CONTRATO = {
-  cpd: Object.keys(CPD) as CpdContrato[],
-  edr: Object.keys(EDR) as EdrContrato[],
-  module: Object.keys(MODULO) as ModuloContrato[],
-} as const
+  cpd: ['external', 'own', 'hybrid'] as const,
+  edr: ['none', 'edr', 'mdr'] as const,
+  module: ['none', 'nis2', 'ensMedium', 'ensHigh'] as const,
+} satisfies {
+  cpd: readonly CpdContrato[]
+  edr: readonly EdrContrato[]
+  module: readonly ModuloContrato[]
+}
+
+for (const [nombre, mapa, tupla] of [
+  ['cpd', CPD, VALORES_CONTRATO.cpd],
+  ['edr', EDR, VALORES_CONTRATO.edr],
+  ['module', MODULO, VALORES_CONTRATO.module],
+] as const) {
+  if (Object.keys(mapa).length !== tupla.length) {
+    throw new Error(
+      `contrato: VALORES_CONTRATO.${nombre} tiene ${tupla.length} valores y su mapa ${Object.keys(mapa).length}`,
+    )
+  }
+}

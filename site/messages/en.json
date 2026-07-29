@@ -15,15 +15,6 @@
       "title": "Blog",
       "titleHighlight": "Analysis, regulation and best practices"
     },
-    "newsletter": {
-      "cta": "Subscribe",
-      "error": "Couldn't complete the subscription. Please try again.",
-      "placeholder": "you@company.com",
-      "privacyNote": "By subscribing you accept our Privacy Policy. You can unsubscribe at any time.",
-      "subtitle": "Cybersecurity and GRC news, with our actionable angle. No spam.",
-      "success": "Done! Check your inbox to confirm your subscription.",
-      "title": "Get ISN Labs' monthly analysis"
-    },
     "seo": {
       "description": "Actionable analysis of NIS2, DORA, ISO 27001, ENS, GDPR and incident response for CISOs and compliance leaders.",
       "title": "Cybersecurity and compliance blog (NIS2, DORA, ISO) — ISN Labs"
@@ -60,13 +51,16 @@
       }
     },
     "errors": {
-      "cpdExternoConServidoresPropios": "You selected an external data centre but there are own servers. Choose hybrid or remove the own servers.",
       "cpdPropioConServidoresExternos": "You selected an own data centre but there are external servers. Choose hybrid or remove the external servers.",
-      "entero": "Enter a whole number.",
-      "generic": "The fee could not be calculated. Please try again in a few seconds.",
+      "cpdExternoConServidoresPropios": "You selected an external data centre but there are own servers. Choose hybrid or remove the own servers.",
       "rango": "The value is outside the accepted range.",
+      "entero": "Enter a whole number.",
+      "valor": "That value is not valid.",
+      "validation": "Please review the details: something is not valid.",
       "rateLimited": "Too many requests. Please wait a moment and try again.",
-      "tokenCaducado": "The session has expired. Enter your details again to recalculate."
+      "network": "We could not connect. Check your connection and try again.",
+      "generic": "We could not calculate the estimate. Please try again in a few seconds.",
+      "blocked": "Fix the warning above to calculate the estimate."
     },
     "exclusions": [
       "Taxes",
@@ -87,15 +81,9 @@
           "routeId": null
         }
       ],
-      "subtitle": "Answer a few questions about your environment and we will give you an indicative range for the Managed Cybersecurity Base Plan. No unsolicited sales calls.",
+      "subtitle": "Answer a few questions about your environment and we will show you the estimated fee of the Managed Cybersecurity Base Plan right away, with its breakdown.",
       "title": "Find out which security plan",
       "titleHighlight": "you need"
-    },
-    "leadGate": {
-      "submit": "Show my indicative fee",
-      "submitting": "Calculating…",
-      "subtitle": "We will show you the indicative fee right away. No unsolicited sales calls.",
-      "title": "Tell us who you are"
     },
     "legalNote": "Indicative estimate, not binding. The final fee depends on the scope validated in a free 30-minute technical session.",
     "no": "No",
@@ -135,20 +123,24 @@
       }
     },
     "result": {
+      "title": "Your estimate",
+      "perMonth": "€/month",
+      "taxesNote": "Taxes not included",
+      "sizeLabel": "Estimated size of your organisation",
       "breakdown": {
-        "audits": "NIS2 / ENS audits",
-        "licences": "Licences",
         "title": "Breakdown",
-        "total": "TOTAL"
+        "managed": "Managed service",
+        "licences": "Licences",
+        "audits": "NIS2 / ENS audits",
+        "total": "Total"
       },
-      "cta": "Get a detailed proposal",
-      "ctaSent": "Proposal requested. We will write to you within 24 working hours.",
-      "managedLabel": "Managed service",
-      "perMonth": "€/month · taxes not included",
-      "recalculating": "Updating the fee…",
-      "sizeLabel": "Estimated size",
-      "title": "Quote prepared for {nombre}",
-      "updated": "Fee updated"
+      "emailSent": "We have sent this estimate to {email}, with the breakdown and exclusions.",
+      "referenceLabel": "Reference",
+      "restart": "Change the details",
+      "testMode": {
+        "title": "Test mode",
+        "text": "The estimate is real, calculated with the approved model. But email delivery is switched off: no request has been recorded and nothing has been sent."
+      }
     },
     "seo": {
       "description": "Estimate the monthly fee of the Managed Cybersecurity Base Plan in a minute, based on your sites, users, servers and compliance module.",
@@ -183,7 +175,26 @@
         "label": "SIEM-XDR"
       }
     },
-    "si": "Yes"
+    "si": "Yes",
+    "gate": {
+      "title": "Tell us who you are and we will show you the figure",
+      "subtitle": "We calculate the estimate right away from the details you entered, and email it to you as well. No unsolicited sales calls.",
+      "submit": "Show my estimate",
+      "submitting": "Calculating…"
+    },
+    "steps": {
+      "params": "Your technical details",
+      "contact": "Your contact details",
+      "result": "Your estimate"
+    },
+    "contactFields": {
+      "legend": "So we can send you the estimate",
+      "firstName": "First name",
+      "lastName": "Last name",
+      "company": "Company",
+      "email": "Work email",
+      "phone": "Phone (optional)"
+    }
   },
   "common": {
     "a11y": {
