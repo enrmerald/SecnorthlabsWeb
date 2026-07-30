@@ -136,9 +136,9 @@ export function TeamRoleCard({ title, description }: { title: string; descriptio
         {title.charAt(0)}
       </span>
       <div className="flex flex-col gap-1">
-        {/* Verde y no blanco: el rol es lo que se busca al recorrer la rejilla,
-            y comparte color con el kicker `/03 Equipo` de su seccion. */}
-        <h3 className="font-display text-green text-sm font-bold">{title}</h3>
+        {/* En color y no en blanco: el rol es lo que se busca al recorrer la
+            rejilla, y comparte el cian del kicker `/03 Equipo` de su seccion. */}
+        <h3 className="font-display text-cyan text-sm font-bold">{title}</h3>
         <p className="texto-cuerpo text-sm">{description}</p>
       </div>
     </Card>

@@ -67,15 +67,16 @@ export function Compania({ locale }: { locale: Locale }) {
         <SectionHeading
           kicker={company.values.label}
           kickerPrefijo="/02"
+          kickerColor="verde"
           titulo={company.values.kicker}
         />
         <ul className="grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
           {company.values.items.map((valor) => (
             <Card key={valor.title} as="li" className="flex flex-col gap-2 p-6">
-              {/* Cian, el color del kicker de esta seccion, igual que el equipo
-                  usa el verde del suyo: el color dice de que bloque es la
+              {/* Verde, el color del kicker de esta seccion, igual que el equipo
+                  usa el cian del suyo: el color dice de que bloque es la
                   tarjeta cuando se ve suelta al desplazarse. */}
-              <h3 className="subtitle text-cyan">{valor.title}</h3>
+              <h3 className="subtitle text-green">{valor.title}</h3>
               <p className="texto-cuerpo text-sm">{valor.description}</p>
             </Card>
           ))}
@@ -87,7 +88,6 @@ export function Compania({ locale }: { locale: Locale }) {
         <SectionHeading
           kicker={company.team.kicker}
           kickerPrefijo="/03"
-          kickerColor="verde"
           titulo={company.team.title}
         />
         <ul className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">

@@ -41,7 +41,6 @@ export function Grc({ locale }: { locale: Locale }) {
         <SectionHeading
           kicker={grc.consulting.kicker}
           kickerPrefijo="/01"
-          kickerColor="verde"
           titulo={grc.consulting.title}
         />
 
