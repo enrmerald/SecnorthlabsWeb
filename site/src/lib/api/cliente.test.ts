@@ -1,6 +1,6 @@
 import { afterEach, describe, expect, it, vi } from 'vitest'
 import { z } from 'zod'
-import { nuevoSubmissionId } from './cliente'
+import { esperarMinimoAntispam, nuevoSubmissionId } from './cliente'
 
 /**
  * Estas pruebas existen por un fallo concreto.
@@ -60,5 +60,81 @@ describe('nuevoSubmissionId', () => {
     // desaparece en silencio.
     vi.stubGlobal('crypto', {})
     expect(() => nuevoSubmissionId()).toThrow(/getRandomValues/)
+  })
+})
+
+/**
+ * `esperarMinimoAntispam` existe para no perder leads de personas reales: el
+ * servidor descarta en silencio lo que llega en menos de 3 s, y con el
+ * autorrelleno del navegador una persona puede enviar antes.
+ *
+ * Se prueba con temporizadores falsos porque la alternativa es una prueba que
+ * tarda tres segundos y medio de verdad.
+ */
+describe('esperarMinimoAntispam', () => {
+  /**
+   * Cuantos milisegundos pide esperar, o 0 si no espera.
+   *
+   * Se mide interceptando `setTimeout` en lugar de avanzar el reloj a saltos: lo
+   * que se quiere comprobar es la **decision** -cuanto pide- y no el mecanismo del
+   * temporizador, que es de la plataforma.
+   */
+  async function cuantoEspera(renderizadoEn: number, ahora: number): Promise<number> {
+    // Sin `vi.useFakeTimers()` a proposito: con temporizadores falsos, el
+    // `setTimeout` que hay que usar para no esperar de verdad ES el falso, asi que
+    // la espera se programa en un reloj que nadie avanza y la prueba se cuelga. Se
+    // falsea solo lo que hace falta: la hora y el temporizador.
+    const relojReal = Date.now
+    const temporizadorReal = globalThis.setTimeout
+
+    let pedido = 0
+    Date.now = () => ahora
+    globalThis.setTimeout = ((fn: () => void, ms?: number) => {
+      pedido = ms ?? 0
+      // Se ejecuta ya: lo que se mide es el numero que pide, no la espera.
+      return temporizadorReal(fn, 0)
+    }) as unknown as typeof setTimeout
+
+    try {
+      await esperarMinimoAntispam(renderizadoEn)
+    } finally {
+      Date.now = relojReal
+      globalThis.setTimeout = temporizadorReal
+    }
+
+    return pedido
+  }
+
+  it('no espera nada si el formulario aun no se ha montado', async () => {
+    // `renderizadoEn` es 0 hasta que corre el efecto. Esperar ahi seria retener el
+    // envio por una marca que no existe.
+    expect(await cuantoEspera(0, 1_000_000)).toBe(0)
+  })
+
+  it('no espera nada si ya se superaron los 3 s', async () => {
+    const ahora = 1_000_000
+    expect(await cuantoEspera(ahora - 10_000, ahora)).toBe(0)
+  })
+
+  it('espera lo que falta cuando el envio es demasiado rapido', async () => {
+    const ahora = 1_000_000
+    // Han pasado 500 ms: faltan 2500, mas el margen de 250 para absorber la
+    // diferencia entre el reloj del cliente y el del servidor.
+    expect(await cuantoEspera(ahora - 500, ahora)).toBe(2750)
+  })
+
+  it('un reloj que salta hacia atras NO cuelga el envio', async () => {
+    // ═══════════════════════════════════════════════════════════════════════════
+    // Este caso lo encontro esta prueba, y era un cuelgue real.
+    //
+    // Si el reloj cambia entre el montaje y el envio -sincronizacion NTP, suspender
+    // el portatil-, `transcurrido` sale negativo y `restante` se dispara. Con el
+    // reloj adelantado un minuto se esperaban 63 segundos con el boton en
+    // «enviando» y sin ninguna pista: la persona da la pagina por rota.
+    //
+    // Nunca hace falta esperar mas de lo que exige el umbral, y ese es el tope.
+    // ═══════════════════════════════════════════════════════════════════════════
+    const ahora = 1_000_000
+    expect(await cuantoEspera(ahora + 60_000, ahora)).toBe(3250)
   })
 })

@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useId, useMemo, useRef, useState } from 'react'
+import { useCallback, useEffect, useId, useMemo, useRef, useState } from 'react'
 import { Button } from '@/components/ui/Button'
 import { Card } from '@/components/ui/Card'
 import { Kicker } from '@/components/ui/Kicker'
@@ -131,6 +131,16 @@ const LIMITES: Record<string, [number, number]> = {
   firewalls: [0, 50],
 }
 
+/**
+ * Un entero dentro de su rango. Fuera del componente porque no depende de nada de
+ * el: dentro se recreaba en cada render y obligaba a declararla como dependencia.
+ */
+function numeroValido(campo: keyof Parametros, valor: number) {
+  const limite = LIMITES[campo]
+  if (!limite) return true
+  return Number.isInteger(valor) && valor >= limite[0] && valor <= limite[1]
+}
+
 export function CalculadoraCliente({
   textos,
   locale,
@@ -161,6 +171,9 @@ export function CalculadoraCliente({
   const submissionId = useRef('')
   const panelResultado = useRef<HTMLDivElement>(null)
 
+  // Por `ref` y no con estado: es una trampa, no un campo del formulario.
+  const honeypot = useRef<HTMLInputElement>(null)
+
   // Tras el montaje, nunca en el cuerpo: con exportacion estatica un Date.now()
   // en el render se congela con la fecha del build y el antispam queda inutil.
   useEffect(() => {
@@ -168,7 +181,13 @@ export function CalculadoraCliente({
     submissionId.current = nuevoSubmissionId()
   }, [])
 
-  const msg = (clave: string): string => textos.errors[clave] ?? textos.errors.generic ?? ''
+  // `useCallback` para que los dos `useMemo` de abajo puedan declarar `msg` como
+  // dependencia de verdad. Sin esto se recreaba en cada render, `exhaustive-deps`
+  // protestaba y la salida facil era silenciar la regla.
+  const msg = useCallback(
+    (clave: string): string => textos.errors[clave] ?? textos.errors.generic ?? '',
+    [textos.errors],
+  )
 
   /**
    * Coherencia CPD ↔ servidores. **Error bloqueante, no aviso** (B06).
@@ -185,14 +204,16 @@ export function CalculadoraCliente({
     if (p.cpd === 'own' && externos > 0) return msg('cpdPropioConServidoresExternos')
     if (p.cpd === 'external' && propios > 0) return msg('cpdExternoConServidoresPropios')
     return null
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [p, textos.errors])
-
-  const numeroValido = (campo: keyof Parametros, valor: number) => {
-    const limite = LIMITES[campo]
-    if (!limite) return true
-    return Number.isInteger(valor) && valor >= limite[0] && valor <= limite[1]
-  }
+    // Los cinco campos que lee, y no el objeto `p` entero: asi cambiar el SIEM o
+    // las horas de consultoria no recalcula una comprobacion que no les afecta.
+  }, [
+    p.cpd,
+    p.physicalServersExternal,
+    p.virtualServersExternal,
+    p.physicalServersOwn,
+    p.virtualServersOwn,
+    msg,
+  ])
 
   const erroresNumericos = useMemo(() => {
     const salida: Record<string, string> = {}
@@ -202,12 +223,19 @@ export function CalculadoraCliente({
       else if (!numeroValido(campo, valor)) salida[campo] = msg('rango')
     }
     return salida
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [p, textos.errors])
+    // Aqui si depende de `p` entero, y es honesto: recorre los ocho campos de
+    // `LIMITES`. `numeroValido` esta fuera del componente para no tener que
+    // declararla ni volver a crearla en cada render.
+  }, [p, msg])
 
+  // `lastName` NO se exige, igual que en el formulario de contacto y que en el
+  // esquema del servidor: hay nombres de una sola palabra, y quien escribe desde
+  // fuera de Espana puede no tener «apellidos» en el sentido de aqui. Aqui se
+  // pedian 2 caracteres, de modo que la calculadora bloqueaba a personas que el
+  // otro formulario acepta sin problema, y el motivo de aceptarlas ya estaba
+  // razonado en los dos sitios que mandan.
   const contactoCompleto =
     contacto.firstName.trim().length >= 2 &&
-    contacto.lastName.trim().length >= 2 &&
     contacto.company.trim().length >= 2 &&
     /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(contacto.email.trim())
 
@@ -252,7 +280,7 @@ export function CalculadoraCliente({
       // Se envian los parametros, nunca un total ni una horquilla: el servidor
       // recalcula siempre, y su esquema rechaza cualquier clave que no espere.
       data: p,
-      antispam: { honeypot: '', renderedAt: renderizadoEn.current },
+      antispam: { honeypot: honeypot.current?.value ?? '', renderedAt: renderizadoEn.current },
     })
 
     if (respuesta.ok && respuesta.datos.quote) {
@@ -619,10 +647,19 @@ export function CalculadoraCliente({
           </label>
         </div>
 
-        {/* Honeypot, fuera de pantalla y del flujo accesible. */}
+        {/* Honeypot, fuera de pantalla y del flujo accesible. El `ref` es lo que
+            hace que el valor llegue al servidor: sin el, el campo se pinta pero
+            el envio manda siempre la cadena vacia. */}
         <div aria-hidden="true" className="absolute left-[-9999px] h-0 w-0 overflow-hidden">
           <label htmlFor={idDe('hp')}>No rellenar</label>
-          <input id={idDe('hp')} name="empresa_web" type="text" tabIndex={-1} autoComplete="off" />
+          <input
+            ref={honeypot}
+            id={idDe('hp')}
+            name="empresa_web"
+            type="text"
+            tabIndex={-1}
+            autoComplete="off"
+          />
         </div>
 
         <Button type="submit" variante="primario" tamano="lg" ancho disabled={!puedeEnviar}>

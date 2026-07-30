@@ -119,7 +119,23 @@ export async function esperarMinimoAntispam(renderizadoEn: number): Promise<void
 
   // Un margen pequeño para absorber la diferencia entre el reloj del cliente y
   // el del servidor, que es de quien depende la comprobación real.
-  await new Promise((listo) => setTimeout(listo, restante + 250))
+  //
+  // ═══════════════════════════════════════════════════════════════════════════
+  // El `Math.min` no es defensivo por costumbre, evita un cuelgue de verdad.
+  //
+  // `renderizadoEn` y `Date.now()` salen del mismo reloj, pero ese reloj puede
+  // cambiar **entre el montaje y el envío**: una sincronización NTP, suspender y
+  // reanudar el portátil, o cambiar la hora a mano. Si salta hacia atrás,
+  // `transcurrido` sale negativo y `restante` se dispara: con el reloj adelantado
+  // un minuto, esto esperaba 63 segundos con el botón en «enviando» y sin ninguna
+  // pista de por qué. La persona da por hecho que la página está rota y se va.
+  //
+  // Nunca hace falta esperar más de lo que exige el umbral, así que ese es el
+  // tope. `esProbableBot()` en el servidor ya trata el caso simétrico -una marca
+  // en el futuro no es un bot, es un dato no comprobable-; aquí faltaba.
+  // ═══════════════════════════════════════════════════════════════════════════
+  const TOPE_MS = SEGUNDOS_MINIMOS * 1000 + 250
+  await new Promise((listo) => setTimeout(listo, Math.min(restante + 250, TOPE_MS)))
 }
 
 interface OpcionesEnvio {

@@ -11,6 +11,7 @@ import {
   CampoTextarea,
   ResumenErrores,
 } from './campos'
+import { MAX_MENSAJE, codigoDeError, esDominioGenerico } from './validacion'
 
 /**
  * Formulario de contacto (seccion 6.1 del plan).
@@ -92,11 +93,6 @@ const VACIO: Campos = {
   message: '',
 }
 
-/** Dominios de correo personal. Provocan aviso, no bloqueo. */
-const DOMINIOS_GENERICOS = ['gmail.', 'hotmail.', 'outlook.', 'yahoo.', 'live.', 'icloud.']
-
-const MAX_MENSAJE = 1000
-
 export function FormularioContacto({
   textos,
   locale,
@@ -120,6 +116,12 @@ export function FormularioContacto({
   const [mostrarResumen, setMostrarResumen] = useState(false)
 
   const resumen = useRef<HTMLDivElement>(null)
+
+  // El honeypot se lee por `ref` y no con estado a proposito: no es un dato del
+  // formulario, es una trampa. Con estado provocaria un repintado por cada
+  // pulsacion del bot y tendria que aparecer en `Campos`, donde no le
+  // corresponde estar.
+  const honeypot = useRef<HTMLInputElement>(null)
 
   // Acceso a los mensajes de error con respaldo. `noUncheckedIndexedAccess`
   // devuelve `string | undefined` al indexar, y esta bien que lo haga: un codigo
@@ -151,64 +153,23 @@ export function FormularioContacto({
   }
 
   /**
-   * Valida un campo.
+   * Valida un campo y devuelve el texto ya traducido.
    *
-   * ═══════════════════════════════════════════════════════════════════════════
-   * `exigirObligatorios` es la diferencia entre revisar y dar la lata.
-   *
-   * Al **salir de un campo** se llama con `false`: un campo vacío no se marca en
-   * rojo. Recorrer el formulario con el tabulador para ver qué piden, o dejar un
-   * campo para el final, es comportamiento normal, y castigarlo con un error por
-   * cada casilla convierte el formulario en un campo de minas antes de haber
-   * intentado nada. Lo que sí se comprueba al salir es el **contenido escrito**:
-   * si alguien teclea un correo mal formado, decírselo ahí es un favor, no una
-   * regañina.
-   *
-   * Al **enviar** se llama con `true`, y entonces sí se exige todo lo
-   * obligatorio y aparece el resumen de arriba.
-   * ═══════════════════════════════════════════════════════════════════════════
+   * La regla vive en `validacion.ts` y devuelve un **codigo**; aqui solo se
+   * traduce. Estaban juntas, y eso dejaba la parte mas facil de equivocarse -las
+   * reglas- sin forma de probarla sin montar React. Ver `validacion.test.ts`.
    */
   function validarCampo(campo: keyof Campos, exigirObligatorios: boolean): string | undefined {
-    const v = campos[campo].trim()
-    const vacio = v === ''
-
-    switch (campo) {
-      case 'firstName':
-        if (vacio) return exigirObligatorios ? msg('firstName') : undefined
-        return v.length < 2 || v.length > 40 ? msg('firstName') : undefined
-      case 'lastName':
-        // Opcional: hay nombres de una sola palabra, y quien escribe desde otro
-        // pais puede no tener «apellidos» en el sentido de aqui. Solo se
-        // comprueba que no se pase de largo.
-        return v.length > 60 ? msg('lastName') : undefined
-      case 'company':
-        if (vacio) return exigirObligatorios ? msg('company') : undefined
-        return v.length < 2 || v.length > 80 ? msg('company') : undefined
-      case 'email':
-        if (vacio) return exigirObligatorios ? msg('email') : undefined
-        // Validación deliberadamente laxa: la estricta la hace el servidor, y
-        // una expresión agresiva rechaza direcciones válidas raras.
-        return !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v) ? msg('email') : undefined
-      case 'need':
-        return vacio && exigirObligatorios ? msg('need') : undefined
-      case 'message':
-        return v.length > MAX_MENSAJE ? msg('message') : undefined
-      default:
-        return undefined
-    }
+    const codigo = codigoDeError(campo, campos[campo], exigirObligatorios)
+    return codigo ? msg(codigo) : undefined
   }
 
   const alSalirDe = (campo: keyof Campos) => () => {
     setErrores((e) => ({ ...e, [campo]: validarCampo(campo, false) }))
 
     if (campo === 'email') {
-      const dominio = campos.email.toLowerCase()
       // Aviso suave: quien solo tiene correo personal debe poder enviar.
-      setAviso(
-        DOMINIOS_GENERICOS.some((d) => dominio.includes(d))
-          ? msg('genericEmailDomain')
-          : null,
-      )
+      setAviso(esDominioGenerico(campos.email) ? msg('genericEmailDomain') : null)
     }
   }
 
@@ -260,7 +221,7 @@ export function FormularioContacto({
         title: campos.role.trim(),
       },
       data: { need: campos.need, message: campos.message.trim() },
-      antispam: { honeypot: '', renderedAt: renderizadoEn.current },
+      antispam: { honeypot: honeypot.current?.value ?? '', renderedAt: renderizadoEn.current },
     })
 
     if (respuesta.ok) {
@@ -461,10 +422,21 @@ export function FormularioContacto({
 
       {/* Honeypot: invisible para las personas, visible para los bots que
           rellenan todo. Fuera del flujo accesible y fuera de la pantalla, no con
-          `display: none`, que algunos bots detectan. */}
+          `display: none`, que algunos bots detectan.
+
+          El `ref` no es decorativo: sin el, este campo se pinta pero nadie lo
+          lee, el envio manda siempre la cadena vacia y la comprobacion del
+          servidor no puede detectar nada. Lo cubre `e2e/antispam.spec.ts`. */}
       <div aria-hidden="true" className="absolute left-[-9999px] h-0 w-0 overflow-hidden">
         <label htmlFor={idDe('hp')}>No rellenar</label>
-        <input id={idDe('hp')} name="empresa_web" type="text" tabIndex={-1} autoComplete="off" />
+        <input
+          ref={honeypot}
+          id={idDe('hp')}
+          name="empresa_web"
+          type="text"
+          tabIndex={-1}
+          autoComplete="off"
+        />
       </div>
 
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
