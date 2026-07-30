@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ISN Labs · Calculadora PBCG</title>
+<style>
+  :root{ --ink:#000; --paper:#fff; --grey:#f4f4f4; --line:#e2e2e2; --dim:#666; }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    font-family:'Consolas','SF Mono','Cascadia Mono',ui-monospace,monospace;
+    background:var(--paper); color:var(--ink);
+    -webkit-font-smoothing:antialiased; line-height:1.5;
+  }
+  .wrap{max-width:980px; margin:0 auto; padding:48px 24px 80px;}
+  header{margin-bottom:40px;}
+  .brand{font-size:22px; font-weight:700; letter-spacing:.08em;}
+  .claim{font-size:12px; color:var(--dim); letter-spacing:.06em; margin-top:2px;}
+  h1{font-size:26px; font-weight:700; margin:28px 0 8px; letter-spacing:-.01em;}
+  .sub{font-size:14px; color:var(--dim); max-width:660px;}
+  .grid{display:grid; grid-template-columns:1fr 360px; gap:32px; margin-top:36px; align-items:start;}
+  @media(max-width:860px){.grid{grid-template-columns:1fr;}}
+  fieldset{border:1px solid var(--ink); padding:20px; margin-bottom:20px;}
+  legend{font-size:11px; font-weight:700; letter-spacing:.14em; padding:0 8px; text-transform:uppercase;}
+  .row{display:flex; justify-content:space-between; align-items:center; gap:16px; padding:9px 0; border-bottom:1px solid var(--line);}
+  .row:last-child{border-bottom:none;}
+  .row.hidden{display:none;}
+  .row label{font-size:13px; flex:1;}
+  .hint{display:block; font-size:11px; color:var(--dim);}
+  input[type=number],select,input[type=text],input[type=email],input[type=tel]{
+    font-family:inherit; font-size:13px; padding:6px 8px;
+    border:1px solid var(--ink); background:var(--paper); color:var(--ink); border-radius:0;
+  }
+  input[type=number]{width:80px; text-align:right;}
+  select{width:170px;}
+  .toggle{display:flex; border:1px solid var(--ink);}
+  .toggle button{font-family:inherit; font-size:12px; padding:6px 12px; border:none; background:var(--paper); color:var(--ink); cursor:pointer;}
+  .toggle button.on{background:var(--ink); color:var(--paper);}
+  .panel{border:1px solid var(--ink); padding:24px; position:sticky; top:24px;}
+  .panel h2{font-size:11px; letter-spacing:.14em; text-transform:uppercase; margin-bottom:16px;}
+  /* gate */
+  .gate p{font-size:12px; color:var(--dim); margin-bottom:14px;}
+  .gate input{width:100%; margin-bottom:10px; padding:10px;}
+  .gate .err{border-color:#c00 !important;}
+  .gate button{
+    width:100%; font-family:inherit; font-size:13px; font-weight:700; letter-spacing:.08em;
+    padding:12px; background:var(--ink); color:var(--paper); border:none; cursor:pointer; text-transform:uppercase;
+  }
+  .gate .legalnote{font-size:10px; color:var(--dim); margin-top:10px;}
+  /* result */
+  #result{display:none;}
+  .for{font-size:11px; color:var(--dim); margin-bottom:14px;}
+  .biglabel{font-size:11px; letter-spacing:.1em; text-transform:uppercase;}
+  .range{font-size:32px; font-weight:700; letter-spacing:-.02em; line-height:1.15; margin-top:4px;}
+  .permonth{font-size:12px; color:var(--dim); margin-top:4px; margin-bottom:18px;}
+  .desglose{font-size:12px; border-top:1px solid var(--ink); padding-top:8px;}
+  .desglose .d{display:flex; justify-content:space-between; padding:6px 0; border-bottom:1px solid var(--line);}
+  .desglose .d span:last-child{font-weight:700;}
+  .desglose .total{border-top:1px solid var(--ink); border-bottom:none; font-size:14px;}
+  .desglose .total span{font-weight:700;}
+  .note{font-size:11px; color:var(--dim); margin-top:16px;}
+  .cta2{margin-top:18px;}
+  .cta2 button{
+    width:100%; font-family:inherit; font-size:12px; font-weight:700; letter-spacing:.08em;
+    padding:11px; background:var(--paper); color:var(--ink); border:1px solid var(--ink); cursor:pointer; text-transform:uppercase;
+  }
+  .cta2 button:hover{background:var(--ink); color:var(--paper);}
+  .ok{font-size:12px; margin-top:10px; display:none;}
+  footer{margin-top:48px; font-size:11px; color:var(--dim); max-width:760px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="brand">ISN LABS</div>
+    <div class="claim">Cybersecurity, IA &amp; Innovation</div>
+    <h1>¿Cuánto cuesta proteger tu empresa?</h1>
+    <p class="sub">Calcula en un minuto la cuota mensual orientativa del Plan Base de Ciberseguridad Gestionada, con o sin auditorías técnicas periódicas de cumplimiento NIS2 / ENS (análisis de vulnerabilidades, pentest, revisión de configuraciones).</p>
+  </header>
+
+  <div class="grid">
+    <div>
+      <fieldset>
+        <legend>Tu organización</legend>
+        <div class="row"><label>Sedes u oficinas</label><input type="number" id="sedes" min="1" max="50" value="1"></div>
+        <div class="row"><label>Usuarios de IT<span class="hint">puestos de trabajo con equipo</span></label><input type="number" id="usuarios" min="1" max="2000" value="25"></div>
+        <div class="row"><label>CPD</label>
+          <select id="cpd">
+            <option value="externo" selected>Externo o cloud</option>
+            <option value="propio">Propio</option>
+            <option value="hibrido">Híbrido</option>
+          </select>
+        </div>
+        <div class="row srv-propio hidden"><label>Servidores físicos en tu CPD</label><input type="number" id="srvFisPropio" min="0" max="200" value="0"></div>
+        <div class="row srv-propio hidden"><label>Servidores virtuales en tu CPD</label><input type="number" id="srvVirPropio" min="0" max="500" value="0"></div>
+        <div class="row srv-externo"><label>Servidores físicos en CPD externo<span class="hint">housing</span></label><input type="number" id="srvFisExt" min="0" max="200" value="1"></div>
+        <div class="row srv-externo"><label>Servidores virtuales en CPD externo / cloud</label><input type="number" id="srvVirExt" min="0" max="500" value="3"></div>
+        <div class="row"><label>Instalaciones OT<span class="hint">planta industrial, SCADA… (0 si no aplica)</span></label><input type="number" id="ot" min="0" max="20" value="0"></div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Servicios gestionados</legend>
+        <div class="row"><label>Protección de puesto (EDR / MDR)</label>
+          <select id="edr">
+            <option value="ninguno">Ya lo tengo cubierto</option>
+            <option value="edr" selected>EDR gestionado</option>
+            <option value="mdr">MDR gestionado</option>
+          </select>
+        </div>
+        <div class="row"><label>Licencias EDR/MDR incluidas<span class="hint">las suministra ISN Labs</span></label>
+          <div class="toggle" data-for="lic"><button data-v="si" class="on">Sí</button><button data-v="no">No</button></div>
+        </div>
+        <div class="row"><label>Supervisión de backup</label>
+          <div class="toggle" data-for="backup"><button data-v="si" class="on">Sí</button><button data-v="no">No</button></div>
+        </div>
+        <div class="row"><label>Firewalls perimetrales gestionados</label><input type="number" id="fw" min="0" max="50" value="1"></div>
+        <div class="row"><label>SIEM-XDR<span class="hint">revisión periódica de eventos</span></label>
+          <div class="toggle" data-for="siem"><button data-v="si">Sí</button><button data-v="no" class="on">No</button></div>
+        </div>
+        <div class="row"><label>Parcheo gestionado</label>
+          <div class="toggle" data-for="parcheo"><button data-v="si">Sí</button><button data-v="no" class="on">No</button></div>
+        </div>
+        <div class="row"><label>Horas de consultoría incluidas al mes</label>
+          <select id="consultoria" style="width:80px"><option>0</option><option selected>2</option><option>4</option><option>6</option></select>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Cumplimiento normativo</legend>
+        <div class="row"><label>Auditorías técnicas periódicas<span class="hint">vulnerabilidades + pentest + configuración, según el marco que te aplique</span></label>
+          <select id="modulo">
+            <option value="ninguno" selected>Sin auditorías</option>
+            <option value="nis2">NIS2 Ready</option>
+            <option value="ensm">ENS Categoría Media</option>
+            <option value="ensa">ENS Categoría Alta</option>
+          </select>
+        </div>
+      </fieldset>
+    </div>
+
+    <aside class="panel">
+      <!-- puerta: sin datos no hay cotización -->
+      <div class="gate" id="gate">
+        <h2>Ver cotización</h2>
+        <p>Dinos quién eres y te mostramos la cuota orientativa al momento. Sin llamadas comerciales no solicitadas.</p>
+        <input type="text" id="nombre" placeholder="Nombre *">
+        <input type="text" id="apellidos" placeholder="Apellidos *">
+        <input type="email" id="email" placeholder="Email profesional *">
+        <input type="tel" id="telefono" placeholder="Teléfono (opcional)">
+        <button id="ver">Ver cotización</button>
+        <p class="legalnote">* Obligatorio. Usaremos tus datos solo para enviarte esta cotización y la propuesta detallada. [ENLACE A POLÍTICA DE PRIVACIDAD]</p>
+      </div>
+
+      <!-- resultado: visible tras la puerta -->
+      <div id="result">
+        <h2>Cuota mensual orientativa</h2>
+        <div class="for" id="para">-</div>
+        <div class="biglabel">Servicio gestionado</div>
+        <div class="range" id="rango">-</div>
+        <div class="permonth">€/mes · impuestos no incluidos</div>
+        <div class="desglose">
+          <div class="d"><span>Licencias</span><span id="dLic">-</span></div>
+          <div class="d"><span>Auditorías NIS2/ENS</span><span id="dMod">-</span></div>
+          <div class="d total"><span>TOTAL</span><span id="dTot">-</span></div>
+        </div>
+        <div class="cta2">
+          <button id="enviar">Recibir propuesta detallada</button>
+          <div class="ok" id="ok">Recibido. Te enviaremos el desglose completo en menos de 24 h laborables.</div>
+        </div>
+        <p class="note">Estimación orientativa, no vinculante. La cuota final depende del alcance validado en una sesión técnica gratuita de 30 minutos.</p>
+      </div>
+    </aside>
+  </div>
+
+  <footer>
+    Las auditorías técnicas incluyen informe con severidad CVSS y retest, aptos como evidencia para la auditoría de certificación del ENS; la Certificación de Conformidad la emite una entidad acreditada por ENAC. ISN Labs · Innovation and Security North Labs SL.
+  </footer>
+</div>
+
+<script>
+/* ── Configuración: espejo de las hojas PARAMETROS y AUDITORIAS del Excel ──
+   Si cambias tarifas, coeficientes u horas en el Excel, cámbialos aquí. */
+const CFG = {
+  tarifaTecnica: 50, tarifaAuditoria: 65, redondeo: 5, hMin: 0.10, hMax: 0.15,
+  coef: { edrBase:1.0, edrUsuario:0.05, backupBase:1.0, backupServidor:0.25,
+          firewall:1.0, siemBase:2.0, siemUsuario:0.02, parcheoServidor:0.4,
+          parcheoUsuario:0.03, ot:2.0, cpdPropio:1.0, sedeExtra:0.5, srvFisico:0.1 },
+  lic: { edr:4.5, mdr:7.0 },
+  umbrales: { usuS:25, usuM:75, sedS:1, sedM:3 },
+  // horas ANUALES de auditoría técnica por variante y tamaño [S,M,L] (hoja AUDITORIAS)
+  auditoriaAnual: { nis2:[50,78,124], ensm:[62,94,148], ensa:[90,134,210] },
+};
+
+const state = { lic:'si', backup:'si', siem:'no', parcheo:'no', unlocked:false, lead:null };
+const $ = id => document.getElementById(id);
+const num = id => Math.max(0, parseInt($(id).value || '0', 10));
+
+document.querySelectorAll('.toggle').forEach(t => {
+  t.querySelectorAll('button').forEach(b => b.addEventListener('click', () => {
+    t.querySelectorAll('button').forEach(x => x.classList.remove('on'));
+    b.classList.add('on');
+    state[t.dataset.for] = b.dataset.v;
+    calc();
+  }));
+});
+['sedes','usuarios','srvFisPropio','srvVirPropio','srvFisExt','srvVirExt','ot','fw','edr','consultoria','modulo'].forEach(id =>
+  $(id).addEventListener('input', calc));
+
+// mostrar campos de servidores según CPD
+$('cpd').addEventListener('input', () => {
+  const v = $('cpd').value;
+  document.querySelectorAll('.srv-propio').forEach(e => e.classList.toggle('hidden', v === 'externo'));
+  document.querySelectorAll('.srv-externo').forEach(e => e.classList.toggle('hidden', v === 'propio'));
+  calc();
+});
+
+function tamano(u, s, ot, cpd){
+  const uN = u <= CFG.umbrales.usuS ? 1 : (u <= CFG.umbrales.usuM ? 2 : 3);
+  const sN = s <= CFG.umbrales.sedS ? 1 : (s <= CFG.umbrales.sedM ? 2 : 3);
+  let n = Math.max(uN, sN);
+  if (ot > 0 || cpd !== 'externo') n = Math.min(3, n + 1); // propio o híbrido suben escalón
+  return n - 1; // 0/1/2 = S/M/L
+}
+const mround = (v, m) => Math.round(v / m) * m;
+const eur = v => v.toLocaleString('es-ES', {maximumFractionDigits:0}) + ' €';
+
+function calc(){
+  if (!state.unlocked) return;
+  const cpd = $('cpd').value;
+  const fisPropio = cpd === 'externo' ? 0 : num('srvFisPropio');
+  const virPropio = cpd === 'externo' ? 0 : num('srvVirPropio');
+  const fisExt = cpd === 'propio' ? 0 : num('srvFisExt');
+  const virExt = cpd === 'propio' ? 0 : num('srvVirExt');
+  const srvTotal = fisPropio + virPropio + fisExt + virExt;
+  const srvFisicos = fisPropio + fisExt;
+  const u = num('usuarios'), sed = Math.max(1, num('sedes')), ot = num('ot'), fw = num('fw'),
+        cons = parseInt($('consultoria').value, 10), edr = $('edr').value, mod = $('modulo').value, c = CFG.coef;
+
+  let h = 0;
+  if (edr !== 'ninguno') h += c.edrBase + u * c.edrUsuario;
+  if (state.backup === 'si') h += c.backupBase + srvTotal * c.backupServidor;
+  h += fw * c.firewall;
+  if (state.siem === 'si') h += c.siemBase + u * c.siemUsuario;
+  if (state.parcheo === 'si') h += srvTotal * c.parcheoServidor + u * c.parcheoUsuario;
+  h += srvFisicos * c.srvFisico;
+  h += ot * c.ot;
+  if (cpd !== 'externo') h += c.cpdPropio; // propio o híbrido
+  h += (sed - 1) * c.sedeExtra;
+  h += cons;
+  h = Math.round(h * 2) / 2; // bloques de 0,5 h como el contrato
+
+  const hAud = mod === 'ninguno' ? 0 : CFG.auditoriaAnual[mod][tamano(u, sed, ot, cpd)] / 12;
+  const base = h * CFG.tarifaTecnica;
+  const modulo = hAud * CFG.tarifaAuditoria;
+  const lic = (state.lic === 'si' && edr !== 'ninguno') ? u * (edr === 'edr' ? CFG.lic.edr : CFG.lic.mdr) : 0;
+
+  // horquilla solo sobre el servicio gestionado; licencias y auditorías se suman fijas
+  const baseLo = mround(base * (1 - CFG.hMin), CFG.redondeo);
+  const baseHi = mround(base * (1 + CFG.hMax), CFG.redondeo);
+  const totLo = mround(base * (1 - CFG.hMin) + modulo + lic, CFG.redondeo);
+  const totHi = mround(base * (1 + CFG.hMax) + modulo + lic, CFG.redondeo);
+
+  $('rango').textContent = eur(baseLo) + ' – ' + eur(baseHi);
+  $('dLic').textContent = lic ? eur(mround(lic, CFG.redondeo)) : '-';
+  $('dMod').textContent = modulo ? eur(mround(modulo, CFG.redondeo)) : '-';
+  $('dTot').textContent = eur(totLo) + ' – ' + eur(totHi);
+}
+
+// ── puerta: sin nombre, apellidos y email no hay cotización ──
+$('ver').addEventListener('click', () => {
+  const nombre = $('nombre').value.trim(), apellidos = $('apellidos').value.trim(),
+        email = $('email').value.trim(), telefono = $('telefono').value.trim();
+  let ok = true;
+  [['nombre', nombre], ['apellidos', apellidos]].forEach(([id, v]) => {
+    $(id).classList.toggle('err', !v); if (!v) ok = false;
+  });
+  const emailOk = /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email);
+  $('email').classList.toggle('err', !emailOk); if (!emailOk) ok = false;
+  if (!ok) return;
+
+  state.lead = { nombre, apellidos, email, telefono };
+  state.unlocked = true;
+  /* INTEGRACIÓN LEAD: enviar aquí el registro al CRM (Dynamics) -
+     POST { ...state.lead, parametros: leerFormulario(), origen: 'calculadora-web' } */
+  $('gate').style.display = 'none';
+  $('result').style.display = 'block';
+  $('para').textContent = 'Cotización preparada para ' + nombre + ' ' + apellidos;
+  calc();
+});
+
+$('enviar').addEventListener('click', () => {
+  /* INTEGRACIÓN PROPUESTA: POST { ...state.lead, parametros, rango: $('dTot').textContent } */
+  $('ok').style.display = 'block';
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,58 @@
+{
+  "name": "isnlabs-site",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Sitio estatico de ISN Labs. Se exporta por completo (output: 'export') y lo publica Netlify. No contiene codigo de servidor ni secretos.",
+  "packageManager": "pnpm@11.5.0",
+  "engines": {
+    "node": "24.18.0",
+    "pnpm": "11.5.0"
+  },
+  "scripts": {
+    "dev": "pnpm content:build && next dev",
+    "clean": "node scripts/clean.mjs",
+    "images:build": "node scripts/images-build.mjs",
+    "content:build": "node scripts/content-build.mjs",
+    "build:next": "next build",
+    "build": "pnpm clean && pnpm images:build && pnpm content:build && pnpm seo:build && pnpm build:next && pnpm verify:export",
+    "preview": "node scripts/static-server.mjs out",
+    "lint": "eslint . --max-warnings=0",
+    "typecheck": "pnpm images:build && pnpm content:build && tsc --noEmit",
+    "test": "pnpm content:build && vitest run",
+    "test:e2e": "playwright test",
+    "check:i18n": "node scripts/check-i18n.mjs",
+    "check:routes": "node scripts/check-routes.mjs",
+    "check:js": "node scripts/check-js-budget.mjs",
+    "verify:architecture": "node scripts/assert-static-architecture.mjs",
+    "verify:export": "node scripts/assert-static-output.mjs",
+    "correos:preview": "node scripts/correos-preview.mjs",
+    "calcular": "node pbcg/bin/calculate.mjs",
+    "vectores": "node pbcg/bin/generar-vectores.mjs",
+    "seo:build": "node scripts/seo-build.mjs"
+  },
+  "dependencies": {
+    "next": "16.2.12",
+    "next-intl": "4.13.4",
+    "react": "19.2.4",
+    "react-dom": "19.2.4",
+    "zod": "4.4.3"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "4.12.1",
+    "@playwright/test": "1.62.0",
+    "@tailwindcss/postcss": "4.3.3",
+    "@types/markdown-it": "14.1.2",
+    "@types/node": "24.13.3",
+    "@types/react": "19.2.17",
+    "@types/react-dom": "19.2.3",
+    "eslint": "9.39.5",
+    "eslint-config-next": "16.2.12",
+    "lucide-react": "1.27.0",
+    "markdown-it": "14.1.0",
+    "sharp": "0.35.3",
+    "tailwindcss": "4.3.3",
+    "typescript": "5.9.3",
+    "vitest": "4.1.10"
+  }
+}

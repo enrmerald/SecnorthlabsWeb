@@ -1,0 +1,2687 @@
+{
+  "blog": {
+    "hero": {
+      "breadcrumb": [
+        {
+          "label": "Inicio",
+          "routeId": "home"
+        },
+        {
+          "label": "Blog",
+          "routeId": null
+        }
+      ],
+      "subtitle": "Traducimos la actualidad de ciberseguridad y GRC en algo accionable para CISOs y responsables de cumplimiento. Sin humo: qué significa, a quién afecta y qué hacer.",
+      "title": "Blog",
+      "titleHighlight": "Análisis, normativa y buenas prácticas"
+    },
+    "seo": {
+      "description": "Análisis accionable de NIS2, DORA, ISO 27001, ENS, RGPD y respuesta a incidentes para CISOs y responsables de cumplimiento.",
+      "title": "Blog de ciberseguridad y cumplimiento (NIS2, DORA, ISO) - ISN Labs"
+    },
+    "list": {
+      "allLabel": "Todos los temas",
+      "articlesMany": "artículos",
+      "articlesOne": "artículo",
+      "empty": "Todavía no hay análisis publicados en este tema.",
+      "featuredLabel": "Último análisis",
+      "filterLabel": "Filtrar por tema",
+      "kicker": "Archivo",
+      "readMore": "Leer el análisis",
+      "readingSuffix": "min de lectura",
+      "title": "Todos los análisis"
+    },
+    "categories": {
+      "cloud": "Nube",
+      "cumplimiento": "Cumplimiento",
+      "idi": "I+D+i",
+      "mssp": "Servicio gestionado",
+      "ot": "OT e industrial",
+      "tendencias": "Tendencias"
+    },
+    "article": {
+      "authorLabel": "Por",
+      "backToList": "Ver todos los análisis",
+      "breadcrumb": [
+        {
+          "label": "Inicio",
+          "routeId": "home"
+        },
+        {
+          "label": "Blog",
+          "routeId": "blog"
+        }
+      ],
+      "ctaBody": "Te decimos qué te aplica y qué no en una sesión técnica de 30 minutos, sin compromiso.",
+      "ctaKicker": "Y en tu caso",
+      "ctaPrimary": "Calcula tu presupuesto",
+      "ctaSecondary": "Hablar con un especialista",
+      "ctaTitle": "¿Qué implica esto en tu organización?",
+      "relatedTitle": "Seguir leyendo",
+      "tagsLabel": "Temas",
+      "tocTitle": "En esta página",
+      "back": "Volver al blog"
+    }
+  },
+  "calculator": {
+    "auditNote": "Las auditorías técnicas incluyen informe con severidad CVSS y retest, aptos como evidencia para la auditoría de certificación del ENS; la Certificación de Conformidad la emite una entidad acreditada por ENAC.",
+    "cumplimiento": {
+      "legend": "Cumplimiento normativo",
+      "modulo": {
+        "label": "Módulo de auditorías",
+        "options": {
+          "ensAlta": "ENS categoría alta",
+          "ensMedia": "ENS categoría media",
+          "ninguno": "Sin auditorías",
+          "nis2": "NIS2 Ready"
+        }
+      }
+    },
+    "errors": {
+      "cpdPropioConServidoresExternos": "Has indicado CPD propio pero hay servidores externos. Selecciona CPD híbrido o elimina los servidores externos.",
+      "cpdExternoConServidoresPropios": "Has indicado CPD externo pero hay servidores propios. Selecciona CPD híbrido o elimina los servidores propios.",
+      "rango": "El valor está fuera del rango admitido.",
+      "entero": "Introduce un número entero.",
+      "valor": "Ese valor no es válido.",
+      "validation": "Revisa los datos: alguno no es válido.",
+      "rateLimited": "Demasiadas peticiones. Espera un momento e inténtalo de nuevo.",
+      "network": "No hemos podido conectar. Comprueba tu conexión e inténtalo de nuevo.",
+      "generic": "No hemos podido calcular la estimación. Inténtalo de nuevo en unos segundos.",
+      "blocked": "Corrige el aviso de arriba para poder calcular la estimación."
+    },
+    "exclusions": [
+      "Impuestos",
+      "Desplazamientos",
+      "Remediación de los hallazgos",
+      "Pruebas extraordinarias",
+      "Honorarios de la entidad certificadora del ENS"
+    ],
+    "exclusionsLabel": "No incluye",
+    "hero": {
+      "breadcrumb": [
+        {
+          "label": "Inicio",
+          "routeId": "home"
+        },
+        {
+          "label": "Calculadora",
+          "routeId": null
+        }
+      ],
+      "subtitle": "Responde a unas preguntas sobre tu entorno y te damos al momento la cuota estimada del Plan Base de Ciberseguridad Gestionada, con su desglose.",
+      "title": "Descubre qué plan de seguridad",
+      "titleHighlight": "necesitas"
+    },
+    "legalNote": "Estimación orientativa, no vinculante. La cuota final depende del alcance validado en una sesión técnica gratuita de 30 minutos.",
+    "no": "No",
+    "organizacion": {
+      "cpd": {
+        "label": "Centro de proceso de datos",
+        "options": {
+          "externo": "Externo (nube o proveedor)",
+          "hibrido": "Híbrido",
+          "propio": "Propio (on-premise)"
+        }
+      },
+      "instalacionesOT": {
+        "help": "Plantas, subestaciones o líneas. 0 si no aplica.",
+        "label": "Instalaciones OT"
+      },
+      "legend": "Tu organización",
+      "sedes": {
+        "help": "Entre 1 y 50.",
+        "label": "Número de sedes"
+      },
+      "srvFisExt": {
+        "label": "Servidores físicos externos"
+      },
+      "srvFisPropio": {
+        "label": "Servidores físicos propios"
+      },
+      "srvVirExt": {
+        "label": "Servidores virtuales externos"
+      },
+      "srvVirPropio": {
+        "label": "Servidores virtuales propios"
+      },
+      "usuarios": {
+        "help": "Personas con puesto de trabajo. Entre 1 y 2.000.",
+        "label": "Usuarios de IT"
+      }
+    },
+    "result": {
+      "title": "Tu estimación",
+      "perMonth": "€/mes",
+      "taxesNote": "Impuestos no incluidos",
+      "sizeLabel": "Tamaño estimado de tu organización",
+      "breakdown": {
+        "title": "Desglose",
+        "managed": "Servicio gestionado",
+        "licences": "Licencias",
+        "audits": "Auditorías NIS2 / ENS",
+        "total": "Total"
+      },
+      "emailSent": "Te hemos enviado esta estimación a {email}, con el desglose y las exclusiones.",
+      "referenceLabel": "Referencia",
+      "restart": "Modificar los datos",
+      "testMode": {
+        "title": "Modo de pruebas",
+        "text": "La estimación es la real, calculada con el modelo aprobado. Pero el envío de correo está desactivado: no se ha registrado ninguna solicitud ni se ha enviado nada."
+      }
+    },
+    "seo": {
+      "description": "Estima en un minuto la cuota mensual del Plan Base de Ciberseguridad Gestionada según tu número de sedes, usuarios, servidores y módulo de cumplimiento.",
+      "title": "Calculadora del Plan Base de Ciberseguridad Gestionada - ISN Labs"
+    },
+    "servicios": {
+      "backup": {
+        "label": "Supervisión de backup"
+      },
+      "edr": {
+        "label": "EDR / MDR",
+        "options": {
+          "edr": "EDR gestionado (Defender)",
+          "mdr": "MDR gestionado (Huntress)",
+          "ninguno": "Ya lo tengo cubierto"
+        }
+      },
+      "firewalls": {
+        "label": "Número de firewalls"
+      },
+      "horasConsultoria": {
+        "label": "Horas de consultoría al mes"
+      },
+      "legend": "Servicios gestionados",
+      "licenciasIncluidas": {
+        "label": "¿Incluimos las licencias?"
+      },
+      "parcheo": {
+        "label": "Parcheo gestionado"
+      },
+      "siem": {
+        "label": "SIEM-XDR"
+      }
+    },
+    "si": "Sí",
+    "gate": {
+      "title": "Dinos quién eres y te damos la cifra",
+      "subtitle": "Calculamos la estimación al momento con los datos que has introducido y te la enviamos también por correo. Sin llamadas comerciales no solicitadas.",
+      "submit": "Ver mi estimación",
+      "submitting": "Calculando…"
+    },
+    "steps": {
+      "params": "Tus datos técnicos",
+      "contact": "Tus datos de contacto",
+      "result": "Tu estimación"
+    },
+    "contactFields": {
+      "legend": "Para enviarte la estimación",
+      "firstName": "Nombre",
+      "lastName": "Apellidos",
+      "company": "Empresa",
+      "email": "Email profesional",
+      "phone": "Teléfono (opcional)"
+    }
+  },
+  "common": {
+    "a11y": {
+      "breadcrumb": "Estás aquí",
+      "closeMenu": "Cerrar el menú",
+      "currentPage": "Página actual",
+      "externalLink": "se abre en una pestaña nueva",
+      "footerNav": "Enlaces del pie",
+      "languageSwitch": "Cambiar idioma",
+      "loading": "Calculando…",
+      "mainNav": "Navegación principal",
+      "openMenu": "Abrir el menú",
+      "openSubmenu": "Abrir el submenú de Soluciones",
+      "required": "obligatorio",
+      "skipToContent": "Saltar al contenido"
+    },
+    "brand": {
+      "claim": "Cybersecurity, IA & Innovation",
+      "legalName": "Innovation and Security North Labs SL (ISN Labs)",
+      "location": "Asturias, España",
+      "name": "ISN Labs"
+    },
+    "buttons": {
+      "calcBudget": "Calcula tu presupuesto",
+      "contact": "Contáctanos",
+      "discoverPlan": "Descubre tu plan",
+      "learnMore": "Saber más",
+      "read": "Leer",
+      "readArticle": "Leer artículo",
+      "request": "Solicitar",
+      "requestProposal": "Pedir propuesta",
+      "seeServices": "Ver servicios",
+      "subscribe": "Suscribirme",
+      "talkExpert": "Hablar con un experto"
+    },
+    "footer": {
+      "columns": {
+        "company": {
+          "links": [
+            {
+              "label": "Sobre nosotros",
+              "routeId": "company"
+            },
+            {
+              "label": "Sectores",
+              "routeId": "sectors"
+            },
+            {
+              "label": "Blog",
+              "routeId": "blog"
+            },
+            {
+              "label": "Contacto",
+              "routeId": "contact"
+            }
+          ],
+          "title": "Empresa"
+        },
+        "legal": {
+          "cookieSettings": {
+            "action": "openCookieManager",
+            "label": "Configurar cookies"
+          },
+          "links": [
+            {
+              "label": "Política de privacidad",
+              "routeId": "privacy"
+            },
+            {
+              "label": "Aviso legal",
+              "routeId": "legal"
+            },
+            {
+              "label": "Política de cookies",
+              "routeId": "cookies"
+            }
+          ],
+          "title": "Legal"
+        },
+        "solutions": {
+          "links": [
+            {
+              "hash": "#it",
+              "label": "MSSP IT",
+              "routeId": "mssp"
+            },
+            {
+              "hash": "#ot",
+              "label": "MSSP OT",
+              "routeId": "mssp"
+            },
+            {
+              "label": "GRC",
+              "routeId": "grc"
+            },
+            {
+              "hash": "#idi",
+              "label": "I+D+i",
+              "routeId": "grc"
+            }
+          ],
+          "title": "Soluciones"
+        }
+      },
+      "copyright": "© 2026 ISN Labs · Todos los derechos reservados",
+      "ewalaNotice": "",
+      "legalLine": "Innovation and Security North Labs SL (ISN Labs) · Asturias, España"
+    },
+    "frameworks": [
+      "NIS2",
+      "DORA",
+      "ISO 27001",
+      "ISO 42001",
+      "ENS",
+      "RGPD",
+      "IEC 62443"
+    ],
+    "frameworksLabel": "Marcos y normativa con los que alineamos",
+    "nav": {
+      "blog": "Blog",
+      "company": "Compañía",
+      "contact": "Contacto",
+      "cta": "Contáctanos",
+      "languageToggle": "EN",
+      "sectors": "Sectores",
+      "software": "Software",
+      "solutions": "Soluciones"
+    },
+    "notFound": {
+      "code": "404",
+      "cta": "Volver al inicio",
+      "ctaSecondary": "Contactar",
+      "seo": {
+        "description": "La página que buscas no existe o ha cambiado de dirección.",
+        "title": "Página no encontrada - ISN Labs"
+      },
+      "subtitle": "La dirección que has abierto no corresponde a ninguna página del sitio. Puede que haya cambiado o que el enlace esté mal escrito.",
+      "title": "Esta página",
+      "titleHighlight": "no existe"
+    },
+    "solutionsMenu": {
+      "items": [
+        {
+          "hash": "#it",
+          "label": "Ciberseguridad IT",
+          "routeId": "mssp"
+        },
+        {
+          "hash": "#ot",
+          "label": "Ciberseguridad OT",
+          "routeId": "mssp"
+        },
+        {
+          "label": "GRC",
+          "routeId": "grc"
+        },
+        {
+          "hash": "#idi",
+          "label": "I+D+i",
+          "routeId": "grc"
+        }
+      ],
+      "label": "Soluciones"
+    }
+  },
+  "company": {
+    "cta": {
+      "ctaPrimary": "Contactar",
+      "title": "¿Encajamos con lo que buscas?"
+    },
+    "hero": {
+      "breadcrumb": [
+        {
+          "label": "Inicio",
+          "routeId": "home"
+        },
+        {
+          "label": "Compañía",
+          "routeId": null
+        }
+      ],
+      "subtitle": "Somos ISN Labs (Innovation and Security North Labs). Un MSSP con departamento propio de GRC: unimos la operación de seguridad gestionada con el gobierno, riesgo y cumplimiento.",
+      "title": "Seguridad y cumplimiento,",
+      "titleHighlight": "bajo un mismo techo"
+    },
+    "mission": {
+      "body": "Nacimos para cerrar esa brecha. Muchas organizaciones tienen, por un lado, requisitos normativos y documentación y, por otro, medidas técnicas aplicadas sin visión de conjunto. Nosotros unimos ambas cosas: gobernamos la seguridad con criterio y la operamos con tecnología propia y de partners, en IT y en OT.",
+      "kicker": "Por qué existimos",
+      "line1": "El cumplimiento sin operación es papel.",
+      "line2": "La operación sin gobierno es reactiva."
+    },
+    "seo": {
+      "description": "ISN Labs (Innovation and Security North Labs) une seguridad gestionada y cumplimiento GRC, en IT y OT, con I+D+i propio. Base en Asturias.",
+      "title": "Sobre ISN Labs: MSSP con GRC propio en Asturias"
+    },
+    "stats": [
+      {
+        "description": "Operación y cumplimiento integrados, no en silos.",
+        "title": "MSSP + GRC"
+      },
+      {
+        "description": "Cubrimos tanto entornos corporativos como industriales.",
+        "title": "IT + OT"
+      },
+      {
+        "description": "Seguridad desde el diseño y proyectos financiados.",
+        "title": "I+D+i propio"
+      },
+      {
+        "description": "Sin humo comercial: te decimos qué necesitas de verdad.",
+        "title": "Criterio técnico"
+      }
+    ],
+    "team": {
+      "kicker": "Equipo",
+      "roles": [
+        {
+          "description": "Estrategia y operación de servicios gestionados.",
+          "title": "Dirección MSSP"
+        },
+        {
+          "description": "Cumplimiento, sistemas de gestión y auditoría.",
+          "title": "Head of GRC"
+        },
+        {
+          "description": "Coordinación de servicio y entrega.",
+          "title": "Dirección de Operaciones"
+        },
+        {
+          "description": "Arquitectura, tecnología y SentryN3t.",
+          "title": "CTO"
+        },
+        {
+          "description": "Seguridad, riesgo y respuesta a incidentes.",
+          "title": "CSO"
+        },
+        {
+          "description": "Monitorización, respuesta e ingeniería IT/OT.",
+          "title": "Equipo técnico L2/OT"
+        },
+        {
+          "description": "Arquitectos, desarrollo, IA y project management.",
+          "title": "I+D+i"
+        },
+        {
+          "description": "ENS, ISO, NIS2, DORA y privacidad.",
+          "title": "Consultoría"
+        }
+      ],
+      "title": "Un equipo multidisciplinar"
+    },
+    "values": {
+      "items": [
+        {
+          "description": "Seguridad sin alarmismo. Lo complejo, explicado con claridad para dirección.",
+          "title": "Precisión y sobriedad"
+        },
+        {
+          "description": "Sistemas útiles y a medida. Ni sobre-licenciar ni sobre-documentar.",
+          "title": "Proporcionalidad"
+        },
+        {
+          "description": "Sin cajas negras: informes claros y trazables. Ves lo mismo que nosotros.",
+          "title": "Transparencia"
+        },
+        {
+          "description": "Qué funciona, qué no y el siguiente paso. Siempre.",
+          "title": "Mejora continua"
+        }
+      ],
+      "kicker": "Cómo trabajamos",
+      "label": "Filosofía"
+    }
+  },
+  "consent": {
+    "banner": {
+      "accept": "Aceptar todas",
+      "configure": "Configurar",
+      "reject": "Rechazar todas",
+      "text": "Usamos cookies técnicas necesarias para que la web funcione. Queremos tu decisión sobre las demás antes de activarlas.",
+      "title": "Cookies y tecnologías similares"
+    },
+    "preferences": {
+      "categories": {
+        "analytics": {
+          "description": "Nos dicen qué páginas se leen, de forma agregada, para mejorar el contenido.",
+          "title": "Analíticas"
+        },
+        "marketing": {
+          "description": "Permiten medir la eficacia de las campañas.",
+          "title": "Marketing"
+        },
+        "necessary": {
+          "always": "Siempre activas",
+          "description": "Imprescindibles para que la web funcione. No se pueden desactivar.",
+          "title": "Necesarias"
+        }
+      },
+      "close": "Cerrar",
+      "intro": "Elige qué categorías quieres permitir. Puedes cambiarlo cuando quieras desde el pie.",
+      "save": "Guardar preferencias",
+      "title": "Preferencias de cookies"
+    }
+  },
+  "contact": {
+    "form": {
+      "consent": "He leído la información básica sobre protección de datos.",
+      "errorMessage": "No se pudo enviar. Revisa los campos e inténtalo de nuevo.",
+      "errors": {
+        "company": "Indica tu empresa.",
+        "consent": "Debes confirmar que has leído la información sobre protección de datos.",
+        "email": "Introduce un email válido.",
+        "firstName": "Indica tu nombre.",
+        "generic": "No se pudo enviar. Revisa los campos e inténtalo de nuevo.",
+        "genericEmailDomain": "Parece un correo personal. Si puedes, usa el corporativo: nos ayuda a preparar mejor la respuesta.",
+        "lastName": "Los apellidos son demasiado largos (máx. 60 caracteres).",
+        "message": "El mensaje es demasiado largo (máx. 1000 caracteres).",
+        "need": "Selecciona una opción.",
+        "rateLimited": "Demasiados intentos. Espera un momento e inténtalo de nuevo.",
+        "summaryTitle": "Revisa estos campos antes de enviar",
+        "testMode": "Modo de pruebas: el envío de correo está desactivado, así que la solicitud no ha quedado registrada.",
+        "unavailable": "No hemos podido registrar tu solicitud. Ha fallado algo por nuestra parte, no por la tuya: escríbenos a info@secnorthlabs.eu o llámanos al +34 634 651 312 y lo resolvemos.",
+        "network": "No hemos podido conectar. Comprueba tu conexión e inténtalo de nuevo.",
+        "validation": "Revisa los datos: alguno no es válido."
+      },
+      "fields": {
+        "company": {
+          "label": "Empresa",
+          "placeholder": "Acme Industrial S.A."
+        },
+        "email": {
+          "label": "Email corporativo",
+          "placeholder": "ana@empresa.com"
+        },
+        "firstName": {
+          "label": "Nombre",
+          "placeholder": "Ana"
+        },
+        "lastName": {
+          "label": "Apellidos",
+          "placeholder": "García Pérez"
+        },
+        "message": {
+          "label": "Mensaje",
+          "placeholder": "Cuéntanos brevemente tu entorno (IT/OT), tamaño y qué te preocupa…"
+        },
+        "need": {
+          "label": "¿Qué necesitas?",
+          "placeholder": "Selecciona una opción"
+        },
+        "phone": {
+          "label": "Teléfono",
+          "placeholder": "+34 6XX XXX XXX"
+        },
+        "role": {
+          "label": "Cargo / rol",
+          "placeholder": "CISO, IT Manager, Compliance…"
+        }
+      },
+      "marketing": "Deseo recibir comunicaciones comerciales de ISN Labs.",
+      "needOptions": [
+        "MSSP IT",
+        "MSSP OT",
+        "GRC",
+        "Demo SentryN3t",
+        "Licencias / Software",
+        "Otro"
+      ],
+      "privacyBasicInfo": {
+        "moreLabel": "Información adicional en la Política de privacidad",
+        "rows": [
+          {
+            "label": "Responsable",
+            "value": "Innovation and Security North Labs SL · NIF B22966139"
+          },
+          {
+            "label": "Finalidad",
+            "value": "Atender tu solicitud y preparar, si procede, una propuesta de servicios."
+          },
+          {
+            "label": "Destinatarios",
+            "value": "Nuestro CRM propio, alojado en la Unión Europea. No se ceden datos a terceros salvo obligación legal."
+          },
+          {
+            "label": "Conservación",
+            "value": "El tiempo necesario para atender la solicitud y los plazos legales aplicables."
+          },
+          {
+            "label": "Derechos",
+            "value": "Acceso, rectificación, supresión, limitación, portabilidad y oposición, escribiendo a info@secnorthlabs.eu"
+          }
+        ],
+        "title": "Información básica sobre protección de datos"
+      },
+      "privacyLinkLabel": "Política de Privacidad",
+      "privacyNote": "Tratamos tus datos para responder a tu solicitud. Consulta la información básica de arriba y la Política de privacidad.",
+      "requiredNote": "Los campos marcados con * son obligatorios.",
+      "responseNote": "Respuesta < 24 h laborables",
+      "submit": "Enviar solicitud",
+      "successMessage": "Gracias. Te respondemos en menos de 24 h laborables.",
+      "title": "Solicita información o una demo"
+    },
+    "hero": {
+      "breadcrumb": [
+        {
+          "label": "Inicio",
+          "routeId": "home"
+        },
+        {
+          "label": "Contacto",
+          "routeId": null
+        }
+      ],
+      "subtitle": "Cuéntanos tu contexto y te respondemos en menos de 24 h laborables. Diagnóstico inicial sin compromiso: te decimos qué funciona, qué no y el siguiente paso recomendado.",
+      "title": "Hablemos de tu",
+      "titleHighlight": "seguridad"
+    },
+    "rail": {
+      "contactDirect": {
+        "items": [
+          {
+            "label": "Email",
+            "value": "info@secnorthlabs.eu",
+            "icon": "mail"
+          },
+          {
+            "label": "Teléfono",
+            "value": "+34 634 651 312",
+            "icon": "phone"
+          },
+          {
+            "label": "Oficina",
+            "value": "Calle Peña Brava 21, Of. 1B · PI de Silvota, Llanera (Asturias)",
+            "icon": "map"
+          },
+          {
+            "label": "Horario",
+            "value": "L–V · 9:00–18:00 (CET)",
+            "icon": "clock"
+          }
+        ],
+        "title": "Contacto directo"
+      },
+      "incident": {
+        "phone": "",
+        "phoneSuffix": "24/7",
+        "text": "Si sufres un incidente de seguridad ahora, llámanos directamente para respuesta prioritaria.",
+        "title": "¿Incidente en curso?"
+      },
+      "whatNext": {
+        "steps": [
+          {
+            "description": "Un especialista, no un comercial.",
+            "title": "Te contactamos"
+          },
+          {
+            "description": "Entendemos tu contexto IT/OT y prioridades.",
+            "title": "Diagnóstico breve"
+          },
+          {
+            "description": "Alcance, servicios y siguiente paso claro.",
+            "title": "Propuesta a medida"
+          }
+        ],
+        "title": "Qué pasa después"
+      }
+    },
+    "seo": {
+      "description": "Cuéntanos tu contexto IT/OT y te respondemos en menos de 24 h laborables. Diagnóstico inicial sin compromiso.",
+      "title": "Contacto - Solicita información o una demo | ISN Labs"
+    }
+  },
+  "cookies": {
+    "title": "POLÍTICA DE",
+    "titleHighlight": "COOKIES",
+    "seo": {
+      "title": "Política de cookies - ISN Labs",
+      "description": "Qué cookies utiliza la web de ISN Labs, con qué finalidad, quién las instala, cuánto duran y cómo aceptarlas, rechazarlas o retirar el consentimiento."
+    },
+    "intro": "Esta Política de Cookies explica qué cookies utiliza el sitio web www.secnorthlabs.eu, con qué finalidad, quién las instala y durante cuánto tiempo, y cómo puedes aceptarlas, rechazarlas o retirar tu consentimiento en cualquier momento. Se publica en cumplimiento del artículo 22.2 de la Ley 34/2002 (LSSICE) y del Reglamento (UE) 2016/679 (RGPD).",
+    "prevalence": "Este documento se publica en español y en inglés. En caso de discrepancia entre ambas versiones, prevalece la española.",
+    "tabla": {
+      "caption": "Cookies que utiliza esta web",
+      "headers": {
+        "name": "Nombre",
+        "owner": "Titular",
+        "purpose": "Finalidad",
+        "duration": "Duración",
+        "category": "Categoría"
+      },
+      "rows": [
+        {
+          "name": "_ga",
+          "owner": "Google Ireland Limited (tercero)",
+          "purpose": "Distinguir un navegador de otro para poder contar visitantes únicos y elaborar estadísticas agregadas de uso.",
+          "duration": "2 años",
+          "category": "Analítica"
+        },
+        {
+          "name": "_ga_7F3TPM79D7",
+          "owner": "Google Ireland Limited (tercero)",
+          "purpose": "Mantener el estado de la sesión de Google Analytics 4 para saber si una visita es nueva o continúa una anterior.",
+          "duration": "2 años",
+          "category": "Analítica"
+        }
+      ],
+      "note": "Google Tag Manager no instala cookies por sí mismo: es el contenedor que carga las etiquetas listadas. Si en el futuro se añade alguna etiqueta que instale cookies nuevas, esta tabla se actualizará antes de activarla."
+    },
+    "sections": [
+      {
+        "title": "¿Qué son las cookies?",
+        "blocks": [
+          {
+            "kind": "p",
+            "text": "Las cookies son pequeños archivos de texto que se descargan en tu dispositivo (ordenador, teléfono o tableta) cuando visitas determinadas páginas web. Permiten al sitio almacenar y recuperar información sobre tu visita: por ejemplo, recordar una preferencia que hayas elegido o contar cuántas personas han leído una página."
+          },
+          {
+            "kind": "p",
+            "text": "Junto a las cookies existen otras tecnologías con la misma función -almacenamiento local del navegador, píxeles de seguimiento o identificadores de dispositivo- que reciben el mismo tratamiento legal. Cuando esta política dice «cookies», se refiere a todas ellas."
+          }
+        ]
+      },
+      {
+        "title": "Quién instala las cookies de esta web",
+        "blocks": [
+          {
+            "kind": "dl",
+            "items": [
+              {
+                "term": "Titular del sitio web",
+                "text": "Innovation and Security North Labs, S.L., N.I.F. B-22966139, con domicilio en Calle Peña Brava 21, oficina 1B, PI de Silvota, 33192 Llanera (Asturias). Puedes escribir a rgpd@secnorthlabs.eu para cualquier cuestión relacionada con esta política."
+              },
+              {
+                "term": "Terceros",
+                "text": "Google Ireland Limited (Gordon House, Barrow Street, Dublín 4, Irlanda), como proveedor de Google Analytics y Google Tag Manager. Sus condiciones y su información sobre privacidad están disponibles en policies.google.com."
+              }
+            ]
+          },
+          {
+            "kind": "p",
+            "text": "No se comparten datos con redes sociales ni con plataformas publicitarias, y esta web no instala cookies de publicidad comportamental."
+          }
+        ]
+      },
+      {
+        "title": "Tipos de cookies",
+        "blocks": [
+          {
+            "kind": "p",
+            "text": "Las cookies se clasifican de tres formas distintas, y una misma cookie pertenece a una categoría de cada grupo."
+          },
+          {
+            "kind": "h3",
+            "text": "Según quién las gestiona"
+          },
+          {
+            "kind": "dl",
+            "items": [
+              {
+                "term": "Propias",
+                "text": "Se envían desde un equipo gestionado por el titular del sitio web."
+              },
+              {
+                "term": "De terceros",
+                "text": "Se envían desde un equipo gestionado por otra entidad, que es quien trata los datos obtenidos."
+              }
+            ]
+          },
+          {
+            "kind": "h3",
+            "text": "Según cuánto duran"
+          },
+          {
+            "kind": "dl",
+            "items": [
+              {
+                "term": "De sesión",
+                "text": "Se borran al cerrar el navegador."
+              },
+              {
+                "term": "Persistentes",
+                "text": "Permanecen en el dispositivo durante el plazo indicado en la tabla, salvo que las borres antes."
+              }
+            ]
+          },
+          {
+            "kind": "h3",
+            "text": "Según para qué sirven"
+          },
+          {
+            "kind": "dl",
+            "items": [
+              {
+                "term": "Técnicas o necesarias",
+                "text": "Permiten la navegación y el funcionamiento del sitio, o guardan la elección que has hecho sobre las demás cookies. Están exentas de consentimiento conforme al artículo 22.2 LSSICE, porque sin ellas el servicio que has pedido no se puede prestar."
+              },
+              {
+                "term": "De análisis o medición",
+                "text": "Permiten contar visitas y entender de forma agregada cómo se usa el sitio, para mejorar el contenido. Requieren tu consentimiento previo."
+              },
+              {
+                "term": "De publicidad comportamental",
+                "text": "Permiten perfilar hábitos de navegación para mostrar anuncios personalizados. Esta web no las utiliza."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Cookies que utiliza esta web",
+        "blocks": [
+          {
+            "kind": "p",
+            "text": "La siguiente tabla recoge todas las cookies que pueden instalarse en tu dispositivo, con su titular, su finalidad, su duración y su categoría. Las de análisis no se instalan hasta que las aceptas."
+          },
+          {
+            "kind": "tabla"
+          }
+        ]
+      },
+      {
+        "title": "Base jurídica",
+        "blocks": [
+          {
+            "kind": "p",
+            "text": "Las cookies técnicas se instalan sin necesidad de consentimiento, al amparo de la excepción del artículo 22.2 LSSICE, por ser imprescindibles para prestar el servicio que has solicitado."
+          },
+          {
+            "kind": "p",
+            "text": "Las cookies de análisis se instalan únicamente con tu consentimiento previo, libre, específico, informado e inequívoco (artículos 6.1.a RGPD y 22.2 LSSICE). Mientras no lo prestes, no se cargan ni envían ningún dato. Seguir navegando, desplazarse por la página o cerrar el aviso sin elegir no se consideran formas válidas de consentimiento."
+          }
+        ]
+      },
+      {
+        "title": "Cómo aceptar, rechazar o retirar el consentimiento",
+        "blocks": [
+          {
+            "kind": "p",
+            "text": "La primera vez que visitas el sitio aparece un aviso que te permite aceptar todas las cookies, rechazarlas todas o elegir por categorías. Rechazarlas cuesta exactamente lo mismo que aceptarlas: un solo clic, en el mismo lugar y con el mismo aspecto."
+          },
+          {
+            "kind": "p",
+            "text": "Puedes cambiar tu elección o retirar tu consentimiento en cualquier momento desde el enlace «Preferencias de cookies» del pie de página. Retirarlo es tan sencillo como prestarlo, y no afecta a la licitud del tratamiento realizado antes de la retirada."
+          },
+          {
+            "kind": "p",
+            "text": "Además, puedes bloquear o eliminar las cookies desde la configuración de tu navegador. Ten en cuenta que esto afecta a todos los sitios web que visites, no solo a este:"
+          },
+          {
+            "kind": "ul",
+            "items": [
+              "Chrome: Configuración → Privacidad y seguridad → Cookies y otros datos de sitios.",
+              "Firefox: Ajustes → Privacidad y seguridad → Cookies y datos del sitio.",
+              "Safari: Ajustes → Privacidad → Gestionar datos de sitios web.",
+              "Edge: Configuración → Cookies y permisos del sitio → Administrar y eliminar cookies.",
+              "En el móvil, la ruta está dentro de los ajustes del propio navegador, no en los del sistema."
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Qué pasa si no las aceptas",
+        "blocks": [
+          {
+            "kind": "p",
+            "text": "Nada que afecte a tu visita. El sitio funciona igual, todas las páginas siguen accesibles y el formulario de contacto se envía con normalidad. Lo único que ocurre es que tu visita no se contabiliza en nuestras estadísticas."
+          },
+          {
+            "kind": "p",
+            "text": "Si bloqueas todas las cookies desde el navegador, incluidas las técnicas, es posible que no podamos recordar tu elección y el aviso vuelva a aparecer en cada visita."
+          }
+        ]
+      },
+      {
+        "title": "Transferencias internacionales",
+        "blocks": [
+          {
+            "kind": "p",
+            "text": "El proveedor de las cookies de análisis es Google Ireland Limited, con sede en la Unión Europea. Los datos pueden ser tratados por Google LLC en Estados Unidos, entidad certificada en el marco EU-US Data Privacy Framework, declarado adecuado por la Comisión Europea mediante Decisión de 10 de julio de 2023. Como garantía complementaria son de aplicación las Cláusulas Contractuales Tipo suscritas con Google."
+          },
+          {
+            "kind": "p",
+            "text": "Google Analytics 4 no registra ni almacena la dirección IP: la utiliza para deducir una localización aproximada y la descarta a continuación."
+          }
+        ]
+      },
+      {
+        "title": "Cuánto dura tu decisión",
+        "blocks": [
+          {
+            "kind": "p",
+            "text": "La elección que hagas se guarda en tu dispositivo durante un máximo de 24 meses. Pasado ese plazo se te vuelve a preguntar, conforme al criterio de la Agencia Española de Protección de Datos. También se te preguntará de nuevo si cambian las finalidades o los terceros descritos en esta política."
+          }
+        ]
+      },
+      {
+        "title": "Actualización de esta política",
+        "blocks": [
+          {
+            "kind": "p",
+            "text": "Esta Política de Cookies puede actualizarse cuando cambien las cookies utilizadas, la normativa aplicable o los criterios de las autoridades de control. Te recomendamos revisarla periódicamente; la versión aplicable es siempre la publicada en esta página."
+          }
+        ]
+      },
+      {
+        "title": "Más información y ejercicio de derechos",
+        "blocks": [
+          {
+            "kind": "p",
+            "text": "Puedes consultar cómo tratamos tus datos personales, durante cuánto tiempo los conservamos y cómo ejercer tus derechos de acceso, rectificación, supresión, limitación, portabilidad y oposición en nuestra Política de Privacidad, accesible desde el pie de página."
+          },
+          {
+            "kind": "p",
+            "text": "Para cualquier cuestión relacionada con esta política puedes escribir a rgpd@secnorthlabs.eu. También puedes presentar una reclamación ante la Agencia Española de Protección de Datos (www.aepd.es)."
+          }
+        ]
+      }
+    ]
+  },
+  "grc": {
+    "consulting": {
+      "cards": [
+        {
+          "cta": "Saber más",
+          "description": "Adecuación y certificación al Esquema Nacional de Seguridad (RD 311/2022). Obligatorio para quien presta servicios a la Administración.",
+          "tag": "Obligatorio sector público",
+          "title": "ENS"
+        },
+        {
+          "cta": "Saber más",
+          "description": "Gobierna el ciclo de vida de tus sistemas de Inteligencia Artificial y anticípate al Reglamento Europeo de IA (AI Act).",
+          "tag": "Gestión de la IA",
+          "title": "ISO 42001"
+        },
+        {
+          "cta": "Saber más",
+          "description": "El estándar internacional de referencia. Un SGSI útil, proporcional y certificable, alineado con tu negocio.",
+          "tag": "Seguridad de la información",
+          "title": "ISO 27001"
+        },
+        {
+          "cta": "Saber más",
+          "description": "Adecuación a NIS2: gobernanza, gestión de riesgos, control de proveedores y notificación de incidentes.",
+          "tag": "Directiva europea",
+          "title": "NIS2"
+        }
+      ],
+      "discover": {
+        "label": "Descubre más",
+        "link": "Ver todos los servicios GRC",
+        "text": "ISO 27701 (privacidad), ISO 22301 (continuidad), RGPD/LOPDGDD, DPO as a Service, SGSI, Plan Director de Seguridad y dirección estratégica (vCISO)."
+      },
+      "kicker": "Cumplimiento · Marcos principales",
+      "title": "Servicios de consultoría destacados"
+    },
+    "cta": {
+      "ctaPrimary": "Hablar con GRC",
+      "ctaSecondary": "Ver servicios MSSP",
+      "title": "¿Tienes una fecha límite normativa?"
+    },
+    "hero": {
+      "breadcrumb": [
+        {
+          "label": "Inicio",
+          "routeId": "home"
+        },
+        {
+          "label": "Soluciones",
+          "routeId": null
+        },
+        {
+          "label": "GRC",
+          "routeId": null
+        }
+      ],
+      "subtitle": "Sistemas de gestión útiles y proporcionales, integrados en tu operativa real. Cumples la norma y, de paso, mejoras tu seguridad. Estos son los marcos por los que más nos preguntan.",
+      "title": "Gobierno, riesgo y",
+      "titleHighlight": "cumplimiento (GRC)"
+    },
+    "idi": {
+      "items": [
+        {
+          "description": "Liderazgo y gestión de consorcios nacionales y europeos, con seguridad transversal desde TRL0.",
+          "tag": "D1",
+          "title": "Proyectos de I+D+i en colaboración"
+        },
+        {
+          "description": "De la idea al proyecto financiable: objetivos, consorcio y encaje en convocatorias.",
+          "tag": "D2",
+          "title": "Búsqueda de financiación"
+        }
+      ],
+      "kicker": "I+D+i con seguridad desde el diseño",
+      "title": "Innovación segura y financiada"
+    },
+    "seo": {
+      "description": "Adecuación y certificación ENS, ISO 27001, ISO 42001 y NIS2, más RGPD, DPO as a Service y Plan Director. Cumplimiento proporcional.",
+      "title": "Consultoría GRC: ENS, ISO 27001, ISO 42001 y NIS2 - ISN Labs"
+    },
+    "why": {
+      "items": [
+        {
+          "description": "Sistemas que se usan, no que decoran una estantería.",
+          "title": "Proporcional"
+        },
+        {
+          "description": "GRC conectado con tu MSSP: cumplimiento con evidencias reales.",
+          "title": "Integrado con operación"
+        },
+        {
+          "description": "Un solo marco que cubre ENS, ISO, NIS2 y privacidad a la vez.",
+          "title": "Sin duplicidades"
+        }
+      ],
+      "label": "Por qué ISN Labs en GRC"
+    }
+  },
+  "grcCatalog": {
+    "cta": {
+      "ctaPrimary": "Hablar con GRC",
+      "ctaSecondary": "Ver servicios MSSP",
+      "title": "¿Tienes una fecha límite normativa?"
+    },
+    "hero": {
+      "breadcrumb": [
+        {
+          "label": "Inicio",
+          "routeId": "home"
+        },
+        {
+          "label": "Soluciones",
+          "routeId": null
+        },
+        {
+          "label": "GRC",
+          "routeId": "grc"
+        },
+        {
+          "label": "Catálogo",
+          "routeId": null
+        }
+      ],
+      "subtitle": "El desglose completo de nuestros servicios de GRC. Sistemas de gestión útiles y proporcionales, coordinados para evitar duplicidades.",
+      "title": "Gobierno, riesgo y cumplimiento",
+      "titleHighlight": "catálogo de servicios"
+    },
+    "idiNote": "Consulta también nuestros servicios de I+D+i (proyectos en colaboración y financiación) en la página de GRC.",
+    "seo": {
+      "description": "Todos los servicios de Gobierno, Riesgo y Cumplimiento: ENS, ISO 27001/27701/22301/42001, NIS2, RGPD, DPO as a Service, SGSI, Plan Director y vCISO.",
+      "title": "Catálogo de servicios GRC - ISN Labs"
+    },
+    "services": [
+      {
+        "code": "A1",
+        "description": "Adecuación y certificación al Esquema Nacional de Seguridad (RD 311/2022).",
+        "title": "Adecuación al ENS"
+      },
+      {
+        "code": "A2",
+        "description": "Implantación y mantenimiento del Sistema de Gestión de Seguridad de la Información.",
+        "title": "ISO 27001 (SGSI)"
+      },
+      {
+        "code": "A3",
+        "description": "Alineación con la directiva europea, apoyada en ISO 27001 y ENS.",
+        "title": "Adecuación a NIS2"
+      },
+      {
+        "code": "A4",
+        "description": "Sistema de gestión de la Inteligencia Artificial (AIMS), alineado con el AI Act.",
+        "title": "ISO 42001 (IA)"
+      },
+      {
+        "code": "A5",
+        "description": "Sistema de gestión de la continuidad de negocio (BCMS).",
+        "title": "ISO 22301 (Continuidad)"
+      },
+      {
+        "code": "A6",
+        "description": "Adecuación y mantenimiento en protección de datos personales.",
+        "title": "RGPD / LOPDGDD"
+      },
+      {
+        "code": "A7",
+        "description": "Sistema de gestión de la información de privacidad (PIMS).",
+        "title": "ISO 27701 (Privacidad)"
+      },
+      {
+        "code": "A8",
+        "description": "Delegado de Protección de Datos externo, independiente y actualizado.",
+        "title": "DPO as a Service"
+      },
+      {
+        "code": "A9",
+        "description": "Diseño, implantación y mantenimiento del sistema de gestión de seguridad.",
+        "title": "Implantación de SGSI"
+      },
+      {
+        "code": "A10",
+        "description": "Hoja de ruta priorizada por riesgo, alineada con el negocio.",
+        "title": "Plan Director de Seguridad"
+      },
+      {
+        "code": "A11",
+        "description": "Dirección con criterio técnico, sin asumir el rol legal delegado.",
+        "title": "Dirección estratégica de ciberseguridad (vCISO)"
+      }
+    ]
+  },
+  "home": {
+    "ctaBand": {
+      "ctaPrimary": "Descubre tu plan",
+      "ctaSecondary": "Contactar",
+      "subtitle": "Diagnóstico inicial sin compromiso. Te decimos qué funciona, qué no y el siguiente paso.",
+      "title": "Si te preocupa la ciberseguridad de tu empresa",
+      "titleHighlight": "podemos ayudarte"
+    },
+    "hero": {
+      "ctaPrimary": "Contáctanos",
+      "ctaSecondary": "Hablar con un experto",
+      "subtitle": "Operamos tu seguridad (MSSP) y gobernamos tu cumplimiento (GRC) desde un único equipo. Detección con IA en IT y OT, respuesta gestionada y adecuación a NIS2, DORA, ISO 27001, ENS y RGPD. Sin humo, con criterio técnico.",
+      "tags": [
+        "MSSP",
+        "GRC",
+        "Ciberseguridad",
+        "IA"
+      ],
+      "title": "Seguridad gestionada y cumplimiento,",
+      "titleHighlight": "sin cabos sueltos"
+    },
+    "panel": {
+      "footer": "MSSP + GRC · un solo interlocutor",
+      "header": "servicio gestionado",
+      "rows": [
+        {
+          "label": "Ciberseguridad IT",
+          "value": "Gestionada"
+        },
+        {
+          "label": "Ciberseguridad OT",
+          "value": "Gestionada"
+        },
+        {
+          "label": "Gobierno y cumplimiento",
+          "value": "GRC"
+        },
+        {
+          "label": "Detección y respuesta",
+          "value": "24/7"
+        },
+        {
+          "label": "I+D+i · innovación",
+          "value": "Activo"
+        }
+      ],
+      "status": "operativo",
+      "title": "Cobertura bajo un mismo techo"
+    },
+    "pillars": {
+      "items": [
+        {
+          "cta": "Ver servicios",
+          "description": "Monitorización continua (PBCG), SOC 24/7, EDR/MDR/XDR, perímetro, backup 3-2-1, hardening, pentesting y gestión de vulnerabilidades.",
+          "tag": "MSSP · IT",
+          "title": "Ciberseguridad IT gestionada"
+        },
+        {
+          "cta": "Ver servicios",
+          "description": "Visibilidad e inventario pasivo, NDR SentryN3t, monitorización 24/7, parcheo controlado, seguridad perimetral y auditoría OT/ICS.",
+          "tag": "MSSP · OT",
+          "title": "Ciberseguridad industrial"
+        },
+        {
+          "cta": "Ver servicios",
+          "description": "ENS, ISO 27001/27701/22301/42001, NIS2, RGPD/LOPDGDD, DPO as a Service, Plan Director y dirección estratégica de ciberseguridad.",
+          "tag": "GRC",
+          "title": "Gobierno, riesgo y cumplimiento"
+        },
+        {
+          "cta": "Ver servicios",
+          "description": "Seguridad desde el diseño (TRL0), liderazgo de consorcios y captación de financiación nacional y europea para proyectos de I+D+i.",
+          "tag": "I+D+i",
+          "title": "Innovación con seguridad"
+        }
+      ],
+      "kicker": "Qué hacemos",
+      "title": "Cuatro capacidades, un solo interlocutor"
+    },
+    "sentry": {
+      "chips": [
+        "Pasivo y no intrusivo",
+        "IA / ML",
+        "100% europeo",
+        "Escalable"
+      ],
+      "cta": "Saber más",
+      "ctaUrl": "https://www.ewala.es",
+      "description": "Detección de anomalías en el tráfico de red sin agentes, sin firmas y sin impacto en la operación. Inventario pasivo de cada activo y visibilidad total antes de que ocurra el incidente. Producto europeo, alineado con NIS2 e IEC 62443. Lo desplegamos, operamos e integramos como parte de tu servicio gestionado.",
+      "kicker": "Tecnología destacada",
+      "note": "En ewala.es · marca de Ewala",
+      "title": "SentryN3t - NDR con IA para OT/IoT/IT"
+    },
+    "seo": {
+      "description": "Seguridad gestionada (MSSP) y cumplimiento (GRC) bajo un mismo techo. Detección con IA en IT y OT, NIS2, DORA, ISO 27001, ENS y RGPD.",
+      "title": "ISN Labs · MSSP y GRC | Ciberseguridad gestionada IT y OT"
+    }
+  },
+  "legal": {
+    "title": "AVISO",
+    "titleHighlight": "LEGAL",
+    "seo": {
+      "title": "Aviso legal - ISN Labs",
+      "description": "Datos identificativos de Innovation and Security North Labs SL, condiciones de acceso y uso de la web, propiedad intelectual, enlaces y jurisdicción aplicable."
+    },
+    "intro": "En cumplimiento del artículo 10 de la Ley 34/2002, de 11 de julio, de Servicios de la Sociedad de la Información y de Comercio Electrónico (LSSICE), se facilitan los siguientes datos identificativos del titular del presente sitio web.",
+    "prevalence": "Este documento se publica en español y en inglés. En caso de discrepancia entre ambas versiones, prevalece la española.",
+    "sections": [
+      {
+        "title": "Datos identificativos del titular del sitio web",
+        "blocks": [
+          {
+            "kind": "dl",
+            "items": [
+              {
+                "term": "Titular",
+                "text": "Innovation and Security North Labs, S.L. (en adelante, «Innovation and Security North Labs»)"
+              },
+              {
+                "term": "Domicilio social",
+                "text": "Calle Peña Brava 21, oficina 1B, PI de Silvota, 33192 Llanera (Asturias)"
+              },
+              {
+                "term": "N.I.F.",
+                "text": "B-22966139"
+              },
+              {
+                "term": "Teléfono",
+                "text": "+34 634 651 312"
+              },
+              {
+                "term": "Correo electrónico",
+                "text": "info@secnorthlabs.eu"
+              },
+              {
+                "term": "Datos registrales",
+                "text": "Inscrita en el Registro Mercantil de ASTURIAS, Hoja AS-64568, IRUS 1000457571583."
+              }
+            ]
+          },
+          {
+            "kind": "p",
+            "text": "Para cuestiones relacionadas con la protección de datos personales, el interesado puede dirigirse a rgpd@secnorthlabs.eu."
+          }
+        ]
+      },
+      {
+        "title": "Objeto",
+        "blocks": [
+          {
+            "kind": "p",
+            "text": "El presente Aviso Legal regula el acceso, la navegación y el uso del sitio web www.secnorthlabs.eu (en adelante, «la Web»), puesto a disposición de los usuarios por Innovation and Security North Labs en cumplimiento de la LSSICE."
+          },
+          {
+            "kind": "p",
+            "text": "La visita y utilización de la Web atribuye la condición de usuario (en adelante, el «Usuario») e implica la aceptación plena y sin reservas de todas las condiciones incluidas en este Aviso Legal, en la Política de Privacidad y en la Política de Cookies, documentos que en su conjunto conforman la información legal completa de la Web."
+          },
+          {
+            "kind": "p",
+            "text": "Innovation and Security North Labs se reserva el derecho a modificar en cualquier momento la presentación, configuración, contenido y condiciones de acceso y uso de la Web. El Usuario debe leer atentamente el presente Aviso Legal en cada ocasión en que acceda a la Web, ya que sus condiciones pueden sufrir modificaciones. En el caso de que no esté de acuerdo con los términos expuestos, debe abstenerse de navegar y utilizar la Web."
+          }
+        ]
+      },
+      {
+        "title": "Derechos de propiedad intelectual e industrial",
+        "blocks": [
+          {
+            "kind": "p",
+            "text": "Innovation and Security North Labs es titular o, en su caso, cuenta con las licencias correspondientes sobre los derechos de explotación de propiedad intelectual e industrial de la Web, así como sobre los elementos contenidos en la misma."
+          },
+          {
+            "kind": "p",
+            "text": "Todos los contenidos de la Web, a título enunciativo, imágenes, fotografías, documentos, software, textos, gráficos, marcas, logotipos, signos distintivos, combinaciones de colores, estructura y diseño (en adelante, los «Contenidos»), son propiedad intelectual e industrial de Innovation and Security North Labs o de sus licenciantes. El acceso y uso de la Web no atribuye al Usuario ningún derecho sobre los mismos."
+          },
+          {
+            "kind": "p",
+            "text": "Conforme a lo dispuesto en el Real Decreto Legislativo 1/1996, de 12 de abril, por el que se aprueba el texto refundido de la Ley de Propiedad Intelectual, quedan expresamente prohibidas la reproducción, la distribución y la comunicación pública, incluida su modalidad de puesta a disposición, de la totalidad o parte de los Contenidos, con fines comerciales, en cualquier soporte y por cualquier medio técnico, sin la autorización previa y expresa del titular, salvo los usos amparados por los límites legalmente previstos."
+          },
+          {
+            "kind": "p",
+            "text": "El Usuario se abstendrá de suprimir, alterar, eludir o manipular cualquier dispositivo de protección o sistema de seguridad instalado en la Web."
+          }
+        ]
+      },
+      {
+        "title": "Enlaces a sitios de terceros",
+        "blocks": [
+          {
+            "kind": "p",
+            "text": "La Web puede contener enlaces o hiperenlaces que faciliten el acceso a sitios web de terceros independientes. Innovation and Security North Labs no ejerce ningún tipo de control sobre dichos sitios web ni sobre sus contenidos, por lo que no asume responsabilidad alguna sobre los mismos."
+          },
+          {
+            "kind": "p",
+            "text": "La inclusión de enlaces a sitios de terceros no implica aprobación, asociación o recomendación por parte de Innovation and Security North Labs. Innovation and Security North Labs no garantiza que los enlaces sean exactos en el momento de su acceso ni que los sitios enlazados estén operativos en todo momento."
+          },
+          {
+            "kind": "p",
+            "text": "Innovation and Security North Labs no será responsable de la información a la que el Usuario acceda a través de dichos enlaces, salvo que tenga conocimiento efectivo de que la actividad o la información a la que remiten es ilícita o lesiona bienes o derechos de un tercero susceptibles de indemnización, en cuyo caso actuará con diligencia para suprimir o inutilizar el enlace correspondiente."
+          }
+        ]
+      },
+      {
+        "title": "Condiciones de uso",
+        "blocks": [
+          {
+            "kind": "p",
+            "text": "El Usuario se obliga a hacer un uso correcto de la Web de conformidad con la legislación vigente y con el presente Aviso Legal."
+          },
+          {
+            "kind": "p",
+            "text": "Queda expresamente prohibido el uso de la Web con fines lesivos de bienes o intereses de Innovation and Security North Labs o de terceros, o que de cualquier otra forma sobrecarguen, dañen o inutilicen las redes, servidores y demás equipos informáticos o productos y aplicaciones informáticas de Innovation and Security North Labs o de terceros."
+          },
+          {
+            "kind": "p",
+            "text": "En particular, y sin perjuicio de lo anterior, el Usuario se abstendrá de realizar sobre la Web o sobre los sistemas que la soportan cualquier prueba de intrusión, análisis de vulnerabilidades, escaneo de puertos, ingeniería inversa u otra actividad análoga sin autorización previa, expresa y por escrito de Innovation and Security North Labs, conforme a lo previsto en los artículos 197 bis y 264 y siguientes del Código Penal."
+          },
+          {
+            "kind": "p",
+            "text": "El Usuario responderá frente a Innovation and Security North Labs o frente a terceros de cualesquiera daños y perjuicios que pudieran causarse como consecuencia del incumplimiento de estas obligaciones."
+          }
+        ]
+      },
+      {
+        "title": "Exclusión de responsabilidad",
+        "blocks": [
+          {
+            "kind": "p",
+            "text": "Innovation and Security North Labs no garantiza la ausencia de errores en los contenidos de la Web ni que estos se encuentren permanentemente actualizados, si bien declara que adoptará las medidas razonables para corregir los errores, actualizar los contenidos y mantener el correcto funcionamiento de la Web."
+          },
+          {
+            "kind": "p",
+            "text": "Innovation and Security North Labs no se responsabiliza de:"
+          },
+          {
+            "kind": "ul",
+            "items": [
+              "Los daños o perjuicios derivados de la presencia de virus, programas maliciosos o cualquier otro elemento informático dañino en la Web o en el servidor que la suministra. Corresponde al Usuario disponer de herramientas adecuadas para la detección y protección frente a software dañino.",
+              "Los daños o perjuicios derivados de fallos, interrupciones o desconexiones en las redes de telecomunicaciones, en los suministros eléctricos o en cualquier otro servicio de terceros que afecte a la disponibilidad de la Web.",
+              "La veracidad, exactitud, adecuación o actualidad de los contenidos aportados por terceros, quedando exenta de cualquier responsabilidad contractual o extracontractual respecto a los Usuarios que hagan uso de ellos."
+            ]
+          },
+          {
+            "kind": "p",
+            "text": "Los contenidos divulgativos, técnicos o de investigación publicados en la Web tienen carácter meramente informativo y no constituyen asesoramiento profesional ni garantía de resultado. Su aplicación por parte del Usuario se realiza bajo su exclusiva responsabilidad y no genera relación contractual alguna con Innovation and Security North Labs."
+          },
+          {
+            "kind": "p",
+            "text": "En el supuesto de que el Usuario tuviese conocimiento de la existencia de contenidos ilícitos o que pudieran suponer una infracción de derechos de terceros, deberá comunicárselo a Innovation and Security North Labs de forma inmediata a través de los datos de contacto indicados en el apartado 1, a fin de que pueda adoptar las medidas oportunas. La recepción de dicha comunicación no supondrá, conforme a la LSSICE, el conocimiento efectivo de las actividades o contenidos indicados por el comunicante."
+          }
+        ]
+      },
+      {
+        "title": "Protección de datos",
+        "blocks": [
+          {
+            "kind": "p",
+            "text": "De conformidad con lo dispuesto en el Reglamento (UE) 2016/679 (RGPD) y en la Ley Orgánica 3/2018 (LOPDGDD), todos los datos de carácter personal facilitados durante la utilización de la Web serán tratados conforme a lo establecido en la Política de Privacidad, accesible mediante enlace en la parte inferior de la Web."
+          }
+        ]
+      },
+      {
+        "title": "Cookies",
+        "blocks": [
+          {
+            "kind": "p",
+            "text": "La Web utiliza cookies. Para más información sobre las cookies utilizadas, sus finalidades y la forma de gestionarlas, consulte la Política de Cookies, accesible mediante enlace en la parte inferior de la Web."
+          }
+        ]
+      },
+      {
+        "title": "Nulidad parcial",
+        "blocks": [
+          {
+            "kind": "p",
+            "text": "En el caso de que cualquier disposición del presente Aviso Legal fuese declarada nula o inaplicable, en su totalidad o en parte, por cualquier Juzgado, Tribunal u órgano administrativo competente, dicha nulidad o inaplicación no afectará a las restantes disposiciones, que mantendrán su plena eficacia y carácter obligatorio."
+          }
+        ]
+      },
+      {
+        "title": "Legislación y jurisdicción aplicable",
+        "blocks": [
+          {
+            "kind": "p",
+            "text": "El presente Aviso Legal se rige por la legislación española."
+          },
+          {
+            "kind": "p",
+            "text": "Para la resolución de cualquier controversia derivada del acceso o uso de la Web, las partes se someten a los Juzgados y Tribunales de Gijón, salvo en aquellos supuestos en que la normativa aplicable imponga un fuero distinto, en particular la normativa de protección de los consumidores y usuarios."
+          },
+          {
+            "kind": "p",
+            "text": "Innovation and Security North Labs manifiesta su disposición a la resolución previa de cualquier controversia de forma amistosa."
+          }
+        ]
+      }
+    ]
+  },
+  "mssp": {
+    "cta": {
+      "ctaPrimary": "Contáctanos",
+      "ctaSecondary": "Ver software",
+      "title": "¿Montamos tu servicio gestionado?"
+    },
+    "hero": {
+      "breadcrumb": [
+        {
+          "label": "Inicio",
+          "routeId": "home"
+        },
+        {
+          "label": "Soluciones",
+          "routeId": null
+        },
+        {
+          "label": "MSSP",
+          "routeId": null
+        }
+      ],
+      "subtitle": "Operamos tu seguridad de extremo a extremo. Empezamos por lo esencial y crecemos contigo: primero visibilidad y control, después detección y respuesta 24/7.",
+      "title": "Ciberseguridad gestionada",
+      "titleHighlight": "IT + OT, un solo equipo"
+    },
+    "it": {
+      "discover": {
+        "label": "Descubre más",
+        "link": "Ver todos los servicios IT",
+        "text": "SOC 24/7, EDR/MDR/XDR, auditorías, seguridad perimetral, backup, hardening, pentesting, gestión de vulnerabilidades y formación."
+      },
+      "featured": {
+        "cta": "Pide tu presupuesto",
+        "description": "Monitorización y revisión periódica de tu seguridad IT: backups, EDR, SIEM/XDR y firewall bajo control experto, con alerta temprana y reporting. La base sobre la que crece todo lo demás.",
+        "includes": [
+          "Revisión de backups y restauraciones",
+          "Consola EDR y alertas de endpoint",
+          "Revisión de SIEM/XDR y firewall",
+          "Reporte periódico + bolsa de horas"
+        ],
+        "label": "Servicio principal",
+        "title": "Plan Base de Ciberseguridad Gestionada (PBCG)"
+      },
+      "kicker": "MSSP · Ciberseguridad IT",
+      "title": "Empieza por la base y crece con criterio"
+    },
+    "model": {
+      "items": [
+        {
+          "description": "Ves lo mismo que nosotros: informes claros y trazables.",
+          "title": "Sin cajas negras"
+        },
+        {
+          "description": "IT y OT bajo un mismo interlocutor, integrados con GRC.",
+          "title": "Un contrato"
+        },
+        {
+          "description": "Empieza por el Plan Base y evoluciona a SOC 24/7 cuando lo necesites.",
+          "title": "Escalable"
+        }
+      ],
+      "label": "Nuestro modelo de servicio",
+      "title": "Visibilidad · Detección · Respuesta · Mejora continua"
+    },
+    "ot": {
+      "discover": {
+        "label": "Descubre más",
+        "link": "Ver todos los servicios OT",
+        "text": "Arquitectura e inventario OT, NDR SentryN3t, seguridad perimetral industrial, parcheo controlado, auditoría OT/ICS y formación de planta."
+      },
+      "featured": {
+        "cta": "Contáctanos",
+        "description": "Vigilancia continua de tu red industrial con SentryN3t (NDR): detección temprana de anomalías, accesos fuera de patrón e indicadores de incidente, sin agentes y sin impacto en la operación. Con triage y escalado gestionado.",
+        "includes": [
+          "Detección pasiva con IA / ML",
+          "Alertas contextualizadas para planta",
+          "Triage y escalado de incidentes",
+          "Reporte periódico 8x5 o 24x7"
+        ],
+        "label": "Servicio principal",
+        "title": "Monitorización continua - detección y respuesta"
+      },
+      "kicker": "MSSP · Ciberseguridad OT / Industrial",
+      "title": "Seguridad industrial sin frenar la producción"
+    },
+    "seo": {
+      "description": "Plan Base de Ciberseguridad Gestionada (PBCG), SOC 24/7 y monitorización OT con SentryN3t. Un solo equipo para IT y OT.",
+      "title": "Servicios MSSP IT y OT | Ciberseguridad gestionada - ISN Labs"
+    }
+  },
+  "msspItCatalog": {
+    "categories": [
+      {
+        "code": "C1",
+        "description": "Vigilancia y revisión continua de tu seguridad IT, con detección temprana y reporting.",
+        "services": [
+          {
+            "description": "Revisión periódica de backups, EDR, SIEM/XDR y firewall, con alerta temprana y bolsa de horas de consultoría.",
+            "title": "Plan Base de Ciberseguridad Gestionada (PBCG)"
+          },
+          {
+            "description": "Monitorización, detección y coordinación de respuesta 24/7 para entornos que requieren mayor cobertura.",
+            "title": "SOC (Security Operations Center)"
+          },
+          {
+            "description": "Detección basada en red sin agentes; visibilidad complementaria al endpoint y al perímetro.",
+            "title": "NDR SentryN3t"
+          },
+          {
+            "description": "Ciclo completo del incidente (triage, análisis, contención y cierre) con reporting técnico y ejecutivo.",
+            "title": "Gestión de incidentes y reportes"
+          }
+        ],
+        "title": "Monitorización continua"
+      },
+      {
+        "code": "C2",
+        "description": "Visión objetiva y actualizada del estado de tu seguridad, priorizada por riesgo real.",
+        "services": [
+          {
+            "description": "Primera foto no intrusiva del nivel de madurez y los riesgos percibidos.",
+            "title": "Auditoría inicial"
+          },
+          {
+            "description": "Análisis en profundidad de configuraciones, arquitectura y controles técnicos.",
+            "title": "Auditoría técnica"
+          },
+          {
+            "description": "Detección sistemática de debilidades técnicas, priorizadas por criticidad.",
+            "title": "Análisis de vulnerabilidades"
+          }
+        ],
+        "title": "Auditorías de seguridad"
+      },
+      {
+        "code": "C3",
+        "description": "Reduce la superficie de ataque y controla el tráfico de tu red.",
+        "services": [
+          {
+            "description": "Arquitectura perimetral y segmentación (VLANs, DMZ, zonas de seguridad).",
+            "title": "Diseño e implantación de controles perimetrales"
+          },
+          {
+            "description": "Gestión continua de VPN, reglas, NAT, Proxy/WAF y ciclo de vida del dispositivo.",
+            "title": "Firewall management"
+          }
+        ],
+        "title": "Seguridad perimetral"
+      },
+      {
+        "code": "C4",
+        "description": "Refuerza la seguridad en el punto más cercano al usuario.",
+        "services": [
+          {
+            "description": "Detección y respuesta en endpoints, adaptada a tu madurez y exposición.",
+            "title": "EDR / MDR / XDR"
+          },
+          {
+            "description": "Estrategia 3-2-1 para el puesto de trabajo y el correo corporativo.",
+            "title": "Backup de puesto y correo"
+          },
+          {
+            "description": "Gestor de contraseñas y autenticación multifactor para cerrar el vector de credenciales.",
+            "title": "Gestor de credenciales y MFA"
+          }
+        ],
+        "title": "Protección de usuarios (endpoints)"
+      },
+      {
+        "code": "C5",
+        "description": "Operación segura dentro de un marco de seguridad recurrente.",
+        "services": [
+          {
+            "description": "Configuraciones seguras para reducir la superficie de ataque.",
+            "title": "Hardening"
+          },
+          {
+            "description": "On-premise, cloud o híbrida, orientada a estabilidad, escalabilidad y seguridad.",
+            "title": "Análisis, diseño y operación de infraestructura"
+          },
+          {
+            "description": "Inventario continuo basado en tráfico real (SentryN3t).",
+            "title": "Descubrimiento e inventariado de activos"
+          },
+          {
+            "description": "Actualización priorizada por riesgo, con control de cambios y trazabilidad.",
+            "title": "Parcheo gestionado"
+          },
+          {
+            "description": "Copias y recuperación de servidores y servicios, incluidos Microsoft 365 y Google Workspace.",
+            "title": "Backup corporativo"
+          }
+        ],
+        "title": "Soporte y mantenimiento de redes y sistemas"
+      },
+      {
+        "code": "C6",
+        "description": "Comprueba de forma controlada tu exposición real.",
+        "services": [
+          {
+            "description": "Intrusión controlada sobre infraestructura, aplicaciones web y APIs.",
+            "title": "Pentesting (infraestructura y web)"
+          },
+          {
+            "description": "Análisis de tu huella pública y exposición en fuentes abiertas.",
+            "title": "Investigación OSINT"
+          },
+          {
+            "description": "Identificación, priorización y seguimiento continuo.",
+            "title": "Gestión de vulnerabilidades y superficie de ataque"
+          }
+        ],
+        "title": "Testing y validación"
+      },
+      {
+        "code": "C7",
+        "description": "Reduce el riesgo desde el factor humano.",
+        "services": [
+          {
+            "description": "Contenidos a medida por perfil y temática, con enfoque práctico.",
+            "title": "Formación personalizada"
+          },
+          {
+            "description": "Campañas realistas y métricas para medir la mejora.",
+            "title": "Simulación de phishing"
+          },
+          {
+            "description": "Entrena la respuesta y la coordinación entre equipos bajo presión.",
+            "title": "Simulacro de ciberincidentes (tabletop)"
+          }
+        ],
+        "title": "Prevención, concienciación y formación"
+      }
+    ],
+    "cta": {
+      "ctaPrimary": "Contáctanos",
+      "ctaSecondary": "Ver el catálogo OT",
+      "title": "¿Quieres que revisemos tu seguridad IT?"
+    },
+    "hero": {
+      "breadcrumb": [
+        {
+          "label": "Inicio",
+          "routeId": "home"
+        },
+        {
+          "label": "Soluciones",
+          "routeId": null
+        },
+        {
+          "label": "MSSP",
+          "routeId": "mssp"
+        },
+        {
+          "label": "Catálogo IT",
+          "routeId": null
+        }
+      ],
+      "subtitle": "El desglose completo de nuestros servicios gestionados de seguridad IT. Todo se articula dentro de un marco de seguridad recurrente, con visibilidad y trazabilidad.",
+      "title": "Ciberseguridad IT",
+      "titleHighlight": "catálogo de servicios"
+    },
+    "seo": {
+      "description": "Todos los servicios MSSP IT: monitorización (PBCG, SOC 24/7, NDR), auditorías, perímetro, endpoints, soporte, testing y formación.",
+      "title": "Catálogo de servicios de Ciberseguridad IT - ISN Labs"
+    }
+  },
+  "msspOtCatalog": {
+    "categories": [
+      {
+        "code": "B1",
+        "description": "Infraestructura OT estable, documentada y operada de forma segura.",
+        "services": [
+          {
+            "description": "Diseño, operación y mantenimiento preventivo del entorno OT.",
+            "title": "Operación, mejora y mantenimiento de la infraestructura"
+          },
+          {
+            "description": "Inventario pasivo basado en tráfico real, sin agentes (SentryN3t).",
+            "title": "Descubrimiento e inventariado de activos OT"
+          },
+          {
+            "description": "Parcheo controlado y planificado, compatible con la operación.",
+            "title": "Parcheo gestionado en entornos OT"
+          },
+          {
+            "description": "Backup adaptado a sistemas industriales: PLCs, HMIs y servidores OT.",
+            "title": "Copias de seguridad (backup)"
+          }
+        ],
+        "title": "Arquitectura de red y sistemas"
+      },
+      {
+        "code": "B2",
+        "description": "Detección temprana de amenazas en tu entorno OT.",
+        "services": [
+          {
+            "description": "Detección pasiva de anomalías en la red OT, comprensible para personal de planta.",
+            "title": "Despliegue NDR SentryN3t"
+          },
+          {
+            "description": "Visión ampliada y correlación IT/OT en endpoints, identidades y cloud.",
+            "title": "Despliegue de XDR"
+          },
+          {
+            "description": "Vigilancia 8x5 o 24x7 con análisis contextualizado.",
+            "title": "Monitorización continua OT"
+          },
+          {
+            "description": "Ciclo completo del incidente OT, con reporting técnico y ejecutivo.",
+            "title": "Gestión de incidentes y reportes"
+          }
+        ],
+        "title": "Detección y respuesta gestionada"
+      },
+      {
+        "code": "B3",
+        "description": "Controla las comunicaciones sin comprometer la producción.",
+        "services": [
+          {
+            "description": "Segmentación IT/OT, zonas y conduits, DMZ industrial.",
+            "title": "Diseño e implantación de controles perimetrales"
+          },
+          {
+            "description": "Gestión de VPN, reglas, NAT, WAF y ciclo de vida en entornos industriales.",
+            "title": "Firewall management"
+          }
+        ],
+        "title": "Seguridad perimetral"
+      },
+      {
+        "code": "B4",
+        "description": "Conoce tu nivel real de exposición industrial.",
+        "services": [
+          {
+            "description": "Metodología específica y no intrusiva para entornos industriales.",
+            "title": "Análisis de vulnerabilidades OT"
+          },
+          {
+            "description": "Evaluación integral técnica, organizativa y de gobierno.",
+            "title": "Auditoría de ciberseguridad industrial (OT/ICS)"
+          }
+        ],
+        "title": "Auditoría OT"
+      },
+      {
+        "code": "B5",
+        "description": "Refuerza la resiliencia desde las personas.",
+        "services": [
+          {
+            "description": "Adaptada al sector industrial y a los riesgos reales de planta.",
+            "title": "Formación personalizada"
+          },
+          {
+            "description": "Escenarios IT/OT para entrenar la respuesta y la coordinación.",
+            "title": "Simulacro de ciberincidentes (tabletop)"
+          }
+        ],
+        "title": "Prevención, formación y concienciación"
+      }
+    ],
+    "cta": {
+      "ctaPrimary": "Contáctanos",
+      "ctaSecondary": "Ver Ciberseguridad IT",
+      "title": "¿Protegemos tu entorno industrial?"
+    },
+    "hero": {
+      "breadcrumb": [
+        {
+          "label": "Inicio",
+          "routeId": "home"
+        },
+        {
+          "label": "Soluciones",
+          "routeId": null
+        },
+        {
+          "label": "MSSP",
+          "routeId": "mssp"
+        },
+        {
+          "label": "Catálogo OT",
+          "routeId": null
+        }
+      ],
+      "subtitle": "El desglose completo de nuestros servicios de ciberseguridad industrial, diseñados para proteger la operación sin frenar la producción.",
+      "title": "Ciberseguridad OT",
+      "titleHighlight": "catálogo de servicios"
+    },
+    "seo": {
+      "description": "Todos los servicios MSSP OT: arquitectura e inventario, NDR SentryN3t, perímetro industrial, auditoría OT/ICS y formación de planta.",
+      "title": "Catálogo de servicios de Ciberseguridad OT / Industrial - ISN Labs"
+    }
+  },
+  "privacy": {
+    "title": "Política de",
+    "titleHighlight": "Privacidad",
+    "seo": {
+      "title": "Política de privacidad - ISN Labs",
+      "description": "Cómo trata ISN Labs (Innovation and Security North Labs SL) los datos personales: responsable, finalidades, base jurídica, destinatarios, conservación y derechos."
+    },
+    "intro": "En cumplimiento del Reglamento (UE) 2016/679 del Parlamento Europeo y del Consejo, de 27 de abril de 2016, relativo a la protección de las personas físicas en lo que respecta al tratamiento de datos personales y a la libre circulación de estos datos («RGPD»), de la Ley Orgánica 3/2018, de 5 de diciembre, de Protección de Datos Personales y Garantía de los Derechos Digitales («LOPDGDD»), y de la restante normativa vigente en materia de protección de datos.",
+    "prevalence": "Este documento se publica en español y en inglés. En caso de discrepancia entre ambas versiones, prevalece la española.",
+    "sections": [
+      {
+        "title": "Contenido y conformidad",
+        "blocks": [
+          {
+            "kind": "p",
+            "text": "La presente Política de Privacidad y Protección de Datos de Carácter Personal (en adelante, la «Política de Privacidad») es aplicable a los datos de carácter personal facilitados a través del sitio web www.secnorthlabs.eu (en adelante, el «Sitio Web»), así como a través de cualquier otro canal de comunicación puesto a disposición por Innovation and Security North Labs, S.L. (en adelante, «Innovation and Security North Labs» o «la empresa»)."
+          },
+          {
+            "kind": "p",
+            "text": "Cualquier referencia al «Sitio Web» se entenderá realizada igualmente a www.secnorthlabs.eu o a cualquiera de sus subdominios, dominios relacionados o páginas web dependientes."
+          },
+          {
+            "kind": "p",
+            "text": "«Usuario» es la persona que accede, utiliza o navega a través del Sitio Web."
+          },
+          {
+            "kind": "p",
+            "text": "El Usuario decide libre y voluntariamente facilitar sus datos de carácter personal a través del Sitio Web o de los distintos canales de comunicación habilitados. En aquellos casos en que se soliciten datos mediante formularios u otros medios, se le podrá requerir la aportación de determinados datos de carácter personal para poder dar respuesta y trámite a su solicitud."
+          },
+          {
+            "kind": "p",
+            "text": "La información legal completa del Sitio Web está conformada, de forma conjunta, por el Aviso Legal, la presente Política de Privacidad y la Política de Cookies, documentos accesibles mediante enlace en la parte inferior del Sitio Web (en adelante, la «Información Legal Completa»). La interpretación de la información legal del Sitio Web debe realizarse de forma conjunta con todos los documentos mencionados."
+          },
+          {
+            "kind": "p",
+            "text": "Cuando se soliciten datos de carácter personal mediante formularios, se pondrá a disposición del Usuario un cuadro con información básica en protección de datos, así como una casilla de aceptación que indica que ha leído y acepta la presente Política de Privacidad, con enlace directo a la misma."
+          },
+          {
+            "kind": "p",
+            "text": "Se recomienda al Usuario la lectura íntegra de la Información Legal Completa de forma periódica, pues su contenido puede estar sujeto a modificaciones que serán debidamente publicadas con referencia a su versión y fecha."
+          }
+        ]
+      },
+      {
+        "title": "Identificación del responsable del tratamiento y medios de contacto",
+        "blocks": [
+          {
+            "kind": "p",
+            "text": "En cumplimiento de la normativa aplicable, se informa de que el responsable del tratamiento de los datos facilitados es:"
+          },
+          {
+            "kind": "dl",
+            "items": [
+              {
+                "term": "Titular",
+                "text": "Innovation and Security North Labs, S.L."
+              },
+              {
+                "term": "N.I.F.",
+                "text": "B-22966139"
+              },
+              {
+                "term": "Domicilio",
+                "text": "Calle Peña Brava 21, oficina 1B, PI de Silvota, 33192 Llanera (Asturias)"
+              },
+              {
+                "term": "Correo electrónico general",
+                "text": "info@secnorthlabs.eu"
+              },
+              {
+                "term": "Correo electrónico para protección de datos",
+                "text": "rgpd@secnorthlabs.eu"
+              }
+            ]
+          },
+          {
+            "kind": "p",
+            "text": "Para el ejercicio de derechos en materia de protección de datos, el interesado podrá dirigirse a la dirección postal o electrónica indicadas, conforme al procedimiento descrito en el apartado 13."
+          }
+        ]
+      },
+      {
+        "title": "Principios aplicables al tratamiento de datos personales",
+        "blocks": [
+          {
+            "kind": "p",
+            "text": "Innovation and Security North Labs aplica en el tratamiento de datos personales los principios establecidos en el artículo 5 del RGPD:"
+          },
+          {
+            "kind": "dl",
+            "items": [
+              {
+                "term": "Licitud, lealtad y transparencia",
+                "text": "Los datos personales se tratan de manera lícita, leal y transparente en relación con el interesado."
+              },
+              {
+                "term": "Limitación de la finalidad",
+                "text": "Los datos se recogen con fines determinados, explícitos y legítimos, y no se tratan ulteriormente de manera incompatible con dichos fines."
+              },
+              {
+                "term": "Minimización de datos",
+                "text": "Los datos son adecuados, pertinentes y limitados a lo necesario en relación con los fines para los que son tratados."
+              },
+              {
+                "term": "Exactitud",
+                "text": "Los datos son exactos y, cuando sea necesario, se mantienen actualizados. Se adoptarán las medidas razonables para que se supriman o rectifiquen sin dilación los datos inexactos."
+              },
+              {
+                "term": "Limitación del plazo de conservación",
+                "text": "Los datos se mantienen de forma que permitan la identificación de los interesados durante no más tiempo del necesario para los fines del tratamiento."
+              },
+              {
+                "term": "Integridad y confidencialidad",
+                "text": "Los datos se tratan de manera que se garantice una seguridad adecuada mediante la aplicación de medidas técnicas y organizativas apropiadas."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Innovation and Security North Labs como encargado del tratamiento",
+        "blocks": [
+          {
+            "kind": "p",
+            "text": "En el marco de la prestación de sus servicios de seguridad, innovación tecnológica y servicios IT, Innovation and Security North Labs puede actuar como encargado del tratamiento por cuenta de sus clientes, tratando datos personales conforme a las instrucciones documentadas del cliente y al acuerdo de encargo de tratamiento (DPA) suscrito entre ambas partes."
+          },
+          {
+            "kind": "p",
+            "text": "En estos supuestos, el cliente actúa como responsable del tratamiento y Innovation and Security North Labs se compromete a cumplir las obligaciones establecidas en el artículo 28 del RGPD, incluyendo la aplicación de medidas técnicas y organizativas adecuadas, la limitación del tratamiento a las instrucciones del responsable, el deber de confidencialidad del personal autorizado, el régimen de subencargados, la asistencia al responsable en el cumplimiento de sus obligaciones y la supresión o devolución de los datos al finalizar la prestación del servicio, salvo obligación legal de conservación."
+          },
+          {
+            "kind": "p",
+            "text": "Innovation and Security North Labs no accederá ni tratará los datos personales de sus clientes para fines distintos de los establecidos en el correspondiente acuerdo de encargo de tratamiento."
+          }
+        ]
+      },
+      {
+        "title": "Información sobre protección de datos en relación con los clientes",
+        "blocks": [
+          {
+            "kind": "dl",
+            "items": [
+              {
+                "term": "Responsable del tratamiento",
+                "text": "Innovation and Security North Labs, S.L. (datos de contacto en el apartado 2)."
+              },
+              {
+                "term": "Datos tratados y procedencia",
+                "text": "Los datos proceden de los facilitados en la relación comercial y contractual: presupuestos, contratos, facturas, solicitudes, correos electrónicos y cualquier otra comunicación derivada de la relación como cliente. Las categorías de datos tratados incluyen: datos identificativos (nombre, apellidos, DNI/CIF, cargo), datos de contacto (dirección, teléfono, correo electrónico), datos comerciales (servicios contratados, propuestas, presupuestos), datos económicos, financieros y bancarios (facturación, forma de pago, historial de pagos) y datos técnicos derivados de la prestación del servicio (direcciones IP, registros de actividad, configuraciones)."
+              },
+              {
+                "term": "Finalidad",
+                "text": "Contratación de productos y/o servicios y su correspondiente gestión, prestación y soporte de los servicios contratados, gestión de incidencias, facturación y cobro, y elaboración de informes estadísticos agregados y anonimizados sobre la actividad de la empresa."
+              },
+              {
+                "term": "Base jurídica",
+                "text": "Ejecución del contrato o de medidas precontractuales (art. 6.1.b RGPD), cumplimiento de obligaciones legales, fiscales y contables (art. 6.1.c RGPD) e interés legítimo para el tratamiento de los datos de las personas de contacto de personas jurídicas, empresarios individuales y profesionales (art. 6.1.f RGPD y art. 19 LOPDGDD)."
+              },
+              {
+                "term": "Categorías de destinatarios",
+                "text": "Asesoría fiscal, contable y laboral; Agencia Estatal de Administración Tributaria (AEAT) y demás Administraciones Públicas competentes; entidades financieras para la gestión de cobros y pagos; profesionales y proveedores cuya intervención resulte necesaria para la prestación del servicio, con acuerdo de encargo de tratamiento suscrito; y, cuando exista obligación legal, Fuerzas y Cuerpos de Seguridad del Estado y Juzgados y Tribunales."
+              },
+              {
+                "term": "Transferencias internacionales",
+                "text": "No están previstas con carácter general. Cuando resulten necesarias para la prestación del servicio, se aplicarán las garantías indicadas en el apartado 12."
+              },
+              {
+                "term": "Plazos de conservación",
+                "text": "Los datos se conservarán durante la vigencia de la relación contractual y, posteriormente, durante los plazos legalmente establecidos para el cumplimiento de obligaciones fiscales, contables y mercantiles, así como para la formulación, el ejercicio o la defensa de reclamaciones."
+              },
+              {
+                "term": "Decisiones automatizadas",
+                "text": "No se realizan decisiones automatizadas ni elaboración de perfiles con los datos de clientes."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Información sobre protección de datos en la gestión de proveedores",
+        "blocks": [
+          {
+            "kind": "dl",
+            "items": [
+              {
+                "term": "Responsable del tratamiento",
+                "text": "Innovation and Security North Labs, S.L. (datos de contacto en el apartado 2)."
+              },
+              {
+                "term": "Datos tratados y procedencia",
+                "text": "Los datos proceden de la relación comercial y contractual con proveedores. Las categorías de datos incluyen: datos identificativos (nombre, apellidos, DNI/CIF, cargo), datos de contacto (dirección, teléfono, correo electrónico), datos comerciales (propuestas, contratos, condiciones), datos económicos, financieros y bancarios (datos de cuenta, facturas, historial de pagos) y evaluaciones de desempeño del proveedor."
+              },
+              {
+                "term": "Finalidad",
+                "text": "Gestión de la relación con proveedores, homologación, selección y evaluación, gestión contractual, facturación y cumplimiento de las obligaciones de pago."
+              },
+              {
+                "term": "Base jurídica",
+                "text": "Ejecución del contrato (art. 6.1.b RGPD), cumplimiento de obligaciones fiscales y contables (art. 6.1.c RGPD) e interés legítimo para la gestión administrativa y el tratamiento de datos de las personas de contacto de personas jurídicas (art. 6.1.f RGPD y art. 19 LOPDGDD)."
+              },
+              {
+                "term": "Categorías de destinatarios",
+                "text": "Asesoría fiscal y contable, AEAT y entidades financieras."
+              },
+              {
+                "term": "Transferencias internacionales",
+                "text": "No están previstas con carácter general. En caso de que resulten necesarias, se aplicarán las garantías indicadas en el apartado 12."
+              },
+              {
+                "term": "Plazos de conservación",
+                "text": "Durante la vigencia de la relación contractual y, posteriormente, durante los plazos legalmente establecidos para el cumplimiento de obligaciones fiscales, contables y mercantiles, así como para la formulación, el ejercicio o la defensa de reclamaciones."
+              },
+              {
+                "term": "Decisiones automatizadas",
+                "text": "No se realizan decisiones automatizadas ni elaboración de perfiles."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Información sobre protección de datos en selección de personal y recepción de currículum",
+        "blocks": [
+          {
+            "kind": "dl",
+            "items": [
+              {
+                "term": "Responsable del tratamiento",
+                "text": "Innovation and Security North Labs, S.L. (datos de contacto en el apartado 2)."
+              },
+              {
+                "term": "Datos tratados y procedencia",
+                "text": "Los datos proceden de las candidaturas recibidas a través de procesos de selección, del envío espontáneo de currículum o de plataformas profesionales de empleo. Las categorías de datos incluyen: datos identificativos (nombre, apellidos, DNI/NIE), datos de contacto (dirección, teléfono, correo electrónico, perfil profesional), datos académicos (formación, titulaciones, certificaciones), datos profesionales (experiencia, referencias, conocimientos técnicos) y datos derivados de los procesos de evaluación y selección."
+              },
+              {
+                "term": "Finalidad",
+                "text": "Evaluar candidaturas en procesos de selección y contratación: recepción y valoración de currículums, realización de entrevistas y pruebas y mantenimiento de una bolsa de talento."
+              },
+              {
+                "term": "Base jurídica",
+                "text": "Consentimiento del interesado, manifestado mediante la remisión voluntaria de su candidatura (art. 6.1.a RGPD), y adopción de medidas precontractuales a solicitud del interesado (art. 6.1.b RGPD). El mantenimiento de la bolsa de talento se basa en el consentimiento del candidato, revocable en cualquier momento."
+              },
+              {
+                "term": "Categorías de destinatarios",
+                "text": "Personal interno de Innovation and Security North Labs implicado en los procesos de selección y, en su caso, proveedores de plataformas de gestión de candidaturas con acuerdo de encargo de tratamiento suscrito. No se comunican datos a terceros con otra finalidad."
+              },
+              {
+                "term": "Transferencias internacionales",
+                "text": "No están previstas con carácter general. En caso de que resulten necesarias, se aplicarán las garantías indicadas en el apartado 12."
+              },
+              {
+                "term": "Plazos de conservación",
+                "text": "Los datos de los candidatos se conservarán durante un plazo máximo de un (1) año desde su recepción o última actualización. Transcurrido dicho plazo sin que el currículum haya sido actualizado o utilizado, se procederá a su eliminación segura, salvo que deba conservarse durante un período superior para el cumplimiento de una obligación legal o para la formulación, el ejercicio o la defensa de reclamaciones. Si como resultado del proceso de selección el candidato fuese contratado, sus datos pasarán a formar parte de su expediente laboral."
+              },
+              {
+                "term": "Decisiones automatizadas",
+                "text": "No se realizan decisiones automatizadas ni elaboración de perfiles en los procesos de selección."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Información sobre protección de datos en el envío y recepción de correos electrónicos",
+        "blocks": [
+          {
+            "kind": "dl",
+            "items": [
+              {
+                "term": "Responsable del tratamiento",
+                "text": "Innovation and Security North Labs, S.L. (datos de contacto en el apartado 2)."
+              },
+              {
+                "term": "Datos tratados y procedencia",
+                "text": "Los datos proceden de los correos electrónicos enviados y recibidos por Innovation and Security North Labs a través de sus cuentas de correo corporativo. Toda información o dato personal incluido en dichos correos se incorpora a los sistemas de tratamiento de la empresa."
+              },
+              {
+                "term": "Finalidad",
+                "text": "Gestionar, atender y dar respuesta a las consultas y dudas planteadas y mantener la relación generada a través del correo electrónico corporativo. La aportación de datos a través de correo electrónico es voluntaria; en función del asunto se solicitarán únicamente los datos necesarios, por lo que la negativa a facilitar los datos obligatorios podría impedir atender la solicitud o prestar el servicio."
+              },
+              {
+                "term": "Base jurídica",
+                "text": "Ejecución del contrato o de los servicios solicitados (art. 6.1.b RGPD), consentimiento manifestado al remitir el correo electrónico (art. 6.1.a RGPD), cumplimiento de obligaciones legales (art. 6.1.c RGPD) e interés legítimo para el tratamiento de datos de contacto de personas jurídicas, empresarios y profesionales (art. 6.1.f RGPD y art. 19 LOPDGDD)."
+              },
+              {
+                "term": "Categorías de destinatarios",
+                "text": "Terceros a los que resulte necesaria la comunicación por obligación legal o por derivarse de la propia relación; Administraciones Públicas con competencia en la materia; Fuerzas y Cuerpos de Seguridad del Estado; Juzgados y Tribunales; y proveedores de servicios con los que Innovation and Security North Labs haya suscrito el correspondiente acuerdo de encargo de tratamiento."
+              },
+              {
+                "term": "Transferencias internacionales",
+                "text": "No están previstas con carácter general. En caso de que resulten necesarias, se aplicarán las garantías indicadas en el apartado 12."
+              },
+              {
+                "term": "Plazos de conservación",
+                "text": "Durante la vigencia de la relación y, posteriormente, durante los plazos legalmente establecidos para el cumplimiento de obligaciones legales o para la formulación, el ejercicio o la defensa de reclamaciones."
+              },
+              {
+                "term": "Decisiones automatizadas",
+                "text": "No se realizan decisiones automatizadas ni elaboración de perfiles."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Información sobre protección de datos en el envío de comunicaciones comerciales electrónicas",
+        "blocks": [
+          {
+            "kind": "p",
+            "text": "En cumplimiento del artículo 21 de la Ley 34/2002, de 11 de julio, de Servicios de la Sociedad de la Información y de Comercio Electrónico (LSSICE), del RGPD y de la LOPDGDD:"
+          },
+          {
+            "kind": "dl",
+            "items": [
+              {
+                "term": "Responsable del tratamiento",
+                "text": "Innovation and Security North Labs, S.L. (datos de contacto en el apartado 2)."
+              },
+              {
+                "term": "Datos tratados y procedencia",
+                "text": "Correo electrónico y, en su caso, nombre, apellidos, empresa y cargo profesional."
+              },
+              {
+                "term": "Finalidad",
+                "text": "Envío de comunicaciones comerciales electrónicas sobre productos, servicios, novedades y actividades de Innovation and Security North Labs."
+              },
+              {
+                "term": "Base jurídica",
+                "text": "Consentimiento del interesado (art. 6.1.a RGPD). En el caso de clientes, el envío de comunicaciones relativas a productos o servicios similares a los inicialmente contratados se ampara en el interés legítimo de la empresa (art. 6.1.f RGPD), en los términos del artículo 21.2 LSSICE. En toda comunicación se ofrecerá al destinatario la posibilidad de oponerse al tratamiento."
+              },
+              {
+                "term": "Categorías de destinatarios",
+                "text": "Proveedores de servicios de envío y gestión de comunicaciones electrónicas, con acuerdo de encargo de tratamiento suscrito."
+              },
+              {
+                "term": "Transferencias internacionales",
+                "text": "No están previstas con carácter general. En caso de que resulten necesarias, se aplicarán las garantías indicadas en el apartado 12."
+              },
+              {
+                "term": "Plazos de conservación",
+                "text": "Los datos se conservarán mientras el interesado no retire su consentimiento o se oponga al tratamiento y, posteriormente, durante el plazo necesario para acreditar el cumplimiento de las obligaciones legales aplicables."
+              },
+              {
+                "term": "Decisiones automatizadas",
+                "text": "No se realizan decisiones automatizadas ni elaboración de perfiles."
+              }
+            ]
+          },
+          {
+            "kind": "p",
+            "text": "El interesado puede darse de baja de la recepción de comunicaciones comerciales en cualquier momento, de forma sencilla y gratuita, enviando un correo electrónico a rgpd@secnorthlabs.eu o mediante el enlace de baja incluido en cada comunicación."
+          }
+        ]
+      },
+      {
+        "title": "Información sobre protección de datos obtenidos en el uso y gestión del Sitio Web",
+        "blocks": [
+          {
+            "kind": "dl",
+            "items": [
+              {
+                "term": "Responsable del tratamiento",
+                "text": "Innovation and Security North Labs, S.L. (datos de contacto en el apartado 2)."
+              },
+              {
+                "term": "Datos tratados y procedencia",
+                "text": "Los datos proceden de la cumplimentación de los formularios de contacto y de la utilización de los medios de comunicación habilitados en el Sitio Web. Los datos tratados incluyen nombre, apellidos, localización, correo electrónico, teléfono, empresa, dirección IP y contenido del mensaje, así como la información obtenida mediante cookies. Cuando los campos estén marcados con un asterisco (*) o se indiquen como obligatorios, su cumplimentación será necesaria; si no se aportan, Innovation and Security North Labs podrá no aceptar o gestionar la consulta formulada."
+              },
+              {
+                "term": "Finalidad",
+                "text": "Gestionar, atender y dar respuesta a las consultas recibidas a través del Sitio Web, así como remitir información administrativa, técnica, organizativa o comercial sobre los productos y servicios objeto de la solicitud, y elaborar informes estadísticos agregados y anonimizados sobre el uso del Sitio Web."
+              },
+              {
+                "term": "Base jurídica",
+                "text": "Consentimiento del interesado (art. 6.1.a RGPD), adopción de medidas precontractuales a solicitud del interesado (art. 6.1.b RGPD) e interés legítimo para el tratamiento de datos de contacto profesional (art. 6.1.f RGPD y art. 19 LOPDGDD)."
+              },
+              {
+                "term": "Categorías de destinatarios",
+                "text": "Proveedores de servicios de alojamiento, mantenimiento y gestión de la información, con acuerdo de encargo de tratamiento suscrito, y las demás categorías indicadas en los apartados anteriores cuando resulte aplicable."
+              },
+              {
+                "term": "Transferencias internacionales",
+                "text": "No están previstas con carácter general. En caso de que resulten necesarias, se aplicarán las garantías indicadas en el apartado 12."
+              },
+              {
+                "term": "Plazos de conservación",
+                "text": "Durante el tiempo necesario para atender la consulta y, posteriormente, durante los plazos legalmente establecidos para el cumplimiento de obligaciones legales o para la formulación, el ejercicio o la defensa de reclamaciones."
+              },
+              {
+                "term": "Decisiones automatizadas",
+                "text": "No se realizan decisiones automatizadas ni elaboración de perfiles."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Información sobre protección de datos en el uso de cookies",
+        "blocks": [
+          {
+            "kind": "p",
+            "text": "El Sitio Web utiliza cookies. Las categorías de datos tratados incluyen identificadores en línea, datos de navegación y preferencias de usuario."
+          },
+          {
+            "kind": "p",
+            "text": "La finalidad, la base jurídica, las categorías de cookies utilizadas, los destinatarios y la forma de gestionarlas se detallan en la Política de Cookies, accesible mediante enlace en la parte inferior del Sitio Web."
+          }
+        ]
+      },
+      {
+        "title": "Transferencias internacionales de datos",
+        "blocks": [
+          {
+            "kind": "p",
+            "text": "Con carácter general, Innovation and Security North Labs no realiza transferencias internacionales de datos personales."
+          },
+          {
+            "kind": "p",
+            "text": "En caso de que los datos personales llegasen a ser transferidos internacionalmente como consecuencia de su tratamiento, dichas transferencias se realizarán de conformidad con la normativa aplicable en materia de protección de datos y, en particular, a países cuyo nivel de protección haya sido declarado adecuado mediante una Decisión de Adecuación adoptada por la Comisión Europea."
+          },
+          {
+            "kind": "p",
+            "text": "En caso de que la Comisión Europea no haya adoptado una Decisión de Adecuación respecto de un determinado país, Innovation and Security North Labs adoptará otras garantías previstas en la normativa de protección de datos, con especial atención a la suscripción de Cláusulas Contractuales Tipo, acompañadas, cuando proceda, de las medidas suplementarias que resulten necesarias."
+          }
+        ]
+      },
+      {
+        "title": "Derechos en materia de protección de datos de carácter personal",
+        "blocks": [
+          {
+            "kind": "p",
+            "text": "Innovation and Security North Labs informa a los interesados de la existencia de los siguientes derechos:"
+          },
+          {
+            "kind": "dl",
+            "items": [
+              {
+                "term": "Derecho de acceso",
+                "text": "Obtener confirmación de si se están tratando datos personales que le conciernan y, en tal caso, acceder a los mismos y a la información sobre los fines del tratamiento, las categorías de datos, los destinatarios, los plazos de conservación previstos, la existencia de otros derechos y el origen de los datos cuando no se hayan obtenido del interesado."
+              },
+              {
+                "term": "Derecho de rectificación",
+                "text": "Obtener la rectificación de los datos personales inexactos o la cumplimentación de los datos incompletos."
+              },
+              {
+                "term": "Derecho de supresión",
+                "text": "Obtener la supresión de los datos cuando ya no sean necesarios para los fines para los que fueron recogidos, se retire el consentimiento, se oponga al tratamiento, los datos hayan sido tratados ilícitamente o deban suprimirse para el cumplimiento de una obligación legal."
+              },
+              {
+                "term": "Derecho a la limitación del tratamiento",
+                "text": "Obtener la limitación del tratamiento cuando se impugne la exactitud de los datos, el tratamiento sea ilícito, los datos ya no sean necesarios para el responsable pero el interesado los necesite para reclamaciones, o el interesado se haya opuesto al tratamiento."
+              },
+              {
+                "term": "Derecho a la portabilidad de los datos",
+                "text": "Recibir los datos personales facilitados en un formato estructurado, de uso común y lectura mecánica, y transmitirlos a otro responsable, cuando el tratamiento esté basado en el consentimiento o en la ejecución de un contrato y se efectúe por medios automatizados."
+              },
+              {
+                "term": "Derecho de oposición",
+                "text": "Oponerse en cualquier momento, por motivos relacionados con su situación particular, al tratamiento de sus datos personales basado en el interés legítimo, así como, en todo caso y sin necesidad de motivación, al tratamiento con fines de mercadotecnia directa."
+              },
+              {
+                "term": "Derecho a no ser objeto de decisiones individuales automatizadas",
+                "text": "No ser objeto de una decisión basada únicamente en el tratamiento automatizado, incluida la elaboración de perfiles, que produzca efectos jurídicos o le afecte significativamente de modo similar."
+              },
+              {
+                "term": "Derecho a retirar el consentimiento",
+                "text": "Retirar el consentimiento en cualquier momento, sin que ello afecte a la licitud del tratamiento basado en el consentimiento previo a su retirada."
+              },
+              {
+                "term": "Derecho a presentar una reclamación ante una autoridad de control",
+                "text": "El interesado puede presentar una reclamación ante la Agencia Española de Protección de Datos (C/ Jorge Juan 6, 28001 Madrid — www.aepd.es), especialmente cuando no haya obtenido satisfacción en el ejercicio de sus derechos."
+              }
+            ]
+          },
+          {
+            "kind": "h3",
+            "text": "¿Cómo ejercitar los derechos?"
+          },
+          {
+            "kind": "p",
+            "text": "Los derechos pueden ejercitarse ante Innovation and Security North Labs, de forma gratuita, mediante cualquiera de las siguientes vías:"
+          },
+          {
+            "kind": "ul",
+            "items": [
+              "Escrito dirigido a: Innovation and Security North Labs, S.L., Calle Peña Brava 21, oficina 1B, PI de Silvota, 33192 Llanera (Asturias).",
+              "Correo electrónico a: rgpd@secnorthlabs.eu"
+            ]
+          },
+          {
+            "kind": "p",
+            "text": "Para ejercitar los derechos, el interesado deberá aportar:"
+          },
+          {
+            "kind": "ul",
+            "items": [
+              "Solicitud por escrito y firmada, indicando el derecho que desea ejercitar.",
+              "Copia de su documento de identidad (DNI, pasaporte o documento equivalente), únicamente cuando existan dudas razonables sobre la identidad del solicitante.",
+              "En caso de actuar mediante representante: documentación acreditativa de la representación (poder notarial, autorización expresa o acreditación de la patria potestad o tutela)."
+            ]
+          },
+          {
+            "kind": "p",
+            "text": "Innovation and Security North Labs atenderá las solicitudes en el plazo máximo de un mes desde su recepción, que podrá prorrogarse en dos meses adicionales en caso de solicitudes complejas o numerosas, informando al interesado de dicha prórroga dentro del primer mes. Innovation and Security North Labs podrá solicitar información adicional cuando sea necesaria para verificar la identidad del solicitante o para localizar los datos objeto de la solicitud."
+          }
+        ]
+      },
+      {
+        "title": "Calidad y veracidad de los datos",
+        "blocks": [
+          {
+            "kind": "p",
+            "text": "Innovation and Security North Labs solicita únicamente aquellos datos de carácter personal que resulten adecuados, pertinentes y no excesivos en relación con la finalidad para la que se tratan."
+          },
+          {
+            "kind": "p",
+            "text": "El Usuario garantiza la veracidad, exactitud, vigencia y autenticidad de los datos de carácter personal proporcionados, respondiendo de los daños y perjuicios que pudiera ocasionar como consecuencia del incumplimiento de esta garantía. Asimismo, el Usuario se compromete a comunicar a Innovation and Security North Labs cualquier modificación o rectificación de sus datos a través de las vías indicadas en el apartado 13."
+          },
+          {
+            "kind": "p",
+            "text": "Queda expresamente prohibida la suplantación de identidad, la adopción de identidades falsas, la aportación de datos de terceros como propios y la aportación de cualquier dato no veraz, pudiendo anularse los registros efectuados en tales condiciones, sin perjuicio de las medidas legales oportunas."
+          }
+        ]
+      },
+      {
+        "title": "Datos de terceros",
+        "blocks": [
+          {
+            "kind": "p",
+            "text": "Si el Usuario facilita datos de carácter personal de terceros, con carácter previo deberá haber informado a dichos terceros de forma expresa, precisa e inequívoca sobre el contenido de la presente Política de Privacidad y contar con la habilitación necesaria para facilitar dichos datos."
+          },
+          {
+            "kind": "p",
+            "text": "En caso de incumplimiento de lo dispuesto en este apartado, Innovation and Security North Labs se exime de cualquier responsabilidad derivada del tratamiento de datos facilitados por el Usuario sin cumplir los requisitos legales, siendo el Usuario quien responderá frente a Innovation and Security North Labs o frente a cualquier tercero de los daños o perjuicios ocasionados."
+          }
+        ]
+      },
+      {
+        "title": "Datos de menores de edad",
+        "blocks": [
+          {
+            "kind": "p",
+            "text": "El Sitio Web de Innovation and Security North Labs y los servicios ofrecidos por la empresa están dirigidos exclusivamente a personas mayores de dieciocho (18) años con capacidad legal suficiente para contratar."
+          },
+          {
+            "kind": "p",
+            "text": "Innovation and Security North Labs no recoge ni trata de forma intencionada datos de carácter personal de menores de edad. Si tuviera conocimiento de que se han recogido datos de un menor de 18 años sin el consentimiento de sus representantes legales, procederá a su eliminación inmediata."
+          },
+          {
+            "kind": "p",
+            "text": "Si un representante legal tiene conocimiento de que un menor bajo su responsabilidad ha facilitado datos personales a Innovation and Security North Labs, puede contactar a través de rgpd@secnorthlabs.eu para solicitar su supresión."
+          },
+          {
+            "kind": "p",
+            "text": "En caso de facilitarse datos de menores de edad o de personas sin capacidad legal a través del Sitio Web, quien los facilite y actúe en su representación declara responsablemente ostentar la representación legal, la patria potestad o la tutela, o disponer de autorización expresa de quien la ostente, pudiendo la empresa exigir la documentación acreditativa correspondiente."
+          },
+          {
+            "kind": "p",
+            "text": "Los representantes legales serán considerados, en cualquier caso, responsables de los actos que realicen las personas que se encuentren a su cargo, conforme a lo dispuesto en la normativa vigente."
+          }
+        ]
+      },
+      {
+        "title": "Medidas de seguridad",
+        "blocks": [
+          {
+            "kind": "p",
+            "text": "Innovation and Security North Labs adopta e implementa las medidas técnicas y organizativas necesarias para garantizar la seguridad de los datos personales, conforme a lo exigido por el artículo 32 del RGPD, con el objetivo de garantizar la confidencialidad, integridad, disponibilidad y resiliencia permanentes de los sistemas y servicios de tratamiento."
+          },
+          {
+            "kind": "p",
+            "text": "Entre las medidas aplicadas se incluyen, entre otras: cifrado en tránsito y en reposo, autenticación multifactor (MFA), gestión de accesos basada en el principio de mínimo privilegio, monitorización continua, copias de seguridad cifradas y verificadas, medidas de prevención de fuga de información, revisiones periódicas de accesos, acuerdos de confidencialidad con todo el personal y formación periódica en protección de datos y seguridad de la información."
+          },
+          {
+            "kind": "p",
+            "text": "No obstante, el Usuario debe ser consciente de que las medidas de seguridad en Internet no son infalibles. Innovation and Security North Labs tratará los datos de carácter personal con la debida confidencialidad y deber de secreto."
+          },
+          {
+            "kind": "p",
+            "text": "Innovation and Security North Labs no será responsable de los tratamientos y posteriores utilizaciones de los datos personales que pudieran efectuarse por terceros prestadores de servicios de la sociedad de la información que actúen fuera del Sitio Web."
+          }
+        ]
+      },
+      {
+        "title": "Redes sociales",
+        "blocks": [
+          {
+            "kind": "p",
+            "text": "Innovation and Security North Labs mantiene presencia en redes sociales profesionales con la finalidad de informar a los usuarios sobre su actividad, productos y servicios. El tratamiento de los datos personales de quienes sigan los perfiles corporativos se basa en el consentimiento manifestado al seguir dichos perfiles o interactuar con ellos (art. 6.1.a RGPD)."
+          },
+          {
+            "kind": "p",
+            "text": "El tratamiento de datos personales realizado en dichas redes está sujeto, además, a las condiciones de uso, términos legales y políticas de privacidad de cada plataforma, cuya consulta se recomienda al Usuario. Innovation and Security North Labs no es responsable del tratamiento que las propias plataformas realicen sobre los datos de sus usuarios."
+          }
+        ]
+      },
+      {
+        "title": "Duración y modificación de la Política de Privacidad",
+        "blocks": [
+          {
+            "kind": "p",
+            "text": "La Política de Privacidad aplicable será la publicada en el Sitio Web en cada momento. Innovation and Security North Labs se reserva el derecho a modificar, total o parcialmente, en cualquier momento, el contenido de la presente Política de Privacidad por ampliación, mejora, concreción o actualización ya sea por cambios legislativos, jurisprudenciales o de estrategia empresarial, sin que dicha modificación tenga carácter retroactivo."
+          },
+          {
+            "kind": "p",
+            "text": "La Política de Privacidad estará siempre accesible mediante enlace en la parte inferior del Sitio Web, con indicación de su versión y fecha de publicación."
+          }
+        ]
+      },
+      {
+        "title": "Nulidad y eficacia",
+        "blocks": [
+          {
+            "kind": "p",
+            "text": "Si alguna de las cláusulas incluidas en este documento fuera declarada nula, el resto del documento mantendrá su plena eficacia y carácter obligatorio en los mismos términos, siempre que pueda subsistir sin la cláusula declarada nula."
+          }
+        ]
+      },
+      {
+        "title": "Legislación y jurisdicción aplicable",
+        "blocks": [
+          {
+            "kind": "p",
+            "text": "La legislación aplicable es la española. Salvo que resulte de aplicación normativa específica que establezca otra jurisdicción, en particular la normativa de protección de los consumidores y usuarios, las partes se someten a los Juzgados y Tribunales de Gijón para cualquier controversia, sin perjuicio de la disposición de Innovation and Security North Labs a la resolución previa de cualquier controversia de forma amistosa."
+          }
+        ]
+      }
+    ]
+  },
+  "sectors": {
+    "cta": {
+      "ctaPrimary": "Contactar",
+      "subtitle": "La metodología es la misma: entender tu riesgo real y protegerlo con criterio.",
+      "title": "¿No ves tu sector? También podemos ayudarte."
+    },
+    "hero": {
+      "breadcrumb": [
+        {
+          "label": "Inicio",
+          "routeId": "home"
+        },
+        {
+          "label": "Sectores",
+          "routeId": null
+        }
+      ],
+      "subtitle": "Adaptamos la protección al riesgo real de tu sector: convergencia IT/OT, obligaciones regulatorias y continuidad de la operación. Estos son los entornos donde más aportamos.",
+      "title": "Ciberseguridad para",
+      "titleHighlight": "sectores esenciales"
+    },
+    "items": [
+      {
+        "description": "Visibilidad y detección en líneas de producción y almacenes, sin frenar la operación.",
+        "tag": "NIS2 · IEC 62443",
+        "title": "Industria y fabricación",
+        "icon": "industria"
+      },
+      {
+        "description": "Ciberseguridad OT para industria alimentaria y ganadera, incluida la gestión extensiva.",
+        "tag": "NIS2",
+        "title": "Agroalimentario",
+        "icon": "agro"
+      },
+      {
+        "description": "Continuidad y resiliencia de servicios esenciales con monitorización 24/7.",
+        "tag": "NIS2",
+        "title": "Energía",
+        "icon": "energia"
+      },
+      {
+        "description": "Protección de sistemas y dispositivos conectados y continuidad asistencial.",
+        "tag": "NIS2",
+        "title": "Sanidad",
+        "icon": "sanidad"
+      },
+      {
+        "description": "Control de proveedores y terceros: un requisito central de la directiva.",
+        "tag": "NIS2 · Responsabilidad delegada",
+        "title": "Cadena de suministro",
+        "icon": "suministro"
+      },
+      {
+        "description": "Adecuación y certificación ENS para quien presta servicios al sector público.",
+        "tag": "ENS",
+        "title": "Administración pública",
+        "icon": "administracion"
+      },
+      {
+        "description": "Resiliencia operativa digital y gestión de terceros conforme a DORA.",
+        "tag": "DORA",
+        "title": "Finanzas y seguros",
+        "icon": "finanzas"
+      }
+    ],
+    "note": "El RGPD/LOPDGDD aplica de forma transversal a todos los sectores.",
+    "seo": {
+      "description": "Protección IT/OT para industria, agroalimentario, energía, sanidad y cadena de suministro (NIS2), administración pública (ENS) y finanzas (DORA).",
+      "title": "Ciberseguridad por sectores: industria, energía, salud - ISN Labs"
+    }
+  },
+  "software": {
+    "cta": {
+      "ctaPrimary": "Pedir propuesta",
+      "ctaSecondary": "Hablar con un experto",
+      "subtitle": "Te preparamos una propuesta a medida sin coste. Solo pagas por lo que aporta valor.",
+      "title": "¿Qué licencias necesitas de verdad?"
+    },
+    "hero": {
+      "breadcrumb": [
+        {
+          "label": "Inicio",
+          "routeId": "home"
+        },
+        {
+          "label": "Software",
+          "routeId": null
+        }
+      ],
+      "subtitle": "No solo revendemos licencias: te asesoramos sobre la solución adecuada, la licenciamos y la operamos como parte de tu servicio gestionado. Un único interlocutor para tecnología, despliegue y soporte.",
+      "title": "Licencias y tecnología",
+      "titleHighlight": "que desplegamos y gestionamos"
+    },
+    "how": {
+      "steps": [
+        {
+          "description": "Analizamos tu entorno y necesidad real. Sin sobre-licenciar.",
+          "number": "01",
+          "title": "Asesoramos"
+        },
+        {
+          "description": "Gestionamos el alta y la facturación (CSP / suscripción).",
+          "number": "02",
+          "title": "Licenciamos"
+        },
+        {
+          "description": "Implantación y configuración con criterios de seguridad.",
+          "number": "03",
+          "title": "Desplegamos"
+        },
+        {
+          "description": "Operación, soporte y renovaciones en un único contrato.",
+          "number": "04",
+          "title": "Gestionamos"
+        }
+      ],
+      "title": "Cómo funciona nuestro modelo de licenciamiento"
+    },
+    "licenses": {
+      "cards": [
+        {
+          "footer": "Licencia + gestión ISN Labs",
+          "description": "Todo el ecosistema: productividad, identidad, MFA, protección de endpoint (Defender XDR) y backup, con criterios de seguridad.",
+          "name": "Microsoft",
+          "subtitle": "365 · Defender · Entra · Intune"
+        },
+        {
+          "footer": "Licencia + gestión ISN Labs",
+          "description": "Detección y respuesta gestionada 24/7 sobre endpoints e identidad, operada por el equipo de ISN Labs.",
+          "name": "Huntress",
+          "subtitle": "MDR / EDR gestionado"
+        },
+        {
+          "footer": "Hardware + licencias + gestión ISN Labs",
+          "description": "Cortafuegos y VPN sobre OPNsense: perímetro controlado, sin coste de licencia por funcionalidad.",
+          "name": "OPNsense",
+          "subtitle": "Firewall / perímetro"
+        },
+        {
+          "footer": "Hardware + licencias + gestión ISN Labs",
+          "description": "Firewalls FortiGate y ecosistema Fortinet: perímetro, VPN y segmentación gestionados.",
+          "name": "Fortinet",
+          "subtitle": "NGFW / seguridad de red"
+        }
+      ],
+      "kicker": "Licencias",
+      "subtitle": "Licenciamos y gestionamos las soluciones que despliegas, configurándolas con criterios de seguridad reales. Un único contrato para licencia, despliegue y soporte. Precios según volumen y programa; te preparamos la propuesta a medida.",
+      "title": "Licenciamos y gestionamos tu software de seguridad"
+    },
+    "others": {
+      "items": [
+        "EDR / MDR",
+        "Firewalls NGFW",
+        "Backup & DR",
+        "Gestor de contraseñas",
+        "MFA",
+        "SIEM / XDR"
+      ],
+      "label": "Otras tecnologías que integramos y gestionamos"
+    },
+    "sentry": {
+      "chips": [
+        "Pasivo / no intrusivo",
+        "IA + ML",
+        "Inventario automático",
+        "Integra SIEM/XDR",
+        "100% europeo"
+      ],
+      "description": "Solución NDR europea para OT/IoT/IT. Detecta anomalías en el tráfico de red sin agentes, sin firmas y sin impacto en la operación, e inventaría de forma pasiva cada activo de tu entorno. Alineada con NIS2 e IEC 62443. En ISN Labs la desplegamos, ajustamos e integramos con tu SIEM/XDR, y la operamos en modo gestionado.",
+      "kicker": "Tecnología destacada",
+      "learnMore": "Saber más en ewala.es",
+      "learnMoreUrl": "https://www.ewala.es",
+      "licenseModel": {
+        "items": [
+          "Suscripción anual",
+          "Por segmento de red / sede",
+          "Sensor físico o virtual",
+          "Incluye actualizaciones"
+        ],
+        "title": "Modelo de licencia"
+      },
+      "name": "SentryN3t",
+      "notes": [
+        "SentryN3t® es una marca de Ewala.",
+        "ISN Labs, partner de despliegue."
+      ],
+      "tagline": "NDR · Network Detection & Response"
+    },
+    "seo": {
+      "description": "NDR SentryN3t (Ewala) y licencias Microsoft, Huntress, OPNsense y Fortinet, desplegadas y gestionadas por ISN Labs. Propuesta a medida.",
+      "title": "Software y licencias: SentryN3t, Microsoft, Huntress, OPNsense, Fortinet - ISN Labs"
+    },
+    "tiers": {
+      "cta": "Solicitar",
+      "items": [
+        {
+          "description": "Instalación, ajuste e integración de SentryN3t en tu red.",
+          "features": [
+            "Sensor físico o virtual",
+            "Descubrimiento e inventario de activos",
+            "Detección de anomalías con IA/ML",
+            "Integración con tu SIEM/XDR"
+          ],
+          "name": "Despliegue",
+          "recommended": false
+        },
+        {
+          "description": "Lo anterior más vigilancia en horario laboral ampliado.",
+          "features": [
+            "Todo lo de Despliegue",
+            "Monitorización 8x5 por ISN Labs",
+            "Triage y alertas contextualizadas",
+            "Reporte periódico"
+          ],
+          "name": "Despliegue + monit. 8x5",
+          "recommended": true
+        },
+        {
+          "description": "Vigilancia continua y respuesta gestionada.",
+          "features": [
+            "Todo lo de 8x5",
+            "Monitorización 24x7",
+            "Escalado de incidentes",
+            "Reporte técnico y ejecutivo"
+          ],
+          "name": "Despliegue + monit. 24x7",
+          "recommended": false
+        }
+      ],
+      "priceLabel": "Según alcance",
+      "recommendedLabel": "Recomendado"
+    }
+  }
+}

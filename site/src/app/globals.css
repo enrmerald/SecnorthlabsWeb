@@ -1,0 +1,537 @@
+@import "tailwindcss";
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   SISTEMA DE DISENO ISN LABS
+   ISNLA-DOC-0008-01 Fase 1 · ISNLA-DOC-0004-04 seccion 1 y mockup image2.png
+
+   Estos tokens son la fuente de verdad. Toda pagina se construye combinandolos.
+
+   REGLA: todo color sale de un token de @theme. Prohibido el literal suelto
+   tipo text-[#00ffff], que es como estaba medio codigo del proyecto anterior, y
+   prohibido inventarse una clase que no existe: en la web actual Navbar y
+   Footer usan bg-accent-cyan / text-accent-cyan, que no esta definido en
+   ninguna parte y por tanto no pinta nada.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+@theme {
+  /* ── Color ─────────────────────────────────────────────────────────────
+     Contrastes verificados sobre --color-bg; todos pasan WCAG 2.1 AA.        */
+  --color-bg: #0d0f11; /* fondo base de todas las paginas (dark-first)     */
+  --color-panel: #121518; /* bandas y secciones destacadas                   */
+  --color-card: #161a1e; /* tarjetas de servicio, precio, articulo          */
+  --color-border: #262d33; /* bordes de 1px de tarjetas y campos              */
+  --color-text: #e9edf0; /* texto principal            · ~17:1              */
+  --color-text-dim: #8c969e; /* texto secundario           · ~6:1               */
+  --color-cyan: #5bd8e8; /* destacados, enlaces, MSSP  · ~12:1              */
+  --color-green: #00e48d; /* boton primario, GRC, OK    · ~11:1              */
+  --color-alert: #e87878; /* estados de error o incidente                    */
+
+  /* ── Layout (mockup image2.png, recuadro LAYOUT) ────────────────────── */
+  --radius-tarjeta: 0.625rem; /* 10px, dentro del rango 8-14px del brief      */
+  --spacing-gutter: 1.5rem; /* 24px                                          */
+
+  /* ── Breakpoints ─────────────────────────────────────────────────────
+     Se sobreescribe 2xl para que coincida con el contenedor de 1440px.     */
+  --breakpoint-2xl: 90rem;
+
+  /* ── Duraciones ───────────────────────────────────────────────────── */
+  --default-transition-duration: 160ms;
+}
+
+/* Los tokens tipograficos apuntan a las variables que genera next/font, que se
+   declaran en el layout. Son dos capas distintas a proposito: si manana se
+   cambia de fuente se toca solo el layout, no los cientos de usos.
+   @theme inline (y no @theme) porque el valor es una referencia, no un literal. */
+@theme inline {
+  --font-display: var(--font-space-mono);
+  --font-sans: var(--font-noto-sans);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   BASE
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+@layer base {
+  html {
+    /* El desplazamiento suave de las anclas molesta a quien pide menos
+       movimiento; se activa solo si no lo ha desactivado. */
+    scroll-behavior: smooth;
+    /* Compensa la navegacion fija al saltar a un ancla (#it, #ot, #idi). */
+    scroll-padding-top: 5.5rem;
+    /* Suelo real del mercado: por debajo de 320px no se soporta, pero tampoco
+       debe aparecer scroll horizontal (seccion 1.6). */
+    -webkit-text-size-adjust: 100%;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    font-family: var(--font-sans);
+    font-size: 0.9375rem; /* 15px, cuerpo del brief */
+    line-height: 1.7;
+  }
+
+  /* Deliberadamente NO se pone `overflow-x: hidden` en body.
+     Haria dos danos: convierte body en contenedor de scroll y rompe
+     `position: sticky` en sus descendientes -justo lo que necesitan la
+     navegacion fija y el panel lateral de la calculadora-, y ademas esconde los
+     desbordes en lugar de arreglarlos, que es como se llega a una web que
+     "responde" pero no se puede usar. El suelo de 320px sin scroll horizontal
+     se garantiza con la prueba E2E de la seccion 12.5, que compara
+     scrollWidth con clientWidth en toda la matriz de anchuras. */
+
+  @media (min-width: 48rem) {
+    body {
+      font-size: 1rem; /* 16px */
+    }
+  }
+
+  /* Titulares, kickers, datos, botones y etiquetas: Space Mono. Es lo que
+     aporta el caracter tecnico de la marca. */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    line-height: 1.15;
+    text-wrap: balance;
+  }
+
+  /* El foco visible no se elimina nunca sin sustituto (Fase 9). */
+  :focus-visible {
+    outline: 2px solid var(--color-cyan);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  /* Por debajo de 16px, iOS hace zoom automatico al enfocar y descoloca la
+     pagina entera (seccion 1.6). Es un minimo, no una preferencia estetica. */
+  input,
+  select,
+  textarea {
+    font-size: max(1rem, 100%);
+    font-family: inherit;
+  }
+
+  ::selection {
+    background-color: var(--color-cyan);
+    color: var(--color-bg);
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   UTILIDADES DE COMPOSICION
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+@layer components {
+  /* Contenedor fluido. El margen lateral de 56px del brief es el de
+     escritorio, no el de movil: a 320px serian 208px de contenido. */
+  .site-container {
+    width: min(100% - 2rem, 90rem); /* movil: 16px por lado */
+    margin-inline: auto;
+  }
+
+  @media (min-width: 48rem) {
+    .site-container {
+      width: min(100% - 4rem, 90rem); /* tablet: 32px */
+    }
+  }
+
+  @media (min-width: 64rem) {
+    .site-container {
+      width: min(100% - 7rem, 90rem); /* escritorio: 56px, el del brief */
+    }
+  }
+
+  /* ── Escala tipografica fluida ────────────────────────────────────────
+     El Display de 44-58px del sistema de diseno es el tamano de escritorio y
+     no puede ser el minimo en 320px.                                        */
+  .heading-display {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(2.1rem, 8vw, 3.625rem); /* 33.6 -> 58px */
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+  }
+
+  .section-title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(1.75rem, 5vw, 1.875rem); /* 28 -> 30px */
+    line-height: 1.2;
+  }
+
+  .subtitle {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.125rem; /* 18px */
+    line-height: 1.4;
+  }
+
+  .kicker {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 0.8125rem; /* 13px */
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .etiqueta {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 0.6875rem; /* 11px */
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  /* Los acentos son para titulares, kickers, etiquetas, iconos y botones.
+     NUNCA para parrafos: el cuerpo va en --color-text y el secundario en
+     --color-text-dim. Lo pide el brief en su seccion 12 de accesibilidad y es
+     lo que hace que la paleta funcione. */
+  .texto-cuerpo {
+    color: var(--color-text-dim);
+    max-width: 68ch;
+  }
+
+  /* Separacion vertical entre secciones, tambien fluida. */
+  .seccion {
+    padding-block: clamp(3rem, 9vw, 5.5rem);
+  }
+
+  /* Linea de puntos que rellena el hueco entre etiqueta y valor en el panel de
+     cobertura del hero. Se hace con un borde y no con caracteres repetidos
+     para que un lector de pantalla no lea cincuenta puntos. */
+  .linea-guia {
+    flex: 1 1 auto;
+    min-width: 1rem;
+    border-bottom: 1px dotted var(--color-border);
+    translate: 0 -0.25rem;
+  }
+
+  /* Entrada del desplegable de la navegacion. Corta a proposito: por encima de
+     unos 150 ms un menu se siente lento en lugar de suave. La regla global de
+     `prefers-reduced-motion` de la seccion base ya la desactiva. */
+  .animar-desplegable {
+    animation: desplegable 140ms ease-out;
+  }
+
+  @keyframes desplegable {
+    from {
+      opacity: 0;
+      translate: 0 -0.375rem;
+    }
+    to {
+      opacity: 1;
+      translate: 0 0;
+    }
+  }
+
+  /* ── Cuerpo de un articulo del blog ───────────────────────────────────────
+     El HTML lo genera `content:build` desde Markdown, asi que aqui no se pueden
+     poner clases en cada etiqueta: se estilan los elementos dentro de .prosa.
+
+     La medida se limita a 68ch, igual que .texto-cuerpo: una linea de 150
+     caracteres en escritorio se lee mal, y este es el unico sitio del sitio con
+     texto largo de verdad. */
+  .prosa {
+    color: var(--color-text);
+    max-width: 68ch;
+    font-size: 1rem;
+    line-height: 1.75;
+  }
+
+  /* ── La medida del articulo crece con la pantalla ─────────────────────────
+     Con una medida fija de 68ch, a partir de 1024px el texto se queda quieto y
+     deja un hueco enorme hasta el indice de la derecha. Y la solucion no es
+     estirar la linea sin mas: por encima de unos 80 caracteres el ojo pierde el
+     principio del renglon siguiente.
+
+     Asi que crecen las dos cosas a la vez, medida y tamano de letra. El texto
+     ocupa mas ancho fisico y la linea se mantiene en un numero de caracteres
+     legible, que es lo que hace la diferencia entre "mas ancho" y "peor de
+     leer". */
+  @media (min-width: 64rem) {
+    .prosa {
+      max-width: 74ch;
+      font-size: 1.0625rem; /* 17px */
+      line-height: 1.72;
+    }
+  }
+
+  @media (min-width: 90rem) {
+    .prosa {
+      max-width: 78ch;
+      font-size: 1.125rem; /* 18px */
+    }
+  }
+
+  .prosa > * + * {
+    margin-block-start: 1.25rem;
+  }
+
+  .prosa h2,
+  .prosa h3,
+  .prosa h4 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    line-height: 1.25;
+    /* Mas aire encima que debajo: es lo que agrupa el titular con su parrafo en
+       lugar de dejarlo flotando entre dos bloques. */
+    margin-block: 2.5rem 0.75rem;
+    scroll-margin-top: 6rem; /* la navegacion es fija: sin esto el ancla tapa el titular */
+  }
+
+  .prosa h2 {
+    font-size: clamp(1.5rem, 4vw, 1.75rem);
+    color: var(--color-text);
+  }
+
+  .prosa h3 {
+    font-size: 1.1875rem;
+    color: var(--color-cyan);
+  }
+
+  .prosa h4 {
+    font-size: 1rem;
+  }
+
+  .prosa a {
+    color: var(--color-cyan);
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+
+  .prosa a:hover {
+    text-decoration-thickness: 2px;
+  }
+
+  .prosa strong {
+    color: var(--color-text);
+    font-weight: 700;
+  }
+
+  .prosa ul,
+  .prosa ol {
+    padding-inline-start: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .prosa ul {
+    list-style: disc;
+  }
+
+  .prosa ol {
+    list-style: decimal;
+  }
+
+  .prosa li::marker {
+    color: var(--color-green);
+  }
+
+  .prosa blockquote {
+    border-inline-start: 2px solid var(--color-cyan);
+    padding-inline-start: 1.25rem;
+    color: var(--color-text-dim);
+  }
+
+  .prosa hr {
+    border-color: var(--color-border);
+  }
+
+  .prosa img {
+    border-radius: 10px;
+    border: 1px solid var(--color-border);
+  }
+
+  /* ── Tablas ───────────────────────────────────────────────────────────────
+     Una tabla ancha no puede empujar el ancho de la pagina en movil (seccion
+     1.6): el scroll se contiene en su envoltorio, que lo pone el conversor de
+     Markdown, con `tabindex` para poder desplazarla con teclado.
+
+     El indicador de scroll es una sombra interior que solo se ve cuando queda
+     tabla por descubrir: `background-attachment: local` la pega al contenido, asi
+     que desaparece al llegar al borde. Sin ella, en movil no hay forma de saber
+     que la tabla sigue a la derecha. */
+  .tabla-scroll {
+    overflow-x: auto;
+    border: 1px solid var(--color-border);
+    border-radius: 10px;
+    background:
+      linear-gradient(to right, var(--color-panel) 30%, transparent),
+      linear-gradient(to left, var(--color-panel) 30%, transparent),
+      linear-gradient(to right, rgb(0 0 0 / 0.45), transparent 12px),
+      linear-gradient(to left, rgb(0 0 0 / 0.45), transparent 12px);
+    background-repeat: no-repeat;
+    background-size:
+      3rem 100%,
+      3rem 100%,
+      1rem 100%,
+      1rem 100%;
+    background-position:
+      0 0,
+      100% 0,
+      0 0,
+      100% 0;
+    background-attachment: local, local, scroll, scroll;
+  }
+
+  .tabla-scroll:focus-visible {
+    outline: 2px solid var(--color-cyan);
+    outline-offset: 2px;
+  }
+
+  .prosa table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9375rem;
+    /* Las tablas del blog comparan marcos normativos: casi todas las celdas son
+       texto, y a medida completa se leen mejor que apretadas. */
+    line-height: 1.55;
+  }
+
+  .prosa th,
+  .prosa td {
+    padding: 0.75rem 1rem;
+    text-align: start;
+    vertical-align: top;
+    border-block-end: 1px solid var(--color-border);
+  }
+
+  .prosa thead th {
+    font-family: var(--font-display);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.09em;
+    color: var(--color-cyan);
+    background: color-mix(in oklab, var(--color-cyan) 8%, var(--color-panel));
+    /* La cabecera se queda a la vista al desplazar una tabla larga: sin esto hay
+       que subir a releer que columna era cada una. */
+    position: sticky;
+    top: 0;
+    /* Borde inferior propio, porque `border` no viaja con position: sticky. */
+    box-shadow: inset 0 -1px 0 var(--color-border);
+    border-block-end: 0;
+    white-space: nowrap;
+  }
+
+  /* Filas alternas. Muy sutiles a proposito: lo justo para no perder el renglon
+     en una tabla de seis columnas, sin convertirla en un tablero de ajedrez. */
+  .prosa tbody tr:nth-child(even) {
+    background: color-mix(in oklab, var(--color-text) 3%, transparent);
+  }
+
+  .prosa tbody tr:hover {
+    background: color-mix(in oklab, var(--color-cyan) 7%, transparent);
+  }
+
+  /* La primera columna suele ser el concepto que compara la fila. */
+  .prosa tbody :is(th, td):first-child {
+    color: var(--color-text);
+    font-weight: 600;
+  }
+
+  .prosa tbody tr:last-child :is(th, td) {
+    border-block-end: 0;
+  }
+
+  /* El resplandor del hero es un gradiente CSS, no una imagen: es lo que
+     mantiene el LCP por debajo de 2,5 s en movil real (Fase 9). */
+  .resplandor-hero {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(
+        60rem 30rem at 12% -10%,
+        color-mix(in oklab, var(--color-cyan) 9%, transparent),
+        transparent 65%
+      ),
+      radial-gradient(
+        45rem 24rem at 88% 0%,
+        color-mix(in oklab, var(--color-green) 6%, transparent),
+        transparent 60%
+      );
+  }
+}
+
+@layer utilities {
+  /* Enlace "Saltar al contenido": primer elemento enfocable de cada pagina.
+     Sin el, quien navega por teclado recorre la navegacion entera en cada una. */
+  .salto-contenido {
+    position: absolute;
+    left: 1rem;
+    top: 0;
+    z-index: 100;
+    translate: 0 -150%;
+    transition: translate 160ms ease;
+  }
+
+  .salto-contenido:focus-visible {
+    translate: 0 1rem;
+  }
+
+  /* Objetivo tactil minimo de 44x44px (seccion 1.6). Se aplica al area
+     pulsable, no al texto, para no deformar la maquetacion. */
+  .objetivo-tactil {
+    position: relative;
+  }
+
+  .objetivo-tactil::after {
+    content: "";
+    position: absolute;
+    inset: 50% auto auto 50%;
+    translate: -50% -50%;
+    min-width: 44px;
+    min-height: 44px;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+/* ── Filtro por tema del listado del blog ──────────────────────────────────────
+   El filtrado es CSS y no JavaScript: las tarjetas se exportan todas en el HTML
+   -las ve el rastreador- y el componente de cliente solo cambia `data-filtro`.
+   Sin JavaScript se ven todas, que es el comportamiento correcto.
+
+   ⚠️ Estas reglas van FUERA de `@layer`, y no es un descuido. Dentro de
+   `@layer components` no funcionaban: la tarjeta lleva la utilidad `flex` de
+   Tailwind, que vive en la capa `utilities` y gana a cualquier `display` de una
+   capa anterior, de modo que el `display: none` no se aplicaba y el filtro no
+   ocultaba nada. El CSS sin capa tiene prioridad sobre todas las capas, que es
+   justo lo que hace falta aqui. */
+/* Las tres reglas tienen la MISMA especificidad (0,2,0) a proposito, para que
+   decida el orden y no el peso del selector. La primera version usaba
+   `[data-filtro]:not([data-filtro="todos"])`, que suma la especificidad de
+   `:not()` y ganaba a las reglas de abajo: el filtro ocultaba las tarjetas y
+   luego no volvia a mostrar ninguna. */
+[data-filtro] [data-categoria] {
+  display: none;
+}
+
+[data-filtro="todos"] [data-categoria],
+[data-filtro="cumplimiento"] [data-categoria="cumplimiento"],
+[data-filtro="mssp"] [data-categoria="mssp"],
+[data-filtro="ot"] [data-categoria="ot"],
+[data-filtro="cloud"] [data-categoria="cloud"],
+[data-filtro="tendencias"] [data-categoria="tendencias"],
+[data-filtro="idi"] [data-categoria="idi"] {
+  display: flex;
+}

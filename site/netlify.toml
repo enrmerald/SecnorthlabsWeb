@@ -1,0 +1,300 @@
+# Netlify · sitio estatico + dos funciones de ingestion.
+#
+# Las paginas se exportan por completo en build y las sirve el CDN. Lo unico que
+# ejecuta codigo son las dos funciones de netlify/functions/, que Netlify
+# despliega aparte: Next no las compila ni las conoce.
+
+[build]
+  base = "site"
+  command = "corepack enable && pnpm install --frozen-lockfile && pnpm build"
+  publish = "out"
+  functions = "netlify/functions"
+
+[build.environment]
+  NODE_VERSION = "24.18.0"
+  PNPM_VERSION = "11.5.0"
+  # No es opcional: sin ella el plugin de Next puede intentar montar funciones
+  # para SSR y convertir en hibrido lo que queremos estatico.
+  NETLIFY_NEXT_PLUGIN_SKIP = "true"
+
+# ── Rutas de las funciones ───────────────────────────────────────────────────
+# El navegador llama a /api/*, del mismo origen: sin CORS y sin preflight.
+# No hay `signed =`: el sitio y las funciones estan en el mismo proyecto, asi que
+# no hay salto entre sitios que firmar, y la firma JWS de Netlify solo funciona
+# proxificando a sitios externos.
+
+[[redirects]]
+  from = "/api/quote"
+  to = "/.netlify/functions/quote"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/api/csp-report"
+  to = "/.netlify/functions/csp-report"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/api/contact"
+  to = "/.netlify/functions/contact"
+  status = 200
+  force = true
+
+  # Limite en el borde: corta el abuso ANTES de que se invoque la funcion, asi
+  # que no gasta ejecuciones ni cuota de Resend.
+  #
+  # ⚠️ El plan Free admite **2 reglas por proyecto** definidas en codigo (5 en
+  # Pro, 100 solo en Enterprise con HP Edge). Esta es la primera; la segunda
+  # queda reservada para /api/quote cuando la calculadora vuelva. No se pueden
+  # anadir mas sin cambiar de plan.
+  #
+  # 20 peticiones por minuto y por IP es el valor de MIG-02 §7.2. Es holgado a
+  # proposito: detras de una misma IP puede haber una oficina entera con NAT, y
+  # un limite estrecho cortaria a personas reales sin decirles por que. Lo que
+  # filtra el envio automatizado no es esto, sino el honeypot y la comprobacion
+  # de tiempo de la funcion; esto solo pone un techo al volumen.
+  #
+  # `window_size` admite entre 1 y 180 segundos: un limite de negocio mas largo
+  # -«5 solicitudes cada 10 minutos»- no cabe aqui y tendria que aplicarlo la
+  # funcion.
+  [redirects.rate_limit]
+    window_limit = 20
+    window_size = 60
+    # `["domain"]` a secas es solo de Enterprise. Con ip+domain, el limite se
+    # cuenta por visitante, que es lo que se quiere.
+    aggregate_by = ["ip", "domain"]
+
+# ── Redirecciones desde la SPA anterior (Fase 7.1) ───────────────────────────
+# Las URLs que hoy estan indexadas NO pueden devolver 404. Inventario tomado del
+# sitemap.xml y de las rutas de la SPA de web/ antes de borrarla:
+#
+#   sitemap.xml declaraba:  /  /privacidad  /aviso-legal  /cookies
+#   la SPA servia:          /  /politica-privacidad  /aviso-legal  /cookies
+#
+# Fijate en la discrepancia: se envio a Google /privacidad, que la SPA nunca
+# sirvio. Se redirige igualmente, porque puede seguir en su cola de rastreo.
+#
+# ⚠️ Esto NO sustituye al inventario real de Search Console (pendiente P23). Es
+# lo que se puede afirmar con lo que habia en el repositorio; si hay URLs
+# indexadas que no estaban en ese sitemap, faltan aqui.
+
+[[redirects]]
+  from = "/politica-privacidad"
+  to = "/es/politica-privacidad/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/privacidad"
+  to = "/es/politica-privacidad/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/aviso-legal"
+  to = "/es/aviso-legal/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/cookies"
+  to = "/es/cookies/"
+  status = 301
+  force = true
+
+# Anclas de la SPA: no generaban URL propia, pero pueden estar enlazadas desde
+# fuera con la forma /about, /product o /contact.
+[[redirects]]
+  from = "/about"
+  to = "/es/compania/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/product"
+  to = "/es/software/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/contact"
+  to = "/es/contacto/"
+  status = 301
+  force = true
+
+# ── Todo el contenido vive bajo /es/ y /en/ ──────────────────────────────────
+#
+# La raiz reparte segun el idioma del navegador: cualquier variante de castellano
+# va a /es/, y todo lo demas a /en/. Decision de Direccion del 29/07/2026, que
+# cambia la de la seccion 2.1 del plan («no se detecta Accept-Language»).
+#
+# Tres detalles que hacen que esto funcione y no rompa el SEO:
+#
+#   1. **302 y no 301.** La 301 es permanente y los navegadores y las CDN la
+#      cachean sin mirar la cabecera: quien entrase primero con el navegador en
+#      espanol dejaria a los siguientes con /es/ fijado, sin poder salir. Con 302
+#      la decision se vuelve a tomar en cada visita, que es lo que pide una
+#      redireccion que depende de quien pregunta.
+#   2. **Se listan las variantes.** La condicion `Language` de Netlify compara con
+#      los valores de `Accept-Language`, asi que `es-419` o `es-AR` no coinciden
+#      solos con `es`. Se enumeran los dialectos con hablantes reales; el que
+#      falte cae en la regla de abajo, que es /en/ y sigue siendo una pagina util.
+#   3. **La raiz no es contenido.** Ni /es/ ni /en/ dependen de esta regla: las dos
+#      son URLs propias, indexables y con su canonica. Esto solo decide a donde
+#      va quien escribe el dominio a secas.
+[[redirects]]
+  from = "/"
+  to = "/es/"
+  status = 302
+  force = true
+  conditions = { Language = [
+    "es",
+    "es-ES",
+    "es-419",
+    "es-AR",
+    "es-BO",
+    "es-CL",
+    "es-CO",
+    "es-CR",
+    "es-CU",
+    "es-DO",
+    "es-EC",
+    "es-GT",
+    "es-HN",
+    "es-MX",
+    "es-NI",
+    "es-PA",
+    "es-PE",
+    "es-PR",
+    "es-PY",
+    "es-SV",
+    "es-US",
+    "es-UY",
+    "es-VE",
+    "ca",
+    "gl",
+    "eu",
+  ] }
+
+# Cualquier otro idioma. Va despues a proposito: Netlify evalua de arriba abajo y
+# se queda con la primera regla que encaje.
+[[redirects]]
+  from = "/"
+  to = "/en/"
+  status = 302
+  force = true
+
+# ── Cabeceras ────────────────────────────────────────────────────────────────
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    X-Frame-Options = "DENY"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=(), payment=(), usb=()"
+    Cross-Origin-Opener-Policy = "same-origin"
+    Cross-Origin-Resource-Policy = "same-origin"
+    # Un ano, y con subdominios porque no hay ninguno sirviendo por HTTP.
+    #
+    # SIN `preload`, y no por olvido: entrar en la lista precargada de los
+    # navegadores es practicamente irreversible -se compila dentro de Chrome y
+    # Firefox- y obliga a que todo subdominio presente y futuro tenga HTTPS para
+    # siempre. Eso es una decision de infraestructura, no una cabecera mas.
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains"
+    # Destino de los informes de la CSP de abajo. `report-to` necesita que el
+    # nombre del grupo se declare aqui; el `report-uri` clasico apunta a la misma
+    # funcion y cubre a los navegadores que aun no implementan la Reporting API.
+    Reporting-Endpoints = "csp=\"/api/csp-report\""
+    # CSP en modo informe primero. NO se pasa a bloqueo sin medir con trafico
+    # real: una CSP escrita de memoria rompe la pagina en silencio.
+    #
+    # ⚠️ Hasta ahora esto era papel mojado: sin `report-uri` ni `report-to`, el
+    # navegador detectaba las violaciones y no las mandaba a ninguna parte, asi que
+    # la politica no protegia -es Report-Only- y tampoco informaba. Ya hay sumidero
+    # (`netlify/functions/csp-report.ts`) y las dos directivas al final.
+    #
+    # ANTES DE PASAR A BLOQUEO hay que anadir los hosts de Cookiebot
+    # (`consent.cookiebot.com` y `consentcdn.cookiebot.com` en `script-src` y
+    # `connect-src`). No se anaden ya porque Cookiebot todavia no esta instalado y
+    # una lista blanca con hosts que no se usan es una lista que nadie repasa: los
+    # informes diran exactamente cuales hacen falta cuando llegue el momento.
+    #
+    # `/api/*` es del mismo origen, asi que ahi basta 'self'. Lo que abre la
+    # politica es Google Tag Manager y Analytics:
+    #
+    #   script-src   googletagmanager.com sirve gtm.js, y gtag.js cuando lo pide
+    #                el contenedor. El arranque NO va en linea: vive en
+    #                /analitica.js. La politica se deja abierta aunque la
+    #                analitica este hoy desmontada, para que devolverla sea
+    #                descomentar dos lineas del layout y nada mas.
+    #                **'unsafe-inline' sigue siendo obligatorio**, pero por Next,
+    #                no por GTM: cada pagina exportada lleva un `__next_f.push`
+    #                en linea con los datos de hidratacion, y con
+    #                `output: 'export'` no hay servidor que genere un nonce por
+    #                peticion. Conviene saberlo: con 'unsafe-inline' la CSP deja
+    #                de ser una defensa real contra XSS y queda como higiene.
+    #   connect-src  las balizas de medicion; GA4 usa varios subdominios segun
+    #                la region, de ahi los comodines.
+    #   img-src      el pixel de respaldo cuando la baliza no puede salir.
+    #   frame-src    el iframe de <noscript> de GTM.
+    Content-Security-Policy-Report-Only = "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; img-src 'self' data: https://www.googletagmanager.com https://*.google-analytics.com; font-src 'self'; connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; frame-src https://www.googletagmanager.com; style-src 'self' 'unsafe-inline'; report-uri /api/csp-report; report-to csp"
+
+# Activos con hash en el nombre: un ano, inmutables.
+[[headers]]
+  for = "/_next/static/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/logos/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
+
+# HTML: revalidar siempre, o un despliegue no se ve.
+#
+# ⚠️ Esto era SOLO `for = "/*.html"`, y no cubria ni una pagina del sitio. Con
+# `output: 'export'` las 78 paginas se sirven en rutas de directorio -`/es/`,
+# `/es/contacto/`, `/en/blog/<slug>/`-, y ese patron casa con la URL de la
+# peticion, no con el fichero del disco. El unico sitio donde llegaba a aplicarse
+# era `/404.html`.
+#
+# Se cubre por idioma, que es donde vive todo el contenido. Bajo `/es/` y `/en/`
+# solo hay HTML y las cargas RSC `.txt` que Next genera para la navegacion de
+# cliente, y esas tienen que revalidar igual: una carga vieja en cache sirve
+# contenido anterior al despliegue sin que se note.
+#
+# Los activos con hash siguen con su regla `immutable` de arriba, porque viven en
+# `/_next/static/` y no debajo de un idioma.
+[[headers]]
+  for = "/es/*"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/en/*"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+# Se mantiene para `/404.html`, que no cuelga de ningun idioma.
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+# ── 404 por idioma. AL FINAL: Netlify evalua de arriba abajo y una regla
+# comodin por encima de una ruta real se la come. ─────────────────────────────
+[[redirects]]
+  from = "/en/*"
+  to = "/en/404/"
+  status = 404
+
+[[redirects]]
+  from = "/es/*"
+  to = "/es/404/"
+  status = 404
+
+[[redirects]]
+  from = "/*"
+  to = "/es/404/"
+  status = 404

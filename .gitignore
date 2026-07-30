@@ -1,0 +1,72 @@
+# ── Dependencias y artefactos de build ──
+node_modules/
+.next/
+out/
+dist/
+dist-ssr/
+*.local
+.turbo/
+
+# ── Entorno ──
+.env
+.env.*
+!.env.example
+
+# ── Logs ──
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# ── Editor / SO ──
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+Thumbs.db
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# ── Material criptografico ──────────────────────────────────────────────
+# NADA de esto entra en el repositorio, y menos aun en uno que Netlify clona.
+#
+# `claves/produccion/enc-priv.pem` es la unica cosa que impide que un volcado
+# del buzon de ingestion revele los datos personales de todos los leads. Si se
+# filtra, el incidente es notificable.
+#
+# Las reglas van por patron y no solo por directorio, para que mover la carpeta
+# o cambiarle el nombre no desactive la proteccion sin que nadie lo note.
+claves/
+**/claves/
+*.pem
+*.key
+*.p12
+*.pfx
+*.jks
+*.asc
+*.gpg
+id_rsa*
+id_ed25519*
+
+# ── Datos confidenciales ────────────────────────────────────────────────
+# ISNLA-DOC-0008-01 §5: la hoja VALIDACION del dimensionador contiene
+# nombres reales de clientes, horas contratadas y PVP por contrato, y la
+# hoja CALCULADORA contiene coste interno, tarifa efectiva y margen bruto.
+# Nada de eso puede entrar en el repositorio que Netlify clona para
+# construir el sitio. El fichero se distribuye por canal interno.
+docs/*.xlsx
+
+# Volcados de diagnostico: pueden contener claves de API y URLs internas.
+docs/salida-metadata-*.md
+docs/*-metadata-*.md
+
+# Servidor de revision local: no se versiona por indicacion del 29/07/2026.
+# Si el equipo necesita levantarlo sin pedirlo, hay que commitearlo.
+Dockerfile
+docker-compose.yml
+.dockerignore
