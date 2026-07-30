@@ -545,12 +545,13 @@
         "firstName": "Enter your first name.",
         "generic": "Couldn't send. Please check the fields and try again.",
         "genericEmailDomain": "This looks like a personal address. A work email helps us prepare a better answer.",
-        "lastName": "Enter your last name.",
+        "lastName": "Your last name is too long (max. 60 characters).",
         "message": "The message is too long (max. 1000 characters).",
         "need": "Select an option.",
         "rateLimited": "Too many attempts. Please wait a moment and try again.",
         "summaryTitle": "Please review these fields before sending",
         "testMode": "Test mode: email delivery is switched off, so the request has not been recorded.",
+        "unavailable": "We could not record your request. Something failed on our side, not yours: email us at info@secnorthlabs.eu or call +34 634 651 312 and we'll sort it out.",
         "network": "We could not connect. Check your connection and try again.",
         "validation": "Please review the details: something is not valid."
       },
@@ -651,19 +652,23 @@
         "items": [
           {
             "label": "Email",
-            "value": "info@secnorthlabs.eu"
+            "value": "info@secnorthlabs.eu",
+            "icon": "mail"
           },
           {
             "label": "Phone",
-            "value": "+34 634 651 312"
+            "value": "+34 634 651 312",
+            "icon": "phone"
           },
           {
             "label": "Office",
-            "value": "Calle Peña Brava 21, Of. 1B · PI de Silvota, Llanera (Asturias)"
+            "value": "Calle Peña Brava 21, Of. 1B · PI de Silvota, Llanera (Asturias)",
+            "icon": "map"
           },
           {
             "label": "Hours",
-            "value": "Mon–Fri · 9:00–18:00 (CET)"
+            "value": "Mon–Fri · 9:00–18:00 (CET)",
+            "icon": "clock"
           }
         ],
         "title": "Direct contact"

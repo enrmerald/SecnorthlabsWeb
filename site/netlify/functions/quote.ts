@@ -7,6 +7,7 @@ import { toPublicDto } from '../../pbcg/src/types.ts'
 import {
   ContactoSchema,
   SobreSchema,
+  buzonIngestion,
   error,
   esProbableBot,
   puedeEnviarCorreo,
@@ -74,7 +75,7 @@ export default async function handler(request: Request): Promise<Response> {
   // ── El único cálculo, y aquí ──
   const resultado = calcular(entrada.data)
 
-  const enviado = puedeEnviarCorreo()
+  const enviado = puedeEnviarCorreo(buzonIngestion())
   if (enviado) {
     // TODO(entrega): firmar (JWS Ed25519), cifrar (JWE RSA-OAEP-256) y enviar
     // por Resend al buzón de ingestión, más el correo con la estimación al

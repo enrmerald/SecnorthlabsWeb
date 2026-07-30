@@ -7,6 +7,7 @@ export default defineConfig({
       'src/**/*.test.ts',
       'src/**/*.test.tsx',
       'pbcg/**/*.test.ts',
+      'netlify/**/*.test.ts',
       'scripts/**/*.test.mjs',
     ],
     // El motor PBCG vive en pbcg/, fuera de src/, y solo lo ejecuta la Netlify

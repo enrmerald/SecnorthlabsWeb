@@ -30,7 +30,9 @@ mensajes, componentes de cliente o el artefacto. `pnpm test:e2e` construye contr
 | Publicar un articulo | un `.md` en `content/blog/<idioma>/`. El nombre del fichero es la URL. Ver `content/blog/README.md` |
 | Anadir una imagen | el original en `assets/images/`; `images:build` genera `public/img/` y `src/generated/images.json` |
 | Tocar el modelo economico | `pbcg/`. **Jamas** desde `src/` |
+| Cambiar una plantilla de correo | `netlify/functions/_plantillas/`. Se ve con `pnpm correos:preview`, que no envia nada. Tablas y CSS en linea: el navegador de la vista previa es mas permisivo que Outlook |
 | Redirecciones, cabeceras o CSP | `netlify.toml`. `next.config.ts` no puede hacerlo con `output: 'export'` |
+| Analitica (GA4 y GTM) | `src/components/seo/Analitica.tsx` y los identificadores en `src/config/analitica.ts`. Va en el layout de idioma, **no en `/`**. Filtrar entornos o gestionar consentimiento se hace desde GTM, sin tocar codigo |
 
 `src/generated/` es **salida de build**: no se edita a mano.
 

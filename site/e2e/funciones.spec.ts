@@ -222,6 +222,24 @@ test.describe('POST /api/quote', () => {
     })
 
     test('envio demasiado rapido: exito silencioso y SIN precio', async ({ request }) => {
+      // ═══════════════════════════════════════════════════════════════════════
+      // La llamada de calentamiento no es adorno: sin ella la prueba falla sola
+      // cada tantas ejecuciones.
+      //
+      // `renderedAt` se sella al construir la peticion, pero quien mide los tres
+      // segundos es el servidor al atenderla. En la primera llamada a /api/quote
+      // el servidor todavia tiene que importar la funcion, zod y el motor PBCG
+      // entero, y con la suite completa corriendo en cuatro procesos eso puede
+      // pasar de tres segundos. Entonces el envio deja de parecer instantaneo,
+      // el antispam lo da por bueno y la prueba ve un precio donde esperaba
+      // null: un fallo que no tiene nada que ver con lo que se esta probando.
+      //
+      // Con la funcion ya cargada, el tiempo que se mide es solo el del envio,
+      // que es lo que la prueba quiere comprobar. No se relaja ninguna
+      // comprobacion; solo se deja de contar el arranque.
+      // ═══════════════════════════════════════════════════════════════════════
+      await cotizar(request, { ...sobreValido() })
+
       const respuesta = await cotizar(request, {
         ...sobreValido(),
         antispam: { honeypot: '', renderedAt: Date.now() },

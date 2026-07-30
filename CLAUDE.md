@@ -104,6 +104,7 @@ pnpm check:age        # antiguedad de las dependencias
 pnpm verify:architecture  # sin codigo de servidor y sin imports de pbcg/ ni netlify/ desde src/
 pnpm verify:export        # inspecciona out/: artefacto completo y sin filtraciones
 
+pnpm correos:preview  # escribe las plantillas de correo en .correos/ sin enviar nada
 pnpm calcular         # CLI del motor PBCG
 pnpm vectores         # regenera los vectores de oro de contracts/
 ```
@@ -171,6 +172,15 @@ comprueban:
 3. `scripts/idioma-preferido.mjs` - la copia del servidor de `pnpm preview`, que
    lee las variantes del propio `netlify.toml` para que no puedan divergir.
 
+**La analitica son etiquetas en el HTML, no un componente de cliente.**
+`src/components/seo/Analitica.tsx` emite GTM y GA4 como `<script>` en el layout
+de idioma; no usa `@next/third-parties` a proposito, porque eso mete
+`next/script` -codigo de cliente- en las 15 paginas a la vez. La CSP de
+`netlify.toml` esta abierta a `googletagmanager.com` y lleva `'unsafe-inline'`
+en `script-src`, obligado por los fragmentos de arranque: con `output: 'export'`
+no hay servidor que genere un nonce. ⚠️ **Sin banner de consentimiento, esas
+cookies se escriben antes de tener permiso**; el interruptor esta en GTM.
+
 **La regla dura de arquitectura, con enforcement automatico.**
 `scripts/assert-static-architecture.mjs` (`verify:architecture`) falla el build
 por dos motivos distintos:
@@ -209,8 +219,19 @@ que Netlify clona. Es el coste asumido, documentado en ISNLA-DOC-0008-REQ-01 §0
 |---|---|
 | Motor PBCG (`site/pbcg/src/`: `calculate.ts`, `config.ts`, `schemas.ts`, `types.ts`, `contrato.ts`) | ✅ Implementado y probado contra el «caso de oro» del Excel (37 pruebas) |
 | `POST /api/quote` y `POST /api/contact` (`site/netlify/functions/`) | ✅ Validacion, antispam, calculo, respuesta y registro sin datos personales |
-| Entrega del lead: firma JWS Ed25519, cifrado JWE RSA-OAEP-256 y envio por Resend | ⬜ **Pendiente** - hay un `TODO` en `quote.ts`. Sin `RESEND_API_KEY` y `LEAD_MAILBOX_TO`, `puedeEnviarCorreo()` es `false`, las funciones entran en **modo prueba** y responden `delivery: 'skipped'`, que la interfaz esta obligada a mostrar. Bloqueado por el buzon y el dominio verificado (REQ-01, bloques A y B) |
+| Envio del aviso de contacto a `info@` por Resend | ✅ `_correo.ts` (API REST con `fetch`, sin SDK) y `_plantillas/aviso-contacto.ts` (ES y EN). Necesita `RESEND_API_KEY`, `RESEND_FROM` y `CONTACT_MAILBOX_TO` |
+| Entrega del lead de la calculadora: firma JWS Ed25519, cifrado JWE RSA-OAEP-256 y envio al buzon de ingestion | ⬜ **Pendiente** - hay un `TODO` en `quote.ts`. Bloqueado por el buzon `leads-ingest@` y las claves (REQ-01, bloques B y C) |
 | Ingestion en EspoCRM | Fuera de este repositorio: correo cifrado a un importador local. El contrato esta en `contracts/` |
+
+**Son dos buzones distintos, y el correo que va a cada uno es distinto.**
+`CONTACT_MAILBOX_TO` (`info@secnorthlabs.eu`) lo lee una persona: recibe el aviso
+maquetado, con los datos en claro y `Reply-To` apuntando al visitante.
+`LEAD_MAILBOX_TO` (`leads-ingest@`) lo lee un programa: recibe el sobre cifrado
+de MIG-02 §9, sin un solo dato legible. Cifrar el primero lo dejaria inutil para
+quien tiene que atender la consulta; maquetar el segundo solo serviria para colar
+datos personales donde no deben estar. El coste del primero es que **Resend trata
+datos personales en claro**, y por eso el asunto y las trazas siguen sin llevar
+ninguno (decision de Direccion del 30/07/2026).
 
 **Reglas que no se negocian:**
 

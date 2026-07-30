@@ -545,12 +545,13 @@
         "firstName": "Indica tu nombre.",
         "generic": "No se pudo enviar. Revisa los campos e inténtalo de nuevo.",
         "genericEmailDomain": "Parece un correo personal. Si puedes, usa el corporativo: nos ayuda a preparar mejor la respuesta.",
-        "lastName": "Indica tus apellidos.",
+        "lastName": "Los apellidos son demasiado largos (máx. 60 caracteres).",
         "message": "El mensaje es demasiado largo (máx. 1000 caracteres).",
         "need": "Selecciona una opción.",
         "rateLimited": "Demasiados intentos. Espera un momento e inténtalo de nuevo.",
         "summaryTitle": "Revisa estos campos antes de enviar",
         "testMode": "Modo de pruebas: el envío de correo está desactivado, así que la solicitud no ha quedado registrada.",
+        "unavailable": "No hemos podido registrar tu solicitud. Ha fallado algo por nuestra parte, no por la tuya: escríbenos a info@secnorthlabs.eu o llámanos al +34 634 651 312 y lo resolvemos.",
         "network": "No hemos podido conectar. Comprueba tu conexión e inténtalo de nuevo.",
         "validation": "Revisa los datos: alguno no es válido."
       },
@@ -651,19 +652,23 @@
         "items": [
           {
             "label": "Email",
-            "value": "info@secnorthlabs.eu"
+            "value": "info@secnorthlabs.eu",
+            "icon": "mail"
           },
           {
             "label": "Teléfono",
-            "value": "+34 634 651 312"
+            "value": "+34 634 651 312",
+            "icon": "phone"
           },
           {
             "label": "Oficina",
-            "value": "Calle Peña Brava 21, Of. 1B · PI de Silvota, Llanera (Asturias)"
+            "value": "Calle Peña Brava 21, Of. 1B · PI de Silvota, Llanera (Asturias)",
+            "icon": "map"
           },
           {
             "label": "Horario",
-            "value": "L–V · 9:00–18:00 (CET)"
+            "value": "L–V · 9:00–18:00 (CET)",
+            "icon": "clock"
           }
         ],
         "title": "Contacto directo"

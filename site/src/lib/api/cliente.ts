@@ -28,7 +28,13 @@ export const RUTAS_API = {
   cotizacion: '/api/quote',
 } as const
 
-export type CodigoError = 'validation' | 'rateLimited' | 'network' | 'generic'
+/**
+ * `unavailable` es el fallo de nuestro lado: la función no ha podido registrar
+ * la solicitud. Se distingue de `generic` porque el mensaje es distinto -pedir
+ * a alguien que «revise los campos» cuando el fallo es nuestro le hace buscar
+ * un error que no existe- y porque ofrece las vías de contacto directo.
+ */
+export type CodigoError = 'validation' | 'rateLimited' | 'network' | 'unavailable' | 'generic'
 
 export type RespuestaApi<T> =
   | { ok: true; datos: T }
@@ -167,7 +173,13 @@ export async function enviar<T>(
   return { ok: true, datos: datos as T }
 }
 
-const CODIGOS_CONOCIDOS = new Set<string>(['validation', 'rateLimited', 'network', 'generic'])
+const CODIGOS_CONOCIDOS = new Set<string>([
+  'validation',
+  'rateLimited',
+  'network',
+  'unavailable',
+  'generic',
+])
 
 function normalizarCodigo(codigo: string): CodigoError {
   // Un código inesperado se degrada a genérico: si se reenviara tal cual, la

@@ -1,3 +1,5 @@
+import { Clock, Mail, MapPin, Phone } from "lucide-react";
+import type { ComponentType, SVGProps } from "react";
 import { HeroInterior } from "@/components/blocks/HeroInterior";
 import { FormularioContacto } from "@/components/forms/FormularioContacto";
 import { StepList } from "@/components/blocks/Tarjetas";
@@ -49,14 +51,26 @@ export function Contacto({ locale }: { locale: Locale }) {
               {rail.contactDirect.title}
             </h2>
             <dl className="flex flex-col gap-4">
-              {rail.contactDirect.items.map((item) => (
-                <div key={item.label} className="flex flex-col gap-0.5">
-                  <dt className="text-text-dim text-xs">{item.label}</dt>
-                  <dd className="font-display text-sm font-bold">
-                    <ValorContacto valor={item.value} />
-                  </dd>
-                </div>
-              ))}
+              {rail.contactDirect.items.map((item) => {
+                const Icono = ICONOS[item.icon] ?? Clock;
+                return (
+                  <div key={item.label} className="flex items-start gap-3">
+                    {/* Decorativo: la etiqueta de al lado ya dice «Teléfono» o
+                        «Horario», asi que leerlo dos veces solo estorba. */}
+                    <Icono
+                      aria-hidden="true"
+                      className="text-cyan mt-0.5 size-4 shrink-0"
+                      strokeWidth={2}
+                    />
+                    <div className="flex min-w-0 flex-col gap-0.5">
+                      <dt className="text-text-dim text-xs">{item.label}</dt>
+                      <dd className="font-display text-sm font-bold">
+                        <ValorContacto valor={item.value} />
+                      </dd>
+                    </div>
+                  </div>
+                );
+              })}
             </dl>
           </Card>
 
@@ -103,8 +117,23 @@ export function Contacto({ locale }: { locale: Locale }) {
 }
 
 /**
- * Convierte el correo en `mailto:` y el telefono en `tel:` (seccion 1.6). La
- * direccion y el horario se quedan como texto.
+ * El icono de cada dato de contacto.
+ *
+ * La clave viaja en `messages/*.json` junto al dato, y no se deduce del orden
+ * del array: reordenar las filas dejaria el reloj en el telefono sin que fallara
+ * nada. Son iconos de `lucide-react` importados en un componente de build, asi
+ * que salen como SVG en el HTML y no envian ni un byte de JavaScript.
+ */
+const ICONOS: Record<string, ComponentType<SVGProps<SVGSVGElement>>> = {
+  mail: Mail,
+  phone: Phone,
+  map: MapPin,
+  clock: Clock,
+};
+
+/**
+ * Convierte el correo en `mailto:`, el telefono en `tel:` y la direccion en un
+ * enlace a la ficha de Google Maps (seccion 1.6). El horario se queda en texto.
  */
 function ValorContacto({ valor }: { valor: string }) {
   if (valor === EMPRESA.email) {
@@ -121,6 +150,22 @@ function ValorContacto({ valor }: { valor: string }) {
     return (
       <a
         href={`tel:${EMPRESA.telefonoTel}`}
+        className="hover:text-cyan inline-flex min-h-6 items-center"
+      >
+        {valor}
+      </a>
+    );
+  }
+  // La direccion. Se reconoce por la calle y no por la posicion en la lista,
+  // igual que las dos de arriba, para que reordenar el rail no la desactive.
+  if (valor.includes("Peña Brava")) {
+    return (
+      <a
+        href={EMPRESA.mapaUrl}
+        target="_blank"
+        // `noopener` no es opcional con `target="_blank"`: sin el, la pagina
+        // destino puede manipular la nuestra por `window.opener`.
+        rel="noopener noreferrer"
         className="hover:text-cyan inline-flex min-h-6 items-center"
       >
         {valor}

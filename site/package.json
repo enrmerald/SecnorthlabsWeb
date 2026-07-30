@@ -27,6 +27,7 @@
     "check:js": "node scripts/check-js-budget.mjs",
     "verify:architecture": "node scripts/assert-static-architecture.mjs",
     "verify:export": "node scripts/assert-static-output.mjs",
+    "correos:preview": "node scripts/correos-preview.mjs",
     "calcular": "node pbcg/bin/calculate.mjs",
     "vectores": "node pbcg/bin/generar-vectores.mjs",
     "seo:build": "node scripts/seo-build.mjs"

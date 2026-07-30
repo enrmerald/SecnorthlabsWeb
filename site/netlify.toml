@@ -35,6 +35,30 @@
   status = 200
   force = true
 
+  # Limite en el borde: corta el abuso ANTES de que se invoque la funcion, asi
+  # que no gasta ejecuciones ni cuota de Resend.
+  #
+  # ⚠️ El plan Free admite **2 reglas por proyecto** definidas en codigo (5 en
+  # Pro, 100 solo en Enterprise con HP Edge). Esta es la primera; la segunda
+  # queda reservada para /api/quote cuando la calculadora vuelva. No se pueden
+  # anadir mas sin cambiar de plan.
+  #
+  # 20 peticiones por minuto y por IP es el valor de MIG-02 §7.2. Es holgado a
+  # proposito: detras de una misma IP puede haber una oficina entera con NAT, y
+  # un limite estrecho cortaria a personas reales sin decirles por que. Lo que
+  # filtra el envio automatizado no es esto, sino el honeypot y la comprobacion
+  # de tiempo de la funcion; esto solo pone un techo al volumen.
+  #
+  # `window_size` admite entre 1 y 180 segundos: un limite de negocio mas largo
+  # -«5 solicitudes cada 10 minutos»- no cabe aqui y tendria que aplicarlo la
+  # funcion.
+  [redirects.rate_limit]
+    window_limit = 20
+    window_size = 60
+    # `["domain"]` a secas es solo de Enterprise. Con ip+domain, el limite se
+    # cuenta por visitante, que es lo que se quiere.
+    aggregate_by = ["ip", "domain"]
+
 # ── Redirecciones desde la SPA anterior (Fase 7.1) ───────────────────────────
 # Las URLs que hoy estan indexadas NO pueden devolver 404. Inventario tomado del
 # sitemap.xml y de las rutas de la SPA de web/ antes de borrarla:
@@ -167,8 +191,22 @@
     Cross-Origin-Resource-Policy = "same-origin"
     # CSP en modo informe primero. NO se pasa a bloqueo sin medir con trafico
     # real: una CSP escrita de memoria rompe la pagina en silencio.
-    # `connect-src 'self'` basta porque /api/* es del mismo origen.
-    Content-Security-Policy-Report-Only = "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'"
+    #
+    # `/api/*` es del mismo origen, asi que ahi basta 'self'. Lo que abre la
+    # politica es Google Tag Manager y Analytics:
+    #
+    #   script-src   googletagmanager.com sirve gtm.js y gtag.js.
+    #                **'unsafe-inline' es obligatorio**: los dos fragmentos de
+    #                arranque van en linea y con `output: 'export'` no hay
+    #                servidor que genere un nonce por peticion. Es el precio de
+    #                instalar GTM en un sitio estatico, y conviene saberlo: con
+    #                'unsafe-inline' la CSP deja de ser una defensa real contra
+    #                XSS y queda como higiene.
+    #   connect-src  las balizas de medicion; GA4 usa varios subdominios segun
+    #                la region, de ahi los comodines.
+    #   img-src      el pixel de respaldo cuando la baliza no puede salir.
+    #   frame-src    el iframe de <noscript> de GTM.
+    Content-Security-Policy-Report-Only = "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; img-src 'self' data: https://www.googletagmanager.com https://*.google-analytics.com; font-src 'self'; connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; frame-src https://www.googletagmanager.com; style-src 'self' 'unsafe-inline'"
 
 # Activos con hash en el nombre: un ano, inmutables.
 [[headers]]

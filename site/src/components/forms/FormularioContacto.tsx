@@ -82,6 +82,37 @@ const VACIO: Campos = {
   message: '',
 }
 
+/**
+ * Convierte en `mailto:` las direcciones que aparezcan dentro de un texto.
+ *
+ * La informacion basica de proteccion de datos incluye el correo al que se
+ * ejercen los derechos, metido en medio de una frase. Escrito como texto plano
+ * obliga a seleccionarlo y copiarlo a mano, justo a quien esta intentando
+ * ejercer un derecho.
+ *
+ * No se usa `dangerouslySetInnerHTML` para meter la etiqueta: el texto se parte
+ * y React pinta cada trozo como texto, de modo que **sigue escapandose todo**.
+ * Aunque estas cadenas salgan de `messages/*.json` y no de fuera, un helper que
+ * inyecta HTML acaba antes o despues recibiendo algo que si viene de fuera.
+ */
+function ConCorreosEnlazados({ texto }: { texto: string }) {
+  const trozos = texto.split(/([\w.+-]+@[\w-]+\.[\w.]+)/g)
+
+  return (
+    <>
+      {trozos.map((trozo, i) =>
+        /^[\w.+-]+@[\w-]+\.[\w.]+$/.test(trozo) ? (
+          <a key={i} href={`mailto:${trozo}`} className="text-cyan underline">
+            {trozo}
+          </a>
+        ) : (
+          trozo
+        ),
+      )}
+    </>
+  )
+}
+
 /** Dominios de correo personal. Provocan aviso, no bloqueo. */
 const DOMINIOS_GENERICOS = ['gmail.', 'hotmail.', 'outlook.', 'yahoo.', 'live.', 'icloud.']
 
@@ -139,21 +170,47 @@ export function FormularioContacto({
     if (errores[campo]) setErrores((e) => ({ ...e, [campo]: undefined }))
   }
 
-  function validarCampo(campo: keyof Campos): string | undefined {
+  /**
+   * Valida un campo.
+   *
+   * ═══════════════════════════════════════════════════════════════════════════
+   * `exigirObligatorios` es la diferencia entre revisar y dar la lata.
+   *
+   * Al **salir de un campo** se llama con `false`: un campo vacío no se marca en
+   * rojo. Recorrer el formulario con el tabulador para ver qué piden, o dejar un
+   * campo para el final, es comportamiento normal, y castigarlo con un error por
+   * cada casilla convierte el formulario en un campo de minas antes de haber
+   * intentado nada. Lo que sí se comprueba al salir es el **contenido escrito**:
+   * si alguien teclea un correo mal formado, decírselo ahí es un favor, no una
+   * regañina.
+   *
+   * Al **enviar** se llama con `true`, y entonces sí se exige todo lo
+   * obligatorio y aparece el resumen de arriba.
+   * ═══════════════════════════════════════════════════════════════════════════
+   */
+  function validarCampo(campo: keyof Campos, exigirObligatorios: boolean): string | undefined {
     const v = campos[campo].trim()
+    const vacio = v === ''
+
     switch (campo) {
       case 'firstName':
+        if (vacio) return exigirObligatorios ? msg('firstName') : undefined
         return v.length < 2 || v.length > 40 ? msg('firstName') : undefined
       case 'lastName':
-        return v.length < 2 || v.length > 60 ? msg('lastName') : undefined
+        // Opcional: hay nombres de una sola palabra, y quien escribe desde otro
+        // pais puede no tener «apellidos» en el sentido de aqui. Solo se
+        // comprueba que no se pase de largo.
+        return v.length > 60 ? msg('lastName') : undefined
       case 'company':
+        if (vacio) return exigirObligatorios ? msg('company') : undefined
         return v.length < 2 || v.length > 80 ? msg('company') : undefined
       case 'email':
+        if (vacio) return exigirObligatorios ? msg('email') : undefined
         // Validación deliberadamente laxa: la estricta la hace el servidor, y
         // una expresión agresiva rechaza direcciones válidas raras.
         return !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v) ? msg('email') : undefined
       case 'need':
-        return v === '' ? msg('need') : undefined
+        return vacio && exigirObligatorios ? msg('need') : undefined
       case 'message':
         return v.length > MAX_MENSAJE ? msg('message') : undefined
       default:
@@ -162,7 +219,7 @@ export function FormularioContacto({
   }
 
   const alSalirDe = (campo: keyof Campos) => () => {
-    setErrores((e) => ({ ...e, [campo]: validarCampo(campo) }))
+    setErrores((e) => ({ ...e, [campo]: validarCampo(campo, false) }))
 
     if (campo === 'email') {
       const dominio = campos.email.toLowerCase()
@@ -181,9 +238,14 @@ export function FormularioContacto({
 
     const nuevos: typeof errores = {}
     for (const campo of Object.keys(campos) as (keyof Campos)[]) {
-      const e = validarCampo(campo)
+      const e = validarCampo(campo, true)
       if (e) nuevos[campo] = e
     }
+    // La casilla de proteccion de datos si bloquea el envio: acredita que se
+    // facilito la informacion, y sin ella no se puede tratar la solicitud. La de
+    // comunicaciones comerciales, en cambio, no se valida en ningun sitio y no
+    // debe hacerlo nunca: es opcional por definicion, y un consentimiento
+    // obligatorio no es un consentimiento.
     if (!privacidad) nuevos.privacy = msg('consent')
 
     setErrores(nuevos)
@@ -305,8 +367,6 @@ export function FormularioContacto({
           id={idDe('lastName')}
           nombre="lastName"
           label={etiquetas.lastName}
-          requerido
-          etiquetaRequerido={a11yRequerido}
           valor={campos.lastName}
           onChange={actualizar('lastName')}
           onBlur={alSalirDe('lastName')}
@@ -401,7 +461,9 @@ export function FormularioContacto({
           {textos.privacyBasicInfo.rows.map((fila) => (
             <div key={fila.label} className="text-xs">
               <dt className="font-display text-cyan inline font-bold">{fila.label}: </dt>
-              <dd className="text-text-dim inline">{fila.value}</dd>
+              <dd className="text-text-dim inline">
+                <ConCorreosEnlazados texto={fila.value} />
+              </dd>
             </div>
           ))}
         </dl>

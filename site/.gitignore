@@ -24,6 +24,9 @@
 /.next/
 /out/
 
+# vista previa de plantillas de correo (`pnpm correos:preview`)
+/.correos/
+
 # production
 /build
 

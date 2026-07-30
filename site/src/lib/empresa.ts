@@ -33,6 +33,15 @@ export const EMPRESA = {
   },
 
   /**
+   * Ficha de la oficina en Google Maps.
+   *
+   * Enlace corto oficial de Google, no una URL construida a mano con la
+   * direccion como parametro de busqueda: el enlace corto apunta al sitio
+   * concreto, y una busqueda por texto puede acabar en el poligono en general.
+   */
+  mapaUrl: 'https://maps.app.goo.gl/P6s24jZWFyFuSiZ47',
+
+  /**
    * Perfiles publicos para `sameAs` de schema.org. Vacio hasta que Marketing
    * confirme el LinkedIn de empresa (pendiente P7): un `sameAs` que apunta a un
    * perfil equivocado es peor que no declararlo.

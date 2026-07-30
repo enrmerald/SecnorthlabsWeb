@@ -22,7 +22,7 @@ const TAMANO_MAXIMO_BYTES = 32 * 1024
 /** Tiempo mínimo entre que se pinta el formulario y llega el envío. */
 const SEGUNDOS_MINIMOS = 3
 
-export type CodigoError = 'validation' | 'rateLimited' | 'generic'
+export type CodigoError = 'validation' | 'rateLimited' | 'unavailable' | 'generic'
 
 export const CABECERAS = {
   'Content-Type': 'application/json',
@@ -80,17 +80,61 @@ export const SobreSchema = z
   })
   .strict()
 
+/**
+ * Caracteres de control: los invisibles del rango C0/C1, salto de línea
+ * incluido.
+ *
+ * ═══════════════════════════════════════════════════════════════════════════
+ * Se rechazan en todo campo de una sola línea, y no es cosmética.
+ *
+ * Varios de estos valores acaban en cabeceras de correo -`need` en el asunto,
+ * `email` en `Reply-To`-, y una cabecera termina en el primer salto de línea:
+ * un `\r\n` colado en un campo puede cerrar la cabecera y abrir otra, que es la
+ * inyección de cabeceras de toda la vida. La defensa correcta es no aceptar el
+ * carácter, no confiar en que el que va detrás lo limpie.
+ *
+ * `message` queda fuera a propósito: es un texto de varias líneas y los saltos
+ * son parte de lo que la persona quiso decir. Ahí solo se prohíben los
+ * controles que no son salto ni tabulador, y como va al cuerpo y no a una
+ * cabecera, no puede inyectar nada.
+ * ═══════════════════════════════════════════════════════════════════════════
+ */
+const UNA_LINEA = /^[^\p{Cc}]*$/u
+
+/** Campo de una línea: sin controles y recortado. */
+const linea = (min: number, max: number) =>
+  z.string().trim().min(min).max(max).regex(UNA_LINEA, 'valor')
+
 /** Datos de contacto. Nombre y apellidos separados, nunca una cadena partida. */
 export const ContactoSchema = z
   .object({
-    firstName: z.string().trim().min(2).max(40),
-    lastName: z.string().trim().min(2).max(60),
-    company: z.string().trim().min(2).max(80),
+    firstName: linea(2, 40),
+    // Opcional: hay nombres de una sola palabra, y quien escribe desde fuera de
+    // España puede no tener «apellidos» en el sentido de aquí. Exigirlos perdía
+    // solicitudes legítimas por un campo que no cambia nada.
+    lastName: linea(0, 60).optional(),
+    company: linea(2, 80),
+    // `.email()` ya excluye espacios y saltos, que es lo que protege `Reply-To`.
     email: z.string().trim().email().max(160),
-    phone: z.string().trim().max(32).optional().or(z.literal('')),
-    title: z.string().trim().max(80).optional().or(z.literal('')),
+    phone: linea(0, 32).optional(),
+    title: linea(0, 80).optional(),
   })
   .strict()
+
+/**
+ * Texto libre de varias líneas.
+ *
+ * Se normalizan los finales de línea de Windows antes de comprobar: si no, un
+ * `\r` sobreviviría al filtro por ir siempre pegado a un `\n` legítimo.
+ */
+export const textoLargo = (max: number) =>
+  z
+    .string()
+    .transform((v) => v.replace(/\r\n/g, '\n').trim())
+    .refine((v) => v.length <= max, 'message')
+    // Se quitan los saltos y tabuladores legítimos y se exige que no quede
+    // ningún otro control.
+    .refine((v) => UNA_LINEA.test(v.replace(/[\n\t]/g, '')), 'valor')
 
 /**
  * Comprobaciones que preceden a cualquier validación de contenido.
@@ -158,14 +202,34 @@ export function referenciaCorta(submissionId: string): string {
 }
 
 /**
- * `true` si están las claves necesarias para enviar correo.
+ * Buzón que recibe los avisos del formulario de contacto.
  *
- * Cuando es `false`, las funciones entran en **modo prueba**: calculan y
- * responden, pero no envían nada, y lo declaran en `delivery: 'skipped'`. La
- * interfaz está obligada a mostrarlo.
+ * Es **distinto** del de ingestión a propósito: este lo lee una persona y el
+ * correo va en claro; el de ingestión lo lee un programa y el correo va cifrado.
+ * Mezclarlos obligaría a elegir entre un buzón humano lleno de adjuntos JWE o un
+ * importador tropezando con mensajes que no sabe leer.
  */
-export function puedeEnviarCorreo(): boolean {
-  return Boolean(process.env.RESEND_API_KEY && process.env.LEAD_MAILBOX_TO)
+export const buzonContacto = () => process.env.CONTACT_MAILBOX_TO
+
+/** Buzón de ingestión de la calculadora, que lee el importador local. */
+export const buzonIngestion = () => process.env.LEAD_MAILBOX_TO
+
+/** Etiqueta de entorno para asunto, cabeceras y trazas. Nunca lleva datos. */
+export const entorno = () => process.env.MAIL_ENVIRONMENT ?? 'development'
+
+/**
+ * `true` si están las claves necesarias para enviar al buzón indicado.
+ *
+ * Cuando es `false`, la función entra en **modo prueba**: valida, calcula y
+ * responde, pero no envía nada, y lo declara en `delivery: 'skipped'`. La
+ * interfaz está obligada a mostrarlo.
+ *
+ * Se pregunta por un buzón concreto y no en general porque contacto y
+ * calculadora tienen destinatarios distintos: tener configurado el de contacto
+ * no autoriza a enviar cotizaciones a ninguna parte.
+ */
+export function puedeEnviarCorreo(buzon: string | undefined): boolean {
+  return Boolean(process.env.RESEND_API_KEY && process.env.RESEND_FROM && buzon)
 }
 
 /**

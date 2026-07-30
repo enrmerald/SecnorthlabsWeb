@@ -4,6 +4,7 @@ import type { ReactNode } from "react";
 import { displayFont, sansFont } from "@/app/fuentes";
 import { Footer } from "@/components/layout/Footer";
 import { Navbar } from "@/components/layout/Navbar";
+import { Analitica, AnaliticaSinJs } from "@/components/seo/Analitica";
 import { LOCALES, isLocale } from "@/config/routes";
 import { cargarMensajes } from "@/i18n/mensajes";
 import "@/app/globals.css";
@@ -50,6 +51,13 @@ export default async function LayoutIdioma({ children, params }: PropsLayout) {
       className={`${displayFont.variable} ${sansFont.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col">
+        {/* Lo mas arriba posible, que es lo que pide Google para no perder
+            visitas de quien cierra la pestana enseguida. No estorba al enlace de
+            salto: un script no es enfocable, asi que el primer destino del
+            tabulador sigue siendo el de abajo. */}
+        <Analitica />
+        <AnaliticaSinJs />
+
         {/* Primer elemento enfocable de la pagina. Sin el, quien navega por
               teclado recorre la navegacion entera en cada una (Fase 9). */}
         <a
