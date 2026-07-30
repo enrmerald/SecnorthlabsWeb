@@ -4,6 +4,7 @@ import { HeroInterior } from "@/components/blocks/HeroInterior";
 import { FormularioContacto } from "@/components/forms/FormularioContacto";
 import { StepList } from "@/components/blocks/Tarjetas";
 import { Card } from "@/components/ui/Card";
+import { TextoEnlazado } from "@/components/ui/TextoEnlazado";
 import type { Locale } from "@/config/routes";
 import { cargarMensajes } from "@/i18n/mensajes";
 import { EMPRESA, INCIDENT_PHONE, PRIVACY_VERSION, MARKETING_TEXT_VERSION } from "@/lib/empresa";
@@ -41,6 +42,36 @@ export function Contacto({ locale }: { locale: Locale }) {
             privacyVersion={PRIVACY_VERSION}
             marketingVersion={MARKETING_TEXT_VERSION}
             a11yRequerido={common.a11y.required}
+            infoPrivacidad={
+              /* Informacion basica en capas, visible sin desplegar nada. La
+                 AEPD pide que este junto al formulario, no escondida tras un
+                 enlace. Se monta aqui, en build, y no dentro del componente de
+                 cliente: es texto que no reacciona a nada, asi que no tiene por
+                 que viajar como JavaScript. */
+              <details className="border-border bg-panel/50 rounded-[10px] border p-4">
+                <summary className="font-display cursor-pointer text-xs font-bold">
+                  {contact.form.privacyBasicInfo.title}
+                </summary>
+                <dl className="mt-3 flex flex-col gap-2">
+                  {contact.form.privacyBasicInfo.rows.map((fila) => (
+                    <div key={fila.label} className="text-xs">
+                      <dt className="font-display text-cyan inline font-bold">
+                        {fila.label}:{" "}
+                      </dt>
+                      <dd className="text-text-dim inline">
+                        <TextoEnlazado texto={fila.value} />
+                      </dd>
+                    </div>
+                  ))}
+                </dl>
+                <a
+                  href={getLocalizedPath("privacy", locale)}
+                  className="text-cyan mt-3 inline-block text-xs underline"
+                >
+                  {contact.form.privacyBasicInfo.moreLabel}
+                </a>
+              </details>
+            }
           />
         </Card>
 

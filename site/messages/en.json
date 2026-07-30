@@ -1014,73 +1014,203 @@
     }
   },
   "legal": {
-    "sections": {
-      "cookies": {
-        "content": "See Cookie Policy",
-        "title": "Cookies"
-      },
-      "enlaces": {
-        "p1": "In those cases where there are links or hyperlinks on the Web that facilitate access to independent third-party websites, INNOVATION AND SECURITY NORTH LABS informs that it does not exercise any type of control over the websites or their contents as they are not its property, therefore it will not assume any responsibility for the contents and operation of the external website.",
-        "p2": "Links to third-party sites depend on each linked site and the contents of said pages, as well as the security configuration of said environments are the responsibility of the entity that owns it. INNOVATION AND SECURITY NORTH LABS will not assume any responsibility for the contents of the linked sites, nor does it guarantee that the links to other places are accurate at the time of access or that said sites are operational at all times.",
-        "p3": "INNOVATION AND SECURITY NORTH LABS will not be responsible for the information that directs the client of its services through existing links, provided that it does not have effective knowledge that the activity or information is unlawful or that it harms property or rights of a third party susceptible to compensation.",
-        "title": "Links"
-      },
-      "exclusion": {
-        "p1": "INNOVATION AND SECURITY NORTH LABS is not responsible for the truthfulness, accuracy, adequacy, suitability and updating of the contents provided by third parties, being exempt from any contractual or extra-contractual liability with Users who make use of them.",
-        "p2": "Access to the Web does not imply the obligation of INNOVATION AND SECURITY NORTH LABS to control the absence of viruses or any other harmful computer element. It is the responsibility of the User to have adequate tools for detection and disinfection. INNOVATION AND SECURITY NORTH LABS is not responsible for damages produced in the computer equipment of Users or third parties during the provision of the service.",
-        "p3": "Access to the Web requires services and supplies from third parties, including transport through telecommunications networks whose reliability and quality do not correspond to INNOVATION AND SECURITY NORTH LABS.",
-        "p4": "INNOVATION AND SECURITY NORTH LABS is not responsible for damages of any kind produced in the User caused by failures or disconnections in the telecommunications networks that produce the suspension or interruption of the service.",
-        "p5": "In the event that the User has knowledge of the existence of illegal or inappropriate content, they must notify INNOVATION AND SECURITY NORTH LABS immediately.",
-        "title": "Disclaimer"
-      },
-      "jurisdiccion": {
-        "p1": "For any controversy or question that may derive from the application or interpretation of this Legal Notice, the parties will apply the principles of good faith and will be governed by current Spanish regulations.",
-        "p2": "For the resolution of conflicts, the parties expressly submit to the courts and tribunals of Gijón, provided that the applicable legislation so allows.",
-        "title": "Jurisdiction and Applicable Law"
-      },
-      "miscelanea": {
-        "p1": "In the event that any provision of this legal notice is declared null or unenforceable, such nullity or unenforceability will not affect the remaining provisions.",
-        "title": "Miscellaneous"
-      },
-      "objeto": {
-        "p1": "These general conditions regulate the access, navigation and use of the service of this website (hereinafter, 'the Web'), without prejudice to the fact that INNOVATION AND SECURITY NORTH LABS reserves the right to modify the presentation, configuration and content of the Web, as well as the conditions required for its access and/or use.",
-        "p2": "Visiting and using the Web attributes the condition of Web user (hereinafter, the 'User') and implies acceptance of all the conditions included in this Legal Notice, having the same validity as any written and signed contract. The User must carefully read this Legal Notice, as it and its conditions of use may undergo modifications. In the event that you do not agree with the terms set forth, do not browse or use the Web.",
-        "title": "Object"
-      },
-      "propiedad": {
-        "p1": "INNOVATION AND SECURITY NORTH LABS is the owner or, where appropriate, has the corresponding licenses for the exploitation rights of intellectual and industrial property of the Web, as well as the intellectual and industrial property rights over the elements contained therein.",
-        "p2": "All the contents of the Web, including images, photographs, documents, software, texts, graphics, brands, logos, distinctive signs, color combinations, structure and design, etc., (hereinafter, the 'Contents'), are the intellectual property of INNOVATION AND SECURITY NORTH LABS or its licensors. Access and use of the Web does not attribute any rights over them to the User.",
-        "p3": "In accordance with the provisions of the Intellectual Property Law, the reproduction, distribution and public communication, including its modality of making available, of all or part of the contents of the Web, for commercial purposes, in any support and by any technical means, are expressly prohibited. Furthermore, the User shall refrain from deleting, altering, evading or manipulating any protection device or security system installed on the website.",
-        "title": "Intellectual and Industrial Property Rights"
-      },
-      "proteccion": {
-        "p1": "In accordance with the provisions of REGULATION (EU) 2016/679 AND current regulations, the User is informed that all personal data provided during the use of the Website will be processed in accordance with the provisions of the Privacy Policy.",
-        "p2": "INNOVATION AND SECURITY NORTH LABS will use its social media profiles to advertise its own services.",
-        "title": "Data Protection"
-      },
-      "responsable": {
-        "address": "Address",
-        "addressValue": "Calle Peña Brava 21, oficina 1B, PI de Silvota, Llanera, CP 33192",
-        "email": "Email",
-        "emailValue": "info@secnorthlabs.eu",
-        "holder": "Owner",
-        "holderValue": "Innovation and Security North Labs SL",
-        "nif": "Tax ID",
-        "nifValue": "B22966139",
-        "title": "Data Controller"
-      },
-      "uso": {
-        "p1": "The User undertakes to make correct use of the Web in accordance with the Law and this Legal Notice.",
-        "p2": "The User will be liable to INNOVATION AND SECURITY NORTH LABS or third parties for any damages that may be caused as a result of a breach of said obligation. The use of the Web for purposes harmful to property or interests of INNOVATION AND SECURITY NORTH LABS or third parties is expressly prohibited.",
-        "title": "Terms of Use"
-      }
-    },
-    "seo": {
-      "description": "Terms of access, browsing and use of the ISN Labs website, intellectual property, links and applicable jurisdiction.",
-      "title": "Legal notice - ISN Labs"
-    },
     "title": "LEGAL",
-    "titleHighlight": "NOTICE"
+    "titleHighlight": "NOTICE",
+    "seo": {
+      "title": "Legal notice - ISN Labs",
+      "description": "Identifying details of Innovation and Security North Labs SL, terms of access and use of the website, intellectual property, links and applicable jurisdiction."
+    },
+    "intro": "In compliance with Article 10 of Spanish Act 34/2002 of 11 July on Information Society Services and Electronic Commerce (LSSICE), the following identifying details of the owner of this website are provided.",
+    "prevalence": "This document is published in Spanish and in English. In the event of any discrepancy between the two versions, the Spanish version prevails.",
+    "sections": [
+      {
+        "title": "Identifying details of the website owner",
+        "blocks": [
+          {
+            "kind": "dl",
+            "items": [
+              {
+                "term": "Owner",
+                "text": "Innovation and Security North Labs, S.L. (hereinafter, «Innovation and Security North Labs»)"
+              },
+              {
+                "term": "Registered office",
+                "text": "Calle Peña Brava 21, oficina 1B, PI de Silvota, 33192 Llanera (Asturias), Spain"
+              },
+              {
+                "term": "Tax ID (N.I.F.)",
+                "text": "B-22966139"
+              },
+              {
+                "term": "Telephone",
+                "text": "+34 634 651 312"
+              },
+              {
+                "term": "Email",
+                "text": "info@secnorthlabs.eu"
+              },
+              {
+                "term": "Registry details",
+                "text": "Registered with the Commercial Registry of ASTURIAS, Sheet AS-64568, IRUS 1000457571583."
+              }
+            ]
+          },
+          {
+            "kind": "p",
+            "text": "For matters relating to the protection of personal data, data subjects may write to rgpd@secnorthlabs.eu."
+          }
+        ]
+      },
+      {
+        "title": "Purpose",
+        "blocks": [
+          {
+            "kind": "p",
+            "text": "This Legal Notice governs access to, browsing of and use of the website www.secnorthlabs.eu (hereinafter, «the Website»), made available to users by Innovation and Security North Labs in compliance with the LSSICE."
+          },
+          {
+            "kind": "p",
+            "text": "Visiting and using the Website confers the status of user (hereinafter, the «User») and implies full and unreserved acceptance of all the terms set out in this Legal Notice, in the Privacy Policy and in the Cookies Policy, documents which together make up the complete legal information of the Website."
+          },
+          {
+            "kind": "p",
+            "text": "Innovation and Security North Labs reserves the right to modify at any time the presentation, configuration, content and conditions of access to and use of the Website. Users should read this Legal Notice carefully each time they access the Website, as its terms may change. Should they disagree with the terms set out, they must refrain from browsing and using the Website."
+          }
+        ]
+      },
+      {
+        "title": "Intellectual and industrial property rights",
+        "blocks": [
+          {
+            "kind": "p",
+            "text": "Innovation and Security North Labs owns or, where applicable, holds the corresponding licences over the intellectual and industrial property exploitation rights of the Website, as well as over the elements contained in it."
+          },
+          {
+            "kind": "p",
+            "text": "All the contents of the Website, including but not limited to images, photographs, documents, software, texts, graphics, trade marks, logos, distinctive signs, colour combinations, structure and design (hereinafter, the «Contents»), are the intellectual and industrial property of Innovation and Security North Labs or of its licensors. Access to and use of the Website does not grant the User any right over them."
+          },
+          {
+            "kind": "p",
+            "text": "In accordance with Spanish Royal Legislative Decree 1/1996 of 12 April, approving the consolidated text of the Intellectual Property Act, the reproduction, distribution and public communication, including the making available, of all or part of the Contents for commercial purposes, on any medium and by any technical means, is expressly prohibited without the prior express authorisation of the owner, except for uses covered by the limits provided for by law."
+          },
+          {
+            "kind": "p",
+            "text": "The User shall refrain from removing, altering, circumventing or tampering with any protection device or security system installed on the Website."
+          }
+        ]
+      },
+      {
+        "title": "Links to third-party sites",
+        "blocks": [
+          {
+            "kind": "p",
+            "text": "The Website may contain links or hyperlinks that facilitate access to independent third-party websites. Innovation and Security North Labs exercises no control over those websites or their contents and therefore assumes no liability for them."
+          },
+          {
+            "kind": "p",
+            "text": "The inclusion of links to third-party sites does not imply approval, association or recommendation by Innovation and Security North Labs. Innovation and Security North Labs does not warrant that the links will be accurate at the time of access or that the linked sites will be operational at all times."
+          },
+          {
+            "kind": "p",
+            "text": "Innovation and Security North Labs will not be liable for the information accessed by the User through those links, unless it has actual knowledge that the activity or information to which they refer is unlawful or harms the property or rights of a third party for which compensation may be claimed, in which case it will act diligently to remove or disable the corresponding link."
+          }
+        ]
+      },
+      {
+        "title": "Terms of use",
+        "blocks": [
+          {
+            "kind": "p",
+            "text": "The User undertakes to make proper use of the Website in accordance with the applicable legislation and with this Legal Notice."
+          },
+          {
+            "kind": "p",
+            "text": "The use of the Website for purposes that harm the property or interests of Innovation and Security North Labs or of third parties, or that in any other way overload, damage or disable the networks, servers and other computer equipment or software products and applications of Innovation and Security North Labs or of third parties, is expressly prohibited."
+          },
+          {
+            "kind": "p",
+            "text": "In particular, and without prejudice to the foregoing, the User shall refrain from carrying out on the Website or on the systems supporting it any penetration testing, vulnerability analysis, port scanning, reverse engineering or other similar activity without the prior express written authorisation of Innovation and Security North Labs, in accordance with Articles 197 bis and 264 et seq. of the Spanish Criminal Code."
+          },
+          {
+            "kind": "p",
+            "text": "The User shall be liable to Innovation and Security North Labs or to third parties for any damages that may be caused as a result of a breach of these obligations."
+          }
+        ]
+      },
+      {
+        "title": "Disclaimer of liability",
+        "blocks": [
+          {
+            "kind": "p",
+            "text": "Innovation and Security North Labs does not warrant the absence of errors in the contents of the Website or that they are permanently up to date, although it declares that it will take reasonable measures to correct errors, update the contents and maintain the proper functioning of the Website."
+          },
+          {
+            "kind": "p",
+            "text": "Innovation and Security North Labs is not responsible for:"
+          },
+          {
+            "kind": "ul",
+            "items": [
+              "Damages arising from the presence of viruses, malicious programs or any other harmful computer element on the Website or on the server supplying it. It is the User’s responsibility to have adequate tools for the detection of and protection against harmful software.",
+              "Damages arising from failures, interruptions or disconnections in telecommunications networks, in electricity supplies or in any other third-party service affecting the availability of the Website.",
+              "The truthfulness, accuracy, adequacy or currency of contents provided by third parties, being exempt from any contractual or non-contractual liability towards Users who make use of them."
+            ]
+          },
+          {
+            "kind": "p",
+            "text": "The informative, technical or research content published on the Website is for information purposes only and does not constitute professional advice or any warranty of results. Its application by the User is at their sole responsibility and does not create any contractual relationship with Innovation and Security North Labs."
+          },
+          {
+            "kind": "p",
+            "text": "Should the User become aware of the existence of unlawful content or content that may infringe third-party rights, they must notify Innovation and Security North Labs immediately using the contact details set out in section 1, so that it can take the appropriate measures. Receipt of such notification will not constitute, under the LSSICE, actual knowledge of the activities or content indicated by the notifying party."
+          }
+        ]
+      },
+      {
+        "title": "Data protection",
+        "blocks": [
+          {
+            "kind": "p",
+            "text": "In accordance with Regulation (EU) 2016/679 (GDPR) and Spanish Organic Act 3/2018 (LOPDGDD), all personal data provided while using the Website will be processed in accordance with the Privacy Policy, accessible via a link at the bottom of the Website."
+          }
+        ]
+      },
+      {
+        "title": "Cookies",
+        "blocks": [
+          {
+            "kind": "p",
+            "text": "The Website uses cookies. For more information about the cookies used, their purposes and how to manage them, please consult the Cookies Policy, accessible via a link at the bottom of the Website."
+          }
+        ]
+      },
+      {
+        "title": "Partial invalidity",
+        "blocks": [
+          {
+            "kind": "p",
+            "text": "Should any provision of this Legal Notice be declared void or unenforceable, in whole or in part, by any court, tribunal or competent administrative body, such invalidity or unenforceability will not affect the remaining provisions, which will retain their full effect and binding nature."
+          }
+        ]
+      },
+      {
+        "title": "Governing law and jurisdiction",
+        "blocks": [
+          {
+            "kind": "p",
+            "text": "This Legal Notice is governed by Spanish law."
+          },
+          {
+            "kind": "p",
+            "text": "For the resolution of any dispute arising from access to or use of the Website, the parties submit to the Courts of Gijón, except in those cases where the applicable regulations impose a different jurisdiction, in particular consumer protection regulations."
+          },
+          {
+            "kind": "p",
+            "text": "Innovation and Security North Labs states its willingness to resolve any dispute amicably beforehand."
+          }
+        ]
+      }
+    ]
   },
   "mssp": {
     "cta": {
@@ -1477,98 +1607,633 @@
     }
   },
   "privacy": {
-    "sections": {
-      "categorias": {
-        "list": [
-          "Identification data.",
-          "Contact data.",
-          "Academic and professional data.",
-          "Financial and banking data.",
-          "Other data provided by the user."
-        ],
-        "note": "Refusal to provide mandatory data may prevent service delivery.",
-        "title": "Categories of Personal Data"
-      },
-      "comunicaciones": {
-        "list": [
-          "Law enforcement authorities.",
-          "Judicial authorities.",
-          "Public administrations.",
-          "Financial institutions.",
-          "Professionals required for service provision."
-        ],
-        "title": "Disclosure of Personal Data"
-      },
-      "conservacion": {
-        "content": [
-          "Data will be retained for as long as necessary for its intended purpose.",
-          "Candidate data will be retained for one year."
-        ],
-        "title": "Data Retention"
-      },
-      "derechos": {
-        "list": [
-          "Withdraw consent.",
-          "Access personal data.",
-          "Rectify inaccurate data.",
-          "Request data erasure.",
-          "Request processing limitation.",
-          "Request data portability.",
-          "File a complaint with the Spanish Data Protection Agency."
-        ],
-        "title": "Data Subject Rights"
-      },
-      "finalidades": {
-        "intro": "INNOVATION AND SECURITY NORTH LABS will process personal data for the following purposes, provided there is a legal basis:",
-        "list": [
-          "Contracting products and services and their management.",
-          "Responding to inquiries and questions.",
-          "Evaluating candidates in recruitment processes.",
-          "Sending commercial communications unless opposed.",
-          "Producing anonymous statistical reports.",
-          "Keeping users informed through social media.",
-          "Complying with legal obligations."
-        ],
-        "title": "Purpose of Data Processing"
-      },
-      "legitimacion": {
-        "content": [
-          "Recruitment data processing is based on user consent.",
-          "Service management is based on contract execution.",
-          "Commercial communications are based on legitimate interest.",
-          "Data may also be processed to comply with legal obligations."
-        ],
-        "title": "Legal Basis for Data Processing"
-      },
-      "responsable": {
-        "address": "Address",
-        "addressValue": "Calle Peña Brava 21, oficina 1B, PI de Silvota, Llanera, CP 33192",
-        "email": "Email",
-        "emailValue": "info@secnorthlabs.eu",
-        "holder": "Owner",
-        "holderValue": "Innovation and Security North Labs SL",
-        "nif": "Tax ID",
-        "nifValue": "B22966139",
-        "title": "Data Controller"
-      },
-      "seguridad": {
-        "content": [
-          "Technical and organizational measures are applied to protect data.",
-          "This policy may be updated in accordance with current legislation."
-        ],
-        "title": "Security Measures"
-      },
-      "transferencias": {
-        "content": "As a general rule, no international data transfers are carried out. If required, all legal safeguards will be applied.",
-        "title": "International Transfers"
-      }
-    },
-    "seo": {
-      "description": "How ISN Labs (Innovation and Security North Labs SL) processes personal data: purposes, legal basis, retention and rights.",
-      "title": "Privacy policy - ISN Labs"
-    },
     "title": "Privacy",
-    "titleHighlight": "Policy"
+    "titleHighlight": "Policy",
+    "seo": {
+      "title": "Privacy policy - ISN Labs",
+      "description": "How ISN Labs (Innovation and Security North Labs SL) processes personal data: controller, purposes, legal basis, recipients, retention and rights."
+    },
+    "intro": "In compliance with Regulation (EU) 2016/679 of the European Parliament and of the Council of 27 April 2016 on the protection of natural persons with regard to the processing of personal data and on the free movement of such data («GDPR»), with Spanish Organic Act 3/2018 of 5 December on the Protection of Personal Data and the Guarantee of Digital Rights («LOPDGDD»), and with the remaining data protection regulations in force.",
+    "prevalence": "This document is published in Spanish and in English. In the event of any discrepancy between the two versions, the Spanish version prevails.",
+    "sections": [
+      {
+        "title": "Scope and compliance",
+        "blocks": [
+          {
+            "kind": "p",
+            "text": "This Privacy and Personal Data Protection Policy (the «Privacy Policy») applies to the personal data provided through the website www.secnorthlabs.eu (the «Website»), as well as through any other communication channel made available by Innovation and Security North Labs, S.L. («Innovation and Security North Labs» or «the company»)."
+          },
+          {
+            "kind": "p",
+            "text": "Any reference to the «Website» shall equally be understood as a reference to www.secnorthlabs.eu or to any of its subdomains, related domains or dependent web pages."
+          },
+          {
+            "kind": "p",
+            "text": "«User» means the person who accesses, uses or browses the Website."
+          },
+          {
+            "kind": "p",
+            "text": "The User freely and voluntarily decides to provide their personal data through the Website or through the various communication channels made available. Where data is requested by means of forms or other means, the User may be asked to provide certain personal data in order for their request to be answered and processed."
+          },
+          {
+            "kind": "p",
+            "text": "The complete legal information of the Website consists, jointly, of the Legal Notice, this Privacy Policy and the Cookies Policy, documents accessible via a link at the bottom of the Website (the «Complete Legal Information»). The legal information of the Website must be interpreted jointly with all of the documents mentioned."
+          },
+          {
+            "kind": "p",
+            "text": "Where personal data is requested by means of forms, the User will be provided with a basic data protection information panel, together with an acceptance box indicating that they have read and accept this Privacy Policy, with a direct link to it."
+          },
+          {
+            "kind": "p",
+            "text": "Users are advised to read the Complete Legal Information in full and periodically, as its content may be subject to modifications which will be duly published with reference to their version and date."
+          }
+        ]
+      },
+      {
+        "title": "Identification of the data controller and contact details",
+        "blocks": [
+          {
+            "kind": "p",
+            "text": "In compliance with the applicable regulations, the controller of the data provided is:"
+          },
+          {
+            "kind": "dl",
+            "items": [
+              {
+                "term": "Legal entity",
+                "text": "Innovation and Security North Labs, S.L."
+              },
+              {
+                "term": "Tax ID (N.I.F.)",
+                "text": "B-22966139"
+              },
+              {
+                "term": "Registered address",
+                "text": "Calle Peña Brava 21, oficina 1B, PI de Silvota, 33192 Llanera (Asturias), Spain"
+              },
+              {
+                "term": "General email address",
+                "text": "info@secnorthlabs.eu"
+              },
+              {
+                "term": "Data protection email address",
+                "text": "rgpd@secnorthlabs.eu"
+              }
+            ]
+          },
+          {
+            "kind": "p",
+            "text": "To exercise data protection rights, the data subject may write to the postal or email address indicated above, following the procedure described in section 13."
+          }
+        ]
+      },
+      {
+        "title": "Principles applicable to the processing of personal data",
+        "blocks": [
+          {
+            "kind": "p",
+            "text": "Innovation and Security North Labs applies the principles set out in Article 5 GDPR to the processing of personal data:"
+          },
+          {
+            "kind": "dl",
+            "items": [
+              {
+                "term": "Lawfulness, fairness and transparency",
+                "text": "Personal data is processed lawfully, fairly and in a transparent manner in relation to the data subject."
+              },
+              {
+                "term": "Purpose limitation",
+                "text": "Data is collected for specified, explicit and legitimate purposes and is not further processed in a manner incompatible with those purposes."
+              },
+              {
+                "term": "Data minimisation",
+                "text": "Data is adequate, relevant and limited to what is necessary in relation to the purposes for which it is processed."
+              },
+              {
+                "term": "Accuracy",
+                "text": "Data is accurate and, where necessary, kept up to date. Reasonable steps will be taken to ensure that inaccurate data is erased or rectified without delay."
+              },
+              {
+                "term": "Storage limitation",
+                "text": "Data is kept in a form which permits identification of data subjects for no longer than is necessary for the purposes of the processing."
+              },
+              {
+                "term": "Integrity and confidentiality",
+                "text": "Data is processed in a manner that ensures appropriate security through the application of appropriate technical and organisational measures."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Innovation and Security North Labs as a data processor",
+        "blocks": [
+          {
+            "kind": "p",
+            "text": "In the course of providing its security, technological innovation and IT services, Innovation and Security North Labs may act as a data processor on behalf of its clients, processing personal data in accordance with the client’s documented instructions and with the data processing agreement (DPA) signed between the parties."
+          },
+          {
+            "kind": "p",
+            "text": "In such cases, the client acts as the controller and Innovation and Security North Labs undertakes to comply with the obligations set out in Article 28 GDPR, including the application of appropriate technical and organisational measures, the limitation of processing to the controller’s instructions, the duty of confidentiality of authorised personnel, the rules on sub-processors, assistance to the controller in fulfilling its obligations, and the deletion or return of the data at the end of the service, unless there is a legal obligation to retain it."
+          },
+          {
+            "kind": "p",
+            "text": "Innovation and Security North Labs will not access or process its clients’ personal data for purposes other than those set out in the corresponding data processing agreement."
+          }
+        ]
+      },
+      {
+        "title": "Data protection information regarding clients",
+        "blocks": [
+          {
+            "kind": "dl",
+            "items": [
+              {
+                "term": "Controller",
+                "text": "Innovation and Security North Labs, S.L. (contact details in section 2)."
+              },
+              {
+                "term": "Data processed and source",
+                "text": "The data comes from what is provided in the commercial and contractual relationship: quotations, contracts, invoices, requests, emails and any other communication arising from the client relationship. The categories of data processed include: identification data (first name, surname, national ID/company tax ID, job title), contact data (address, telephone, email), commercial data (contracted services, proposals, quotations), economic, financial and banking data (invoicing, payment method, payment history) and technical data arising from the provision of the service (IP addresses, activity logs, configurations)."
+              },
+              {
+                "term": "Purpose",
+                "text": "Contracting of products and/or services and their management, provision and support of the contracted services, incident management, invoicing and collection, and preparation of aggregated and anonymised statistical reports on the company’s activity."
+              },
+              {
+                "term": "Legal basis",
+                "text": "Performance of the contract or of pre-contractual measures (Art. 6(1)(b) GDPR), compliance with legal, tax and accounting obligations (Art. 6(1)(c) GDPR) and legitimate interest for the processing of the data of contact persons of legal entities, sole traders and professionals (Art. 6(1)(f) GDPR and Art. 19 LOPDGDD)."
+              },
+              {
+                "term": "Categories of recipients",
+                "text": "Tax, accounting and employment advisers; the Spanish Tax Agency (AEAT) and other competent public authorities; financial institutions for the management of collections and payments; professionals and suppliers whose involvement is necessary for the provision of the service, under a signed data processing agreement; and, where there is a legal obligation, State law enforcement agencies and the Courts."
+              },
+              {
+                "term": "International transfers",
+                "text": "Not envisaged as a general rule. Where necessary for the provision of the service, the safeguards set out in section 12 will apply."
+              },
+              {
+                "term": "Retention periods",
+                "text": "The data will be kept for the duration of the contractual relationship and, thereafter, for the periods legally established for compliance with tax, accounting and commercial obligations, as well as for the establishment, exercise or defence of legal claims."
+              },
+              {
+                "term": "Automated decisions",
+                "text": "No automated decision-making or profiling is carried out with client data."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Data protection information regarding supplier management",
+        "blocks": [
+          {
+            "kind": "dl",
+            "items": [
+              {
+                "term": "Controller",
+                "text": "Innovation and Security North Labs, S.L. (contact details in section 2)."
+              },
+              {
+                "term": "Data processed and source",
+                "text": "The data comes from the commercial and contractual relationship with suppliers. The categories of data include: identification data (first name, surname, national ID/company tax ID, job title), contact data (address, telephone, email), commercial data (proposals, contracts, terms), economic, financial and banking data (account details, invoices, payment history) and supplier performance assessments."
+              },
+              {
+                "term": "Purpose",
+                "text": "Management of the relationship with suppliers, approval, selection and assessment, contract management, invoicing and compliance with payment obligations."
+              },
+              {
+                "term": "Legal basis",
+                "text": "Performance of the contract (Art. 6(1)(b) GDPR), compliance with tax and accounting obligations (Art. 6(1)(c) GDPR) and legitimate interest for administrative management and the processing of data of contact persons of legal entities (Art. 6(1)(f) GDPR and Art. 19 LOPDGDD)."
+              },
+              {
+                "term": "Categories of recipients",
+                "text": "Tax and accounting advisers, the Spanish Tax Agency (AEAT) and financial institutions."
+              },
+              {
+                "term": "International transfers",
+                "text": "Not envisaged as a general rule. Should they become necessary, the safeguards set out in section 12 will apply."
+              },
+              {
+                "term": "Retention periods",
+                "text": "For the duration of the contractual relationship and, thereafter, for the periods legally established for compliance with tax, accounting and commercial obligations, as well as for the establishment, exercise or defence of legal claims."
+              },
+              {
+                "term": "Automated decisions",
+                "text": "No automated decision-making or profiling is carried out."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Data protection information regarding recruitment and receipt of CVs",
+        "blocks": [
+          {
+            "kind": "dl",
+            "items": [
+              {
+                "term": "Controller",
+                "text": "Innovation and Security North Labs, S.L. (contact details in section 2)."
+              },
+              {
+                "term": "Data processed and source",
+                "text": "The data comes from applications received through selection processes, from unsolicited submission of CVs or from professional job platforms. The categories of data include: identification data (first name, surname, national ID/foreigner ID), contact data (address, telephone, email, professional profile), academic data (education, qualifications, certifications), professional data (experience, references, technical knowledge) and data arising from assessment and selection processes."
+              },
+              {
+                "term": "Purpose",
+                "text": "To assess applications in selection and recruitment processes: receiving and evaluating CVs, conducting interviews and tests, and maintaining a talent pool."
+              },
+              {
+                "term": "Legal basis",
+                "text": "Consent of the data subject, given by voluntarily submitting their application (Art. 6(1)(a) GDPR), and the taking of pre-contractual measures at the data subject’s request (Art. 6(1)(b) GDPR). Maintaining the talent pool is based on the candidate’s consent, which may be withdrawn at any time."
+              },
+              {
+                "term": "Categories of recipients",
+                "text": "Internal staff of Innovation and Security North Labs involved in the selection processes and, where applicable, providers of application management platforms under a signed data processing agreement. No data is disclosed to third parties for any other purpose."
+              },
+              {
+                "term": "International transfers",
+                "text": "Not envisaged as a general rule. Should they become necessary, the safeguards set out in section 12 will apply."
+              },
+              {
+                "term": "Retention periods",
+                "text": "Candidates’ data will be kept for a maximum period of one (1) year from receipt or last update. Once that period has elapsed without the CV having been updated or used, it will be securely deleted, unless it must be kept for a longer period to comply with a legal obligation or for the establishment, exercise or defence of legal claims. If, as a result of the selection process, the candidate is hired, their data will become part of their employment file."
+              },
+              {
+                "term": "Automated decisions",
+                "text": "No automated decision-making or profiling is carried out in selection processes."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Data protection information regarding sending and receiving emails",
+        "blocks": [
+          {
+            "kind": "dl",
+            "items": [
+              {
+                "term": "Controller",
+                "text": "Innovation and Security North Labs, S.L. (contact details in section 2)."
+              },
+              {
+                "term": "Data processed and source",
+                "text": "The data comes from the emails sent and received by Innovation and Security North Labs through its corporate email accounts. Any information or personal data included in those emails is incorporated into the company’s processing systems."
+              },
+              {
+                "term": "Purpose",
+                "text": "To manage, handle and respond to the queries and questions raised, and to maintain the relationship established through corporate email. Providing data by email is voluntary; depending on the subject matter, only the necessary data will be requested, so refusal to provide mandatory data could prevent the request from being handled or the service from being provided."
+              },
+              {
+                "term": "Legal basis",
+                "text": "Performance of the contract or of the services requested (Art. 6(1)(b) GDPR), consent given by sending the email (Art. 6(1)(a) GDPR), compliance with legal obligations (Art. 6(1)(c) GDPR) and legitimate interest for the processing of contact data of legal entities, sole traders and professionals (Art. 6(1)(f) GDPR and Art. 19 LOPDGDD)."
+              },
+              {
+                "term": "Categories of recipients",
+                "text": "Third parties to whom disclosure is necessary by legal obligation or as a result of the relationship itself; public authorities with competence in the matter; State law enforcement agencies; the Courts; and service providers with which Innovation and Security North Labs has signed the corresponding data processing agreement."
+              },
+              {
+                "term": "International transfers",
+                "text": "Not envisaged as a general rule. Should they become necessary, the safeguards set out in section 12 will apply."
+              },
+              {
+                "term": "Retention periods",
+                "text": "For the duration of the relationship and, thereafter, for the periods legally established for compliance with legal obligations or for the establishment, exercise or defence of legal claims."
+              },
+              {
+                "term": "Automated decisions",
+                "text": "No automated decision-making or profiling is carried out."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Data protection information regarding electronic commercial communications",
+        "blocks": [
+          {
+            "kind": "p",
+            "text": "In compliance with Article 21 of Spanish Act 34/2002 of 11 July on Information Society Services and Electronic Commerce (LSSICE), the GDPR and the LOPDGDD:"
+          },
+          {
+            "kind": "dl",
+            "items": [
+              {
+                "term": "Controller",
+                "text": "Innovation and Security North Labs, S.L. (contact details in section 2)."
+              },
+              {
+                "term": "Data processed and source",
+                "text": "Email address and, where applicable, first name, surname, company and job title."
+              },
+              {
+                "term": "Purpose",
+                "text": "Sending electronic commercial communications about the products, services, news and activities of Innovation and Security North Labs."
+              },
+              {
+                "term": "Legal basis",
+                "text": "Consent of the data subject (Art. 6(1)(a) GDPR). In the case of clients, sending communications about products or services similar to those originally contracted is based on the company’s legitimate interest (Art. 6(1)(f) GDPR), under the terms of Article 21.2 LSSICE. Every communication will offer the recipient the possibility to object to the processing."
+              },
+              {
+                "term": "Categories of recipients",
+                "text": "Providers of electronic communication sending and management services, under a signed data processing agreement."
+              },
+              {
+                "term": "International transfers",
+                "text": "Not envisaged as a general rule. Should they become necessary, the safeguards set out in section 12 will apply."
+              },
+              {
+                "term": "Retention periods",
+                "text": "The data will be kept until the data subject withdraws their consent or objects to the processing and, thereafter, for the period necessary to demonstrate compliance with the applicable legal obligations."
+              },
+              {
+                "term": "Automated decisions",
+                "text": "No automated decision-making or profiling is carried out."
+              }
+            ]
+          },
+          {
+            "kind": "p",
+            "text": "Data subjects may unsubscribe from commercial communications at any time, simply and free of charge, by sending an email to rgpd@secnorthlabs.eu or by using the unsubscribe link included in every communication."
+          }
+        ]
+      },
+      {
+        "title": "Data protection information regarding the use and management of the Website",
+        "blocks": [
+          {
+            "kind": "dl",
+            "items": [
+              {
+                "term": "Controller",
+                "text": "Innovation and Security North Labs, S.L. (contact details in section 2)."
+              },
+              {
+                "term": "Data processed and source",
+                "text": "The data comes from the completion of the contact forms and from the use of the communication channels made available on the Website. The data processed includes first name, surname, location, email address, telephone, company, IP address and the content of the message, as well as information obtained through cookies. Where fields are marked with an asterisk (*) or indicated as mandatory, they must be completed; if they are not provided, Innovation and Security North Labs may not accept or handle the query submitted."
+              },
+              {
+                "term": "Purpose",
+                "text": "To manage, handle and respond to the queries received through the Website, to send administrative, technical, organisational or commercial information about the products and services covered by the request, and to prepare aggregated and anonymised statistical reports on the use of the Website."
+              },
+              {
+                "term": "Legal basis",
+                "text": "Consent of the data subject (Art. 6(1)(a) GDPR), the taking of pre-contractual measures at the data subject’s request (Art. 6(1)(b) GDPR) and legitimate interest for the processing of professional contact data (Art. 6(1)(f) GDPR and Art. 19 LOPDGDD)."
+              },
+              {
+                "term": "Categories of recipients",
+                "text": "Providers of hosting, maintenance and information management services, under a signed data processing agreement, and the other categories indicated in the preceding sections where applicable."
+              },
+              {
+                "term": "International transfers",
+                "text": "Not envisaged as a general rule. Should they become necessary, the safeguards set out in section 12 will apply."
+              },
+              {
+                "term": "Retention periods",
+                "text": "For as long as is necessary to handle the query and, thereafter, for the periods legally established for compliance with legal obligations or for the establishment, exercise or defence of legal claims."
+              },
+              {
+                "term": "Automated decisions",
+                "text": "No automated decision-making or profiling is carried out."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Data protection information regarding the use of cookies",
+        "blocks": [
+          {
+            "kind": "p",
+            "text": "The Website uses cookies. The categories of data processed include online identifiers, browsing data and user preferences."
+          },
+          {
+            "kind": "p",
+            "text": "The purpose, the legal basis, the categories of cookies used, the recipients and how to manage them are set out in the Cookies Policy, accessible via a link at the bottom of the Website."
+          }
+        ]
+      },
+      {
+        "title": "International data transfers",
+        "blocks": [
+          {
+            "kind": "p",
+            "text": "As a general rule, Innovation and Security North Labs does not carry out international transfers of personal data."
+          },
+          {
+            "kind": "p",
+            "text": "Should personal data come to be transferred internationally as a result of its processing, such transfers will be carried out in accordance with the applicable data protection regulations and, in particular, to countries whose level of protection has been declared adequate by an Adequacy Decision adopted by the European Commission."
+          },
+          {
+            "kind": "p",
+            "text": "Where the European Commission has not adopted an Adequacy Decision in respect of a given country, Innovation and Security North Labs will adopt other safeguards provided for in data protection regulations, with particular attention to signing Standard Contractual Clauses, accompanied, where appropriate, by any necessary supplementary measures."
+          }
+        ]
+      },
+      {
+        "title": "Rights regarding the protection of personal data",
+        "blocks": [
+          {
+            "kind": "p",
+            "text": "Innovation and Security North Labs informs data subjects of the existence of the following rights:"
+          },
+          {
+            "kind": "dl",
+            "items": [
+              {
+                "term": "Right of access",
+                "text": "To obtain confirmation as to whether personal data concerning them is being processed and, if so, to access that data and information about the purposes of the processing, the categories of data, the recipients, the envisaged retention periods, the existence of other rights and the source of the data where it was not obtained from the data subject."
+              },
+              {
+                "term": "Right to rectification",
+                "text": "To obtain the rectification of inaccurate personal data or the completion of incomplete data."
+              },
+              {
+                "term": "Right to erasure",
+                "text": "To obtain the erasure of the data where it is no longer necessary for the purposes for which it was collected, consent is withdrawn, the data subject objects to the processing, the data has been unlawfully processed, or it must be erased to comply with a legal obligation."
+              },
+              {
+                "term": "Right to restriction of processing",
+                "text": "To obtain the restriction of processing where the accuracy of the data is contested, the processing is unlawful, the data is no longer needed by the controller but the data subject needs it for legal claims, or the data subject has objected to the processing."
+              },
+              {
+                "term": "Right to data portability",
+                "text": "To receive the personal data provided in a structured, commonly used and machine-readable format, and to transmit it to another controller, where the processing is based on consent or on the performance of a contract and is carried out by automated means."
+              },
+              {
+                "term": "Right to object",
+                "text": "To object at any time, on grounds relating to their particular situation, to the processing of their personal data based on legitimate interest, as well as, in any case and without needing to give reasons, to processing for direct marketing purposes."
+              },
+              {
+                "term": "Right not to be subject to automated individual decision-making",
+                "text": "Not to be subject to a decision based solely on automated processing, including profiling, which produces legal effects or similarly significantly affects them."
+              },
+              {
+                "term": "Right to withdraw consent",
+                "text": "To withdraw consent at any time, without affecting the lawfulness of processing based on consent before its withdrawal."
+              },
+              {
+                "term": "Right to lodge a complaint with a supervisory authority",
+                "text": "Data subjects may lodge a complaint with the Spanish Data Protection Agency (C/ Jorge Juan 6, 28001 Madrid — www.aepd.es), in particular where they have not obtained satisfaction in the exercise of their rights."
+              }
+            ]
+          },
+          {
+            "kind": "h3",
+            "text": "How to exercise these rights"
+          },
+          {
+            "kind": "p",
+            "text": "The rights may be exercised before Innovation and Security North Labs, free of charge, by any of the following means:"
+          },
+          {
+            "kind": "ul",
+            "items": [
+              "A letter addressed to: Innovation and Security North Labs, S.L., Calle Peña Brava 21, oficina 1B, PI de Silvota, 33192 Llanera (Asturias), Spain.",
+              "An email to: rgpd@secnorthlabs.eu"
+            ]
+          },
+          {
+            "kind": "p",
+            "text": "To exercise these rights, the data subject must provide:"
+          },
+          {
+            "kind": "ul",
+            "items": [
+              "A written and signed request, stating the right they wish to exercise.",
+              "A copy of their identity document (national ID, passport or equivalent document), only where there are reasonable doubts about the identity of the applicant.",
+              "Where acting through a representative: documentation evidencing that representation (power of attorney, express authorisation, or evidence of parental authority or guardianship)."
+            ]
+          },
+          {
+            "kind": "p",
+            "text": "Innovation and Security North Labs will handle requests within a maximum period of one month from receipt, which may be extended by two further months in the case of complex or numerous requests, informing the data subject of that extension within the first month. Innovation and Security North Labs may request additional information where necessary to verify the identity of the applicant or to locate the data covered by the request."
+          }
+        ]
+      },
+      {
+        "title": "Quality and accuracy of the data",
+        "blocks": [
+          {
+            "kind": "p",
+            "text": "Innovation and Security North Labs requests only such personal data as is adequate, relevant and not excessive in relation to the purpose for which it is processed."
+          },
+          {
+            "kind": "p",
+            "text": "The User warrants the truthfulness, accuracy, currency and authenticity of the personal data provided, and is liable for any damages that may be caused as a result of a breach of this warranty. The User also undertakes to notify Innovation and Security North Labs of any change or correction to their data through the channels indicated in section 13."
+          },
+          {
+            "kind": "p",
+            "text": "Identity theft, the adoption of false identities, the provision of third-party data as one’s own and the provision of any untruthful data are expressly prohibited; records made under such conditions may be cancelled, without prejudice to any appropriate legal action."
+          }
+        ]
+      },
+      {
+        "title": "Third-party data",
+        "blocks": [
+          {
+            "kind": "p",
+            "text": "If the User provides personal data of third parties, they must beforehand have informed those third parties expressly, precisely and unequivocally about the content of this Privacy Policy and must hold the necessary authorisation to provide that data."
+          },
+          {
+            "kind": "p",
+            "text": "In the event of a breach of this section, Innovation and Security North Labs disclaims any liability arising from the processing of data provided by the User without complying with the legal requirements, and the User shall be liable to Innovation and Security North Labs or to any third party for any damages caused."
+          }
+        ]
+      },
+      {
+        "title": "Data of minors",
+        "blocks": [
+          {
+            "kind": "p",
+            "text": "The Website of Innovation and Security North Labs and the services offered by the company are aimed exclusively at persons over eighteen (18) years of age with sufficient legal capacity to enter into contracts."
+          },
+          {
+            "kind": "p",
+            "text": "Innovation and Security North Labs does not intentionally collect or process personal data of minors. Should it become aware that data of a person under 18 has been collected without the consent of their legal representatives, it will proceed to delete it immediately."
+          },
+          {
+            "kind": "p",
+            "text": "If a legal representative becomes aware that a minor in their care has provided personal data to Innovation and Security North Labs, they may get in touch at rgpd@secnorthlabs.eu to request its erasure."
+          },
+          {
+            "kind": "p",
+            "text": "Where data of minors or of persons lacking legal capacity is provided through the Website, whoever provides it and acts on their behalf declares, under their own responsibility, that they hold legal representation, parental authority or guardianship, or that they have the express authorisation of whoever holds it; the company may require the corresponding supporting documentation."
+          },
+          {
+            "kind": "p",
+            "text": "Legal representatives shall in any event be held responsible for the acts carried out by the persons in their care, in accordance with the applicable regulations."
+          }
+        ]
+      },
+      {
+        "title": "Security measures",
+        "blocks": [
+          {
+            "kind": "p",
+            "text": "Innovation and Security North Labs adopts and implements the technical and organisational measures necessary to guarantee the security of personal data, as required by Article 32 GDPR, with the aim of ensuring the ongoing confidentiality, integrity, availability and resilience of processing systems and services."
+          },
+          {
+            "kind": "p",
+            "text": "The measures applied include, among others: encryption in transit and at rest, multi-factor authentication (MFA), access management based on the principle of least privilege, continuous monitoring, encrypted and verified backups, data loss prevention measures, periodic access reviews, confidentiality agreements with all personnel and periodic training in data protection and information security."
+          },
+          {
+            "kind": "p",
+            "text": "Nevertheless, the User should be aware that security measures on the Internet are not infallible. Innovation and Security North Labs will process personal data with due confidentiality and the duty of secrecy."
+          },
+          {
+            "kind": "p",
+            "text": "Innovation and Security North Labs will not be liable for the processing and subsequent use of personal data that may be carried out by third-party information society service providers acting outside the Website."
+          }
+        ]
+      },
+      {
+        "title": "Social media",
+        "blocks": [
+          {
+            "kind": "p",
+            "text": "Innovation and Security North Labs maintains a presence on professional social networks in order to inform users about its activity, products and services. The processing of the personal data of those who follow the corporate profiles is based on the consent given by following those profiles or interacting with them (Art. 6(1)(a) GDPR)."
+          },
+          {
+            "kind": "p",
+            "text": "The processing of personal data carried out on those networks is also subject to the terms of use, legal terms and privacy policies of each platform, which Users are advised to consult. Innovation and Security North Labs is not responsible for the processing that the platforms themselves carry out on their users’ data."
+          }
+        ]
+      },
+      {
+        "title": "Term and modification of the Privacy Policy",
+        "blocks": [
+          {
+            "kind": "p",
+            "text": "The applicable Privacy Policy will be the one published on the Website at any given time. Innovation and Security North Labs reserves the right to modify, in whole or in part, at any time, the content of this Privacy Policy by way of extension, improvement, clarification or update, whether due to legislative or case-law changes or to business strategy, without such modification having retroactive effect."
+          },
+          {
+            "kind": "p",
+            "text": "The Privacy Policy will always be accessible via a link at the bottom of the Website, stating its version and date of publication."
+          }
+        ]
+      },
+      {
+        "title": "Severability and effect",
+        "blocks": [
+          {
+            "kind": "p",
+            "text": "If any of the clauses included in this document were declared void, the remainder of the document will retain its full effect and binding nature on the same terms, provided that it can subsist without the clause declared void."
+          }
+        ]
+      },
+      {
+        "title": "Governing law and jurisdiction",
+        "blocks": [
+          {
+            "kind": "p",
+            "text": "The applicable law is Spanish law. Unless specific regulations establishing another jurisdiction apply, in particular consumer protection regulations, the parties submit to the Courts of Gijón for any dispute, without prejudice to the willingness of Innovation and Security North Labs to resolve any dispute amicably beforehand."
+          }
+        ]
+      }
+    ]
   },
   "sectors": {
     "cta": {

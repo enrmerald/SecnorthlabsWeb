@@ -1,57 +1,38 @@
 import { Breadcrumbs } from '@/components/ui/Breadcrumbs'
 import { Card } from '@/components/ui/Card'
+import { TextoEnlazado } from '@/components/ui/TextoEnlazado'
 import { getLocalizedPath, type Locale, type RouteId } from '@/config/routes'
 import { cargarMensajes } from '@/i18n/mensajes'
-import { EMPRESA } from '@/lib/empresa'
 import type { TramoBreadcrumb } from '@/lib/tipos'
 
 /**
  * Paginas legales - `/politica-privacidad/`, `/aviso-legal/` y `/cookies/`
  * (secciones 4.13 a 4.15).
  *
- * **El texto se porta palabra por palabra desde la SPA actual.** No se reescribe
- * ni se resume ni se "mejora": lo redacto quien lleva cumplimiento y solo esa
- * persona puede cambiarlo (pendiente P16). Aqui solo se reestiliza con los
- * tokens nuevos.
+ * **El texto se porta palabra por palabra.** No se reescribe ni se resume ni se
+ * "mejora": lo redacto quien lleva cumplimiento y solo esa persona puede
+ * cambiarlo (pendiente P16). Aqui solo se reestiliza con los tokens nuevos.
  *
- * Un cambio si se ha hecho, y es una correccion de dato: los datos del
- * responsable estaban **incrustados en el JSX** de `Privacidad.tsx` y
- * `Aviso.tsx`, no en el JSON, y la razon social que figuraba -«Innovation &
- * NORTH LABS SL»- no es la denominacion registrada. Ahora salen de
- * `lib/empresa.ts`, que es la unica fuente de datos de empresa del sitio.
+ * De donde sale cada texto:
+ *
+ * - **Politica de privacidad** (21 apartados) y **aviso legal** (10), de los
+ *   dos documentos v1.0 que entrego cumplimiento. Sustituyen a los que venian
+ *   de la SPA anterior, que tenian 9 y 10 apartados con otro articulado.
+ * - **Cookies**: sigue viniendo de la SPA anterior. ⚠️ Y sigue declarando que
+ *   solo hay cookies estrictamente necesarias, lo que dejo de ser cierto al
+ *   instalar Google Analytics y Tag Manager. Es el pendiente mas urgente de
+ *   esta pagina.
+ *
+ * **El ingles de los dos documentos nuevos es una traduccion de trabajo**, no
+ * un original: por eso cada pagina declara que en caso de discrepancia
+ * prevalece el espanol. Cumplimiento tiene que repasarla.
+ *
+ * ⚠️ Los datos de empresa de estos dos documentos viven ahora en
+ * `messages/*.json`, y **no** en `lib/empresa.ts`. Es deliberado -el texto
+ * legal se porta literal del documento firmado, no se compone a trozos- pero
+ * significa que un cambio de domicilio o de telefono hay que hacerlo en los dos
+ * sitios.
  */
-
-/** Ficha del responsable del tratamiento. La comparten privacidad y aviso legal. */
-function FichaResponsable({
-  etiquetas,
-}: {
-  etiquetas: { holder: string; address: string; nif: string; email: string }
-}) {
-  const filas = [
-    { label: etiquetas.holder, value: EMPRESA.razonSocial },
-    {
-      label: etiquetas.address,
-      value: `${EMPRESA.direccion.calle}, ${EMPRESA.direccion.poligono}, ${EMPRESA.direccion.localidad}, CP ${EMPRESA.direccion.codigoPostal}`,
-    },
-    { label: etiquetas.nif, value: EMPRESA.nif },
-  ]
-
-  return (
-    <address className="flex flex-col gap-2 not-italic">
-      {filas.map((fila) => (
-        <p key={fila.label} className="text-sm">
-          <span className="font-display text-cyan font-bold">{fila.label}:</span> {fila.value}
-        </p>
-      ))}
-      <p className="text-sm">
-        <span className="font-display text-cyan font-bold">{etiquetas.email}:</span>{' '}
-        <a href={`mailto:${EMPRESA.email}`} className="hover:text-cyan underline">
-          {EMPRESA.email}
-        </a>
-      </p>
-    </address>
-  )
-}
 
 function ArmazonLegal({
   locale,
@@ -121,120 +102,141 @@ const Parrafos = ({ textos }: { textos: readonly string[] }) => (
   </>
 )
 
-const Lista = ({ textos }: { textos: readonly string[] }) => (
-  <ul className="ml-5 flex list-disc flex-col gap-2">
-    {textos.map((texto, indice) => (
-      <li key={`${indice}-${texto.slice(0, 24)}`}>{texto}</li>
-    ))}
-  </ul>
-)
+/**
+ * La forma de un apartado de un documento legal.
+ *
+ * Se declara a mano en lugar de deducirla del JSON porque TypeScript ensancha
+ * los literales de un fichero importado: `kind` le sale `string`, no
+ * `'p' | 'ul' | …`, y sin eso el `switch` de abajo no discrimina nada. Cuesta
+ * una asercion en un solo punto, y a cambio anadir un tipo de bloque nuevo sin
+ * pintarlo deja de compilar.
+ */
+type Bloque =
+  | { kind: 'p'; text: string }
+  | { kind: 'h3'; text: string }
+  | { kind: 'ul'; items: readonly string[] }
+  | { kind: 'dl'; items: readonly { term: string; text: string }[] }
 
-export function Privacidad({ locale }: { locale: Locale }) {
-  const { privacy } = cargarMensajes(locale)
-  const s = privacy.sections
+interface SeccionDeTexto {
+  title: string
+  blocks: readonly Bloque[]
+}
 
+/** Lo comun a la politica de privacidad y al aviso legal. */
+interface DocumentoLegal {
+  title: string
+  titleHighlight: string
+  intro: string
+  prevalence: string
+  sections: readonly SeccionDeTexto[]
+}
+
+/**
+ * Un bloque de texto legal.
+ *
+ * Los apartados no tienen todos la misma forma -unos son parrafos, otros listas
+ * de termino y definicion, y el de derechos lleva ademas un subtitulo-, asi que
+ * cada apartado declara sus bloques en `messages/*.json` y aqui solo se decide
+ * como se pinta cada tipo. La alternativa era un componente por apartado, que
+ * con 31 apartados entre los dos documentos y en dos idiomas significa tocar
+ * codigo cada vez que cumplimiento cambia una coma.
+ */
+function BloqueLegal({ bloque }: { bloque: Bloque }) {
+  switch (bloque.kind) {
+    case 'p':
+      return (
+        <p>
+          <TextoEnlazado texto={bloque.text} />
+        </p>
+      )
+
+    case 'h3':
+      return <h3 className="font-display text-text mt-2 text-sm font-bold">{bloque.text}</h3>
+
+    case 'ul':
+      return (
+        <ul className="ml-5 flex list-disc flex-col gap-2">
+          {bloque.items.map((item, indice) => (
+            <li key={`${indice}-${item.slice(0, 24)}`}>
+              <TextoEnlazado texto={item} />
+            </li>
+          ))}
+        </ul>
+      )
+
+    case 'dl':
+      return (
+        // `<dl>` y no una lista con negritas: cada fila es un termino y su
+        // definicion, que es literalmente lo que describe este elemento, y un
+        // lector de pantalla puede anunciarlos como tales.
+        <dl className="flex flex-col gap-3">
+          {bloque.items.map((item) => (
+            <div key={item.term}>
+              <dt className="font-display text-cyan text-[0.8125rem] font-bold">{item.term}</dt>
+              <dd>
+                <TextoEnlazado texto={item.text} />
+              </dd>
+            </div>
+          ))}
+        </dl>
+      )
+  }
+}
+
+/**
+ * Documento legal completo: encabezado normativo, version y apartados.
+ *
+ * La politica de privacidad y el aviso legal lo comparten porque tienen la
+ * misma forma. No es una abstraccion prematura: son los dos documentos que
+ * llegan de cumplimiento en Word, con el mismo articulado numerado, y
+ * mantenerlos por separado significaba arreglar dos veces cada detalle de
+ * maquetacion.
+ */
+function PaginaDocumento({
+  locale,
+  routeId,
+  documento,
+}: {
+  locale: Locale
+  routeId: RouteId
+  documento: DocumentoLegal
+}) {
   return (
     <ArmazonLegal
       locale={locale}
-      routeId="privacy"
-      title={privacy.title}
-      titleHighlight={privacy.titleHighlight}
+      routeId={routeId}
+      title={documento.title}
+      titleHighlight={documento.titleHighlight}
     >
-      <SeccionLegal numero={1} titulo={s.responsable.title}>
-        <FichaResponsable etiquetas={s.responsable} />
-      </SeccionLegal>
+      {/* La version va a la vista porque los dos documentos se comprometen a
+          publicarla, y porque sin ella nadie puede saber si esta leyendo la que
+          acepto hace seis meses. */}
+      <div className="border-border flex flex-col gap-3 border-b pb-8">
+        <p className="texto-cuerpo text-sm">{documento.intro}</p>
+        <p className="text-text-dim text-xs italic">{documento.prevalence}</p>
+      </div>
 
-      <SeccionLegal numero={2} titulo={s.finalidades.title}>
-        <p className="text-text">{s.finalidades.intro}</p>
-        <Lista textos={s.finalidades.list} />
-      </SeccionLegal>
-
-      <SeccionLegal numero={3} titulo={s.legitimacion.title}>
-        <Parrafos textos={s.legitimacion.content} />
-      </SeccionLegal>
-
-      <SeccionLegal numero={4} titulo={s.categorias.title}>
-        <Lista textos={s.categorias.list} />
-        <p className="border-border border-t pt-4 text-xs italic">{s.categorias.note}</p>
-      </SeccionLegal>
-
-      <SeccionLegal numero={5} titulo={s.comunicaciones.title}>
-        <Lista textos={s.comunicaciones.list} />
-      </SeccionLegal>
-
-      <SeccionLegal numero={6} titulo={s.transferencias.title}>
-        <p>{s.transferencias.content}</p>
-      </SeccionLegal>
-
-      <SeccionLegal numero={7} titulo={s.conservacion.title}>
-        <Parrafos textos={s.conservacion.content} />
-      </SeccionLegal>
-
-      <SeccionLegal numero={8} titulo={s.derechos.title}>
-        <Lista textos={s.derechos.list} />
-      </SeccionLegal>
-
-      <SeccionLegal numero={9} titulo={s.seguridad.title}>
-        <Parrafos textos={s.seguridad.content} />
-      </SeccionLegal>
+      {documento.sections.map((seccion, indice) => (
+        <SeccionLegal key={seccion.title} numero={indice + 1} titulo={seccion.title}>
+          {seccion.blocks.map((bloque, i) => (
+            <BloqueLegal key={`${bloque.kind}-${i}`} bloque={bloque} />
+          ))}
+        </SeccionLegal>
+      ))}
     </ArmazonLegal>
+  )
+}
+
+export function Privacidad({ locale }: { locale: Locale }) {
+  const { privacy } = cargarMensajes(locale)
+  return (
+    <PaginaDocumento locale={locale} routeId="privacy" documento={privacy as DocumentoLegal} />
   )
 }
 
 export function AvisoLegal({ locale }: { locale: Locale }) {
   const { legal } = cargarMensajes(locale)
-  const s = legal.sections
-
-  return (
-    <ArmazonLegal
-      locale={locale}
-      routeId="legal"
-      title={legal.title}
-      titleHighlight={legal.titleHighlight}
-    >
-      <SeccionLegal numero={1} titulo={s.responsable.title}>
-        <FichaResponsable etiquetas={s.responsable} />
-      </SeccionLegal>
-
-      <SeccionLegal numero={2} titulo={s.objeto.title}>
-        <Parrafos textos={[s.objeto.p1, s.objeto.p2]} />
-      </SeccionLegal>
-
-      <SeccionLegal numero={3} titulo={s.propiedad.title}>
-        <Parrafos textos={[s.propiedad.p1, s.propiedad.p2, s.propiedad.p3]} />
-      </SeccionLegal>
-
-      <SeccionLegal numero={4} titulo={s.enlaces.title}>
-        <Parrafos textos={[s.enlaces.p1, s.enlaces.p2, s.enlaces.p3]} />
-      </SeccionLegal>
-
-      <SeccionLegal numero={5} titulo={s.uso.title}>
-        <Parrafos textos={[s.uso.p1, s.uso.p2]} />
-      </SeccionLegal>
-
-      <SeccionLegal numero={6} titulo={s.exclusion.title}>
-        <Parrafos
-          textos={[s.exclusion.p1, s.exclusion.p2, s.exclusion.p3, s.exclusion.p4, s.exclusion.p5]}
-        />
-      </SeccionLegal>
-
-      <SeccionLegal numero={7} titulo={s.proteccion.title}>
-        <Parrafos textos={[s.proteccion.p1, s.proteccion.p2]} />
-      </SeccionLegal>
-
-      <SeccionLegal numero={8} titulo={s.cookies.title}>
-        <p>{s.cookies.content}</p>
-      </SeccionLegal>
-
-      <SeccionLegal numero={9} titulo={s.miscelanea.title}>
-        <p>{s.miscelanea.p1}</p>
-      </SeccionLegal>
-
-      <SeccionLegal numero={10} titulo={s.jurisdiccion.title}>
-        <Parrafos textos={[s.jurisdiccion.p1, s.jurisdiccion.p2]} />
-      </SeccionLegal>
-    </ArmazonLegal>
-  )
+  return <PaginaDocumento locale={locale} routeId="legal" documento={legal as DocumentoLegal} />
 }
 
 export function Cookies({ locale }: { locale: Locale }) {

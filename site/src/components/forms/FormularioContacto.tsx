@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useId, useRef, useState } from 'react'
+import { useEffect, useId, useRef, useState, type ReactNode } from 'react'
 import { Button } from '@/components/ui/Button'
 import type { Locale } from '@/config/routes'
 import { RUTAS_API, enviar, esperarMinimoAntispam, nuevoSubmissionId, type RespuestaContacto } from '@/lib/api/cliente'
@@ -42,11 +42,6 @@ export interface TextosContacto {
   requiredNote: string
   privacyLinkLabel: string
   privacyNote: string
-  privacyBasicInfo: {
-    title: string
-    rows: readonly { label: string; value: string }[]
-    moreLabel: string
-  }
   errors: Record<string, string>
 }
 
@@ -54,6 +49,21 @@ interface Props {
   textos: TextosContacto
   locale: Locale
   privacyHref: string
+  /**
+   * La informacion basica de proteccion de datos, ya renderizada.
+   *
+   * ═══════════════════════════════════════════════════════════════════════════
+   * Llega como nodo y no como cadenas por una razon medible: es contenido
+   * estatico -cinco filas de texto legal y un enlace- que no reacciona a nada, y
+   * si se pinta aqui dentro viaja al navegador como JavaScript, porque este
+   * fichero es un componente de cliente. Montandolo en el componente de build
+   * que lo envuelve, sale como HTML y no cuesta ni un byte de bundle.
+   *
+   * No es una optimizacion teorica: pintarlo aqui hacia que `check:js` pasara de
+   * 156,9 a 157,1 KB y rompiera el techo de 157.
+   * ═══════════════════════════════════════════════════════════════════════════
+   */
+  infoPrivacidad: ReactNode
   /** Versiones del texto informativo, para poder acreditar qué se mostró. */
   privacyVersion: string
   marketingVersion: string
@@ -82,37 +92,6 @@ const VACIO: Campos = {
   message: '',
 }
 
-/**
- * Convierte en `mailto:` las direcciones que aparezcan dentro de un texto.
- *
- * La informacion basica de proteccion de datos incluye el correo al que se
- * ejercen los derechos, metido en medio de una frase. Escrito como texto plano
- * obliga a seleccionarlo y copiarlo a mano, justo a quien esta intentando
- * ejercer un derecho.
- *
- * No se usa `dangerouslySetInnerHTML` para meter la etiqueta: el texto se parte
- * y React pinta cada trozo como texto, de modo que **sigue escapandose todo**.
- * Aunque estas cadenas salgan de `messages/*.json` y no de fuera, un helper que
- * inyecta HTML acaba antes o despues recibiendo algo que si viene de fuera.
- */
-function ConCorreosEnlazados({ texto }: { texto: string }) {
-  const trozos = texto.split(/([\w.+-]+@[\w-]+\.[\w.]+)/g)
-
-  return (
-    <>
-      {trozos.map((trozo, i) =>
-        /^[\w.+-]+@[\w-]+\.[\w.]+$/.test(trozo) ? (
-          <a key={i} href={`mailto:${trozo}`} className="text-cyan underline">
-            {trozo}
-          </a>
-        ) : (
-          trozo
-        ),
-      )}
-    </>
-  )
-}
-
 /** Dominios de correo personal. Provocan aviso, no bloqueo. */
 const DOMINIOS_GENERICOS = ['gmail.', 'hotmail.', 'outlook.', 'yahoo.', 'live.', 'icloud.']
 
@@ -125,6 +104,7 @@ export function FormularioContacto({
   privacyVersion,
   marketingVersion,
   a11yRequerido,
+  infoPrivacidad,
 }: Props) {
   const base = useId()
   const idDe = (campo: string) => `${base}-${campo}`
@@ -451,26 +431,7 @@ export function FormularioContacto({
         maximo={MAX_MENSAJE}
       />
 
-      {/* Informacion basica en capas, visible sin desplegar nada. La AEPD pide
-          que este junto al formulario, no escondida tras un enlace. */}
-      <details className="border-border bg-panel/50 rounded-[10px] border p-4">
-        <summary className="font-display cursor-pointer text-xs font-bold">
-          {textos.privacyBasicInfo.title}
-        </summary>
-        <dl className="mt-3 flex flex-col gap-2">
-          {textos.privacyBasicInfo.rows.map((fila) => (
-            <div key={fila.label} className="text-xs">
-              <dt className="font-display text-cyan inline font-bold">{fila.label}: </dt>
-              <dd className="text-text-dim inline">
-                <ConCorreosEnlazados texto={fila.value} />
-              </dd>
-            </div>
-          ))}
-        </dl>
-        <a href={privacyHref} className="text-cyan mt-3 inline-block text-xs underline">
-          {textos.privacyBasicInfo.moreLabel}
-        </a>
-      </details>
+      {infoPrivacidad}
 
       <CampoCasilla
         id={idDe('privacy')}
