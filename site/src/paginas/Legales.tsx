@@ -1,5 +1,4 @@
 import { Breadcrumbs } from '@/components/ui/Breadcrumbs'
-import { Card } from '@/components/ui/Card'
 import { TextoEnlazado } from '@/components/ui/TextoEnlazado'
 import { getLocalizedPath, type Locale, type RouteId } from '@/config/routes'
 import { cargarMensajes } from '@/i18n/mensajes'
@@ -18,14 +17,19 @@ import type { TramoBreadcrumb } from '@/lib/tipos'
  * - **Politica de privacidad** (21 apartados) y **aviso legal** (10), de los
  *   dos documentos v1.0 que entrego cumplimiento. Sustituyen a los que venian
  *   de la SPA anterior, que tenian 9 y 10 apartados con otro articulado.
- * - **Cookies**: sigue viniendo de la SPA anterior. ⚠️ Y sigue declarando que
- *   solo hay cookies estrictamente necesarias, lo que dejo de ser cierto al
- *   instalar Google Analytics y Tag Manager. Es el pendiente mas urgente de
- *   esta pagina.
+ * - **Politica de cookies** (11 apartados y la tabla), redactada a partir de la
+ *   de ewala.es cerrando sus huecos, el mayor de los cuales era que el apartado
+ *   «Detalle de cookies instaladas» no detallaba ninguna.
  *
- * **El ingles de los dos documentos nuevos es una traduccion de trabajo**, no
- * un original: por eso cada pagina declara que en caso de discrepancia
- * prevalece el espanol. Cumplimiento tiene que repasarla.
+ * ⚠️ **La politica de cookies describe un aviso de consentimiento que todavia
+ * no existe.** Dice que las analiticas no se cargan hasta aceptarlas, y hoy
+ * `Analitica.tsx` las carga siempre. Esta pagina NO puede publicarse antes que
+ * el aviso: hasta entonces el texto es falso, y un texto falso es peor que uno
+ * incompleto. Las cadenas del aviso y del panel ya estan en `consent`.
+ *
+ * **El ingles de los tres documentos es una traduccion de trabajo**, no un
+ * original: por eso cada pagina declara que en caso de discrepancia prevalece
+ * el espanol. Cumplimiento tiene que repasarla.
  *
  * ⚠️ Los datos de empresa de estos dos documentos viven ahora en
  * `messages/*.json`, y **no** en `lib/empresa.ts`. Es deliberado -el texto
@@ -94,14 +98,6 @@ function SeccionLegal({
   )
 }
 
-const Parrafos = ({ textos }: { textos: readonly string[] }) => (
-  <>
-    {textos.map((texto, indice) => (
-      <p key={`${indice}-${texto.slice(0, 24)}`}>{texto}</p>
-    ))}
-  </>
-)
-
 /**
  * La forma de un apartado de un documento legal.
  *
@@ -116,19 +112,36 @@ type Bloque =
   | { kind: 'h3'; text: string }
   | { kind: 'ul'; items: readonly string[] }
   | { kind: 'dl'; items: readonly { term: string; text: string }[] }
+  /** Marcador: la tabla de cookies, que se pinta con `documento.tabla`. */
+  | { kind: 'tabla' }
 
 interface SeccionDeTexto {
   title: string
   blocks: readonly Bloque[]
 }
 
-/** Lo comun a la politica de privacidad y al aviso legal. */
+interface TablaCookies {
+  caption: string
+  headers: { name: string; owner: string; purpose: string; duration: string; category: string }
+  rows: readonly {
+    name: string
+    owner: string
+    purpose: string
+    duration: string
+    category: string
+  }[]
+  note: string
+}
+
+/** Lo comun a los tres documentos legales. */
 interface DocumentoLegal {
   title: string
   titleHighlight: string
   intro: string
   prevalence: string
   sections: readonly SeccionDeTexto[]
+  /** Solo la politica de cookies la trae. */
+  tabla?: TablaCookies
 }
 
 /**
@@ -141,8 +154,13 @@ interface DocumentoLegal {
  * con 31 apartados entre los dos documentos y en dos idiomas significa tocar
  * codigo cada vez que cumplimiento cambia una coma.
  */
-function BloqueLegal({ bloque }: { bloque: Bloque }) {
+function BloqueLegal({ bloque, tabla }: { bloque: Bloque; tabla?: TablaCookies }) {
   switch (bloque.kind) {
+    case 'tabla':
+      // Sin tabla no se pinta nada, en lugar de una cabecera vacia: una tabla de
+      // cookies sin filas es justo el defecto que tenia la politica anterior.
+      return tabla ? <TablaDeCookies tabla={tabla} /> : null
+
     case 'p':
       return (
         <p>
@@ -184,6 +202,65 @@ function BloqueLegal({ bloque }: { bloque: Bloque }) {
 }
 
 /**
+ * La tabla de cookies que exige la AEPD.
+ *
+ * En movil no se apila en tarjetas ni se recorta: se deja **desplazar en
+ * horizontal** dentro de su propio contenedor. Una tabla de cinco columnas con
+ * texto legal no cabe en 320px de ninguna forma honesta, y convertir cada fila
+ * en un bloque rompe la comparacion entre cookies, que es para lo que sirve la
+ * tabla. El desplazamiento es del contenedor, no de la pagina: la prueba de
+ * `movil.spec.ts` comprueba que ninguna pagina desborda a lo ancho.
+ */
+function TablaDeCookies({ tabla }: { tabla: TablaCookies }) {
+  const columnas = [
+    tabla.headers.name,
+    tabla.headers.owner,
+    tabla.headers.purpose,
+    tabla.headers.duration,
+    tabla.headers.category,
+  ]
+
+  return (
+    <div className="flex flex-col gap-3">
+      <div className="border-border overflow-x-auto rounded-[10px] border">
+        <table className="w-full min-w-[46rem] border-collapse text-left text-xs">
+          <caption className="sr-only">{tabla.caption}</caption>
+          <thead>
+            <tr className="bg-panel">
+              {columnas.map((columna) => (
+                <th
+                  key={columna}
+                  scope="col"
+                  className="font-display text-cyan border-border border-b px-3 py-2.5 font-bold"
+                >
+                  {columna}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {tabla.rows.map((fila) => (
+              <tr key={fila.name} className="border-border border-b last:border-b-0">
+                {/* El nombre es la clave de la fila y va como cabecera de fila:
+                    un lector de pantalla lo repite al leer cada celda. */}
+                <th scope="row" className="font-display text-text px-3 py-2.5 font-bold">
+                  {fila.name}
+                </th>
+                <td className="text-text-dim px-3 py-2.5">{fila.owner}</td>
+                <td className="text-text-dim px-3 py-2.5">{fila.purpose}</td>
+                <td className="text-text-dim px-3 py-2.5 whitespace-nowrap">{fila.duration}</td>
+                <td className="text-text-dim px-3 py-2.5 whitespace-nowrap">{fila.category}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p className="text-text-dim text-xs italic">{tabla.note}</p>
+    </div>
+  )
+}
+
+/**
  * Documento legal completo: encabezado normativo, version y apartados.
  *
  * La politica de privacidad y el aviso legal lo comparten porque tienen la
@@ -219,7 +296,7 @@ function PaginaDocumento({
       {documento.sections.map((seccion, indice) => (
         <SeccionLegal key={seccion.title} numero={indice + 1} titulo={seccion.title}>
           {seccion.blocks.map((bloque, i) => (
-            <BloqueLegal key={`${bloque.kind}-${i}`} bloque={bloque} />
+            <BloqueLegal key={`${bloque.kind}-${i}`} bloque={bloque} tabla={documento.tabla} />
           ))}
         </SeccionLegal>
       ))}
@@ -240,30 +317,8 @@ export function AvisoLegal({ locale }: { locale: Locale }) {
 }
 
 export function Cookies({ locale }: { locale: Locale }) {
-  const { cookies, consent } = cargarMensajes(locale)
-
+  const { cookies } = cargarMensajes(locale)
   return (
-    <ArmazonLegal
-      locale={locale}
-      routeId="cookies"
-      title={cookies.title}
-      titleHighlight={cookies.titleHighlight}
-    >
-      <SeccionLegal numero={1} titulo={cookies.sections.info.title}>
-        <Parrafos textos={cookies.sections.info.paragraphs} />
-      </SeccionLegal>
-
-      {/* Tabla de cookies y tecnologias utilizadas (Fase 8). La AEPD la exige y
-          hoy no existe en la web actual. Se rellena cuando este decidida la
-          analitica (pendiente P12); mientras tanto se declara con honestidad
-          que no hay mas que las estrictamente necesarias, en lugar de publicar
-          una tabla inventada. */}
-      <section className="flex flex-col gap-4">
-        <h2 className="subtitle">{consent.table.caption}</h2>
-        <Card className="p-5">
-          <p className="texto-cuerpo text-sm">{consent.table.empty}</p>
-        </Card>
-      </section>
-    </ArmazonLegal>
+    <PaginaDocumento locale={locale} routeId="cookies" documento={cookies as DocumentoLegal} />
   )
 }
