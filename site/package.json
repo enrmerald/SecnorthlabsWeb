@@ -18,7 +18,7 @@
     "build": "pnpm clean && pnpm images:build && pnpm content:build && pnpm seo:build && pnpm build:next && pnpm verify:export",
     "preview": "node scripts/static-server.mjs out",
     "lint": "eslint . --max-warnings=0",
-    "typecheck": "tsc --noEmit",
+    "typecheck": "pnpm images:build && pnpm content:build && tsc --noEmit",
     "test": "pnpm content:build && vitest run",
     "test:e2e": "playwright test",
     "check:i18n": "node scripts/check-i18n.mjs",

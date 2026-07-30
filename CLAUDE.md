@@ -2,6 +2,13 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## Convenciones de commit
+
+Los commits se firman como si los hubiera hecho el usuario: **sin** trailer
+`Co-Authored-By` ni ninguna otra mencion a Claude o a IA en el mensaje. El
+autor de git ya es el del usuario (`git config user.name`/`user.email`); no lo
+sobrescribas.
+
 ## Estructura del repositorio
 
 Una carpeta de codigo y varias de apoyo, sin workspace que las una:
