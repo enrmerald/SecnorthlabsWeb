@@ -38,11 +38,28 @@ const outDir = join(root, 'out')
  * renunciar a la navegacion de cliente. Es una decision de arquitectura que
  * corresponde a direccion, no un ajuste.
  *
- * El techo se fija en la medida real mas un margen minimo, para que **cualquier
- * subida** rompa el build y haya que justificarla. Si sube, lo primero que hay
- * que comprobar son los tres puntos de arriba.
+ * ═══════════════════════════════════════════════════════════════════════════
+ * SOBRE EL TECHO: 160 KB, con la medida real en 156,8.
+ *
+ * Estaba en 157 con la medida en 156,8, es decir, 0,2 KB de margen. La intencion
+ * era buena -que cualquier subida obligara a justificarse- pero el efecto no: con
+ * dos decimas de holgura, lo que rompe el build no es una decision discutible sino
+ * un parche de React o de Next que nadie eligio, y el arreglo entonces no es
+ * pensar, es subir el numero con prisa. Un techo que salta por causas ajenas
+ * ensena a subirlo sin mirar, que es justo lo contrario de lo que se pretendia.
+ *
+ * Con ~3 KB de holgura el presupuesto sigue siendo estrecho -no cabe una libreria
+ * nueva- pero absorbe el ruido de las dependencias. La disciplina de verdad la da
+ * revisar el delta en cada PR, no un techo sin aire.
+ *
+ * ⚠️ El margen NO es para gastarlo. Si aparece un componente de cliente nuevo -el
+ * banner de consentimiento es el candidato- se mide antes y se decide con el
+ * numero delante, no aprovechando el hueco.
+ *
+ * Si sube, lo primero que hay que comprobar son los tres puntos de arriba.
+ * ═══════════════════════════════════════════════════════════════════════════
  */
-const PRESUPUESTO_KB = Number(process.env.JS_BUDGET_KB ?? 157)
+const PRESUPUESTO_KB = Number(process.env.JS_BUDGET_KB ?? 160)
 
 const paginas = [
   { etiqueta: 'home ES', path: 'es/index.html' },

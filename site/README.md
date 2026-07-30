@@ -56,7 +56,7 @@ pnpm test:e2e               # playwright, contra out/
 
 pnpm check:i18n             # paridad estructural ES/EN
 pnpm check:routes           # manifiesto de rutas coherente
-pnpm check:age              # cadena de suministro: nada publicado hace < 24 h
+pnpm check:js               # presupuesto de JavaScript por pagina
 pnpm verify:architecture    # sin codigo de servidor en el repositorio
 pnpm verify:export          # sin filtraciones en el artefacto
 ```
