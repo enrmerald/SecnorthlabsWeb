@@ -76,6 +76,10 @@ async function resolveFile(pathname) {
 const FUNCIONES = {
   '/api/quote': 'quote',
   '/api/contact': 'contact',
+  // El sumidero de la CSP. Tiene que estar tambien aqui, o en `pnpm preview` los
+  // informes darian 404 y el navegador se quejaria de la cabecera en cada pagina,
+  // que es justo el ruido que la politica pretende ayudar a eliminar.
+  '/api/csp-report': 'csp-report',
 }
 
 const cacheFunciones = new Map()

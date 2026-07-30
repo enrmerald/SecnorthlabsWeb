@@ -30,6 +30,12 @@
   force = true
 
 [[redirects]]
+  from = "/api/csp-report"
+  to = "/.netlify/functions/csp-report"
+  status = 200
+  force = true
+
+[[redirects]]
   from = "/api/contact"
   to = "/.netlify/functions/contact"
   status = 200
@@ -189,14 +195,39 @@
     Permissions-Policy = "camera=(), microphone=(), geolocation=(), payment=(), usb=()"
     Cross-Origin-Opener-Policy = "same-origin"
     Cross-Origin-Resource-Policy = "same-origin"
+    # Un ano, y con subdominios porque no hay ninguno sirviendo por HTTP.
+    #
+    # SIN `preload`, y no por olvido: entrar en la lista precargada de los
+    # navegadores es practicamente irreversible -se compila dentro de Chrome y
+    # Firefox- y obliga a que todo subdominio presente y futuro tenga HTTPS para
+    # siempre. Eso es una decision de infraestructura, no una cabecera mas.
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains"
+    # Destino de los informes de la CSP de abajo. `report-to` necesita que el
+    # nombre del grupo se declare aqui; el `report-uri` clasico apunta a la misma
+    # funcion y cubre a los navegadores que aun no implementan la Reporting API.
+    Reporting-Endpoints = "csp=\"/api/csp-report\""
     # CSP en modo informe primero. NO se pasa a bloqueo sin medir con trafico
     # real: una CSP escrita de memoria rompe la pagina en silencio.
+    #
+    # ⚠️ Hasta ahora esto era papel mojado: sin `report-uri` ni `report-to`, el
+    # navegador detectaba las violaciones y no las mandaba a ninguna parte, asi que
+    # la politica no protegia -es Report-Only- y tampoco informaba. Ya hay sumidero
+    # (`netlify/functions/csp-report.ts`) y las dos directivas al final.
+    #
+    # ANTES DE PASAR A BLOQUEO hay que anadir los hosts de Cookiebot
+    # (`consent.cookiebot.com` y `consentcdn.cookiebot.com` en `script-src` y
+    # `connect-src`). No se anaden ya porque Cookiebot todavia no esta instalado y
+    # una lista blanca con hosts que no se usan es una lista que nadie repasa: los
+    # informes diran exactamente cuales hacen falta cuando llegue el momento.
     #
     # `/api/*` es del mismo origen, asi que ahi basta 'self'. Lo que abre la
     # politica es Google Tag Manager y Analytics:
     #
-    #   script-src   googletagmanager.com sirve gtm.js y gtag.js. El arranque
-    #                de las dos NO va en linea: vive en /analitica.js.
+    #   script-src   googletagmanager.com sirve gtm.js, y gtag.js cuando lo pide
+    #                el contenedor. El arranque NO va en linea: vive en
+    #                /analitica.js. La politica se deja abierta aunque la
+    #                analitica este hoy desmontada, para que devolverla sea
+    #                descomentar dos lineas del layout y nada mas.
     #                **'unsafe-inline' sigue siendo obligatorio**, pero por Next,
     #                no por GTM: cada pagina exportada lleva un `__next_f.push`
     #                en linea con los datos de hidratacion, y con
@@ -207,7 +238,7 @@
     #                la region, de ahi los comodines.
     #   img-src      el pixel de respaldo cuando la baliza no puede salir.
     #   frame-src    el iframe de <noscript> de GTM.
-    Content-Security-Policy-Report-Only = "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; img-src 'self' data: https://www.googletagmanager.com https://*.google-analytics.com; font-src 'self'; connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; frame-src https://www.googletagmanager.com; style-src 'self' 'unsafe-inline'"
+    Content-Security-Policy-Report-Only = "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; img-src 'self' data: https://www.googletagmanager.com https://*.google-analytics.com; font-src 'self'; connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; frame-src https://www.googletagmanager.com; style-src 'self' 'unsafe-inline'; report-uri /api/csp-report; report-to csp"
 
 # Activos con hash en el nombre: un ano, inmutables.
 [[headers]]
@@ -221,6 +252,31 @@
     Cache-Control = "public, max-age=604800"
 
 # HTML: revalidar siempre, o un despliegue no se ve.
+#
+# ⚠️ Esto era SOLO `for = "/*.html"`, y no cubria ni una pagina del sitio. Con
+# `output: 'export'` las 78 paginas se sirven en rutas de directorio -`/es/`,
+# `/es/contacto/`, `/en/blog/<slug>/`-, y ese patron casa con la URL de la
+# peticion, no con el fichero del disco. El unico sitio donde llegaba a aplicarse
+# era `/404.html`.
+#
+# Se cubre por idioma, que es donde vive todo el contenido. Bajo `/es/` y `/en/`
+# solo hay HTML y las cargas RSC `.txt` que Next genera para la navegacion de
+# cliente, y esas tienen que revalidar igual: una carga vieja en cache sirve
+# contenido anterior al despliegue sin que se note.
+#
+# Los activos con hash siguen con su regla `immutable` de arriba, porque viven en
+# `/_next/static/` y no debajo de un idioma.
+[[headers]]
+  for = "/es/*"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/en/*"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+# Se mantiene para `/404.html`, que no cuelga de ningun idioma.
 [[headers]]
   for = "/*.html"
   [headers.values]
