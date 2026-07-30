@@ -492,7 +492,8 @@
           "title": "Continuous improvement"
         }
       ],
-      "kicker": "How we work"
+      "kicker": "How we work",
+      "label": "Philosophy"
     }
   },
   "consent": {
@@ -2475,37 +2476,44 @@
       {
         "description": "Visibility and detection across production lines and warehouses, without stopping operations.",
         "tag": "NIS2 · IEC 62443",
-        "title": "Industry and manufacturing"
+        "title": "Industry and manufacturing",
+        "icon": "industria"
       },
       {
         "description": "OT cybersecurity for the food and livestock industry, including extensive farming.",
         "tag": "NIS2",
-        "title": "Agrifood"
+        "title": "Agrifood",
+        "icon": "agro"
       },
       {
         "description": "Continuity and resilience of essential services with 24/7 monitoring.",
         "tag": "NIS2",
-        "title": "Energy"
+        "title": "Energy",
+        "icon": "energia"
       },
       {
         "description": "Protection of connected systems and devices and continuity of care.",
         "tag": "NIS2",
-        "title": "Healthcare"
+        "title": "Healthcare",
+        "icon": "sanidad"
       },
       {
         "description": "Control of suppliers and third parties: a core requirement of the directive.",
         "tag": "NIS2 · Delegated liability",
-        "title": "Supply chain"
+        "title": "Supply chain",
+        "icon": "suministro"
       },
       {
         "description": "ENS alignment and certification for those serving the public sector.",
         "tag": "ENS",
-        "title": "Public administration"
+        "title": "Public administration",
+        "icon": "administracion"
       },
       {
         "description": "Digital operational resilience and third-party management under DORA.",
         "tag": "DORA",
-        "title": "Finance and insurance"
+        "title": "Finance and insurance",
+        "icon": "finanzas"
       }
     ],
     "note": "GDPR applies across all sectors.",

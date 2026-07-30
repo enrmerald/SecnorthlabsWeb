@@ -32,7 +32,12 @@ export function DiscoverBox({
       <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
         <div className="flex flex-col gap-2">
           <p className={`etiqueta ${color}`}>{label}</p>
-          <p className="texto-cuerpo text-sm">{text}</p>
+          {/* `max-w-none` anula la medida de 68ch de `texto-cuerpo`. Esa medida
+              existe para que un parrafo largo no se lea en lineas de 150
+              caracteres, y en un cajon de una sola frase hace lo contrario de lo
+              que pretende: parte el texto en dos lineas dejando media caja
+              vacia a la derecha. */}
+          <p className="texto-cuerpo max-w-none text-sm">{text}</p>
         </div>
 
         <Link

@@ -35,6 +35,7 @@ export function Sectores({ locale }: { locale: Locale }) {
               title={sector.title}
               description={sector.description}
               tag={sector.tag}
+              icon={sector.icon}
             />
           ))}
         </ul>

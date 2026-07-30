@@ -159,7 +159,7 @@ export function Software({ locale }: { locale: Locale }) {
           <ul className="flex flex-wrap gap-2.5">
             {software.others.items.map((otra) => (
               <li key={otra}>
-                <Tag acento="neutro">{otra}</Tag>
+                <Tag acento="cian">{otra}</Tag>
               </li>
             ))}
           </ul>

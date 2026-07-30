@@ -39,8 +39,6 @@ artículos de blog.
 - Cabecera válida y completa (`content:build`).
 - Los enlaces internos apuntan a `/en/blog/…` y todos sus destinos existen.
 - `hreflang` recíproco entre las dos versiones de cada artículo.
-- Ningún enlace al blog anterior ni al dominio de Ewala en el cuerpo, salvo en
-  `livet-digitalizacion-ganaderia-extensiva.md`, donde es correcto: la plataforma
-  LIVET y el programa GUARDIANS son de Ewala.
+- Ningún enlace al blog anterior ni al dominio de Ewala en el cuerpo.
 
 Lo comprueban `pnpm content:build` y `e2e/blog.spec.ts`.

@@ -492,7 +492,8 @@
           "title": "Mejora continua"
         }
       ],
-      "kicker": "Cómo trabajamos"
+      "kicker": "Cómo trabajamos",
+      "label": "Filosofía"
     }
   },
   "consent": {
@@ -2475,37 +2476,44 @@
       {
         "description": "Visibilidad y detección en líneas de producción y almacenes, sin frenar la operación.",
         "tag": "NIS2 · IEC 62443",
-        "title": "Industria y fabricación"
+        "title": "Industria y fabricación",
+        "icon": "industria"
       },
       {
         "description": "Ciberseguridad OT para industria alimentaria y ganadera, incluida la gestión extensiva.",
         "tag": "NIS2",
-        "title": "Agroalimentario"
+        "title": "Agroalimentario",
+        "icon": "agro"
       },
       {
         "description": "Continuidad y resiliencia de servicios esenciales con monitorización 24/7.",
         "tag": "NIS2",
-        "title": "Energía"
+        "title": "Energía",
+        "icon": "energia"
       },
       {
         "description": "Protección de sistemas y dispositivos conectados y continuidad asistencial.",
         "tag": "NIS2",
-        "title": "Sanidad"
+        "title": "Sanidad",
+        "icon": "sanidad"
       },
       {
         "description": "Control de proveedores y terceros: un requisito central de la directiva.",
         "tag": "NIS2 · Responsabilidad delegada",
-        "title": "Cadena de suministro"
+        "title": "Cadena de suministro",
+        "icon": "suministro"
       },
       {
         "description": "Adecuación y certificación ENS para quien presta servicios al sector público.",
         "tag": "ENS",
-        "title": "Administración pública"
+        "title": "Administración pública",
+        "icon": "administracion"
       },
       {
         "description": "Resiliencia operativa digital y gestión de terceros conforme a DORA.",
         "tag": "DORA",
-        "title": "Finanzas y seguros"
+        "title": "Finanzas y seguros",
+        "icon": "finanzas"
       }
     ],
     "note": "El RGPD/LOPDGDD aplica de forma transversal a todos los sectores.",

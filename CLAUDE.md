@@ -7,7 +7,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 Una carpeta de codigo y varias de apoyo, sin workspace que las una:
 
 - **`site/`** - **todo el sitio**. Next.js 16 (App Router) con `output: 'export'`,
-  las 79 paginas estaticas, las dos Netlify Functions de ingestion y el motor
+  las 78 paginas estaticas, las dos Netlify Functions de ingestion y el motor
   PBCG. Aqui ocurre todo el desarrollo.
 - **`contracts/`** - contrato de ingestion para EspoCRM, mapeo de enums y los
   vectores de oro del PBCG, compartidos con el servicio local de importacion, que
@@ -55,7 +55,7 @@ site/
 Un articulo es **un fichero** en `content/blog/<idioma>/<slug>.md`; el nombre del
 fichero es la URL. `content:build` valida la cabecera con zod, convierte el
 Markdown a HTML y emite `src/generated/blog.json`, que es lo unico que leen las
-paginas. Hoy hay **23 articulos publicados en cada idioma**.
+paginas. Hoy hay **22 articulos publicados en cada idioma**.
 
 El conversor (`markdown-it`) **se queda en el build**: no viaja al navegador, asi
 que publicar veinte articulos mas no mueve el presupuesto de `check:js`. El mismo
@@ -124,8 +124,9 @@ Contacto, Blog, Articulo, Calculadora, Legales, NoEncontrada) y
 `Record<RouteId, …>` no es decorativo: anadir un `RouteId` sin escribir su
 renderizador **no compila**.
 
-El artefacto son **79 paginas HTML**: 15 rutas x 2 idiomas, 23 articulos x 2
-idiomas, `/`, `/404` y `/_not-found`.
+El artefacto son **78 paginas HTML**: 15 rutas x 2 idiomas (30), 22 articulos x
+2 idiomas (44) y cuatro sueltas: `/`, `/_not-found` y las dos formas de la 404
+que emite la exportacion estatica (`/404.html` y `/404/index.html`).
 
 **`src/config/routes.ts` es el manifiesto central de rutas** - unica fuente de
 verdad, consumida por navegacion, pie, selector de idioma, `generateStaticParams`,

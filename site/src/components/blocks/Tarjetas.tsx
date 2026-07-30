@@ -1,3 +1,14 @@
+import {
+  Banknote,
+  Factory,
+  HeartPulse,
+  Landmark,
+  ShieldCheck,
+  Truck,
+  Wheat,
+  Zap,
+} from 'lucide-react'
+import type { ComponentType, SVGProps } from 'react'
 import { Card } from '@/components/ui/Card'
 import { LogoMarca } from '@/components/ui/LogoMarca'
 import { Tag } from '@/components/ui/Tag'
@@ -54,18 +65,51 @@ export function LicenseCard({
  * destino es real, o el elemento no se enlaza: mandar todas las tarjetas a
  * `/contacto` es una experiencia enganosa.
  */
+/**
+ * Icono de cada sector.
+ *
+ * La clave viaja en `messages/*.json` junto al sector, no se deduce del orden:
+ * reordenar la rejilla dejaria el rayo en sanidad sin que fallara nada. Son
+ * iconos de `lucide-react` en un componente de build, asi que salen como SVG en
+ * el HTML y no envian JavaScript.
+ */
+const ICONOS_SECTOR: Record<string, ComponentType<SVGProps<SVGSVGElement>>> = {
+  industria: Factory,
+  agro: Wheat,
+  energia: Zap,
+  sanidad: HeartPulse,
+  suministro: Truck,
+  administracion: Landmark,
+  finanzas: Banknote,
+}
+
 export function SectorCard({
   title,
   description,
   tag,
+  icon,
 }: {
   title: string
   description: string
   tag: string
+  icon?: string
 }) {
+  const Icono = (icon && ICONOS_SECTOR[icon]) || ShieldCheck
+
   return (
     <Card as="li" className="flex flex-col gap-3 p-6">
-      <h3 className="font-display text-base font-bold">{title}</h3>
+      <div className="flex items-center gap-3">
+        {/* En capsula y no suelto: siete iconos sueltos sobre fondo oscuro se
+            leen como ruido, y el circulo los ancla a la misma linea base que el
+            titulo. Decorativo: el titulo de al lado ya dice el sector. */}
+        <span
+          aria-hidden="true"
+          className="border-border bg-panel text-cyan flex size-10 shrink-0 items-center justify-center rounded-full border"
+        >
+          <Icono className="size-5" strokeWidth={1.75} />
+        </span>
+        <h3 className="font-display text-base font-bold">{title}</h3>
+      </div>
       <p className="texto-cuerpo text-sm">{description}</p>
       <div className="mt-auto pt-2">
         <Tag acento="cian">{tag}</Tag>
@@ -92,7 +136,9 @@ export function TeamRoleCard({ title, description }: { title: string; descriptio
         {title.charAt(0)}
       </span>
       <div className="flex flex-col gap-1">
-        <h3 className="font-display text-sm font-bold">{title}</h3>
+        {/* Verde y no blanco: el rol es lo que se busca al recorrer la rejilla,
+            y comparte color con el kicker `/03 Equipo` de su seccion. */}
+        <h3 className="font-display text-green text-sm font-bold">{title}</h3>
         <p className="texto-cuerpo text-sm">{description}</p>
       </div>
     </Card>

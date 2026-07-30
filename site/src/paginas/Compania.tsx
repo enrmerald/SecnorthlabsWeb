@@ -52,17 +52,30 @@ export function Compania({ locale }: { locale: Locale }) {
           }
         />
         <Card className="p-6 sm:p-8">
-          <p className="texto-cuerpo">{company.mission.body}</p>
+          {/* `max-w-none` anula la medida de 68ch de `texto-cuerpo`: la tarjeta
+              ya limita el ancho, y con las dos limitaciones el parrafo se
+              quedaba a media tarjeta con un hueco a la derecha. */}
+          <p className="texto-cuerpo max-w-none">{company.mission.body}</p>
         </Card>
       </section>
 
-      {/* ── /02 Como trabajamos ── */}
+      {/* ── /02 Filosofia ──
+          El `/02` no se veia: `SectionHeading` solo pinta el prefijo si hay
+          kicker, y aqui no se le pasaba ninguno. La pagina saltaba de /01 a /03
+          y parecia que faltaba una seccion entera. */}
       <section className="site-container flex flex-col gap-8 pb-12">
-        <SectionHeading kickerPrefijo="/02" titulo={company.values.kicker} />
+        <SectionHeading
+          kicker={company.values.label}
+          kickerPrefijo="/02"
+          titulo={company.values.kicker}
+        />
         <ul className="grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
           {company.values.items.map((valor) => (
             <Card key={valor.title} as="li" className="flex flex-col gap-2 p-6">
-              <h3 className="subtitle">{valor.title}</h3>
+              {/* Cian, el color del kicker de esta seccion, igual que el equipo
+                  usa el verde del suyo: el color dice de que bloque es la
+                  tarjeta cuando se ve suelta al desplazarse. */}
+              <h3 className="subtitle text-cyan">{valor.title}</h3>
               <p className="texto-cuerpo text-sm">{valor.description}</p>
             </Card>
           ))}

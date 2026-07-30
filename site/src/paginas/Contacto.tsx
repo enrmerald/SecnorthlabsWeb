@@ -93,9 +93,14 @@ export function Contacto({ locale }: { locale: Locale }) {
                       className="text-cyan mt-0.5 size-4 shrink-0"
                       strokeWidth={2}
                     />
+                    {/* La etiqueta en Space Mono y el dato en Noto Sans, y no al
+                        contrario: la mono da el caracter tecnico de la marca en
+                        la palabra corta, y el dato -una direccion postal de dos
+                        lineas, un correo largo- se lee mejor en la de texto,
+                        que tiene mejor interletraje para cadenas largas. */}
                     <div className="flex min-w-0 flex-col gap-0.5">
-                      <dt className="text-text-dim text-xs">{item.label}</dt>
-                      <dd className="font-display text-sm font-bold">
+                      <dt className="font-display text-text-dim text-xs">{item.label}</dt>
+                      <dd className="font-sans text-sm font-bold">
                         <ValorContacto valor={item.value} />
                       </dd>
                     </div>
