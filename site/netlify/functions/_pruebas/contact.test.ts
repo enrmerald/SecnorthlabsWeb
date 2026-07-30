@@ -1,6 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
-import { PEOR_CASO_MS, PRESUPUESTO_MS } from './_correo.ts'
-import handler from './contact.ts'
+import { PEOR_CASO_MS, PRESUPUESTO_MS } from '../_correo.ts'
+import handler from '../contact.ts'
 
 /**
  * Pruebas de `POST /api/contact`.

@@ -1,5 +1,5 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
-import handler from './quote.ts'
+import handler from '../quote.ts'
 
 /**
  * Pruebas de `POST /api/quote`.

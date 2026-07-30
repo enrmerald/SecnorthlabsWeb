@@ -1,5 +1,5 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
-import handler from './csp-report.ts'
+import handler from '../csp-report.ts'
 
 /**
  * Pruebas del sumidero de informes de la CSP.
