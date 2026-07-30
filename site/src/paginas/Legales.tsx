@@ -21,11 +21,25 @@ import type { TramoBreadcrumb } from '@/lib/tipos'
  *   de ewala.es cerrando sus huecos, el mayor de los cuales era que el apartado
  *   «Detalle de cookies instaladas» no detallaba ninguna.
  *
- * ⚠️ **La politica de cookies describe un aviso de consentimiento que todavia
- * no existe.** Dice que las analiticas no se cargan hasta aceptarlas, y hoy
- * `Analitica.tsx` las carga siempre. Esta pagina NO puede publicarse antes que
- * el aviso: hasta entonces el texto es falso, y un texto falso es peor que uno
- * incompleto. Las cadenas del aviso y del panel ya estan en `consent`.
+ * ⚠️ **La politica de cookies describe un aviso de consentimiento que todavia no
+ * existe.** Dice que las analiticas no se cargan hasta aceptarlas, y hoy se
+ * cargan siempre. Es una ventana conocida y con fecha de cierre, no un descuido:
+ * se publica midiendo para que el escaner de Cookiebot pueda inventariar las
+ * cookies, porque sin medicion su declaracion saldria vacia.
+ *
+ * Lo que cierra la ventana, y **no se puede dejar a medias**:
+ *
+ *   1. Banner de Cookiebot activo, con `analytics_storage` en `denied` por
+ *      defecto via Consent Mode v2 en GTM.
+ *   2. La **tabla de cookies escrita a mano de esta pagina** pasa a ser la
+ *      declaracion dinamica de Cookiebot. Mantener las dos es garantizar que un
+ *      dia digan cosas distintas, y la que se queda vieja es siempre la de aqui.
+ *
+ * Las cadenas de `consent` en `messages/*.json` (banner y panel, ES y EN) se
+ * escribieron para un aviso propio. Si el banner lo pone Cookiebot con su propia
+ * interfaz, **quedan sin usar**: decidir entonces si se retiran o si se
+ * aprovechan para traducir la plantilla de Cookiebot, pero no dejarlas ahi como
+ * si estuvieran en uso.
  *
  * **El ingles de los tres documentos es una traduccion de trabajo**, no un
  * original: por eso cada pagina declara que en caso de discrepancia prevalece

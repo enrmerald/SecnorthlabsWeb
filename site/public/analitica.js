@@ -27,11 +27,28 @@
  * este fichero no puede importar nada. Lo comprueba `analitica.test.ts`, que
  * ejecuta este script y compara lo que pide con los del manifiesto: si divergen,
  * falla la prueba en lugar de dejar de medir en silencio.
+ *
+ * ⚠️ **AQUI NO SE CARGA GA4, Y ES DELIBERADO.** Antes este fichero pedia tambien
+ * `gtag/js?id=G-...` y llamaba a `gtag('config', GA_ID)`, es decir, arrancaba
+ * Analytics por su cuenta, al margen del contenedor. Eso tenia dos consecuencias
+ * malas:
+ *
+ *   1. **Doble medicion.** Si el contenedor de GTM tiene su propia etiqueta de
+ *      GA4 con el mismo identificador -que es lo normal-, cada visita se contaba
+ *      dos veces y ningun informe cuadraba.
+ *   2. **El consentimiento no se podia gobernar.** El Consent Mode de GTM solo
+ *      gobierna las etiquetas que dispara GTM. Un `gtag('config')` lanzado desde
+ *      aqui se ejecuta igual con el consentimiento denegado, de modo que el
+ *      interruptor que se documenta en `Analitica.tsx` -«se hace en GTM, sin
+ *      tocar codigo»- no habria funcionado.
+ *
+ * Asi que GA4 se configura **dentro del contenedor de GTM**, con el
+ * identificador de `src/config/analitica.ts`. Este fichero solo arranca GTM y
+ * deja `gtag` disponible para las etiquetas.
  * ═══════════════════════════════════════════════════════════════════════════
  */
 (function (window, document) {
   var GTM_ID = 'GTM-KMK36XFH'
-  var GA_ID = 'G-7F3TPM79D7'
 
   window.dataLayer = window.dataLayer || []
 
@@ -59,11 +76,7 @@
   }
 
   // ── Tag Manager ──
+  // Lo unico que se carga. GA4 lo configura el contenedor: ver la nota de arriba.
   window.dataLayer.push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' })
   cargar('https://www.googletagmanager.com/gtm.js?id=' + GTM_ID)
-
-  // ── Analytics 4 ──
-  cargar('https://www.googletagmanager.com/gtag/js?id=' + GA_ID)
-  gtag('js', new Date())
-  gtag('config', GA_ID)
 })(window, document)

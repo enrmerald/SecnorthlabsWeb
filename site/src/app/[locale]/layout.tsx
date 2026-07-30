@@ -51,10 +51,38 @@ export default async function LayoutIdioma({ children, params }: PropsLayout) {
       className={`${displayFont.variable} ${sansFont.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col">
-        {/* Lo mas arriba posible, que es lo que pide Google para no perder
-            visitas de quien cierra la pestana enseguida. No estorba al enlace de
-            salto: un script no es enfocable, asi que el primer destino del
-            tabulador sigue siendo el de abajo. */}
+        {/* ═══════════════════════════════════════════════════════════════════
+            LA ANALITICA VA MONTADA, Y HAY UN PENDIENTE ABIERTO CON ELLA.
+
+            GTM y GA4 escriben cookies al abrir la pagina, y en la UE eso exige
+            consentimiento previo. El aviso lo va a poner **Cookiebot**, y su
+            escaner necesita que las etiquetas disparen de verdad para inventariar
+            que cookies se escriben: sin medicion no hay nada que descubrir, y la
+            declaracion de cookies saldria vacia. Por eso se publica midiendo
+            (decision de Direccion del 30/07/2026).
+
+            ⚠️ Mientras dure ese escaneo, la politica de cookies afirma algo que
+            todavia no es cierto -que las analiticas no se cargan hasta
+            aceptarlas-. Es una ventana conocida y acotada, no un descuido, y se
+            cierra al activar el banner de Cookiebot. Ver la nota de `Legales.tsx`.
+
+            Orden de trabajo previsto:
+              1. Publicar con medicion (esto).
+              2. Cookiebot escanea el dominio e inventaria las cookies.
+              3. Banner de Cookiebot + Consent Mode v2 en GTM, con
+                 `analytics_storage` en `denied` por defecto.
+              4. La declaracion de cookies de Cookiebot sustituye a la tabla
+                 escrita a mano de la politica.
+
+            GA4 se configura **dentro del contenedor de GTM**, no desde el codigo
+            (ver `public/analitica.js`): es lo que permite que el paso 3 se haga en
+            GTM sin recompilar, y lo que hace que Cookiebot pueda gobernarlo.
+
+            Lo mas arriba posible, que es lo que pide Google para no perder visitas
+            de quien cierra la pestana enseguida. No estorba al enlace de salto: un
+            script no es enfocable, asi que el primer destino del tabulador sigue
+            siendo el de abajo.
+            ═══════════════════════════════════════════════════════════════════ */}
         <Analitica />
         <AnaliticaSinJs />
 

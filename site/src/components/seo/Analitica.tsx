@@ -6,14 +6,19 @@ import { GTM_ID } from '@/config/analitica'
  * ═══════════════════════════════════════════════════════════════════════════
  * ESCRIBEN COOKIES, Y ESO EN LA UE EXIGE CONSENTIMIENTO PREVIO.
  *
- * Estas etiquetas se cargan hoy **en cuanto se abre la pagina**, sin preguntar.
- * Mientras no haya un aviso de consentimiento -o Consent Mode configurado en
- * GTM con el estado por defecto en `denied`-, el sitio esta midiendo antes de
- * tener permiso. Y la politica de cookies ya publicada dice lo contrario: que
- * las analiticas no se cargan hasta aceptarlas. Es el pendiente mas urgente.
+ * Se publican midiendo a proposito: el escaner de **Cookiebot** necesita que las
+ * etiquetas disparen para inventariar que cookies se escriben, y sin medicion su
+ * declaracion saldria vacia. Es un paso intermedio con fecha, no el estado final.
  *
- * Cuando se resuelva, el cambio no es de codigo: se hace en GTM, que es
- * exactamente por lo que se instala GTM y no solo gtag.
+ * ⚠️ Mientras dure, la politica de cookies dice algo que aun no es cierto: que
+ * las analiticas no se cargan hasta aceptarlas. La ventana se cierra al activar
+ * el banner de Cookiebot. El motivo completo y el orden de los cuatro pasos estan
+ * en el layout de idioma, que es donde se montan.
+ *
+ * El consentimiento no se programa aqui: se configura en GTM con Consent Mode,
+ * que es exactamente por lo que se instala GTM y no solo gtag. GA4 se configura
+ * **dentro del contenedor**, no desde `public/analitica.js`, y eso es lo que hace
+ * que GTM -y por tanto Cookiebot- pueda gobernarlo.
  * ═══════════════════════════════════════════════════════════════════════════
  *
  * **El arranque vive en `public/analitica.js`, no aqui.** Un `<script>` con

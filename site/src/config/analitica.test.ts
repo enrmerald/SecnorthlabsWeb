@@ -65,9 +65,24 @@ describe('analitica.js', () => {
     expect(cargados).toContain(`https://www.googletagmanager.com/gtm.js?id=${GTM_ID}`)
   })
 
-  it('pide la libreria de GA4 del manifiesto', () => {
-    const { cargados } = ejecutar()
-    expect(cargados).toContain(`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`)
+  it('NO carga GA4 por su cuenta: de eso se encarga el contenedor', () => {
+    const { cargados, dataLayer } = ejecutar()
+
+    // Esta prueba afirmaba lo contrario, y lo contrario estaba mal por dos
+    // motivos: duplicaba la medicion si el contenedor tenia su propia etiqueta de
+    // GA4, y sobre todo dejaba a Analytics fuera del Consent Mode, que solo
+    // gobierna lo que dispara GTM. Con GA4 dentro del contenedor, el
+    // consentimiento se gestiona sin tocar codigo, que es la razon de usar GTM.
+    expect(cargados.some((src) => src.includes('/gtag/js'))).toBe(false)
+    expect(cargados.some((src) => src.includes(GA_ID))).toBe(false)
+
+    const configuraciones = dataLayer
+      .filter(
+        (entrada): entrada is IArguments =>
+          typeof entrada === 'object' && entrada !== null && 'length' in entrada,
+      )
+      .map((argumentos) => Array.from(argumentos))
+    expect(configuraciones).not.toContainEqual(['config', GA_ID])
   })
 
   it('no pide ningun identificador que no este en el manifiesto', () => {
@@ -75,7 +90,7 @@ describe('analitica.js', () => {
     // Cazaria un identificador copiado a mano que ya no se corresponde con el
     // de `analitica.ts`, que es el fallo que esta prueba existe para evitar.
     for (const src of cargados) {
-      expect(src.includes(GTM_ID) || src.includes(GA_ID)).toBe(true)
+      expect(src.includes(GTM_ID)).toBe(true)
     }
   })
 
@@ -86,15 +101,15 @@ describe('analitica.js', () => {
     expect(typeof arranque['gtm.start']).toBe('number')
   })
 
-  it('configura GA4 con el identificador del manifiesto', () => {
+  it('deja `dataLayer` con el arranque de GTM y nada mas', () => {
     const { dataLayer } = ejecutar()
-    // `gtag()` empuja su `arguments` tal cual, que es lo que espera gtag.js.
-    const configuraciones = dataLayer
-      .filter((entrada): entrada is IArguments => typeof entrada === 'object' && entrada !== null && 'length' in entrada)
-      .map((argumentos) => Array.from(argumentos))
 
-    expect(configuraciones).toContainEqual(['config', GA_ID])
-    expect(configuraciones.some(([verbo]) => verbo === 'js')).toBe(true)
+    // Antes se comprobaba aqui el `['config', GA_ID]` que este fichero ya no
+    // emite. Lo que si tiene que seguir cumpliendose es que el arranque no
+    // ensucie la cola con nada que el contenedor no espere: GTM lee `dataLayer`
+    // tal cual, y una entrada de mas es una variable que alguien depurara.
+    expect(dataLayer).toHaveLength(1)
+    expect((dataLayer[0] as Record<string, unknown>).event).toBe('gtm.js')
   })
 
   it('expone gtag en window, para que GTM y las etiquetas puedan usarlo', () => {
@@ -132,7 +147,8 @@ describe('analitica.js', () => {
     new Function('window', 'document', FUENTE)({}, document)
 
     // Sin `async`, gtm.js bloquearia el analisis del HTML y retrasaria el
-    // primer pintado de todas las paginas.
-    expect(asincronos).toEqual([true, true])
+    // primer pintado de todas las paginas. Es uno solo desde que GA4 vive en el
+    // contenedor; antes eran dos.
+    expect(asincronos).toEqual([true])
   })
 })
