@@ -32,7 +32,7 @@ mensajes, componentes de cliente o el artefacto. `pnpm test:e2e` construye contr
 | Tocar el modelo economico | `pbcg/`. **Jamas** desde `src/` |
 | Cambiar una plantilla de correo | `netlify/functions/_plantillas/`. Se ve con `pnpm correos:preview`, que no envia nada. Tablas y CSS en linea: el navegador de la vista previa es mas permisivo que Outlook |
 | Redirecciones, cabeceras o CSP | `netlify.toml`. `next.config.ts` no puede hacerlo con `output: 'export'` |
-| Analitica (GA4 y GTM) | `src/components/seo/Analitica.tsx` y los identificadores en `src/config/analitica.ts`. Va en el layout de idioma, **no en `/`**. Filtrar entornos o gestionar consentimiento se hace desde GTM, sin tocar codigo |
+| Analitica (GA4 y GTM) | `src/components/seo/Analitica.tsx`, arranque en `public/analitica.js`, identificadores en `src/config/analitica.ts`. Va en el layout de idioma, **no en `/`**. GA4 se configura dentro del contenedor de GTM, no desde el codigo, para que Consent Mode -y Cookiebot- puedan gobernarlo. ⚠️ Se publica midiendo sin banner a proposito, para que Cookiebot pueda inventariar las cookies; ver la nota del layout |
 
 `src/generated/` es **salida de build**: no se edita a mano.
 
@@ -62,8 +62,11 @@ HTML sin enviar JavaScript.
 Las 15 paginas se resuelven con una sola ruta atrapatodo, asi que **todas cargan
 los mismos chunks**: dividir por pagina no reduce nada, y `next/dynamic` sobre
 los dos formularios se probo y salio 0,6 KB peor. El techo de `check:js` son
-157 KB gzip y esta puesto en la medida real mas un margen minimo, para que
-cualquier subida obligue a justificarla.
+**160 KB gzip** y la medida real es 156,8: unos 3 KB de holgura, que estan para
+absorber un parche de React o de Next, **no para gastarlos**. Un componente de
+cliente nuevo se mide antes y se decide con el numero delante. Antes el techo
+estaba en 157 -0,2 KB de margen- y eso hacia que lo que rompiera el build fuera
+una actualizacion que nadie eligio, lo que ensena a subir el techo sin mirar.
 
 Los componentes de build leen los mensajes y pasan **solo las cadenas que hacen
 falta** como props a los de cliente. No hay provider global de traduccion.

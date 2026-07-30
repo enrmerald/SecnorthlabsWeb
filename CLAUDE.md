@@ -46,7 +46,7 @@ site/
 ├── messages/             es.json y en.json
 ├── public/               logos, imagenes procesadas, sitemap, robots y reparto-idioma.js
 ├── scripts/              build, verificaciones y el servidor de `pnpm preview`
-├── e2e/                  560 pruebas de Playwright en cuatro anchuras
+├── e2e/                  564 pruebas de Playwright en cuatro anchuras
 └── netlify.toml          redirecciones, cabeceras y reparto por idioma
 ```
 
@@ -94,13 +94,12 @@ pnpm preview          # sirve out/ con scripts/static-server.mjs (no existe `nex
 
 pnpm lint             # eslint . --max-warnings=0 (`next lint` no existe en Next 16)
 pnpm typecheck        # tsc --noEmit
-pnpm test             # content:build → vitest run · 155 pruebas en 9 ficheros
-pnpm test:e2e         # playwright test · 560 pruebas en cuatro anchuras, contra out/
+pnpm test             # content:build → vitest run · 240 pruebas en 15 ficheros
+pnpm test:e2e         # playwright test · 564 pruebas en cuatro anchuras, contra out/
 
 pnpm check:i18n       # es.json y en.json, misma estructura de claves
 pnpm check:routes     # ningun RouteId sin registrar, ningun slug duplicado por idioma
-pnpm check:js         # presupuesto de JavaScript por pagina (techo 157 KB gzip)
-pnpm check:age        # antiguedad de las dependencias
+pnpm check:js         # presupuesto de JavaScript por pagina (techo 160 KB gzip; medida real 156,8)
 pnpm verify:architecture  # sin codigo de servidor y sin imports de pbcg/ ni netlify/ desde src/
 pnpm verify:export        # inspecciona out/: artefacto completo y sin filtraciones
 
@@ -173,14 +172,28 @@ comprueban:
 3. `scripts/idioma-preferido.mjs` - la copia del servidor de `pnpm preview`, que
    lee las variantes del propio `netlify.toml` para que no puedan divergir.
 
-**La analitica son etiquetas en el HTML, no un componente de cliente.**
-`src/components/seo/Analitica.tsx` emite GTM y GA4 como `<script>` en el layout
-de idioma; no usa `@next/third-parties` a proposito, porque eso mete
-`next/script` -codigo de cliente- en las 15 paginas a la vez. La CSP de
-`netlify.toml` esta abierta a `googletagmanager.com` y lleva `'unsafe-inline'`
-en `script-src`, obligado por los fragmentos de arranque: con `output: 'export'`
-no hay servidor que genere un nonce. ⚠️ **Sin banner de consentimiento, esas
-cookies se escriben antes de tener permiso**; el interruptor esta en GTM.
+**Se publica midiendo, y hay un pendiente abierto.** GTM y GA4 escriben cookies al
+abrir la pagina, y en la UE eso exige consentimiento previo. El aviso lo pondra
+**Cookiebot**, cuyo escaner necesita que las etiquetas disparen para inventariar
+las cookies: sin medicion la declaracion saldria vacia. De ahi el orden acordado
+el 30/07/2026 — publicar midiendo, escanear, activar el banner con Consent Mode v2
+(`analytics_storage` en `denied`) y sustituir la tabla de cookies escrita a mano de
+`Legales.tsx` por la declaracion dinamica de Cookiebot.
+⚠️ **Hasta el paso 3, la politica de cookies afirma algo que no es cierto.** Es una
+ventana con fecha de cierre, no un descuido; no dejarla abierta indefinidamente.
+Las cadenas `consent` de `messages/*.json` se escribieron para un aviso propio: si
+el banner lo pone Cookiebot, quedan sin usar.
+
+**Son etiquetas en el HTML, no un componente de cliente.**
+`src/components/seo/Analitica.tsx` emite un `<script async src>` que carga
+`public/analitica.js`; no usa `@next/third-parties` a proposito, porque eso mete
+`next/script` -codigo de cliente- en las 15 paginas a la vez. **GA4 se configura
+dentro del contenedor de GTM, no desde el codigo**: hacerlo desde `analitica.js`
+duplicaba la medicion y, peor, dejaba a Analytics fuera del Consent Mode, que solo
+gobierna lo que dispara GTM. La CSP de `netlify.toml` esta abierta a
+`googletagmanager.com` y lleva `'unsafe-inline'` en `script-src`, obligado por los
+fragmentos de hidratacion de Next: con `output: 'export'` no hay servidor que
+genere un nonce.
 
 **La regla dura de arquitectura, con enforcement automatico.**
 `scripts/assert-static-architecture.mjs` (`verify:architecture`) falla el build
@@ -204,7 +217,7 @@ canonica y hreflang.
 Client Components (`'use client'` solo para interaccion real - menu movil,
 formularios, calculadora, filtro del blog), y ningun runtime desplegado. Los
 Server Components de build no son «mas peligrosos»: son los que generan HTML sin
-enviar JavaScript. `check:js` pone el techo en 157 KB gzip por pagina, y como las
+enviar JavaScript. `check:js` pone el techo en 160 KB gzip por pagina, y como las
 15 paginas se resuelven con una sola ruta atrapatodo, **todas cargan los mismos
 chunks**: dividir por pagina no sirve.
 
@@ -221,7 +234,7 @@ que Netlify clona. Es el coste asumido, documentado en ISNLA-DOC-0008-REQ-01 §0
 | Motor PBCG (`site/pbcg/src/`: `calculate.ts`, `config.ts`, `schemas.ts`, `types.ts`, `contrato.ts`) | ✅ Implementado y probado contra el «caso de oro» del Excel (37 pruebas) |
 | `POST /api/quote` y `POST /api/contact` (`site/netlify/functions/`) | ✅ Validacion, antispam, calculo, respuesta y registro sin datos personales |
 | Envio del aviso de contacto a `info@` por Resend | ✅ `_correo.ts` (API REST con `fetch`, sin SDK) y `_plantillas/aviso-contacto.ts` (ES y EN). Necesita `RESEND_API_KEY`, `RESEND_FROM` y `CONTACT_MAILBOX_TO` |
-| Entrega del lead de la calculadora: firma JWS Ed25519, cifrado JWE RSA-OAEP-256 y envio al buzon de ingestion | ⬜ **Pendiente** - hay un `TODO` en `quote.ts`. Bloqueado por el buzon `leads-ingest@` y las claves (REQ-01, bloques B y C) |
+| Entrega del lead de la calculadora: firma JWS Ed25519, cifrado JWE RSA-OAEP-256 y envio al buzon de ingestion | ⬜ **Pendiente** - hay un `TODO` en `quote.ts`. Bloqueado por el buzon `leads-ingest@` y las claves (REQ-01, bloques B y C). Mientras siga abierto, `quote.ts` fija `enviado = false` y responde siempre `delivery: 'skipped'`: **no puede derivarse del entorno**, o el dia que exista `LEAD_MAILBOX_TO` diria «enviado» sin enviar nada. Lo cubre `quote.test.ts` |
 | Ingestion en EspoCRM | Fuera de este repositorio: correo cifrado a un importador local. El contrato esta en `contracts/` |
 
 **Son dos buzones distintos, y el correo que va a cada uno es distinto.**

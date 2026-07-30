@@ -17,7 +17,18 @@
 export const LOCALES = ['es', 'en'] as const
 export type Locale = (typeof LOCALES)[number]
 
-/** El espanol es el idioma por defecto: `/` redirige 301 fijo a `/es/`. */
+/**
+ * El espanol es el idioma por defecto, en el sentido de que es el destino de
+ * quien no pide nada mas y el idioma que prevalece en los textos legales.
+ *
+ * ⚠️ **No significa que `/` redirija fijo aqui.** Este comentario decia «`/`
+ * redirige 301 fijo a `/es/`» y describia la regla anterior. Desde la decision de
+ * Direccion del 29/07/2026 la raiz reparte por idioma del navegador con dos
+ * **302**, y que no sean 301 es deliberado: una permanente la cachean navegadores
+ * y CDN sin volver a mirar la cabecera. El razonamiento completo esta en
+ * `netlify.toml`, y las tres implementaciones que tienen que coincidir estan en
+ * `public/reparto-idioma.js` y `scripts/idioma-preferido.mjs`.
+ */
 export const DEFAULT_LOCALE: Locale = 'es'
 
 export type RouteId =
@@ -39,12 +50,16 @@ export type RouteId =
   | 'notFound'
 
 /**
- * El blog existe y se indexa, con la **opcion A** de la seccion 4.9: pagina
- * "proximamente" con la linea editorial y el bloque de newsletter funcional.
- * No se publican seis titulares inventados con tiempos de lectura inventados.
+ * El blog existe, se indexa y **tiene contenido real**: 22 articulos en cada
+ * idioma, en `content/blog/`, compilados a `src/generated/blog.json` por
+ * `content:build`.
  *
- * Si Marketing decide otra cosa (pendiente P8), se cambia aqui y desaparece de
- * la navegacion, del pie, del sitemap y de las pruebas sin tocar nada mas.
+ * Esto describia la «opcion A» de la seccion 4.9 -una pagina «proximamente» con
+ * la linea editorial-, que fue lo que se publico primero y ya no es el estado.
+ *
+ * Si Marketing decide retirarlo (pendiente P8), se pone `false` aqui y
+ * desaparece de la navegacion, del pie, del sitemap, del build y de las pruebas
+ * sin tocar nada mas.
  */
 const BLOG_ENABLED = true
 const BLOG_INDEXABLE = true

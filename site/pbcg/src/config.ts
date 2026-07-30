@@ -2,15 +2,27 @@
  * Parametros del modelo economico del Plan Base de Ciberseguridad Gestionada.
  *
  * ═══════════════════════════════════════════════════════════════════════════
- * ESTE FICHERO VIVE EN EL REPOSITORIO DEL GATEWAY Y NO EXISTE EN EL DEL SITIO.
+ * ESTE FICHERO SI VIVE EN EL REPOSITORIO DEL SITIO, Y ESO ES UN COSTE ASUMIDO.
  *
- * Es la razon de ser de la separacion (bloqueante B01 del plan). Si estas
- * cifras estuvieran en `isnlabs-site`, Netlify las compilaria y acabarian en el
- * JavaScript que descarga cualquier visitante: las tarifas, el algoritmo
- * completo y, sobre todo, la posibilidad de abrir las herramientas de
- * desarrollo, llamar a la funcion y obtener el precio sin dejar ni el nombre.
- * `verify:export` del sitio comprueba en cada build que ninguna de estas
- * cadenas aparece en `out/`.
+ * La cabecera anterior decia lo contrario -«vive en el repositorio del gateway y
+ * no existe en el del sitio»-, y se quedo escrita cuando el gateway se cancelo y
+ * el motor se movio aqui (ISNLA-DOC-0008-MIG-02). Importa corregirlo: es el
+ * fichero que concentra las tarifas, y un comentario que promete una separacion
+ * que ya no existe invita a confiar en una defensa que no esta.
+ *
+ * Lo que SI sigue en pie, y es lo que cierra el bloqueante B01:
+ *
+ *   - Estas cifras **no llegan al navegador**. Solo las lee el motor, que se
+ *     ejecuta dentro de una Netlify Function, y el codigo de una funcion no se
+ *     descarga. `verify:architecture` prohibe que cualquier fichero de `src/`
+ *     importe de `pbcg/`, que es lo que lo garantiza en cada build.
+ *   - `verify:export` comprueba ademas que ninguna de estas cadenas aparezca en
+ *     `out/`, por si alguna se colara por otro camino.
+ *
+ * Lo que se pierde respecto al diseno original: el modelo vive en el repositorio
+ * que Netlify clona, de modo que quien tenga acceso al repositorio tiene acceso a
+ * las tarifas. Es la variante hibrida de MIG-02 §0.4, aprobada por Direccion el
+ * 28/07/2026 y documentada en ISNLA-DOC-0008-REQ-01 §0.1.
  * ═══════════════════════════════════════════════════════════════════════════
  *
  * Espejo literal de la hoja `PARAMETROS` del dimensionador
