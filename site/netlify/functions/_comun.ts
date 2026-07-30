@@ -228,8 +228,27 @@ export const entorno = () => process.env.MAIL_ENVIRONMENT ?? 'development'
  * calculadora tienen destinatarios distintos: tener configurado el de contacto
  * no autoriza a enviar cotizaciones a ninguna parte.
  */
-export function puedeEnviarCorreo(buzon: string | undefined): boolean {
+export function puedeEnviarCorreo(buzon: string | undefined): buzon is string {
   return Boolean(process.env.RESEND_API_KEY && process.env.RESEND_FROM && buzon)
+}
+
+/**
+ * Mapa campo → código de error, para que el cliente pinte el mensaje traducido.
+ *
+ * Estaba escrita dos veces -aquí en forma de bucle suelto dentro de `contact.ts` y
+ * como función en `quote.ts`-, con la misma política y sin nada que las obligara a
+ * coincidir. Vive aquí porque la decisión de qué error se muestra por campo es una
+ * sola, no una por endpoint.
+ */
+export function camposConError(err: z.ZodError): Record<string, string> {
+  const salida: Record<string, string> = {}
+  for (const problema of err.issues) {
+    const clave = problema.path.join('.') || 'general'
+    // El primer error por campo es el que se muestra: encadenar tres mensajes
+    // bajo un mismo input no ayuda a nadie.
+    salida[clave] ??= problema.message
+  }
+  return salida
 }
 
 /**

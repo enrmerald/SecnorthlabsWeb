@@ -5,6 +5,7 @@ import {
   ContactoSchema,
   SobreSchema,
   buzonContacto,
+  camposConError,
   entorno,
   error,
   esProbableBot,
@@ -48,11 +49,7 @@ export default async function handler(request: Request): Promise<Response> {
 
   const analizado = PeticionSchema.safeParse(previo.cuerpo)
   if (!analizado.success) {
-    const campos: Record<string, string> = {}
-    for (const p of analizado.error.issues) {
-      campos[p.path.join('.') || 'general'] ??= p.message
-    }
-    return error('validation', 400, campos)
+    return error('validation', 400, camposConError(analizado.error))
   }
 
   const peticion = analizado.data
@@ -96,8 +93,11 @@ export default async function handler(request: Request): Promise<Response> {
     marketing: peticion.marketing,
   })
 
+  // Sin cast: `puedeEnviarCorreo` es un type guard, asi que aqui `buzon` ya es
+  // `string`. Antes habia un `as string` que el tipo no respaldaba -si algun dia la
+  // condicion dejara de comprobar el buzon, el cast lo habria tapado-.
   const envio = await enviarCorreo({
-    para: buzon as string,
+    para: buzon,
     asunto:
       entornoActual === 'production' ? aviso.asunto : `[${entornoActual.toUpperCase()}] ${aviso.asunto}`,
     html: aviso.html,

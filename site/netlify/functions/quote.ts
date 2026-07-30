@@ -7,10 +7,9 @@ import { toPublicDto } from '../../pbcg/src/types.ts'
 import {
   ContactoSchema,
   SobreSchema,
-  buzonIngestion,
+  camposConError,
   error,
   esProbableBot,
-  puedeEnviarCorreo,
   referenciaCorta,
   registrar,
   responder,
@@ -75,15 +74,27 @@ export default async function handler(request: Request): Promise<Response> {
   // ── El único cálculo, y aquí ──
   const resultado = calcular(entrada.data)
 
-  const enviado = puedeEnviarCorreo(buzonIngestion())
-  if (enviado) {
-    // TODO(entrega): firmar (JWS Ed25519), cifrar (JWE RSA-OAEP-256) y enviar
-    // por Resend al buzón de ingestión, más el correo con la estimación al
-    // interesado. Pendiente de que exista el buzón y el dominio verificado
-    // (ISNLA-DOC-0008-REQ-01, bloques A y B).
-    //
-    // Mientras no esté, `puedeEnviarCorreo()` devuelve false y no se llega aquí.
-  }
+  // ═══════════════════════════════════════════════════════════════════════════
+  // Constante y NO `puedeEnviarCorreo(buzonIngestion())`, que es lo que decía
+  // antes y era un fallo silencioso esperando su momento.
+  //
+  // La entrega cifrada del TODO de abajo no está implementada. Preguntar por las
+  // variables de entorno hacía que `delivery` pasara a `'sent'` el día que
+  // alguien definiera `LEAD_MAILBOX_TO` -y `RESEND_API_KEY` y `RESEND_FROM` ya
+  // están puestas en producción para el formulario de contacto-, de modo que la
+  // función habría empezado a responder «enviado» sin enviar nada y cada lead se
+  // habría perdido sin dejar rastro. Es justo lo contrario de lo que razona
+  // `contact.ts` al devolver 503 cuando el correo no sale.
+  //
+  // Se vuelve a calcular a partir del entorno cuando exista el envío, no antes.
+  // ═══════════════════════════════════════════════════════════════════════════
+  const enviado = false
+
+  // TODO(entrega): firmar (JWS Ed25519), cifrar (JWE RSA-OAEP-256) y enviar
+  // por Resend al buzón de ingestión, más el correo con la estimación al
+  // interesado. Pendiente de que exista el buzón y el dominio verificado
+  // (ISNLA-DOC-0008-REQ-01, bloques A y B). Al implementarlo, `enviado` pasa a
+  // ser el resultado real del envío.
 
   registrar({
     tipo: 'quote',
@@ -151,14 +162,3 @@ const PeticionSchema = SobreSchema.extend({
   data: DatosCotizacionSchema,
 }).strict()
 
-/** Mapa campo → código de error, para que el cliente pinte el mensaje traducido. */
-function camposConError(err: z.ZodError): Record<string, string> {
-  const salida: Record<string, string> = {}
-  for (const problema of err.issues) {
-    const clave = problema.path.join('.') || 'general'
-    // El primer error por campo es el que se muestra: encadenar tres mensajes
-    // bajo un mismo input no ayuda a nadie.
-    salida[clave] ??= problema.message
-  }
-  return salida
-}

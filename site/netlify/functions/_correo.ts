@@ -32,8 +32,37 @@ const URL_RESEND = 'https://api.resend.com/emails'
  */
 const unaLinea = (valor: string) => valor.replace(/[\p{Cc}]+/gu, ' ').trim()
 
-/** Corta el intento antes de que Netlify corte la función entera. */
-const TIEMPO_MAXIMO_MS = 8000
+/**
+ * Corta el intento antes de que Netlify corte la función entera.
+ *
+ * ═══════════════════════════════════════════════════════════════════════════
+ * 3,5 s y no 8 s, y el número sale de una cuenta, no de una preferencia.
+ *
+ * Una Netlify Function síncrona tiene **10 s**. Con 8 s por intento, dos intentos
+ * y la espera intermedia, el peor caso eran 8 + 0,4 + 8 = 16,4 s: la plataforma
+ * mataba la función antes del segundo intento y quien enviaba el formulario
+ * recibía un 502 de Netlify en lugar del 503 que `contact.ts` se toma el trabajo
+ * de devolver. Es decir, el caso que el código maneja con más cuidado -«el correo
+ * no ha salido, dilo»- era justo el que no llegaba a ocurrir.
+ *
+ * Con 3,5 s: 3,5 + 0,4 + 3,5 = 7,4 s, y quedan ~2,5 s para validar, componer la
+ * plantilla y responder. Resend contesta en décimas cuando está sano; 3,5 s ya es
+ * holgado para un `POST` de tres campos.
+ * ═══════════════════════════════════════════════════════════════════════════
+ */
+const TIEMPO_MAXIMO_MS = 3500
+
+/**
+ * Presupuesto total de la función, para que la cuenta de arriba no se rompa en
+ * silencio si alguien sube el tiempo por intento. Lo comprueba `contact.test.ts`.
+ */
+export const PRESUPUESTO_MS = 10_000
+
+/** Intentos totales, no reintentos: el primero cuenta. */
+const INTENTOS = 2
+
+/** Espera entre el primer intento y el segundo. */
+const ESPERA_MS = 400
 
 export interface CorreoSaliente {
   /** Buzón de destino. Siempre de una variable de entorno, nunca del cliente. */
@@ -91,7 +120,7 @@ export async function enviarCorreo(correo: CorreoSaliente): Promise<ResultadoEnv
   // error, que es más honesto que dejarle esperando (MIG-02 §21.1).
   let ultimo: ResultadoEnvio = { ok: false, codigo: 0 }
 
-  for (let intento = 0; intento < 2; intento++) {
+  for (let intento = 0; intento < INTENTOS; intento++) {
     ultimo = await intentar(cuerpo, clave, correo.idempotencia)
     if (ultimo.ok) return ultimo
 
@@ -100,11 +129,20 @@ export async function enviarCorreo(correo: CorreoSaliente): Promise<ResultadoEnv
     const transitorio = ultimo.codigo === 0 || ultimo.codigo === 429 || ultimo.codigo >= 500
     if (!transitorio) return ultimo
 
-    if (intento === 0) await new Promise((listo) => setTimeout(listo, 400))
+    if (intento === 0) await new Promise((listo) => setTimeout(listo, ESPERA_MS))
   }
 
   return ultimo
 }
+
+/**
+ * Peor caso de tiempo de esta función.
+ *
+ * Se calcula en lugar de escribirse para que subir `TIEMPO_MAXIMO_MS` o añadir un
+ * intento no pueda desbordar el presupuesto sin que nadie lo note: lo comprueba
+ * `contact.test.ts`.
+ */
+export const PEOR_CASO_MS = INTENTOS * TIEMPO_MAXIMO_MS + (INTENTOS - 1) * ESPERA_MS
 
 async function intentar(
   cuerpo: string,

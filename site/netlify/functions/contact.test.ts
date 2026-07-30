@@ -1,4 +1,5 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
+import { PEOR_CASO_MS, PRESUPUESTO_MS } from './_correo.ts'
 import handler from './contact.ts'
 
 /**
@@ -290,5 +291,24 @@ describe('contact', () => {
     const respuesta = await handler(peticion(cuerpo))
 
     expect(respuesta.status).toBe(400)
+  })
+
+  it('los reintentos caben en el presupuesto de la funcion', () => {
+    // ═════════════════════════════════════════════════════════════════════════
+    // Esto no prueba comportamiento, prueba una CUENTA, y hace falta.
+    //
+    // Con 8 s por intento -lo que habia- el peor caso eran 16,4 s frente a los
+    // 10 s de una Netlify Function sincrona: la plataforma mataba la funcion
+    // antes del segundo intento y el visitante recibia un 502 en lugar del 503
+    // que este fichero comprueba con tanto cuidado tres pruebas mas arriba.
+    //
+    // El fallo no lo cazaba nada porque los dos numeros estaban en ficheros
+    // distintos y nadie los sumaba. Ahora se suman aqui.
+    // ═════════════════════════════════════════════════════════════════════════
+    expect(PEOR_CASO_MS).toBeLessThan(PRESUPUESTO_MS)
+
+    // Y con margen para validar, componer la plantilla y responder: apurar el
+    // limite hasta el ultimo milisegundo es no tener presupuesto.
+    expect(PRESUPUESTO_MS - PEOR_CASO_MS).toBeGreaterThanOrEqual(2000)
   })
 })
