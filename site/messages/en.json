@@ -327,7 +327,7 @@
         }
       },
       "copyright": "© 2026 ISN Labs · All rights reserved",
-      "ewalaNotice": "SentryN3t® is a trademark of Ewala",
+      "ewalaNotice": "",
       "legalLine": "Innovation and Security North Labs SL (ISN Labs) · Asturias, Spain"
     },
     "frameworks": [
@@ -403,7 +403,7 @@
           "routeId": null
         }
       ],
-      "subtitle": "We are ISN Labs (Innovation and Security North Labs). An MSSP with an in-house GRC department: we combine managed security operations with governance, risk and compliance. Based in Asturias, with expansion in mind.",
+      "subtitle": "We are ISN Labs (Innovation and Security North Labs). An MSSP with an in-house GRC department: we combine managed security operations with governance, risk and compliance.",
       "title": "Security and compliance,",
       "titleHighlight": "under one roof"
     },
@@ -636,7 +636,7 @@
       ],
       "subtitle": "Tell us about your context and we'll reply within 24 business hours. Free initial assessment: we tell you what works, what doesn't and the recommended next step.",
       "title": "Let's talk about your",
-      "titleHighlight": "security posture"
+      "titleHighlight": "security"
     },
     "rail": {
       "contactDirect": {

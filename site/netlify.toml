@@ -195,13 +195,14 @@
     # `/api/*` es del mismo origen, asi que ahi basta 'self'. Lo que abre la
     # politica es Google Tag Manager y Analytics:
     #
-    #   script-src   googletagmanager.com sirve gtm.js y gtag.js.
-    #                **'unsafe-inline' es obligatorio**: los dos fragmentos de
-    #                arranque van en linea y con `output: 'export'` no hay
-    #                servidor que genere un nonce por peticion. Es el precio de
-    #                instalar GTM en un sitio estatico, y conviene saberlo: con
-    #                'unsafe-inline' la CSP deja de ser una defensa real contra
-    #                XSS y queda como higiene.
+    #   script-src   googletagmanager.com sirve gtm.js y gtag.js. El arranque
+    #                de las dos NO va en linea: vive en /analitica.js.
+    #                **'unsafe-inline' sigue siendo obligatorio**, pero por Next,
+    #                no por GTM: cada pagina exportada lleva un `__next_f.push`
+    #                en linea con los datos de hidratacion, y con
+    #                `output: 'export'` no hay servidor que genere un nonce por
+    #                peticion. Conviene saberlo: con 'unsafe-inline' la CSP deja
+    #                de ser una defensa real contra XSS y queda como higiene.
     #   connect-src  las balizas de medicion; GA4 usa varios subdominios segun
     #                la region, de ahi los comodines.
     #   img-src      el pixel de respaldo cuando la baliza no puede salir.
