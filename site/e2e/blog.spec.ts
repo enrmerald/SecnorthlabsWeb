@@ -241,7 +241,20 @@ test.describe('sitemap y robots', () => {
 
   test('robots.txt apunta al sitemap y no bloquea el blog', async ({ request }) => {
     const texto = await (await request.get('/robots.txt')).text()
+    expect(texto).toContain('Sitemap: https://secnorthlabs.eu/sitemap-google.xml')
     expect(texto).toContain('Sitemap: https://secnorthlabs.eu/sitemap.xml')
     expect(texto).not.toMatch(/Disallow: \/(es\/blog|$)/m)
+  })
+
+  test('sitemap-google.xml tiene las mismas URLs que sitemap.xml pero sin xhtml:link', async ({
+    request,
+  }) => {
+    const xml = await (await request.get('/sitemap-google.xml')).text()
+
+    expect(xml).not.toContain('xhtml:link')
+    expect(xml).not.toContain('<priority>')
+    for (const articulo of ARTICULOS_ES) {
+      expect(xml).toContain(`https://secnorthlabs.eu/es/blog/${articulo.slug}/`)
+    }
   })
 })

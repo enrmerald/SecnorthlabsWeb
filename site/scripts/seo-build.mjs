@@ -103,6 +103,30 @@ ${urls}
 </urlset>
 `
 
+// ── sitemap-google.xml ──────────────────────────────────────────────────────
+// Mismas URLs, sin `xhtml:link` ni `priority`: Google ya recibe el hreflang por
+// las etiquetas `<link rel="alternate">` de cada pagina (`lib/metadatos.ts`), y
+// la propia documentacion de Google dice que ignora `priority`. Este fichero es
+// el que se declara en Search Console; el de arriba (`sitemap.xml`) sigue
+// existiendo para quien si lea `xhtml:link` -Bing, validadores, otras
+// herramientas- y para no romper lo que ya lo enlaza.
+const urlsGoogle = entradas
+  .flatMap(({ paths, lastmod }) =>
+    Object.values(paths).map(
+      (path) =>
+        `  <url>\n    <loc>${escapar(absoluta(path))}</loc>${
+          lastmod ? `\n    <lastmod>${lastmod}</lastmod>` : ''
+        }\n  </url>`,
+    ),
+  )
+  .join('\n')
+
+const sitemapGoogle = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${urlsGoogle}
+</urlset>
+`
+
 // ── robots.txt ───────────────────────────────────────────────────────────────
 const robots = esProduccion
   ? `# ISN Labs · ${SITE_URL}
@@ -113,6 +137,7 @@ Allow: /
 Disallow: /es/404/
 Disallow: /en/404/
 
+Sitemap: ${SITE_URL}/sitemap-google.xml
 Sitemap: ${SITE_URL}/sitemap.xml
 `
   : `# Despliegue de revision (CONTEXT=${process.env.CONTEXT}). No debe indexarse:
@@ -123,9 +148,10 @@ Disallow: /
 
 await mkdir(publicDir, { recursive: true })
 await writeFile(join(publicDir, 'sitemap.xml'), sitemap, 'utf8')
+await writeFile(join(publicDir, 'sitemap-google.xml'), sitemapGoogle, 'utf8')
 await writeFile(join(publicDir, 'robots.txt'), robots, 'utf8')
 
 console.log(
-  `seo:build · OK · ${entradas.length} pagina(s) logica(s) en el sitemap` +
+  `seo:build · OK · ${entradas.length} pagina(s) logica(s) en sitemap.xml y sitemap-google.xml` +
     `${esProduccion ? '' : ' · robots.txt en modo no indexable'}`,
 )
