@@ -17,9 +17,11 @@ import type { TramoBreadcrumb } from '@/lib/tipos'
  * - **Politica de privacidad** (21 apartados) y **aviso legal** (10), de los
  *   dos documentos v1.0 que entrego cumplimiento. Sustituyen a los que venian
  *   de la SPA anterior, que tenian 9 y 10 apartados con otro articulado.
- * - **Politica de cookies** (11 apartados y la tabla), redactada a partir de la
- *   de ewala.es cerrando sus huecos, el mayor de los cuales era que el apartado
- *   «Detalle de cookies instaladas» no detallaba ninguna.
+ * - **Politica de cookies** (10 apartados y la tabla), calcada en estructura y
+ *   orden al modelo de `docs/Politica_de_Cookies_Modelo ejemplo.docx`, con los
+ *   datos reales de la empresa y de las cookies de Analytics que ya se usaban.
+ *   No lleva el apartado de «Cookies de redes sociales» del modelo porque esta
+ *   web no incorpora botones de compartir en redes sociales.
  *
  * ⚠️ **La politica de cookies describe un aviso de consentimiento que todavia no
  * existe.** Dice que las analiticas no se cargan hasta aceptarlas, y hoy se

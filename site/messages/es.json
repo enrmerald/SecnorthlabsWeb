@@ -701,7 +701,7 @@
       "title": "Política de cookies - ISN Labs",
       "description": "Qué cookies utiliza la web de ISN Labs, con qué finalidad, quién las instala, cuánto duran y cómo aceptarlas, rechazarlas o retirar el consentimiento."
     },
-    "intro": "Esta Política de Cookies explica qué cookies utiliza el sitio web www.secnorthlabs.eu, con qué finalidad, quién las instala y durante cuánto tiempo, y cómo puedes aceptarlas, rechazarlas o retirar tu consentimiento en cualquier momento. Se publica en cumplimiento del artículo 22.2 de la Ley 34/2002 (LSSICE) y del Reglamento (UE) 2016/679 (RGPD).",
+    "intro": "Esta Política de Cookies explica qué cookies utiliza el sitio web www.secnorthlabs.eu, con qué finalidad, quién las instala y durante cuánto tiempo, y cómo puedes aceptarlas, rechazarlas o retirar tu consentimiento en cualquier momento. Se publica en cumplimiento del artículo 22.2 de la Ley 34/2002, de Servicios de la Sociedad de la Información y de Comercio Electrónico (LSSICE), del Reglamento (UE) 2016/679 (RGPD), de la Ley Orgánica 3/2018 (LOPDGDD) y de las directrices de la Agencia Española de Protección de Datos en materia de cookies.",
     "prevalence": "Este documento se publica en español y en inglés. En caso de discrepancia entre ambas versiones, prevalece la española.",
     "tabla": {
       "caption": "Cookies que utiliza esta web",
@@ -732,42 +732,91 @@
     },
     "sections": [
       {
-        "title": "¿Qué son las cookies?",
-        "blocks": [
-          {
-            "kind": "p",
-            "text": "Las cookies son pequeños archivos de texto que se descargan en tu dispositivo (ordenador, teléfono o tableta) cuando visitas determinadas páginas web. Permiten al sitio almacenar y recuperar información sobre tu visita: por ejemplo, recordar una preferencia que hayas elegido o contar cuántas personas han leído una página."
-          },
-          {
-            "kind": "p",
-            "text": "Junto a las cookies existen otras tecnologías con la misma función -almacenamiento local del navegador, píxeles de seguimiento o identificadores de dispositivo- que reciben el mismo tratamiento legal. Cuando esta política dice «cookies», se refiere a todas ellas."
-          }
-        ]
-      },
-      {
-        "title": "Quién instala las cookies de esta web",
+        "title": "Responsable de la instalación de cookies",
         "blocks": [
           {
             "kind": "dl",
             "items": [
               {
-                "term": "Titular del sitio web",
-                "text": "Innovation and Security North Labs, S.L., N.I.F. B-22966139, con domicilio en Calle Peña Brava 21, oficina 1B, PI de Silvota, 33192 Llanera (Asturias). Puedes escribir a rgpd@secnorthlabs.eu para cualquier cuestión relacionada con esta política."
+                "term": "Titular",
+                "text": "Innovation and Security North Labs, S.L."
               },
               {
-                "term": "Terceros",
-                "text": "Google Ireland Limited (Gordon House, Barrow Street, Dublín 4, Irlanda), como proveedor de Google Analytics y Google Tag Manager. Sus condiciones y su información sobre privacidad están disponibles en policies.google.com."
+                "term": "N.I.F.",
+                "text": "B-22966139"
+              },
+              {
+                "term": "Domicilio",
+                "text": "Calle Peña Brava 21, oficina 1B, PI de Silvota, 33192 Llanera (Asturias)"
+              },
+              {
+                "term": "Sitio web",
+                "text": "www.secnorthlabs.eu"
+              },
+              {
+                "term": "Contacto en materia de protección de datos",
+                "text": "rgpd@secnorthlabs.eu"
               }
             ]
           },
           {
             "kind": "p",
-            "text": "No se comparten datos con redes sociales ni con plataformas publicitarias, y esta web no instala cookies de publicidad comportamental."
+            "text": "Este sitio web utiliza cookies propias y de terceros para asegurar su correcto funcionamiento y para analizar su uso con el fin de mejorarlo. No se utilizan cookies con fines publicitarios ni para elaborar perfiles a partir de tus hábitos de navegación. El único tercero que instala cookies en esta web es Google Ireland Limited (Gordon House, Barrow Street, Dublín 4, Irlanda), como proveedor de Google Analytics y Google Tag Manager; sus condiciones y su información sobre privacidad están disponibles en policies.google.com."
           }
         ]
       },
       {
-        "title": "Tipos de cookies",
+        "title": "Consentimiento para el uso de cookies",
+        "blocks": [
+          {
+            "kind": "p",
+            "text": "Al acceder por primera vez a este sitio web se muestra un aviso de cookies que te permite decidir libremente sobre su uso, con las mismas facilidades para aceptar que para rechazar: «Aceptar todas», «Rechazar todas» y «Configurar» (acceso al panel de preferencias). Rechazar las cookies es tan sencillo como aceptarlas."
+          },
+          {
+            "kind": "p",
+            "text": "No se instala ninguna cookie distinta de las técnicas o estrictamente necesarias hasta que prestas tu consentimiento. No se utilizan casillas premarcadas a favor de la aceptación: si guardas tu elección sin marcar ninguna categoría, equivale al rechazo de todas las cookies no necesarias. El acceso al sitio web y a sus contenidos no está condicionado a que aceptes las cookies."
+          },
+          {
+            "kind": "p",
+            "text": "Seguir navegando, desplazarte por la página o cerrar el aviso sin elegir no se consideran, en ningún caso, formas válidas de prestar el consentimiento."
+          },
+          {
+            "kind": "p",
+            "text": "Puedes cambiar o retirar tu consentimiento en cualquier momento, de forma tan sencilla como lo prestaste, desde el enlace «Preferencias de cookies» del pie de página. Retirarlo no afecta a la licitud del tratamiento realizado con anterioridad."
+          },
+          {
+            "kind": "p",
+            "text": "Se te volverá a pedir el consentimiento transcurridos 12 meses desde que lo prestaste o lo renovaste por última vez, así como si cambian de forma sustancial las cookies utilizadas o sus finalidades."
+          },
+          {
+            "kind": "p",
+            "text": "Se conserva un registro del consentimiento que prestas, a efectos de poder acreditarlo conforme al artículo 7.1 del RGPD. Este consentimiento se aplica al dominio secnorthlabs.eu."
+          },
+          {
+            "kind": "p",
+            "text": "Puedes obtener más información sobre quiénes somos, cómo contactarnos y cómo tratamos tus datos personales en nuestra Política de Privacidad, accesible desde el pie de página."
+          }
+        ]
+      },
+      {
+        "title": "¿Qué es una cookie?",
+        "blocks": [
+          {
+            "kind": "p",
+            "text": "Una cookie es un pequeño archivo de texto que se descarga en tu dispositivo (ordenador, teléfono o tableta) cuando visitas determinadas páginas web. Permite al sitio almacenar y recuperar información sobre tu visita: por ejemplo, recordar una preferencia que hayas elegido o contar cuántas personas han leído una página."
+          },
+          {
+            "kind": "p",
+            "text": "Junto a las cookies existen otras tecnologías con la misma función -almacenamiento local del navegador, píxeles de seguimiento o identificadores de dispositivo- y también las técnicas de fingerprinting o huella digital, que combinan información para identificar el dispositivo sin necesidad de almacenar nada en él. Cuando esta política dice «cookies», se refiere a todas ellas."
+          },
+          {
+            "kind": "p",
+            "text": "La información obtenida mediante cookies puede constituir un dato de carácter personal cuando permite identificarte de forma directa o indirecta; en ese caso, su tratamiento se rige por lo previsto en nuestra Política de Privacidad."
+          }
+        ]
+      },
+      {
+        "title": "¿Qué tipos de cookies existen?",
         "blocks": [
           {
             "kind": "p",
@@ -831,11 +880,11 @@
         ]
       },
       {
-        "title": "Cookies que utiliza esta web",
+        "title": "Cookies utilizadas en esta web",
         "blocks": [
           {
             "kind": "p",
-            "text": "La siguiente tabla recoge todas las cookies que pueden instalarse en tu dispositivo, con su titular, su finalidad, su duración y su categoría. Las de análisis no se instalan hasta que las aceptas."
+            "text": "La siguiente tabla recoge todas las cookies que pueden instalarse en tu dispositivo, con su titular, su finalidad, su duración y su categoría. Las de análisis no se instalan hasta que las aceptas. Las cookies técnicas se instalan sin necesidad de consentimiento, al amparo de la excepción del artículo 22.2 LSSICE, por ser imprescindibles para prestar el servicio que has solicitado."
           },
           {
             "kind": "tabla"
@@ -843,32 +892,36 @@
         ]
       },
       {
-        "title": "Base jurídica",
+        "title": "Transferencias internacionales de datos",
         "blocks": [
           {
             "kind": "p",
-            "text": "Las cookies técnicas se instalan sin necesidad de consentimiento, al amparo de la excepción del artículo 22.2 LSSICE, por ser imprescindibles para prestar el servicio que has solicitado."
+            "text": "El tratamiento de los datos obtenidos mediante cookies se realiza, con carácter general, en el Espacio Económico Europeo o en países respecto de los cuales la Comisión Europea ha declarado un nivel adecuado de protección."
           },
           {
             "kind": "p",
-            "text": "Las cookies de análisis se instalan únicamente con tu consentimiento previo, libre, específico, informado e inequívoco (artículos 6.1.a RGPD y 22.2 LSSICE). Mientras no lo prestes, no se cargan ni envían ningún dato. Seguir navegando, desplazarse por la página o cerrar el aviso sin elegir no se consideran formas válidas de consentimiento."
+            "text": "El proveedor de las cookies de análisis es Google Ireland Limited, con sede en la Unión Europea. Los datos pueden ser tratados por Google LLC en Estados Unidos, entidad certificada en el marco EU-US Data Privacy Framework, declarado adecuado por la Comisión Europea mediante Decisión de Ejecución (UE) 2023/1795, de 10 de julio de 2023. Como garantía complementaria son de aplicación las Cláusulas Contractuales Tipo suscritas con Google."
+          },
+          {
+            "kind": "p",
+            "text": "Google Analytics 4 no registra ni almacena la dirección IP: la utiliza para deducir una localización aproximada y la descarta a continuación."
           }
         ]
       },
       {
-        "title": "Cómo aceptar, rechazar o retirar el consentimiento",
+        "title": "¿Cómo puede gestionarse el uso de cookies en esta web?",
         "blocks": [
           {
             "kind": "p",
-            "text": "La primera vez que visitas el sitio aparece un aviso que te permite aceptar todas las cookies, rechazarlas todas o elegir por categorías. Rechazarlas cuesta exactamente lo mismo que aceptarlas: un solo clic, en el mismo lugar y con el mismo aspecto."
+            "text": "En el panel de preferencias de cookies, accesible en cualquier momento desde el enlace «Preferencias de cookies» del pie de página, puedes consultar toda la información sobre las cookies utilizadas -incluida su finalidad, duración y si son propias o de terceros- y activar o desactivar las que no sean estrictamente necesarias para el funcionamiento del sitio."
           },
           {
             "kind": "p",
-            "text": "Puedes cambiar tu elección o retirar tu consentimiento en cualquier momento desde el enlace «Preferencias de cookies» del pie de página. Retirarlo es tan sencillo como prestarlo, y no afecta a la licitud del tratamiento realizado antes de la retirada."
+            "text": "Cuando desactivas una cookie, se elimina de tu navegador siempre que es posible y, si no puede eliminarse, se bloquea: nunca se utiliza una cookie que hayas rechazado. Algunos mecanismos de eliminación dependen del tercero responsable de la cookie y quedan fuera de nuestro control."
           },
           {
             "kind": "p",
-            "text": "Además, puedes bloquear o eliminar las cookies desde la configuración de tu navegador. Ten en cuenta que esto afecta a todos los sitios web que visites, no solo a este:"
+            "text": "Alternativamente, puedes bloquear o eliminar las cookies desde la configuración de tu propio navegador, también las de terceros que hayas aceptado antes. Ten en cuenta que esto afecta a todos los sitios web que visites, no solo a este:"
           },
           {
             "kind": "ul",
@@ -879,11 +932,15 @@
               "Edge: Configuración → Cookies y permisos del sitio → Administrar y eliminar cookies.",
               "En el móvil, la ruta está dentro de los ajustes del propio navegador, no en los del sistema."
             ]
+          },
+          {
+            "kind": "p",
+            "text": "Esta posibilidad puede ejercerse en cualquier momento. La configuración del panel y del navegador es específica de cada dispositivo: si quieres que tu elección se aplique en otro, tendrás que configurarla también ahí."
           }
         ]
       },
       {
-        "title": "Qué pasa si no las aceptas",
+        "title": "¿Qué ocurre al deshabilitar las cookies?",
         "blocks": [
           {
             "kind": "p",
@@ -891,51 +948,33 @@
           },
           {
             "kind": "p",
-            "text": "Si bloqueas todas las cookies desde el navegador, incluidas las técnicas, es posible que no podamos recordar tu elección y el aviso vuelva a aparecer en cada visita."
+            "text": "Si bloqueas todas las cookies desde el navegador, incluidas las técnicas, es posible que no podamos recordar tu elección y el aviso vuelva a aparecer en cada visita. En ningún caso el rechazo de las cookies no necesarias impide el acceso al sitio web ni a sus contenidos y servicios esenciales."
           }
         ]
       },
       {
-        "title": "Transferencias internacionales",
+        "title": "Derechos del Usuario",
         "blocks": [
           {
             "kind": "p",
-            "text": "El proveedor de las cookies de análisis es Google Ireland Limited, con sede en la Unión Europea. Los datos pueden ser tratados por Google LLC en Estados Unidos, entidad certificada en el marco EU-US Data Privacy Framework, declarado adecuado por la Comisión Europea mediante Decisión de 10 de julio de 2023. Como garantía complementaria son de aplicación las Cláusulas Contractuales Tipo suscritas con Google."
+            "text": "En la medida en que la información obtenida mediante cookies constituya un dato de carácter personal, puedes ejercer los derechos de acceso, rectificación, supresión, limitación del tratamiento, portabilidad y oposición, así como retirar el consentimiento prestado en cualquier momento, escribiendo a rgpd@secnorthlabs.eu, en los términos previstos en nuestra Política de Privacidad."
           },
           {
             "kind": "p",
-            "text": "Google Analytics 4 no registra ni almacena la dirección IP: la utiliza para deducir una localización aproximada y la descarta a continuación."
+            "text": "También tienes derecho a presentar una reclamación ante la Agencia Española de Protección de Datos (C/ Jorge Juan 6, 28001 Madrid - www.aepd.es), especialmente si no has obtenido respuesta satisfactoria al ejercer tus derechos."
           }
         ]
       },
       {
-        "title": "Cuánto dura tu decisión",
-        "blocks": [
-          {
-            "kind": "p",
-            "text": "La elección que hagas se guarda en tu dispositivo durante un máximo de 24 meses. Pasado ese plazo se te vuelve a preguntar, conforme al criterio de la Agencia Española de Protección de Datos. También se te preguntará de nuevo si cambian las finalidades o los terceros descritos en esta política."
-          }
-        ]
-      },
-      {
-        "title": "Actualización de esta política",
+        "title": "Actualización de la Política de Cookies",
         "blocks": [
           {
             "kind": "p",
             "text": "Esta Política de Cookies puede actualizarse cuando cambien las cookies utilizadas, la normativa aplicable o los criterios de las autoridades de control. Te recomendamos revisarla periódicamente; la versión aplicable es siempre la publicada en esta página."
-          }
-        ]
-      },
-      {
-        "title": "Más información y ejercicio de derechos",
-        "blocks": [
-          {
-            "kind": "p",
-            "text": "Puedes consultar cómo tratamos tus datos personales, durante cuánto tiempo los conservamos y cómo ejercer tus derechos de acceso, rectificación, supresión, limitación, portabilidad y oposición en nuestra Política de Privacidad, accesible desde el pie de página."
           },
           {
             "kind": "p",
-            "text": "Para cualquier cuestión relacionada con esta política puedes escribir a rgpd@secnorthlabs.eu. También puedes presentar una reclamación ante la Agencia Española de Protección de Datos (www.aepd.es)."
+            "text": "Cuando se produzcan cambios significativos en las cookies instaladas o en sus finalidades, te lo comunicaremos a través del sitio web y se te pedirá de nuevo el consentimiento. Para cualquier duda puedes escribir a rgpd@secnorthlabs.eu."
           }
         ]
       }

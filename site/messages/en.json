@@ -701,7 +701,7 @@
       "title": "Cookies policy - ISN Labs",
       "description": "Which cookies the ISN Labs website uses, for what purpose, who installs them, how long they last and how to accept, reject or withdraw your consent."
     },
-    "intro": "This Cookies Policy explains which cookies the website www.secnorthlabs.eu uses, for what purpose, who installs them and for how long, and how you can accept them, reject them or withdraw your consent at any time. It is published in compliance with Article 22.2 of Spanish Act 34/2002 (LSSICE) and with Regulation (EU) 2016/679 (GDPR).",
+    "intro": "This Cookies Policy explains which cookies the website www.secnorthlabs.eu uses, for what purpose, who installs them and for how long, and how you can accept them, reject them or withdraw your consent at any time. It is published in compliance with Article 22.2 of Spanish Act 34/2002 on Information Society Services and Electronic Commerce (LSSICE), Regulation (EU) 2016/679 (GDPR), Spanish Organic Act 3/2018 (LOPDGDD) and the guidelines of the Spanish Data Protection Agency on cookies.",
     "prevalence": "This document is published in Spanish and in English. In the event of any discrepancy between the two versions, the Spanish version prevails.",
     "tabla": {
       "caption": "Cookies used by this website",
@@ -732,42 +732,91 @@
     },
     "sections": [
       {
-        "title": "What are cookies?",
-        "blocks": [
-          {
-            "kind": "p",
-            "text": "Cookies are small text files downloaded onto your device (computer, phone or tablet) when you visit certain websites. They allow the site to store and retrieve information about your visit: for example, to remember a preference you have chosen or to count how many people have read a page."
-          },
-          {
-            "kind": "p",
-            "text": "Alongside cookies there are other technologies with the same function -browser local storage, tracking pixels or device identifiers- which receive the same legal treatment. Where this policy says «cookies», it refers to all of them."
-          }
-        ]
-      },
-      {
-        "title": "Who installs the cookies on this website",
+        "title": "Who is responsible for installing cookies",
         "blocks": [
           {
             "kind": "dl",
             "items": [
               {
-                "term": "Website owner",
-                "text": "Innovation and Security North Labs, S.L., Tax ID B-22966139, with registered office at Calle Peña Brava 21, oficina 1B, PI de Silvota, 33192 Llanera (Asturias), Spain. You can write to rgpd@secnorthlabs.eu about any matter relating to this policy."
+                "term": "Owner",
+                "text": "Innovation and Security North Labs, S.L."
               },
               {
-                "term": "Third parties",
-                "text": "Google Ireland Limited (Gordon House, Barrow Street, Dublin 4, Ireland), as the provider of Google Analytics and Google Tag Manager. Their terms and privacy information are available at policies.google.com."
+                "term": "Tax ID",
+                "text": "B-22966139"
+              },
+              {
+                "term": "Registered office",
+                "text": "Calle Peña Brava 21, oficina 1B, PI de Silvota, 33192 Llanera (Asturias), Spain"
+              },
+              {
+                "term": "Website",
+                "text": "www.secnorthlabs.eu"
+              },
+              {
+                "term": "Data protection contact",
+                "text": "rgpd@secnorthlabs.eu"
               }
             ]
           },
           {
             "kind": "p",
-            "text": "No data is shared with social networks or advertising platforms, and this website does not install behavioural advertising cookies."
+            "text": "This website uses first-party and third-party cookies to ensure it works correctly and to analyse its use in order to improve it. No cookies are used for advertising purposes or to build profiles from your browsing habits. The only third party that installs cookies on this website is Google Ireland Limited (Gordon House, Barrow Street, Dublin 4, Ireland), as the provider of Google Analytics and Google Tag Manager; their terms and privacy information are available at policies.google.com."
           }
         ]
       },
       {
-        "title": "Types of cookies",
+        "title": "Consent to the use of cookies",
+        "blocks": [
+          {
+            "kind": "p",
+            "text": "The first time you access this website, a cookie notice is shown that lets you decide freely on their use, with equally easy options to accept and to reject: «Accept all», «Reject all» and «Configure» (access to the preferences panel). Rejecting cookies is as easy as accepting them."
+          },
+          {
+            "kind": "p",
+            "text": "No cookie other than technical or strictly necessary ones is installed until you give your consent. No boxes are pre-checked in favour of acceptance: if you save your choice without selecting any category, this is treated as rejecting all non-necessary cookies. Access to the website and its content is not conditional on accepting cookies."
+          },
+          {
+            "kind": "p",
+            "text": "Continuing to browse, scrolling the page or closing the notice without choosing are not, under any circumstances, valid ways of giving consent."
+          },
+          {
+            "kind": "p",
+            "text": "You can change or withdraw your consent at any time, as easily as you gave it, from the «Cookie preferences» link in the footer. Withdrawing it does not affect the lawfulness of processing carried out beforehand."
+          },
+          {
+            "kind": "p",
+            "text": "You will be asked for consent again after 12 months from when you gave it or last renewed it, as well as if the cookies used or their purposes change substantially."
+          },
+          {
+            "kind": "p",
+            "text": "A record of the consent you give is kept so that it can be demonstrated in accordance with Article 7.1 GDPR. This consent applies to the domain secnorthlabs.eu."
+          },
+          {
+            "kind": "p",
+            "text": "You can find out more about who we are, how to contact us and how we process your personal data in our Privacy Policy, accessible from the footer."
+          }
+        ]
+      },
+      {
+        "title": "What is a cookie?",
+        "blocks": [
+          {
+            "kind": "p",
+            "text": "A cookie is a small text file downloaded onto your device (computer, phone or tablet) when you visit certain websites. It allows the site to store and retrieve information about your visit: for example, to remember a preference you have chosen or to count how many people have read a page."
+          },
+          {
+            "kind": "p",
+            "text": "Alongside cookies there are other technologies with the same function -browser local storage, tracking pixels or device identifiers- and also fingerprinting techniques, which combine information to identify the device without needing to store anything on it. Where this policy says «cookies», it refers to all of them."
+          },
+          {
+            "kind": "p",
+            "text": "The information obtained through cookies may constitute personal data where it allows you to be identified directly or indirectly; in that case, its processing is governed by our Privacy Policy."
+          }
+        ]
+      },
+      {
+        "title": "What types of cookies are there?",
         "blocks": [
           {
             "kind": "p",
@@ -835,7 +884,7 @@
         "blocks": [
           {
             "kind": "p",
-            "text": "The following table lists every cookie that may be installed on your device, with its owner, purpose, duration and category. Analytics cookies are not installed until you accept them."
+            "text": "The following table lists every cookie that may be installed on your device, with its owner, purpose, duration and category. Analytics cookies are not installed until you accept them. Technical cookies are installed without the need for consent, under the exception in Article 22.2 LSSICE, as they are essential to provide the service you have requested."
           },
           {
             "kind": "tabla"
@@ -843,32 +892,36 @@
         ]
       },
       {
-        "title": "Legal basis",
+        "title": "International transfers of data",
         "blocks": [
           {
             "kind": "p",
-            "text": "Technical cookies are installed without the need for consent, under the exception in Article 22.2 LSSICE, as they are essential to provide the service you have requested."
+            "text": "Data obtained through cookies is generally processed within the European Economic Area or in countries for which the European Commission has declared an adequate level of protection."
           },
           {
             "kind": "p",
-            "text": "Analytics cookies are installed only with your prior, freely given, specific, informed and unambiguous consent (Articles 6(1)(a) GDPR and 22.2 LSSICE). Until you give it, they are neither loaded nor do they send any data. Continuing to browse, scrolling the page or closing the notice without choosing are not valid forms of consent."
+            "text": "The provider of the analytics cookies is Google Ireland Limited, established in the European Union. The data may be processed by Google LLC in the United States, an entity certified under the EU-US Data Privacy Framework, declared adequate by the European Commission through Implementing Decision (EU) 2023/1795, of 10 July 2023. Standard Contractual Clauses signed with Google apply as a complementary safeguard."
+          },
+          {
+            "kind": "p",
+            "text": "Google Analytics 4 does not log or store IP addresses: it uses them to derive an approximate location and then discards them."
           }
         ]
       },
       {
-        "title": "How to accept, reject or withdraw consent",
+        "title": "How can the use of cookies on this website be managed?",
         "blocks": [
           {
             "kind": "p",
-            "text": "The first time you visit the site, a notice appears allowing you to accept all cookies, reject them all or choose by category. Rejecting them costs exactly the same as accepting them: a single click, in the same place and with the same appearance."
+            "text": "In the cookie preferences panel, accessible at any time from the «Cookie preferences» link in the footer, you can review full information on the cookies used -including their purpose, duration and whether they are first-party or third-party- and enable or disable those that are not strictly necessary for the site to work."
           },
           {
             "kind": "p",
-            "text": "You can change your choice or withdraw your consent at any time from the «Cookie preferences» link in the footer. Withdrawing it is as easy as giving it, and does not affect the lawfulness of processing carried out before the withdrawal."
+            "text": "When you disable a cookie, it is deleted from your browser whenever possible and, if it cannot be deleted, it is blocked: a cookie you have rejected is never used. Some deletion mechanisms depend on the third party responsible for the cookie and are beyond our control."
           },
           {
             "kind": "p",
-            "text": "You can also block or delete cookies from your browser settings. Bear in mind that this affects every website you visit, not just this one:"
+            "text": "Alternatively, you can block or delete cookies from your own browser settings, including third-party cookies you previously accepted. Bear in mind that this affects every website you visit, not just this one:"
           },
           {
             "kind": "ul",
@@ -879,11 +932,15 @@
               "Edge: Settings → Cookies and site permissions → Manage and delete cookies.",
               "On mobile, the path is inside the browser’s own settings, not the system settings."
             ]
+          },
+          {
+            "kind": "p",
+            "text": "This option can be exercised at any time. The panel and browser settings are specific to each device: if you want your choice to apply on another one, you will need to configure it there too."
           }
         ]
       },
       {
-        "title": "What happens if you do not accept them",
+        "title": "What happens if cookies are disabled?",
         "blocks": [
           {
             "kind": "p",
@@ -891,51 +948,33 @@
           },
           {
             "kind": "p",
-            "text": "If you block all cookies from your browser, including technical ones, we may not be able to remember your choice and the notice will appear again on every visit."
+            "text": "If you block all cookies from your browser, including technical ones, we may not be able to remember your choice and the notice will appear again on every visit. Rejecting non-necessary cookies never prevents access to the website or to its essential content and services."
           }
         ]
       },
       {
-        "title": "International transfers",
+        "title": "User rights",
         "blocks": [
           {
             "kind": "p",
-            "text": "The provider of the analytics cookies is Google Ireland Limited, established in the European Union. The data may be processed by Google LLC in the United States, an entity certified under the EU-US Data Privacy Framework, declared adequate by the European Commission in its Decision of 10 July 2023. Standard Contractual Clauses signed with Google apply as a complementary safeguard."
+            "text": "To the extent that information obtained through cookies constitutes personal data, you can exercise your rights of access, rectification, erasure, restriction of processing, portability and objection, as well as withdraw your consent at any time, by writing to rgpd@secnorthlabs.eu, under the terms set out in our Privacy Policy."
           },
           {
             "kind": "p",
-            "text": "Google Analytics 4 does not log or store IP addresses: it uses them to derive an approximate location and then discards them."
+            "text": "You also have the right to lodge a complaint with the Spanish Data Protection Agency (C/ Jorge Juan 6, 28001 Madrid, Spain - www.aepd.es), especially if you have not obtained a satisfactory response when exercising your rights."
           }
         ]
       },
       {
-        "title": "How long your decision lasts",
-        "blocks": [
-          {
-            "kind": "p",
-            "text": "The choice you make is stored on your device for a maximum of 24 months. After that period you will be asked again, in line with the criteria of the Spanish Data Protection Agency. You will also be asked again if the purposes or the third parties described in this policy change."
-          }
-        ]
-      },
-      {
-        "title": "Updates to this policy",
+        "title": "Updates to the Cookies Policy",
         "blocks": [
           {
             "kind": "p",
             "text": "This Cookies Policy may be updated when the cookies used, the applicable regulations or the criteria of the supervisory authorities change. We recommend reviewing it periodically; the applicable version is always the one published on this page."
-          }
-        ]
-      },
-      {
-        "title": "Further information and exercise of rights",
-        "blocks": [
-          {
-            "kind": "p",
-            "text": "You can find out how we process your personal data, for how long we keep it and how to exercise your rights of access, rectification, erasure, restriction, portability and objection in our Privacy Policy, accessible from the footer."
           },
           {
             "kind": "p",
-            "text": "For any matter relating to this policy you can write to rgpd@secnorthlabs.eu. You may also lodge a complaint with the Spanish Data Protection Agency (www.aepd.es)."
+            "text": "When significant changes are made to the cookies installed or to their purposes, we will notify you through the website and ask for your consent again. For any query you can write to rgpd@secnorthlabs.eu."
           }
         ]
       }
