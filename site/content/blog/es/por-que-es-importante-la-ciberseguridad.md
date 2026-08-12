@@ -15,7 +15,7 @@ originalUrl: https://ewala.es/blog/posts/por-que-es-importante-la-ciberseguridad
 
 Hoy te contamos por qué es importante la **ciberseguridad**, exponiendo las razones de que esta materia se haya convertido en una necesidad fundamental en el mundo empresarial.
 
-Somos **[ISN Labs](/es/compania/)** y somos conscientes de que los datos son uno de **los activos más valiosos para las empresas**. Queremos aprovechar nuestra experiencia en el sector para informarte, y si quieres ampliar la información, podemos ver cómo el [Plan Base de Ciberseguridad Gestionada](/es/soluciones/mssp/) puede ayudarte
+Somos **[ISN Labs](/compania/)** y somos conscientes de que los datos son uno de **los activos más valiosos para las empresas**. Queremos aprovechar nuestra experiencia en el sector para informarte, y si quieres ampliar la información, podemos ver cómo el [Plan Base de Ciberseguridad Gestionada](/soluciones/mssp/) puede ayudarte
 
 ## ¿Es la ciberseguridad tan crucial?
 
@@ -63,7 +63,7 @@ Ten en cuenta que factores como la inteligencia artificial, el trabajo remoto o 
 
 ## Por qué elegir a ISN Labs en ciberseguridad
 
-En **[ISN Labs](/es/compania/)** no solo te explicamos **por qué es importante la ciberseguridad**, también nos dedicamos a ofrecer soluciones adaptadas a nuestros clientes, a través de herramientas avanzadas como el análisis de riesgos, despliegue de soluciones y monitorización continua.
+En **[ISN Labs](/compania/)** no solo te explicamos **por qué es importante la ciberseguridad**, también nos dedicamos a ofrecer soluciones adaptadas a nuestros clientes, a través de herramientas avanzadas como el análisis de riesgos, despliegue de soluciones y monitorización continua.
 
 Esto es lo que nos diferencia:
 
@@ -78,4 +78,4 @@ No importa qué estás buscando relacionado con la ciberseguridad, tenemos lo ne
 
 Si te ha resultado de utilidad la información acerca de **por qué es importante la ciberseguridad**, considera nuestros servicios para poner en marcha un diagnóstico de seguridad en tu empresa, que es el primer paso.
 
-Analizaremos y detallaremos cuáles son tus vulnerabilidades y riesgos actuales y, sobre todo, te proponemos un plan de acción calendarizado, **adaptado a tu contexto y tus recursos**. ¡[Contáctanos](/es/contacto/) ya!
+Analizaremos y detallaremos cuáles son tus vulnerabilidades y riesgos actuales y, sobre todo, te proponemos un plan de acción calendarizado, **adaptado a tu contexto y tus recursos**. ¡[Contáctanos](/contacto/) ya!

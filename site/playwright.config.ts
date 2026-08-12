@@ -21,7 +21,10 @@ export default defineConfig({
 
   webServer: {
     command: 'node scripts/static-server.mjs out',
-    url: `${baseURL}/es/`,
+    // La Home, que es la raiz: el espanol se sirve sin prefijo. Con `/es/` esto
+    // solo funcionaba porque la redireccion de legado lo llevaba hasta aqui, y
+    // se quedaria colgado los 60 segundos el dia que esa regla se retire.
+    url: `${baseURL}/`,
     reuseExistingServer: !process.env.CI,
     timeout: 60_000,
   },

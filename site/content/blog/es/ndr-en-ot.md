@@ -103,6 +103,6 @@ Incorporar un NDR en una red OT no es solo una decisión técnica acertada: es u
 
 ### Soluciones ISN Labs: Protección OT sin interferencias
 
-Estas ideas forman parte del diseño de [**SentryN3t Protection**](/es/software/), la solución de monitorización pasiva y **ciberprotección de infraestructuras críticas** de nuestro partner Ewala, que en **[ISN Labs](/es/compania/)** implantamos y operamos.
+Estas ideas forman parte del diseño de [**SentryN3t Protection**](/software/), la solución de monitorización pasiva y **ciberprotección de infraestructuras críticas** de nuestro partner Ewala, que en **[ISN Labs](/compania/)** implantamos y operamos.
 ¿Quieres saber cómo puede aplicarse a tu caso?  
-[Contáctanos](/es/contacto/) y te lo mostramos.
+[Contáctanos](/contacto/) y te lo mostramos.

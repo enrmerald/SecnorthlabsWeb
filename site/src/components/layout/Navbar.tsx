@@ -17,20 +17,22 @@ import { NavbarCliente } from './NavbarCliente'
  */
 export function Navbar({ locale }: { locale: Locale }) {
   const navegacion = construirNavegacion(locale)
-  const otro = navegacion.otroIdioma.locale
+  const otro = navegacion.otroIdioma?.locale
 
-  const equivalencias = Object.fromEntries(
-    ROUTES.filter((route) => route.enabled).map((route) => [
-      route.paths[locale],
-      route.paths[otro],
-    ]),
-  )
+  const equivalencias = otro
+    ? Object.fromEntries(
+        ROUTES.filter((route) => route.enabled).map((route) => [
+          route.paths[locale],
+          route.paths[otro],
+        ]),
+      )
+    : undefined
 
   return (
     <NavbarCliente
       navegacion={navegacion}
       equivalencias={equivalencias}
-      inicioOtroIdioma={getLocalizedPath('home', otro)}
+      inicioOtroIdioma={otro ? getLocalizedPath('home', otro) : undefined}
     />
   )
 }

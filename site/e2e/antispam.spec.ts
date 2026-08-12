@@ -45,7 +45,7 @@ test.describe('honeypot del formulario de contacto', () => {
   test.slow()
 
   test('el valor del campo trampa viaja en la peticion', async ({ page }) => {
-    await page.goto('/es/contacto/')
+    await page.goto('/contacto/')
 
     let cuerpo: Record<string, unknown> | null = null
     await page.route('**/api/contact', async (ruta) => {
@@ -77,7 +77,7 @@ test.describe('honeypot del formulario de contacto', () => {
   })
 
   test('sin rellenar el campo trampa, viaja vacio', async ({ page }) => {
-    await page.goto('/es/contacto/')
+    await page.goto('/contacto/')
 
     let cuerpo: Record<string, unknown> | null = null
     await page.route('**/api/contact', async (ruta) => {

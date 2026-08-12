@@ -13,7 +13,7 @@ import { GTM_ID } from '@/config/analitica'
  * ⚠️ Mientras dure, la politica de cookies dice algo que aun no es cierto: que
  * las analiticas no se cargan hasta aceptarlas. La ventana se cierra al activar
  * el banner de Cookiebot. El motivo completo y el orden de los cuatro pasos estan
- * en el layout de idioma, que es donde se montan.
+ * en `src/app/layout.tsx`, que es donde se montan.
  *
  * El consentimiento no se programa aqui: se configura en GTM con Consent Mode,
  * que es exactamente por lo que se instala GTM y no solo gtag. GA4 se configura
@@ -24,18 +24,16 @@ import { GTM_ID } from '@/config/analitica'
  * **El arranque vive en `public/analitica.js`, no aqui.** Un `<script>` con
  * contenido en linea escrito desde JSX solo se ejecuta cuando el navegador
  * analiza el HTML; si React lo vuelve a pintar en una navegacion de cliente
- * -cambiar de idioma, que cruza el segmento `[locale]` y repinta el layout
- * entero-, crea el elemento pero el navegador no lo ejecuta, y React lo avisa
- * por consola. Un `<script async src>` no tiene ese problema: React lo eleva al
- * `<head>` y lo deduplica por `src`.
+ * -al volver a montar el layout raiz-, crea el elemento pero el navegador no lo
+ * ejecuta, y React lo avisa por consola. Un `<script async src>` no tiene ese
+ * problema: React lo eleva al `<head>` y lo deduplica por `src`.
  *
  * Sigue sin ser componente de cliente y sin montar ningun efecto: las dos
  * etiquetas salen escritas en el HTML exportado, igual que el JSON-LD.
  *
- * **Deliberadamente NO se pone en `/`.** Esa pagina solo reparte por idioma y
- * redirige de inmediato: medirla contaria dos visitas por cada una real y
- * ademas competiria con `reparto-idioma.js`, que tiene que ser el primer
- * elemento del `<body>` para ejecutarse antes del primer pintado.
+ * Se monta en el layout raiz, asi que mide **todas** las paginas, incluida `/`:
+ * con un solo idioma activo, `/` es la Home real y no una pagina de reparto que
+ * conviniera excluir de la medicion.
  */
 export function Analitica() {
   return <script async src="/analitica.js" />

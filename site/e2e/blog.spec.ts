@@ -14,7 +14,6 @@ import compilado from '../src/generated/blog.json' with { type: 'json' }
  */
 
 const ARTICULOS_ES = compilado.es
-const ARTICULOS_EN = compilado.en
 const PRIMERO = ARTICULOS_ES[0]
 if (!PRIMERO) throw new Error('no hay articulos compilados: ejecuta pnpm content:build')
 
@@ -27,7 +26,7 @@ test.describe('listado del blog', () => {
     // que ve un rastreador.
     const contexto = await browser.newContext({ javaScriptEnabled: false })
     const pagina = await contexto.newPage()
-    await pagina.goto('/es/blog/')
+    await pagina.goto('/blog/')
 
     // El destacado va aparte y no se repite en la rejilla.
     const tarjetas = pagina.locator('li[data-categoria]')
@@ -36,13 +35,13 @@ test.describe('listado del blog', () => {
     await expect(pagina.getByRole('heading', { level: 1 })).toContainText('Blog')
     await expect(
       pagina.getByRole('link', { name: PRIMERO.title, exact: true }),
-    ).toHaveAttribute('href', `/es/blog/${PRIMERO.slug}/`)
+    ).toHaveAttribute('href', `/blog/${PRIMERO.slug}/`)
 
     await contexto.close()
   })
 
   test('el filtro por tema deja solo los articulos de ese tema', async ({ page }) => {
-    await page.goto('/es/blog/')
+    await page.goto('/blog/')
 
     const cumplimiento = ARTICULOS_ES.filter(
       (articulo) => articulo.category === 'cumplimiento' && articulo.slug !== PRIMERO.slug,
@@ -67,7 +66,7 @@ test.describe('listado del blog', () => {
 test.describe('paginas de articulo', () => {
   for (const articulo of ARTICULOS_ES) {
     test(`${articulo.slug}: se genera con su contenido y sus metadatos`, async ({ page }) => {
-      const respuesta = await page.goto(`/es/blog/${articulo.slug}/`)
+      const respuesta = await page.goto(`/blog/${articulo.slug}/`)
       expect(respuesta?.status()).toBe(200)
 
       const h1 = page.getByRole('heading', { level: 1 })
@@ -84,7 +83,7 @@ test.describe('paginas de articulo', () => {
       // Canonica del propio idioma y BlogPosting con la fecha real.
       await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
         'href',
-        `https://secnorthlabs.eu/es/blog/${articulo.slug}/`,
+        `https://secnorthlabs.eu/blog/${articulo.slug}/`,
       )
 
       const jsonLd = await page
@@ -102,11 +101,11 @@ test.describe('paginas de articulo', () => {
     // Las migas ya llevan al blog, pero son de 12px y estan para situarse. Quien
     // entra desde una busqueda necesita un objetivo pulsable antes del articulo,
     // no solo al final de tres mil palabras.
-    await page.goto(`/es/blog/${PRIMERO.slug}/`)
+    await page.goto(`/blog/${PRIMERO.slug}/`)
 
     const volver = page.getByRole('link', { name: /volver al blog/i })
     await expect(volver).toBeVisible()
-    await expect(volver).toHaveAttribute('href', '/es/blog/')
+    await expect(volver).toHaveAttribute('href', '/blog/')
 
     // Y por encima de la categoria, que es el orden pedido. La fila de la
     // categoria se localiza por el tiempo de lectura, que la acompana: buscarla
@@ -130,7 +129,7 @@ test.describe('paginas de articulo', () => {
     // El articulo de ENS vs ISO trae una tabla de tres columnas anchas: es el caso
     // que rompia el ancho de la pagina en movil antes del envoltorio con scroll.
     await page.setViewportSize({ width: 390, height: 900 })
-    await page.goto('/es/blog/ens-vs-iso-27001-diferencias/')
+    await page.goto('/blog/ens-vs-iso-27001-diferencias/')
 
     const envoltorio = page.locator('.tabla-scroll').first()
     await expect(envoltorio).toBeVisible()
@@ -150,7 +149,7 @@ test.describe('paginas de articulo', () => {
   })
 
   test('el cuerpo crece con la pantalla en lugar de quedarse fijo', async ({ page }) => {
-    await page.goto(`/es/blog/${PRIMERO.slug}/`)
+    await page.goto(`/blog/${PRIMERO.slug}/`)
 
     const anchoEn = async (ancho: number) => {
       await page.setViewportSize({ width: ancho, height: 1000 })
@@ -167,14 +166,14 @@ test.describe('paginas de articulo', () => {
 
   test('no queda ningun enlace al blog anterior', async ({ page }) => {
     for (const articulo of ARTICULOS_ES.slice(0, 5)) {
-      await page.goto(`/es/blog/${articulo.slug}/`)
+      await page.goto(`/blog/${articulo.slug}/`)
       const externos = page.locator('.prosa a[href*="ewala.es/blog/posts"]')
       await expect(externos).toHaveCount(0)
     }
   })
 
   test('un slug que no existe acaba en la 404 y no en una pagina vacia', async ({ page }) => {
-    const respuesta = await page.goto('/es/blog/articulo-inventado/')
+    const respuesta = await page.goto('/blog/articulo-inventado/')
     // El servidor estatico devuelve 404; en Netlify lo hace la regla del final
     // de netlify.toml. En los dos casos, lo que no puede pasar es que se sirva
     // una pagina de articulo sin contenido.
@@ -183,45 +182,10 @@ test.describe('paginas de articulo', () => {
   })
 })
 
-test.describe('version inglesa', () => {
-  test('el listado ingles tiene sus articulos y sus enlaces son de /en/', async ({ page }) => {
-    await page.goto('/en/blog/')
-
-    await expect(page.locator('li[data-categoria]')).toHaveCount(ARTICULOS_EN.length - 1)
-
-    const enlaces = await page.locator('li[data-categoria] a').evaluateAll((nodos) =>
-      nodos.map((nodo) => nodo.getAttribute('href')),
-    )
-    expect(enlaces.length).toBeGreaterThan(0)
-    for (const href of enlaces) expect(href).toMatch(/^\/en\/blog\//)
-  })
-
-  test('cada articulo ingles declara su alternativa en espanol', async ({ page }) => {
-    for (const articulo of ARTICULOS_EN.slice(0, 5)) {
-      const respuesta = await page.goto(`/en/blog/${articulo.slug}/`)
-      expect(respuesta?.status()).toBe(200)
-
-      // Las dos versiones existen, asi que las dos alternativas de idioma tienen
-      // que estar declaradas: es lo que le dice al buscador que son la misma
-      // pieza en dos idiomas y no dos paginas compitiendo.
-      await expect(page.locator('link[hrefLang="es"]')).toHaveAttribute(
-        'href',
-        `https://secnorthlabs.eu/es/blog/${articulo.slug}/`,
-      )
-      await expect(page.locator('link[hrefLang="en"]')).toHaveAttribute(
-        'href',
-        `https://secnorthlabs.eu/en/blog/${articulo.slug}/`,
-      )
-    }
-  })
-
-  test('el cuerpo ingles no arrastra enlaces al blog en espanol', async ({ page }) => {
-    for (const articulo of ARTICULOS_EN.slice(0, 8)) {
-      await page.goto(`/en/blog/${articulo.slug}/`)
-      await expect(page.locator('.prosa a[href^="/es/"]')).toHaveCount(0)
-    }
-  })
-})
+// La version inglesa se retira con IDIOMAS_ACTIVOS (PLAN-solo-espanol.md):
+// content/blog/en/ se conserva en disco pero content:build no lo compila, asi
+// que /en/blog/ no se genera. Las pruebas de esa version se quitan de aqui;
+// volver a activarla es devolverlas junto con el interruptor.
 
 test.describe('sitemap y robots', () => {
   test('el sitemap incluye los articulos publicados y ninguno en borrador', async ({
@@ -230,7 +194,7 @@ test.describe('sitemap y robots', () => {
     const xml = await (await request.get('/sitemap.xml')).text()
 
     for (const articulo of ARTICULOS_ES) {
-      expect(xml).toContain(`https://secnorthlabs.eu/es/blog/${articulo.slug}/`)
+      expect(xml).toContain(`https://secnorthlabs.eu/blog/${articulo.slug}/`)
     }
 
     // Los tres borradores no existen como pagina, asi que tampoco pueden estar
@@ -254,7 +218,7 @@ test.describe('sitemap y robots', () => {
     expect(xml).not.toContain('xhtml:link')
     expect(xml).not.toContain('<priority>')
     for (const articulo of ARTICULOS_ES) {
-      expect(xml).toContain(`https://secnorthlabs.eu/es/blog/${articulo.slug}/`)
+      expect(xml).toContain(`https://secnorthlabs.eu/blog/${articulo.slug}/`)
     }
   })
 })

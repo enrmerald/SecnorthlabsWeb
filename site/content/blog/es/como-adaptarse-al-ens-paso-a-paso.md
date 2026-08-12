@@ -18,7 +18,7 @@ Si trabajas con la Administración Pública en España —o quieres empezar a ha
 
 Y no, no es un trámite que resuelves con un par de PDFs y buena voluntad. El **Esquema Nacional de Seguridad** es un proyecto real de ciberseguridad que, bien llevado, deja a tu empresa mucho más protegida. Mal llevado, se convierte en un agujero de tiempo y dinero.
 
-Si quieres profundizar en este enfoque, puedes consultar también nuestro servicio de [GRC: Gobernanza, Riesgo y Cumplimiento](/es/soluciones/grc/).
+Si quieres profundizar en este enfoque, puedes consultar también nuestro servicio de [GRC: Gobernanza, Riesgo y Cumplimiento](/soluciones/grc/).
 
 ¿La buena noticia? Se puede resumir en **9 pasos**. Vamos a ello.
 
@@ -121,7 +121,7 @@ Según la situación de la empresa, puede tener sentido apoyarse en soluciones c
 
 Un consejo: no intentes hacer todo a la vez. Prioriza lo que cierra los riesgos más altos y avanza por fases.
 
-También puede ser útil revisar nuestro análisis sobre [XDR vs SIEM: la solución para tu negocio](/es/blog/xdr-vs-siem-la-solucion-para-tu-negocio/), especialmente cuando la empresa necesita madurar sus capacidades de visibilidad y respuesta.
+También puede ser útil revisar nuestro análisis sobre [XDR vs SIEM: la solución para tu negocio](/blog/xdr-vs-siem-la-solucion-para-tu-negocio/), especialmente cuando la empresa necesita madurar sus capacidades de visibilidad y respuesta.
 
 ### 7. Recoge evidencias
 
@@ -191,12 +191,12 @@ Un enfoque bien planteado permite:
 - Evitar duplicidades.
 - Construir una estrategia GRC más coherente.
 
-Si quieres profundizar en esta comparativa, puedes consultar nuestro artículo sobre [ENS vs ISO 27001: diferencias, requisitos y cuál elegir](/es/blog/ens-vs-iso-27001-diferencias/).
+Si quieres profundizar en esta comparativa, puedes consultar nuestro artículo sobre [ENS vs ISO 27001: diferencias, requisitos y cuál elegir](/blog/ens-vs-iso-27001-diferencias/).
 
 ## ¿Necesitas ayuda?
 
-En [ISN Labs](/es/compania/) combinamos consultoría de cumplimiento con capacidad técnica propia en **SOC** y **MSSP**.
+En [ISN Labs](/compania/) combinamos consultoría de cumplimiento con capacidad técnica propia en **SOC** y **MSSP**.
 
 No solo te ayudamos a obtener la certificación: hacemos que la seguridad funcione en tu día a día.
 
-Descubre nuestro servicio de [GRC: Gobernanza, Riesgo y Cumplimiento](/es/soluciones/grc/).
+Descubre nuestro servicio de [GRC: Gobernanza, Riesgo y Cumplimiento](/soluciones/grc/).

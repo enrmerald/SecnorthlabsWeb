@@ -29,7 +29,7 @@ test.describe('sin contexto seguro (HTTP en una IP)', () => {
   // hay que devolver estas dos pruebas: el fallo que motivo el fichero
   // -`crypto.randomUUID` inexistente sin contexto seguro- afectaba a los dos
   // formularios por igual.
-  for (const [ruta, minimoCampos] of [['/es/contacto/', 8]] as const) {
+  for (const [ruta, minimoCampos] of [['/contacto/', 8]] as const) {
     test(`${ruta} se renderiza y no lanza`, async ({ page }) => {
       const errores: string[] = []
       page.on('pageerror', (e) => errores.push(e.message))

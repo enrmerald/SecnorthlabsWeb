@@ -9,7 +9,7 @@ import { dirname, join } from 'node:path'
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..')
 
-const { ROUTES, LOCALES, NAV_ROUTES, getLocalizedPath } = await import(
+const { ROUTES, LOCALES, IDIOMAS_ACTIVOS, PREFIJO_URL, NAV_ROUTES, getLocalizedPath } = await import(
   pathToFileURL(join(root, 'src', 'config', 'routes.ts')).href
 )
 
@@ -44,7 +44,9 @@ for (const locale of LOCALES) {
   }
 }
 
-// ── 3 · Forma de las rutas: prefijo de idioma y barra final ──────────────────
+// ── 3 · Forma de las rutas: prefijo de idioma (PREFIJO_URL) y barra final ────
+// Se exige path en TODOS los idiomas del catalogo (LOCALES), no solo en los
+// activos: es lo que mantiene sano el regreso del ingles con IDIOMAS_ACTIVOS.
 for (const route of ROUTES) {
   for (const locale of LOCALES) {
     const path = route.paths[locale]
@@ -52,8 +54,18 @@ for (const route of ROUTES) {
       errores.push(`"${route.id}" no declara ruta para "${locale}"`)
       continue
     }
-    if (!path.startsWith(`/${locale}/`)) {
-      errores.push(`"${route.id}" (${locale}): "${path}" no empieza por /${locale}/`)
+    // Dos comprobaciones y no una: con prefijo vacio -el espanol, que se sirve
+    // en la raiz- la del prefijo no dice nada, y saltarse el bloque entero
+    // dejaba al unico idioma publicado sin ninguna validacion de forma. Un
+    // `paths.es` sin barra inicial pasaba el check y el build, y luego
+    // `getLocalizedPath` devolvia una URL relativa que el navegador resolvia
+    // contra la pagina en curso: enlace roto en toda la navegacion.
+    if (!path.startsWith('/')) {
+      errores.push(`"${route.id}" (${locale}): "${path}" no empieza por barra`)
+    }
+    const prefijo = `${PREFIJO_URL[locale]}/`
+    if (prefijo !== '/' && !path.startsWith(prefijo)) {
+      errores.push(`"${route.id}" (${locale}): "${path}" no empieza por ${prefijo}`)
     }
     // trailingSlash: true en next.config, asi que la barra final no es estetica.
     if (!path.endsWith('/')) {
@@ -139,5 +151,5 @@ if (errores.length > 0) {
 
 const activasCount = ROUTES.filter((r) => r.enabled).length
 console.log(
-  `check:routes · OK · ${activasCount} rutas activas x ${LOCALES.length} idiomas = ${activasCount * LOCALES.length} paginas`,
+  `check:routes · OK · ${activasCount} rutas activas x ${IDIOMAS_ACTIVOS.length} idioma(s) activo(s) = ${activasCount * IDIOMAS_ACTIVOS.length} paginas`,
 )

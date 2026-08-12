@@ -1,5 +1,5 @@
 import { expect, test } from '@playwright/test'
-import { LOCALES, ROUTES } from '../src/config/routes'
+import { ROUTES } from '../src/config/routes'
 
 /**
  * Matriz movil obligatoria de la seccion 1.6.
@@ -37,7 +37,7 @@ test.describe('objetivos tactiles y teclado virtual', () => {
   test.use({ viewport: { width: 375, height: 667 } })
 
   test('el menu movil se abre, atrapa el foco y cierra con Escape', async ({ page }) => {
-    await page.goto('/es/')
+    await page.goto('/')
 
     const abrir = page.getByRole('button', { name: /abrir el menú/i })
     await expect(abrir).toBeVisible()
@@ -53,7 +53,7 @@ test.describe('objetivos tactiles y teclado virtual', () => {
   })
 
   test('todo objetivo interactivo mide al menos 44px de alto', async ({ page }) => {
-    await page.goto('/es/contacto/')
+    await page.goto('/contacto/')
 
     for (const elemento of await page.getByRole('link').all()) {
       if (!(await elemento.isVisible())) continue
@@ -76,7 +76,7 @@ test.describe('objetivos tactiles y teclado virtual', () => {
     // newsletter, retirada el 28/07/2026.
     // La calculadora estaba en esta lista; con `CALCULADORA_ACTIVA` en `false` no
     // se genera, y contacto es el otro formulario con campos de texto.
-    for (const ruta of ['/es/contacto/']) {
+    for (const ruta of ['/contacto/']) {
       await page.goto(ruta)
       const campos = await page.locator('input:not([type=checkbox]), select, textarea').all()
       expect(campos.length, `${ruta} no tiene campos`).toBeGreaterThan(0)
@@ -91,18 +91,7 @@ test.describe('objetivos tactiles y teclado virtual', () => {
   })
 })
 
-test.describe('selector de idioma', () => {
-  test('conserva la pagina logica con el slug traducido', async ({ page }) => {
-    await page.goto('/es/soluciones/grc/')
-    await page.getByRole('link', { name: /cambiar idioma/i }).click()
-    await expect(page).toHaveURL(/\/en\/solutions\/grc\/$/)
-  })
-
-  for (const route of rutasActivas.filter((r) => r.id !== 'notFound')) {
-    test(`${route.id}: el equivalente en el otro idioma existe`, async ({ request }) => {
-      for (const locale of LOCALES) {
-        expect((await request.get(route.paths[locale])).status()).toBe(200)
-      }
-    })
-  }
-})
+// El selector de idioma se retira con IDIOMAS_ACTIVOS (PLAN-solo-espanol.md):
+// con un solo idioma activo no hay nada que elegir, y `Navbar`/`NavbarCliente`
+// no renderizan el enlace. Volver a activar el ingles es devolver estas
+// pruebas junto con el interruptor.

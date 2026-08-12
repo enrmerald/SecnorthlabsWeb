@@ -24,7 +24,7 @@ Una misma organización puede tener varios sistemas con categorías distintas. U
 
 Entender esta idea es clave, porque la categoría del sistema condiciona todo lo demás: las medidas de seguridad aplicables, la documentación exigida, el tipo de evaluación de conformidad y, en muchos casos, el coste del proyecto.
 
-Si todavía necesitas una visión general del marco, puedes consultar antes nuestro artículo sobre [qué es el ENS y por qué es obligatorio en España](/es/blog/que-es-el-ens/).
+Si todavía necesitas una visión general del marco, puedes consultar antes nuestro artículo sobre [qué es el ENS y por qué es obligatorio en España](/blog/que-es-el-ens/).
 
 ## Qué son las categorías del ENS
 
@@ -138,7 +138,7 @@ La categoría media requiere una **Certificación de Conformidad** mediante audi
 
 Además, la auditoría ordinaria debe realizarse al menos cada dos años, según el artículo 31.1.
 
-Si quieres ver el proceso completo de preparación, puedes consultar nuestro artículo sobre [cómo adaptarse al ENS paso a paso](/es/blog/como-adaptarse-al-ens-paso-a-paso/).
+Si quieres ver el proceso completo de preparación, puedes consultar nuestro artículo sobre [cómo adaptarse al ENS paso a paso](/blog/como-adaptarse-al-ens-paso-a-paso/).
 
 ## Categoría alta
 
@@ -164,7 +164,7 @@ La organización debe demostrar resiliencia real, no solo la existencia de contr
 
 En estos entornos, soluciones como **SIEM**, **EDR**, **XDR** o servicios de **SOC** pueden ser relevantes para reforzar la vigilancia, la trazabilidad y la respuesta ante incidentes.
 
-Puedes profundizar en estas capacidades en nuestros artículos sobre [qué es un SOC en ciberseguridad](/es/blog/que-es-un-soc-en-ciberseguridad/) y [SIEM y SOAR: qué son y para qué sirven](/es/blog/que-es-un-siem-y-para-que-sirve-y-un-soar/).
+Puedes profundizar en estas capacidades en nuestros artículos sobre [qué es un SOC en ciberseguridad](/blog/que-es-un-soc-en-ciberseguridad/) y [SIEM y SOAR: qué son y para qué sirven](/blog/que-es-un-siem-y-para-que-sirve-y-un-soar/).
 
 ### Evaluación de conformidad
 
@@ -212,9 +212,9 @@ Este concepto no tiene equivalente directo en otros marcos.
 
 El enfoque más eficiente suele ser buscar puntos comunes entre marcos, reutilizar evidencias y construir un modelo de cumplimiento integrado.
 
-Si quieres profundizar en esta comparativa, puedes leer nuestro artículo sobre [ENS vs ISO 27001: diferencias, requisitos y cuál elegir](/es/blog/ens-vs-iso-27001-diferencias/).
+Si quieres profundizar en esta comparativa, puedes leer nuestro artículo sobre [ENS vs ISO 27001: diferencias, requisitos y cuál elegir](/blog/ens-vs-iso-27001-diferencias/).
 
-Si estás empezando desde cero, también puede ayudarte nuestra [guía del ENS: cuándo es obligatorio y cómo adaptarse](/es/blog/ens-cuando-es-obligatorio-y-como-adaptarse/).
+Si estás empezando desde cero, también puede ayudarte nuestra [guía del ENS: cuándo es obligatorio y cómo adaptarse](/blog/ens-cuando-es-obligatorio-y-como-adaptarse/).
 
 ## Cómo empezar
 
@@ -272,4 +272,4 @@ En **ISN Labs** ayudamos a las organizaciones a identificar qué sistemas están
 
 Nuestro enfoque combina consultoría GRC, ciberseguridad técnica y visión de negocio.
 
-Si tu empresa trabaja con la Administración Pública, participa en licitaciones o necesita saber qué categoría ENS aplica a sus sistemas, descubre nuestro servicio de [GRC: Gobernanza, Riesgo y Cumplimiento](/es/soluciones/grc/).
+Si tu empresa trabaja con la Administración Pública, participa en licitaciones o necesita saber qué categoría ENS aplica a sus sistemas, descubre nuestro servicio de [GRC: Gobernanza, Riesgo y Cumplimiento](/soluciones/grc/).

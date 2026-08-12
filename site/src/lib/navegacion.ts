@@ -1,4 +1,5 @@
 import {
+  MULTIIDIOMA,
   NAV_ROUTES,
   getLocalizedPath,
   isEnabled,
@@ -66,8 +67,11 @@ export interface DatosNavegacion {
   /** Desplegable "Soluciones". */
   soluciones: { label: string; items: EnlaceResuelto[] }
   cta: EnlaceResuelto
-  /** Idioma al que lleva el selector, y su etiqueta ("EN" desde el espanol). */
-  otroIdioma: { locale: Locale; label: string }
+  /**
+   * Idioma al que lleva el selector, y su etiqueta ("EN" desde el espanol).
+   * `null` con un solo idioma activo (`!MULTIIDIOMA`): no hay nada que elegir.
+   */
+  otroIdioma: { locale: Locale; label: string } | null
   a11y: ReturnType<typeof cargarMensajes>['common']['a11y']
 }
 
@@ -101,7 +105,7 @@ export function construirNavegacion(locale: Locale): DatosNavegacion {
     // es donde se atiende la misma peticion. El texto lo dice sin rodeos
     // («Contactanos»): un boton de barra promete el destino al que lleva.
     cta: { label: common.nav.cta, href: getLocalizedPath('contact', locale) },
-    otroIdioma: { locale: otro, label: common.nav.languageToggle },
+    otroIdioma: MULTIIDIOMA ? { locale: otro, label: common.nav.languageToggle } : null,
     a11y: common.a11y,
   }
 }

@@ -2,8 +2,8 @@
  * Arranque de Google Tag Manager y Google Analytics 4.
  *
  * ═══════════════════════════════════════════════════════════════════════════
- * ESTE FICHERO NO PASA POR EL COMPILADOR. Se sirve tal cual, como
- * `reparto-idioma.js`: JavaScript de toda la vida, sin modulos ni tipos.
+ * ESTE FICHERO NO PASA POR EL COMPILADOR. Se sirve tal cual: JavaScript de
+ * toda la vida, sin modulos ni tipos.
  *
  * Antes esto eran dos `<script>` en linea dentro de `Analitica.tsx`, y estaba
  * mal por un motivo concreto. Un `<script>` con contenido en linea escrito
@@ -13,9 +13,10 @@
  *
  *   «Encountered a script tag while rendering React component.»
  *
- * Se veia justo al cambiar de idioma, y tiene sentido: cambiar de `/es/` a
- * `/en/` cruza el segmento `[locale]`, asi que se vuelve a pintar el layout
- * entero. Dentro del mismo idioma el layout se reutiliza y no pasaba nada.
+ * Se veia al cambiar de idioma, cuando eso cruzaba el segmento `[locale]` y
+ * volvia a pintar el layout entero (hoy retirado con `IDIOMAS_ACTIVOS`, ver
+ * `PLAN-solo-espanol.md`). Dentro del mismo layout se reutiliza y no pasaba
+ * nada.
  *
  * No rompia la medicion -las etiquetas ya se habian cargado en la primera
  * visita y no deben cargarse dos veces-, pero era ruido en consola que tapaba

@@ -25,9 +25,10 @@ import type { DatosNavegacion } from '@/lib/navegacion'
  */
 interface PropsNavbarCliente {
   navegacion: DatosNavegacion
-  /** `ruta en el idioma actual -> misma pagina en el otro idioma`. */
-  equivalencias: Record<string, string>
-  inicioOtroIdioma: string
+  /** `ruta en el idioma actual -> misma pagina en el otro idioma`. `undefined`
+   * con un solo idioma activo: no hay selector que mostrar. */
+  equivalencias?: Record<string, string>
+  inicioOtroIdioma?: string
 }
 
 export function NavbarCliente({
@@ -51,7 +52,7 @@ export function NavbarCliente({
   // Si algun dia no la trae, la equivalencia fallaria en silencio y el selector
   // llevaria siempre a la portada, asi que se normaliza.
   const rutaActual = pathname.endsWith('/') ? pathname : `${pathname}/`
-  const enlaceIdioma = equivalencias[rutaActual] ?? inicioOtroIdioma
+  const enlaceIdioma = equivalencias?.[rutaActual] ?? inicioOtroIdioma
 
   const esActiva = useCallback(
     (href: string) => {
@@ -251,16 +252,18 @@ export function NavbarCliente({
         </nav>
 
         <div className="flex items-center gap-3">
-          <Link
-            href={enlaceIdioma}
-            hrefLang={navegacion.otroIdioma.locale}
-            aria-label={a11y.languageSwitch}
-            // Fondo propio y texto a plena intensidad: antes era gris sobre
-            // transparente y no se leia como un control pulsable.
-            className="font-display border-border bg-panel text-text hover:border-cyan hover:text-cyan hover:bg-card inline-flex size-11 items-center justify-center rounded-md border text-xs font-bold transition-colors"
-          >
-            {navegacion.otroIdioma.label}
-          </Link>
+          {navegacion.otroIdioma && enlaceIdioma && (
+            <Link
+              href={enlaceIdioma}
+              hrefLang={navegacion.otroIdioma.locale}
+              aria-label={a11y.languageSwitch}
+              // Fondo propio y texto a plena intensidad: antes era gris sobre
+              // transparente y no se leia como un control pulsable.
+              className="font-display border-border bg-panel text-text hover:border-cyan hover:text-cyan hover:bg-card inline-flex size-11 items-center justify-center rounded-md border text-xs font-bold transition-colors"
+            >
+              {navegacion.otroIdioma.label}
+            </Link>
+          )}
 
           {/* El CTA se oculta desde un contenedor y no con `hidden` sobre el
               propio boton: `Button` ya trae `inline-flex` en sus clases base y

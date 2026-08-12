@@ -12,11 +12,11 @@ author: ISN Labs
 originalUrl: https://ewala.es/blog/posts/que-es-un-siem-y-para-que-sirve-y-un-soar/
 ---
 
-## Descubre el corazón de la ciberseguridad moderna con [ISN Labs](/es/compania/)
+## Descubre el corazón de la ciberseguridad moderna con [ISN Labs](/compania/)
 
 En un mundo cada vez más digitalizado, donde la industria 4.0 y los entornos empresariales dependen de la tecnología, la seguridad de la información se ha convertido en una prioridad crítica. En este contexto, los **SIEM** (*Security Information and Event Management*) y los sistemas **SOAR** (*Security Orchestration, Automation, and Response*) son pilares fundamentales para la protección de los activos digitales.
 
-Hoy en [**ISN Labs**](/es/compania/) te explicamos qué es un SIEM, cómo funciona, y por qué es una parte esencial de un SOC (*Security Operations Center*) moderno.
+Hoy en [**ISN Labs**](/compania/) te explicamos qué es un SIEM, cómo funciona, y por qué es una parte esencial de un SOC (*Security Operations Center*) moderno.
 
 ## ¿Qué es un SIEM?
 
@@ -60,7 +60,7 @@ Juntos, **SIEM** y **SOAR** crean un ecosistema de ciberseguridad robusto:
 - **SIEM:** Detecta, analiza y alerta sobre incidentes.  
 - **SOAR:** Automatiza respuestas, coordina equipos y reduce tiempos de reacción.  
 
-En [**ISN Labs**](/es/compania/), ofrecemos un servicio completo de SOC, que combina estas tecnologías avanzadas con un equipo de expertos en ciberseguridad que **monitoriza, analiza y responde a incidentes en tiempo real**.
+En [**ISN Labs**](/compania/), ofrecemos un servicio completo de SOC, que combina estas tecnologías avanzadas con un equipo de expertos en ciberseguridad que **monitoriza, analiza y responde a incidentes en tiempo real**.
 
 ## Beneficios de un SIEM en Ciberseguridad
 
@@ -69,9 +69,9 @@ En [**ISN Labs**](/es/compania/), ofrecemos un servicio completo de SOC, que com
 - **Mejora en la gestión de incidentes:** Gracias a la integración con **SOAR**, la respuesta es más rápida y efectiva.  
 - **Visibilidad completa:** Permite un control centralizado de toda la infraestructura de TI.  
 
-## Protege tu empresa con [ISN Labs](/es/compania/)
+## Protege tu empresa con [ISN Labs](/compania/)
 
-En [**ISN Labs**](/es/compania/), entendemos la importancia de contar con un enfoque integral de ciberseguridad. Por eso, nuestros servicios de **SOC** están diseñados para garantizar la **protección de tus datos** y la **resiliencia digital** de tu organización.
+En [**ISN Labs**](/compania/), entendemos la importancia de contar con un enfoque integral de ciberseguridad. Por eso, nuestros servicios de **SOC** están diseñados para garantizar la **protección de tus datos** y la **resiliencia digital** de tu organización.
 
 ¿Quieres saber más sobre cómo un **SIEM** y un **SOAR** pueden transformar la seguridad de tu empresa?
 
@@ -79,6 +79,6 @@ En [**ISN Labs**](/es/compania/), entendemos la importancia de contar con un enf
 
 También te podemos ayudar con nuestros servicios de:
 
-- [**Ciberseguridad Industrial**](/es/soluciones/mssp/#ot): Protección específica para entornos industriales.  
-- **Sistemas y** [**Ciberseguridad IT**](/es/soluciones/mssp/#it): Seguridad integral para infraestructuras tecnológicas.
-- [**Gobierno, riesgo y cumplimiento**](/es/soluciones/grc/): ENS, ISO 27001 y NIS2 con enfoque de negocio.
+- [**Ciberseguridad Industrial**](/soluciones/mssp/#ot): Protección específica para entornos industriales.  
+- **Sistemas y** [**Ciberseguridad IT**](/soluciones/mssp/#it): Seguridad integral para infraestructuras tecnológicas.
+- [**Gobierno, riesgo y cumplimiento**](/soluciones/grc/): ENS, ISO 27001 y NIS2 con enfoque de negocio.

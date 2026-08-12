@@ -31,8 +31,21 @@ const { separarFrontMatter } = await import(
 const { FrontMatterSchema, PALABRAS_POR_MINUTO, OPTIMO_SEO } = await import(
   pathToFileURL(join(root, 'src', 'lib', 'blog', 'esquema.ts')).href
 )
+const {
+  IDIOMAS_ACTIVOS,
+  MULTIIDIOMA,
+  ROUTES,
+  LOCALES: LOCALES_CATALOGO,
+} = await import(pathToFileURL(join(root, 'src', 'config', 'routes.ts')).href)
+const { revisarEnlacesInternos } = await import(
+  pathToFileURL(join(root, 'src', 'lib', 'blog', 'enlaces.ts')).href
+)
 
-const LOCALES = ['es', 'en']
+// Solo se compilan los idiomas activos: los `.md` de content/blog/en/ se
+// quedan en disco sin tocar mientras IDIOMAS_ACTIVOS sea ['es'] (interruptor
+// de PLAN-solo-espanol.md), listos para recompilarse el dia que el ingles
+// vuelva a activarse.
+const LOCALES = IDIOMAS_ACTIVOS
 const SLUG = /^[a-z0-9]+(?:-[a-z0-9]+)*$/
 
 const exists = async (path) => access(path).then(() => true, () => false)
@@ -253,31 +266,35 @@ for (const locale of LOCALES) {
 //
 // Se aplica la tercera, y cada reescritura se registra: si la lista crece y no
 // baja, es que la traduccion se ha quedado parada.
-const PREFIJO_BLOG = { es: '/es/blog/', en: '/en/blog/' }
+//
+// La validacion vive en `src/lib/blog/enlaces.ts` y va **contra el manifiesto**,
+// no contra un prefijo escrito aqui. Antes habia una constante `PREFIJO_BLOG`
+// copiada de `ROUTES`, y esa copia es la que causo el incidente: al pasar el
+// espanol a la raiz se actualizo la copia, los `.md` se quedaron con sus `/es/…`
+// y la regex dejo de casar con un solo enlace, en silencio. De paso, ahora se
+// revisan tambien los enlaces a paginas fijas -`/compania/`, `/contacto/`…-, que
+// eran dos tercios del total y no los miraba nadie.
 let reescritos = 0
 
-for (const locale of LOCALES) {
-  const otro = locale === 'es' ? 'en' : 'es'
-  const enEsteIdioma = new Set(compilado[locale].map((articulo) => articulo.slug))
-  const enElOtro = new Set(compilado[otro].map((articulo) => articulo.slug))
+const slugsPorIdioma = Object.fromEntries(
+  LOCALES_CATALOGO.map((locale) => [
+    locale,
+    new Set((compilado[locale] ?? []).map((articulo) => articulo.slug)),
+  ]),
+)
 
+for (const locale of LOCALES) {
   for (const articulo of compilado[locale]) {
-    articulo.html = articulo.html.replace(
-      new RegExp(`href="${PREFIJO_BLOG[locale]}([a-z0-9-]+)/"`, 'g'),
-      (completo, destino) => {
-        if (enEsteIdioma.has(destino)) return completo
-        if (enElOtro.has(destino)) {
-          reescritos += 1
-          return `href="${PREFIJO_BLOG[otro]}${destino}/"`
-        }
-        // No existe en ningun idioma: ese si es un enlace roto de verdad.
-        errores.push(
-          `content/blog/${locale}/${articulo.slug}.md · enlaza a ${PREFIJO_BLOG[locale]}${destino}/, ` +
-            'que no existe en ningun idioma',
-        )
-        return completo
-      },
-    )
+    const revision = revisarEnlacesInternos({
+      html: articulo.html,
+      locale,
+      origen: `content/blog/${locale}/${articulo.slug}.md`,
+      slugsPorIdioma,
+      manifiesto: { rutas: ROUTES, locales: LOCALES_CATALOGO },
+    })
+    articulo.html = revision.html
+    reescritos += revision.reescrituras
+    errores.push(...revision.errores)
   }
 }
 
@@ -287,17 +304,23 @@ if (reescritos > 0) {
 
 // Un articulo traducido que no exista en espanol no tendria alternativa de
 // idioma ni canonical coherente. Al reves si vale: el ingles va por detras.
-for (const articulo of compilado.en) {
-  if (!compilado.es.some((otro) => otro.slug === articulo.slug)) {
-    errores.push(`content/blog/en/${articulo.slug}.md · no existe la version en espanol`)
+//
+// Con el ingles retirado (!MULTIIDIOMA) no se compila content/blog/en/, asi
+// que esta comprobacion y el aviso de abajo no dirian nada util -saldrian
+// vacia y a maximo respectivamente- y se saltan.
+if (MULTIIDIOMA) {
+  for (const articulo of compilado.en) {
+    if (!compilado.es.some((otro) => otro.slug === articulo.slug)) {
+      errores.push(`content/blog/en/${articulo.slug}.md · no existe la version en espanol`)
+    }
   }
-}
 
-const sinTraducir = compilado.es.filter(
-  (articulo) => !compilado.en.some((otro) => otro.slug === articulo.slug),
-)
-if (sinTraducir.length > 0) {
-  avisos.push(`${sinTraducir.length} articulo(s) sin version en ingles`)
+  const sinTraducir = compilado.es.filter(
+    (articulo) => !compilado.en.some((otro) => otro.slug === articulo.slug),
+  )
+  if (sinTraducir.length > 0) {
+    avisos.push(`${sinTraducir.length} articulo(s) sin version en ingles`)
+  }
 }
 
 if (errores.length > 0) {

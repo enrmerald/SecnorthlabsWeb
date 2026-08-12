@@ -22,7 +22,7 @@ Un **ataque a la cadena de suministro** se produce cuando un actor malicioso com
 
 La clave está en que el componente comprometido **parece legítimo**. No se trata necesariamente de una descarga sospechosa, sino de un elemento habitual dentro de la operativa del negocio. Por eso este tipo de ataques es especialmente peligroso: explota la confianza previa y reduce la capacidad de control directo de la empresa.
 
-Si quieres una visión más general sobre este contexto, puedes leer también nuestro artículo sobre [qué es la ciberseguridad y para qué sirve](/es/blog/que-es-la-ciberseguridad-y-para-que-sirve/).
+Si quieres una visión más general sobre este contexto, puedes leer también nuestro artículo sobre [qué es la ciberseguridad y para qué sirve](/blog/que-es-la-ciberseguridad-y-para-que-sirve/).
 
 ## ¿Por qué es tan peligroso para las empresas?
 
@@ -32,7 +32,7 @@ La segunda es que estos ataques **atraviesan controles tradicionales**. Si el ma
 
 La tercera es su **efecto multiplicador**. Un único proveedor, plugin o paquete comprometido puede afectar a multitud de clientes. Por eso la gestión del riesgo de terceros ya forma parte de la ciberseguridad empresarial moderna.
 
-Este enfoque conecta también con lo que explicamos en [por qué es importante la ciberseguridad](/es/blog/por-que-es-importante-la-ciberseguridad/) y con las [tendencias de ciberseguridad en 2025](/es/blog/tendencias-ciberseguridad-2025/).
+Este enfoque conecta también con lo que explicamos en [por qué es importante la ciberseguridad](/blog/por-que-es-importante-la-ciberseguridad/) y con las [tendencias de ciberseguridad en 2025](/blog/tendencias-ciberseguridad-2025/).
 
 ## Casos recientes que demuestran el problema
 
@@ -76,9 +76,9 @@ La primera medida es ganar **visibilidad**. Necesitas inventario de software de 
 
 La segunda es endurecer la cadena de desarrollo y despliegue: fijar versiones cuando sea posible, revisar workflows CI/CD, validar integridad y limitar privilegios en procesos sensibles.
 
-La tercera es reforzar la seguridad de entornos web, cloud y plataformas conectadas. En este punto, puede ayudarte complementar esta visión con nuestros artículos sobre [ciberseguridad en la nube](/es/blog/ciberseguridad-en-la-nube/) y [qué es un SIEM y para qué sirve y un SOAR](/es/blog/que-es-un-siem-y-para-que-sirve-y-un-soar/).
+La tercera es reforzar la seguridad de entornos web, cloud y plataformas conectadas. En este punto, puede ayudarte complementar esta visión con nuestros artículos sobre [ciberseguridad en la nube](/blog/ciberseguridad-en-la-nube/) y [qué es un SIEM y para qué sirve y un SOAR](/blog/que-es-un-siem-y-para-que-sirve-y-un-soar/).
 
-La cuarta es apostar por **monitorización continua y detección temprana**. Cuando el ataque entra por una vía confiable, no basta con bloquear lo desconocido: hay que detectar comportamientos anómalos y cambios fuera de patrón. En este sentido, también puede interesarte nuestro artículo sobre [qué es un SOC en ciberseguridad](/es/blog/que-es-un-soc-en-ciberseguridad/) y [XDR vs SIEM: la solución para tu negocio](/es/blog/xdr-vs-siem-la-solucion-para-tu-negocio/).
+La cuarta es apostar por **monitorización continua y detección temprana**. Cuando el ataque entra por una vía confiable, no basta con bloquear lo desconocido: hay que detectar comportamientos anómalos y cambios fuera de patrón. En este sentido, también puede interesarte nuestro artículo sobre [qué es un SOC en ciberseguridad](/blog/que-es-un-soc-en-ciberseguridad/) y [XDR vs SIEM: la solución para tu negocio](/blog/xdr-vs-siem-la-solucion-para-tu-negocio/).
 
 ## La seguridad ya no depende solo de tu perímetro
 
@@ -88,7 +88,7 @@ Los **ataques a la cadena de suministro en ciberseguridad** son especialmente pe
 
 ## ISN Labs: visibilidad y resiliencia frente al riesgo de terceros
 
-En **[ISN Labs](/es/compania/)** ayudamos a las organizaciones a reforzar su postura de seguridad frente a amenazas que ya no se limitan al perímetro tradicional. La gestión del riesgo de terceros, la monitorización continua, la visibilidad sobre activos y la detección temprana son claves para reducir el impacto de incidentes que pueden entrar por software, servicios o componentes aparentemente confiables.
+En **[ISN Labs](/compania/)** ayudamos a las organizaciones a reforzar su postura de seguridad frente a amenazas que ya no se limitan al perímetro tradicional. La gestión del riesgo de terceros, la monitorización continua, la visibilidad sobre activos y la detección temprana son claves para reducir el impacto de incidentes que pueden entrar por software, servicios o componentes aparentemente confiables.
 
 Si tu empresa depende de múltiples proveedores, entornos web, software de terceros o infraestructuras híbridas, contar con una estrategia de ciberseguridad orientada a **resiliencia, visibilidad y control** ya no es una opción secundaria. Es parte de la base.  
-**[Contacta con ISN Labs](/es/contacto/)** y te ayudamos a evaluar cómo reducir tu exposición frente a este tipo de amenazas.
+**[Contacta con ISN Labs](/contacto/)** y te ayudamos a evaluar cómo reducir tu exposición frente a este tipo de amenazas.

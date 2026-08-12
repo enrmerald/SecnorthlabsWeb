@@ -78,28 +78,31 @@
 # ⚠️ Esto NO sustituye al inventario real de Search Console (pendiente P23). Es
 # lo que se puede afirmar con lo que habia en el repositorio; si hay URLs
 # indexadas que no estaban en ese sitemap, faltan aqui.
+#
+# Los destinos van sin prefijo de idioma (decision de Direccion del 11/08/2026,
+# ver la seccion de mas abajo): antes eran `/es/...`.
 
 [[redirects]]
   from = "/politica-privacidad"
-  to = "/es/politica-privacidad/"
+  to = "/politica-privacidad/"
   status = 301
   force = true
 
 [[redirects]]
   from = "/privacidad"
-  to = "/es/politica-privacidad/"
+  to = "/politica-privacidad/"
   status = 301
   force = true
 
 [[redirects]]
   from = "/aviso-legal"
-  to = "/es/aviso-legal/"
+  to = "/aviso-legal/"
   status = 301
   force = true
 
 [[redirects]]
   from = "/cookies"
-  to = "/es/cookies/"
+  to = "/cookies/"
   status = 301
   force = true
 
@@ -107,83 +110,143 @@
 # fuera con la forma /about, /product o /contact.
 [[redirects]]
   from = "/about"
-  to = "/es/compania/"
+  to = "/compania/"
   status = 301
   force = true
 
 [[redirects]]
   from = "/product"
-  to = "/es/software/"
+  to = "/software/"
   status = 301
   force = true
 
 [[redirects]]
   from = "/contact"
-  to = "/es/contacto/"
+  to = "/contacto/"
   status = 301
   force = true
 
-# ── Todo el contenido vive bajo /es/ y /en/ ──────────────────────────────────
+# ── El contenido vive en la raiz del dominio, en espanol ─────────────────────
 #
-# La raiz reparte segun el idioma del navegador: cualquier variante de castellano
-# va a /es/, y todo lo demas a /en/. Decision de Direccion del 29/07/2026, que
-# cambia la de la seccion 2.1 del plan («no se detecta Accept-Language»).
+# Decision de Direccion del 11/08/2026: el publico objetivo es espanol y el
+# ingles «no hace falta por ahora», mas un motivo con fecha -Cookiebot en
+# version trial escanea 50 paginas, y el sitio con ingles tiene 78; sin el, 37-.
+# Se retira con el interruptor `IDIOMAS_ACTIVOS` de `src/config/routes.ts`, no
+# borrando nada: `messages/en.json`, los 22 articulos de `content/blog/en/` y
+# los `paths.en` del manifiesto se conservan para cuando vuelva.
 #
-# Tres detalles que hacen que esto funcione y no rompa el SEO:
+# Hasta ahora la raiz repartia por idioma del navegador con dos 302 (decision de
+# Direccion del 29/07/2026). Ese reparto ha desaparecido: `/` es ahora la Home
+# real, en espanol, servida por el artefacto sin ninguna regla de por medio.
 #
-#   1. **302 y no 301.** La 301 es permanente y los navegadores y las CDN la
-#      cachean sin mirar la cabecera: quien entrase primero con el navegador en
-#      espanol dejaria a los siguientes con /es/ fijado, sin poder salir. Con 302
-#      la decision se vuelve a tomar en cada visita, que es lo que pide una
-#      redireccion que depende de quien pregunta.
-#   2. **Se listan las variantes.** La condicion `Language` de Netlify compara con
-#      los valores de `Accept-Language`, asi que `es-419` o `es-AR` no coinciden
-#      solos con `es`. Se enumeran los dialectos con hablantes reales; el que
-#      falte cae en la regla de abajo, que es /en/ y sigue siendo una pagina util.
-#   3. **La raiz no es contenido.** Ni /es/ ni /en/ dependen de esta regla: las dos
-#      son URLs propias, indexables y con su canonica. Esto solo decide a donde
-#      va quien escribe el dominio a secas.
-[[redirects]]
-  from = "/"
-  to = "/es/"
-  status = 302
-  force = true
-  conditions = { Language = [
-    "es",
-    "es-ES",
-    "es-419",
-    "es-AR",
-    "es-BO",
-    "es-CL",
-    "es-CO",
-    "es-CR",
-    "es-CU",
-    "es-DO",
-    "es-EC",
-    "es-GT",
-    "es-HN",
-    "es-MX",
-    "es-NI",
-    "es-PA",
-    "es-PE",
-    "es-PR",
-    "es-PY",
-    "es-SV",
-    "es-US",
-    "es-UY",
-    "es-VE",
-    "ca",
-    "gl",
-    "eu",
-  ] }
+# Lo que queda por hacer es redirigir el legado con prefijo, para que ninguna
+# URL indexada de `/es/*` o `/en/*` devuelva 404 (seccion 7.1 de nuevo, aplicada
+# esta vez a las 78 URLs que si se llegaron a publicar):
+#
+#   1. `/es/*` cubre las 37 URLs espanolas de una sola regla: el path sin el
+#      prefijo es exactamente la URL nueva.
+#   2. `/en/blog/*` cubre el listado y los 22 articulos ingleses: el slug es el
+#      mismo en los dos idiomas por contrato de `content:build`.
+#   3. Las paginas fijas en ingles no comparten slug con la espanola
+#      (`/en/company/` vs `/compania/`), asi que van una a una.
+#   4. Cualquier otra URL bajo `/en/` -que no debiera existir, pero por si
+#      acaso- cae a la Home en vez de a un 404.
 
-# Cualquier otro idioma. Va despues a proposito: Netlify evalua de arriba abajo y
-# se queda con la primera regla que encaje.
 [[redirects]]
-  from = "/"
-  to = "/en/"
-  status = 302
+  from = "/es/*"
+  to = "/:splat"
+  status = 301
   force = true
+
+# NINGUNA regla de /en/ lleva `force`, y es deliberado: `force` gana tambien
+# cuando el fichero existe, asi que el dia que `IDIOMAS_ACTIVOS` vuelva a
+# ['es','en'] estas catorce reglas redirigirian al espanol cada pagina inglesa
+# recien construida y el ingles seria inalcanzable -en produccion, con el build,
+# check:routes, verify:export y las e2e en verde, porque ninguno prueba la tabla
+# de redirecciones contra el artefacto ingles-. Sin `force` solo actuan mientras
+# no exista el fichero, que es exactamente lo que hace falta: hoy redirigen el
+# legado y manana se apartan solas.
+[[redirects]]
+  from = "/en/blog/*"
+  to = "/blog/:splat"
+  status = 301
+
+[[redirects]]
+  from = "/en/solutions/mssp/"
+  to = "/soluciones/mssp/"
+  status = 301
+
+[[redirects]]
+  from = "/en/solutions/mssp/it/"
+  to = "/soluciones/mssp/it/"
+  status = 301
+
+[[redirects]]
+  from = "/en/solutions/mssp/ot/"
+  to = "/soluciones/mssp/ot/"
+  status = 301
+
+[[redirects]]
+  from = "/en/solutions/grc/"
+  to = "/soluciones/grc/"
+  status = 301
+
+[[redirects]]
+  from = "/en/solutions/grc/catalogue/"
+  to = "/soluciones/grc/catalogo/"
+  status = 301
+
+[[redirects]]
+  from = "/en/software/"
+  to = "/software/"
+  status = 301
+
+[[redirects]]
+  from = "/en/sectors/"
+  to = "/sectores/"
+  status = 301
+
+[[redirects]]
+  from = "/en/company/"
+  to = "/compania/"
+  status = 301
+
+[[redirects]]
+  from = "/en/contact/"
+  to = "/contacto/"
+  status = 301
+
+# `/en/calculator/` no redirige a `/calculadora/`: ese destino no se construye
+# mientras `CALCULADORA_ACTIVA` sea false, asi que seria un 301 permanente hacia
+# un 404, que Search Console reporta como error en vez de como retirada limpia.
+# Se le da el mismo trato que a la version espanola, que cae en el `/*` del final:
+# un 404 directo. Cuando vuelva la calculadora, esta regla pasa a ser el 301.
+[[redirects]]
+  from = "/en/calculator/"
+  to = "/404/"
+  status = 404
+
+[[redirects]]
+  from = "/en/privacy-policy/"
+  to = "/politica-privacidad/"
+  status = 301
+
+[[redirects]]
+  from = "/en/legal-notice/"
+  to = "/aviso-legal/"
+  status = 301
+
+[[redirects]]
+  from = "/en/cookies/"
+  to = "/cookies/"
+  status = 301
+
+# Cierre: cualquier otra URL bajo /en/ -incluida la Home, /en/- que no haya
+# casado con ninguna regla de arriba.
+[[redirects]]
+  from = "/en/*"
+  to = "/"
+  status = 301
 
 # ── Cabeceras ────────────────────────────────────────────────────────────────
 [[headers]]
@@ -253,48 +316,86 @@
 
 # HTML: revalidar siempre, o un despliegue no se ve.
 #
-# ⚠️ Esto era SOLO `for = "/*.html"`, y no cubria ni una pagina del sitio. Con
-# `output: 'export'` las 78 paginas se sirven en rutas de directorio -`/es/`,
-# `/es/contacto/`, `/en/blog/<slug>/`-, y ese patron casa con la URL de la
-# peticion, no con el fichero del disco. El unico sitio donde llegaba a aplicarse
-# era `/404.html`.
+# Se enumeran las secciones en vez de poner un `/*`, y no es cautela de mas:
+# Netlify aplica TODAS las reglas `[[headers]]` que casan y concatena las
+# cabeceras con el mismo nombre, asi que un `/*` casaria tambien con
+# `/_next/static/*` y `/logos/*` y esos activos acabarian con un
+# `Cache-Control: …immutable, public, max-age=0, must-revalidate` -dos max-age en
+# conflicto- que obliga a revalidar: los chunks con hash dejarian de cachearse un
+# ano y cada visita recurrente volveria a descargarlos. Cuando el contenido vivia
+# bajo `/es/*` y `/en/*` el solapamiento era imposible por construccion.
 #
-# Se cubre por idioma, que es donde vive todo el contenido. Bajo `/es/` y `/en/`
-# solo hay HTML y las cargas RSC `.txt` que Next genera para la navegacion de
-# cliente, y esas tienen que revalidar igual: una carga vieja en cache sirve
-# contenido anterior al despliegue sin que se note.
-#
-# Los activos con hash siguen con su regla `immutable` de arriba, porque viven en
-# `/_next/static/` y no debajo de un idioma.
+# La lista sale de los paths del manifiesto (`src/config/routes.ts`): una seccion
+# nueva ahi necesita su linea aqui.
 [[headers]]
-  for = "/es/*"
+  for = "/"
   [headers.values]
     Cache-Control = "public, max-age=0, must-revalidate"
 
 [[headers]]
-  for = "/en/*"
+  for = "/blog/*"
   [headers.values]
     Cache-Control = "public, max-age=0, must-revalidate"
 
-# Se mantiene para `/404.html`, que no cuelga de ningun idioma.
+[[headers]]
+  for = "/soluciones/*"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/software/*"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/sectores/*"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/compania/*"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/contacto/*"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/calculadora/*"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/politica-privacidad/*"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/aviso-legal/*"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/cookies/*"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/404/*"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+# Se mantiene para `/404.html`, que no cuelga de ninguna ruta del manifiesto.
 [[headers]]
   for = "/*.html"
   [headers.values]
     Cache-Control = "public, max-age=0, must-revalidate"
 
-# ── 404 por idioma. AL FINAL: Netlify evalua de arriba abajo y una regla
-# comodin por encima de una ruta real se la come. ─────────────────────────────
-[[redirects]]
-  from = "/en/*"
-  to = "/en/404/"
-  status = 404
-
-[[redirects]]
-  from = "/es/*"
-  to = "/es/404/"
-  status = 404
-
+# ── 404 unica. AL FINAL: Netlify evalua de arriba abajo y una regla comodin por
+# encima de una ruta real se la come. ────────────────────────────────────────
 [[redirects]]
   from = "/*"
-  to = "/es/404/"
+  to = "/404/"
   status = 404

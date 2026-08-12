@@ -12,7 +12,8 @@ content/blog/
 ```
 
 **El nombre del fichero es la URL.** `es/que-es-el-ens.md` se publica en
-`/es/blog/que-es-el-ens/`. Cambiar el nombre de un fichero ya publicado cambia su
+`/blog/que-es-el-ens/` — el español se sirve en la raíz del dominio, sin prefijo
+de idioma. Cambiar el nombre de un fichero ya publicado cambia su
 URL y pierde su posicionamiento, así que no se renombra: si hay que hacerlo, se
 añade la redirección correspondiente en `netlify.toml`.
 
@@ -95,6 +96,10 @@ línea en lugar de un campo que llega vacío a producción.
 - Envuelve las tablas en un contenedor con scroll propio, para que una tabla
   ancha no rompa el ancho de la página en móvil.
 - Abre los enlaces externos en otra pestaña con `rel="noopener noreferrer"`.
+- **Valida cada enlace interno contra el manifiesto de rutas**
+  (`src/config/routes.ts`): enlazar a un artículo que no existe, a una página
+  retirada (`/calculadora/`, hoy) o con prefijo de idioma rompe el build,
+  diciendo el fichero y el destino.
 - Calcula el tiempo de lectura.
 - Emite `BlogPosting`, `BreadcrumbList`, canónica, `hreflang` y Open Graph, y
   añade el artículo al `sitemap.xml`.
@@ -117,8 +122,12 @@ pnpm check:js          # que el listado siga sin enviar JavaScript de más
 Con rutas del propio sitio y barra final:
 
 ```markdown
-Ver también [qué es el ENS](/es/blog/que-es-el-ens/).
+Ver también [qué es el ENS](/blog/que-es-el-ens/).
 ```
 
-En el fichero inglés, `/en/blog/...`. **No se enlaza al dominio anterior**: los
-artículos migrados ya tienen sus enlaces internos reescritos.
+El español va **en la raíz**: `/blog/…`, `/compania/`, `/contacto/`. Nada de
+`/es/…` — esas URLs solo existen como redirección 301 de legado en
+`netlify.toml`, así que un enlace así añade un salto en cada clic y sería un 404
+el día que esa regla se retire. En el fichero inglés (retirado hoy, ver
+`PLAN-solo-espanol.md`) el prefijo sí es `/en/…`. **No se enlaza al dominio
+anterior**: los artículos migrados ya tienen sus enlaces internos reescritos.

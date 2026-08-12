@@ -13,7 +13,7 @@ originalUrl: https://ewala.es/blog/posts/que-es-un-xdr-y-como-puede-proteger-tu-
 ---
 
 
-¿Te has preguntado **qué es un XDR**? Desde [ISN Labs](/es/compania/) te contaremos cómo esta tecnología, diseñada para mejorar la detección y respuesta ante incidentes de seguridad, es una de las principales líneas de protección en el mundo digital.  
+¿Te has preguntado **qué es un XDR**? Desde [ISN Labs](/compania/) te contaremos cómo esta tecnología, diseñada para mejorar la detección y respuesta ante incidentes de seguridad, es una de las principales líneas de protección en el mundo digital.  
 Las empresas necesitan soluciones avanzadas para protegerse a nivel cibernético. ¿A qué esperas para descubrir todos los secretos de la tecnología **E**xtended **D**etection and **R**esponse?  
 Es el momento de saber **cómo fortalecer la ciberseguridad** de tu empresa.
 
@@ -31,7 +31,7 @@ A continuación, te presentamos las principales características de XDR.
 - **Reducción de falsos positivos:** El análisis avanzado que realiza XDR disminuye la cantidad de alertas falsas.
 - **Múltiples capas de seguridad:** Integra una protección completa al unificar datos de redes, correos electrónicos, servidores, cargas de la nube y endpoints.
 
-Te invitamos a conocer nuestro servicio que integra una solución XDR dentro del stack de herramientas de seguridad: ciberseguridad gestionada [ciberseguridad gestionada](/es/soluciones/mssp/).
+Te invitamos a conocer nuestro servicio que integra una solución XDR dentro del stack de herramientas de seguridad: ciberseguridad gestionada [ciberseguridad gestionada](/soluciones/mssp/).
 
 ### La seguridad informática con XDR
 
@@ -48,7 +48,7 @@ Antes hemos mencionado que el **software XDR** posee diferencias claras frente a
 Pese a que tienen el mismo objetivo (proteger los sistemas informáticos), hay que subrayar los factores distintivos.  
 A diferencia de un EDR, que opera de forma aislada en dispositivos individuales, XDR integra información de múltiples capas como redes, servidores, identidades y entornos en la nube, lo que permite una detección más efectiva de ataques avanzados.  
 Mientras que un SIEM depende de reglas y análisis retrospectivos, XDR aplica inteligencia artificial y automatización para responder de manera más rápida y precisa a las amenazas.  
-Infórmate con otro artículo de nuestro blog acerca de [XDR vs SIEM](/es/blog/xdr-vs-siem-la-solucion-para-tu-negocio/).
+Infórmate con otro artículo de nuestro blog acerca de [XDR vs SIEM](/blog/xdr-vs-siem-la-solucion-para-tu-negocio/).
 
 #### SIEM-XDR
 
@@ -73,5 +73,5 @@ Te invitamos a conocer nuestros servicios para recibir un enfoque personalizado 
 ### ISN Labs te cuenta qué es XDR
 
 Si consideras que te ha resultado de utilidad la información acerca de **qué es XDR**, anímate a conocernos.  
-En [ISN Labs](/es/compania/), te ayudamos a evaluar y mejorar sobre la ciberseguridad de tu compañía. Descubre cómo proteger tu empresa en un entorno donde las amenazas digitales evolucionan constantemente.  
+En [ISN Labs](/compania/), te ayudamos a evaluar y mejorar sobre la ciberseguridad de tu compañía. Descubre cómo proteger tu empresa en un entorno donde las amenazas digitales evolucionan constantemente.  
 Te ofrecemos soluciones de protección avanzada e implementamos la mejor estrategia para tu organización.

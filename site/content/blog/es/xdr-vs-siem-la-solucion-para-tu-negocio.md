@@ -23,7 +23,7 @@ Aunque comparten objetivos similares, sus enfoques son fundamentalmente diferent
 
 ### **SIEM (Security Information and Event Management)**
 
-Las plataformas SIEM se han convertido en un estándar sólido en la **[gestión de ciberseguridad](/es/compania/) durante dos décadas.**
+Las plataformas SIEM se han convertido en un estándar sólido en la **[gestión de ciberseguridad](/compania/) durante dos décadas.**
 
 Son herramientas que recopilan, almacenan y analizan registros de eventos de diversas fuentes dentro de una red, proporcionando una vista centralizada del entorno de seguridad.
 
@@ -94,6 +94,6 @@ Al decidir entre XDR y SIEM, considera:
 
 Esperamos que esta información te ayude a comprender las diferencias clave entre XDR y SIEM para tomar una decisión informada. 
 
-En **ISN Labs**, somos conscientes de que elegir la solución adecuada no es fácil. Por eso, ofrecemos un **[Plan Base de Ciberseguridad Gestionada](/es/soluciones/mssp/)** y otros servicios para mejorar tu estrategia.  
+En **ISN Labs**, somos conscientes de que elegir la solución adecuada no es fácil. Por eso, ofrecemos un **[Plan Base de Ciberseguridad Gestionada](/soluciones/mssp/)** y otros servicios para mejorar tu estrategia.  
 
 **¡No dudes en contactarnos para resolver cualquier consulta!**

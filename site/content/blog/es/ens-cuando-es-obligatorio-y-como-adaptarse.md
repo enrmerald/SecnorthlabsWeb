@@ -12,7 +12,7 @@ author: ISN Labs
 originalUrl: https://ewala.es/blog/posts/ens-cuando-es-obligatorio-y-como-adaptarse/
 ---
 
-La ciberseguridad se ha convertido en un requisito clave para cualquier organización que opere en entornos digitales, y especialmente para aquellas que trabajan —o quieren trabajar— con el sector público. Si quieres entender mejor este contexto, puedes consultar también nuestro artículo sobre [qué es la ciberseguridad y para qué sirve](/es/blog/que-es-la-ciberseguridad-y-para-que-sirve/).
+La ciberseguridad se ha convertido en un requisito clave para cualquier organización que opere en entornos digitales, y especialmente para aquellas que trabajan —o quieren trabajar— con el sector público. Si quieres entender mejor este contexto, puedes consultar también nuestro artículo sobre [qué es la ciberseguridad y para qué sirve](/blog/que-es-la-ciberseguridad-y-para-que-sirve/).
 
 En este contexto, el **Esquema Nacional de Seguridad (ENS)** es el marco de referencia en España para garantizar que los sistemas de información sean seguros, fiables y resilientes.
 
@@ -127,7 +127,7 @@ Incluye tres tipos de acciones:
 
 - Organizativas: políticas, roles y responsabilidades  
 - Técnicas: control de accesos, cifrado, segmentación  
-- Operativas: monitorización y gestión de incidentes, apoyadas en soluciones como [SIEM y SOAR](/es/blog/que-es-un-siem-y-para-que-sirve-y-un-soar/) o servicios de [SOC en ciberseguridad](/es/blog/que-es-un-soc-en-ciberseguridad/)  
+- Operativas: monitorización y gestión de incidentes, apoyadas en soluciones como [SIEM y SOAR](/blog/que-es-un-siem-y-para-que-sirve-y-un-soar/) o servicios de [SOC en ciberseguridad](/blog/que-es-un-soc-en-ciberseguridad/)  
 
 ### 5. Evaluación de conformidad
 
@@ -158,7 +158,7 @@ Uno de los errores más habituales es tratar el ENS como un requisito aislado.
 
 En realidad, debe integrarse dentro de una estrategia más amplia de ciberseguridad empresarial.
 
-En este contexto, tecnologías como **SIEM, SOC o XDR** permiten mejorar la detección temprana de incidentes, la correlación de eventos y la capacidad de respuesta ante amenazas, tal y como analizamos en [XDR vs SIEM: la solución para tu negocio](/es/blog/xdr-vs-siem-la-solucion-para-tu-negocio/).
+En este contexto, tecnologías como **SIEM, SOC o XDR** permiten mejorar la detección temprana de incidentes, la correlación de eventos y la capacidad de respuesta ante amenazas, tal y como analizamos en [XDR vs SIEM: la solución para tu negocio](/blog/xdr-vs-siem-la-solucion-para-tu-negocio/).
 
 El ENS no sustituye estas soluciones, sino que define el marco en el que deben aplicarse.
 
@@ -203,7 +203,7 @@ Contar con un partner especializado en Gobierno, Riesgo y Cumplimiento (GRC) per
 - Priorizar correctamente las medidas  
 - Asegurar un cumplimiento real  
 
-Si quieres profundizar en este enfoque, puedes consultar nuestro servicio de [GRC: Gobernanza, Riesgo y Cumplimiento](/es/soluciones/grc/).
+Si quieres profundizar en este enfoque, puedes consultar nuestro servicio de [GRC: Gobernanza, Riesgo y Cumplimiento](/soluciones/grc/).
 
 ## ISN Labs: adecuación al ENS con enfoque de negocio
 
@@ -213,4 +213,4 @@ No se trata solo de cumplir, sino de construir una base sólida que permita crec
 
 Si quieres saber en qué punto está tu empresa o qué te exigiría el ENS en tu caso concreto:
 
-👉 Descubre cómo abordamos estos proyectos en [GRC: Gobernanza, Riesgo y Cumplimiento](/es/soluciones/grc/) o contacta con nuestro equipo para definir el camino más eficiente.
+👉 Descubre cómo abordamos estos proyectos en [GRC: Gobernanza, Riesgo y Cumplimiento](/soluciones/grc/) o contacta con nuestro equipo para definir el camino más eficiente.

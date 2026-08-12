@@ -16,8 +16,7 @@ import { GA_ID, GTM_ID } from './analitica'
  * medir en silencio y nadie se enteraria hasta mirar el panel de Analytics.
  *
  * Se ejecuta el script en lugar de buscar el identificador con una expresion
- * regular, por el mismo motivo que en `reparto-idioma.test.ts`: asi se comprueba
- * el comportamiento y no el texto.
+ * regular: asi se comprueba el comportamiento y no el texto.
  */
 const FUENTE = readFileSync(
   fileURLToPath(new URL('../../public/analitica.js', import.meta.url)),

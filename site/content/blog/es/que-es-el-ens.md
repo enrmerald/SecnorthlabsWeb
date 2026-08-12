@@ -20,7 +20,7 @@ Aunque muchas veces se interpreta como una obligación exclusiva del sector púb
 
 Por eso, entender qué es el ENS es cada vez más importante para cualquier empresa que quiera trabajar con el sector público o mejorar su posición en licitaciones.
 
-Si quieres una visión más amplia sobre cuándo aplica y cómo abordarlo, puedes consultar también nuestra [guía del ENS: cuándo es obligatorio y cómo adaptarse](/es/blog/ens-cuando-es-obligatorio-y-como-adaptarse/).
+Si quieres una visión más amplia sobre cuándo aplica y cómo abordarlo, puedes consultar también nuestra [guía del ENS: cuándo es obligatorio y cómo adaptarse](/blog/ens-cuando-es-obligatorio-y-como-adaptarse/).
 
 ## Qué es el Esquema Nacional de Seguridad
 
@@ -56,7 +56,7 @@ Entre sus objetivos más importantes destacan:
 
 En este sentido, el ENS no debe entenderse únicamente como una obligación legal, sino como una herramienta para mejorar la **ciberseguridad empresarial** y reforzar la confianza en los servicios digitales.
 
-Si todavía estás construyendo una base de seguridad en tu organización, también puede resultarte útil nuestro artículo sobre [qué es la ciberseguridad y para qué sirve](/es/blog/que-es-la-ciberseguridad-y-para-que-sirve/).
+Si todavía estás construyendo una base de seguridad en tu organización, también puede resultarte útil nuestro artículo sobre [qué es la ciberseguridad y para qué sirve](/blog/que-es-la-ciberseguridad-y-para-que-sirve/).
 
 ## Las cinco dimensiones de seguridad del ENS
 
@@ -157,7 +157,7 @@ A partir de ese análisis, el sistema se clasifica en una de las tres categoría
 
 Esta categorización determina el nivel de exigencia, las medidas aplicables y el tipo de evaluación de conformidad necesario.
 
-Puedes profundizar en las [categorías del ENS: básica, media y alta](/es/blog/categorias-del-ens/).
+Puedes profundizar en las [categorías del ENS: básica, media y alta](/blog/categorias-del-ens/).
 
 ## Diferencia entre cumplimiento, declaración y certificación ENS
 
@@ -232,7 +232,7 @@ Por ejemplo:
 - Auditorías internas.
 - Seguimiento de proveedores.
 
-En organizaciones con cierta complejidad tecnológica, soluciones como [SIEM y SOAR](/es/blog/que-es-un-siem-y-para-que-sirve-y-un-soar/), servicios de [SOC en ciberseguridad](/es/blog/que-es-un-soc-en-ciberseguridad/) o plataformas de detección avanzada pueden ayudar a cumplir mejor con los requisitos de monitorización, trazabilidad y respuesta.
+En organizaciones con cierta complejidad tecnológica, soluciones como [SIEM y SOAR](/blog/que-es-un-siem-y-para-que-sirve-y-un-soar/), servicios de [SOC en ciberseguridad](/blog/que-es-un-soc-en-ciberseguridad/) o plataformas de detección avanzada pueden ayudar a cumplir mejor con los requisitos de monitorización, trazabilidad y respuesta.
 
 ## ENS, ISO 27001 y NIS2: marcos relacionados, pero no iguales
 
@@ -250,7 +250,7 @@ Una empresa puede estar afectada por más de uno de estos marcos al mismo tiempo
 
 Por ejemplo, una organización puede utilizar ISO 27001 como base de gestión, estar afectada por NIS2 por su sector de actividad y necesitar ENS para prestar servicios a la Administración Pública.
 
-En el siguiente artículo de esta serie analizaremos con más detalle las diferencias entre [ENS e ISO 27001](/es/blog/ens-vs-iso-27001-diferencias/).
+En el siguiente artículo de esta serie analizaremos con más detalle las diferencias entre [ENS e ISO 27001](/blog/ens-vs-iso-27001-diferencias/).
 
 ## Beneficios del ENS para una empresa
 
@@ -372,4 +372,4 @@ Si tu empresa trabaja con la Administración Pública, participa en licitaciones
 
 👉 Podemos ayudarte a evaluar tu situación y definir un plan de adecuación al ENS adaptado a tu negocio.
 
-Descubre también nuestro servicio de [GRC: Gobernanza, Riesgo y Cumplimiento](/es/soluciones/grc/).
+Descubre también nuestro servicio de [GRC: Gobernanza, Riesgo y Cumplimiento](/soluciones/grc/).

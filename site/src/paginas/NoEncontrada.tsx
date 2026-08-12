@@ -3,9 +3,9 @@ import { getLocalizedPath, type Locale } from '@/config/routes'
 import { cargarMensajes } from '@/i18n/mensajes'
 
 /**
- * Contenido de la 404 traducida. Lo usan dos sitios: la ruta `/es/404/` que
- * genera el manifiesto -la que sirven las reglas del final de `netlify.toml`- y
- * `app/[locale]/not-found.tsx`.
+ * Contenido de la 404. Lo usan dos sitios: la ruta `/404/` que genera el
+ * manifiesto -la que sirve la regla final de `netlify.toml`- y
+ * `src/app/not-found.tsx`.
  *
  * La lluvia binaria animada de la 404 actual **no se porta**: usa
  * `Math.random()` durante el render, lo que produce marcado distinto en build y

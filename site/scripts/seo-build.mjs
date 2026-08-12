@@ -21,7 +21,7 @@ import { dirname, join } from 'node:path'
 const root = join(dirname(fileURLToPath(import.meta.url)), '..')
 const publicDir = join(root, 'public')
 
-const { ROUTES, LOCALES, DEFAULT_LOCALE, getRoute } = await import(
+const { ROUTES, IDIOMAS_ACTIVOS, MULTIIDIOMA, DEFAULT_LOCALE, getRoute } = await import(
   pathToFileURL(join(root, 'src', 'config', 'routes.ts')).href
 )
 
@@ -51,7 +51,7 @@ const entradas = []
 for (const route of ROUTES) {
   if (!route.enabled || !route.indexable) continue
   entradas.push({
-    paths: Object.fromEntries(LOCALES.map((locale) => [locale, route.paths[locale]])),
+    paths: Object.fromEntries(IDIOMAS_ACTIVOS.map((locale) => [locale, route.paths[locale]])),
     // Sin `lastmod`: una fecha de build en una pagina que no ha cambiado es un
     // dato falso, y Google ha dicho que ignora los lastmod que no se sostienen.
     prioridad: route.id === 'home' ? '1.0' : '0.8',
@@ -61,12 +61,13 @@ for (const route of ROUTES) {
 const rutaArticulo = (locale, slug) => `${getRoute('blog').paths[locale]}${slug}/`
 
 for (const articulo of blog[DEFAULT_LOCALE] ?? []) {
-  // Solo los idiomas en los que el articulo existe: anunciar una traduccion que
-  // no esta escrita manda al rastreador a un 404.
+  // Solo los idiomas activos en los que el articulo existe: anunciar una
+  // traduccion que no esta escrita, o que esta pero no se publica, manda al
+  // rastreador a un 404.
   const paths = Object.fromEntries(
-    LOCALES.filter((locale) => (blog[locale] ?? []).some((otro) => otro.slug === articulo.slug)).map(
-      (locale) => [locale, rutaArticulo(locale, articulo.slug)],
-    ),
+    IDIOMAS_ACTIVOS.filter((locale) =>
+      (blog[locale] ?? []).some((otro) => otro.slug === articulo.slug),
+    ).map((locale) => [locale, rutaArticulo(locale, articulo.slug)]),
   )
 
   entradas.push({ paths, lastmod: articulo.date, prioridad: '0.6' })
@@ -75,15 +76,19 @@ for (const articulo of blog[DEFAULT_LOCALE] ?? []) {
 const urls = entradas
   .flatMap(({ paths, lastmod, prioridad }) =>
     Object.entries(paths).map(([locale, path]) => {
-      const alternativas = [
-        ...Object.entries(paths).map(
-          ([otro, otroPath]) =>
-            `    <xhtml:link rel="alternate" hreflang="${otro}" href="${escapar(absoluta(otroPath))}"/>`,
-        ),
-        `    <xhtml:link rel="alternate" hreflang="x-default" href="${escapar(
-          absoluta(paths[DEFAULT_LOCALE] ?? path),
-        )}"/>`,
-      ]
+      // Sin segundo idioma, un `xhtml:link` que solo se apunta a si mismo es
+      // ruido: se omite entero en vez de emitir una alternativa vacia.
+      const alternativas = MULTIIDIOMA
+        ? [
+            ...Object.entries(paths).map(
+              ([otro, otroPath]) =>
+                `    <xhtml:link rel="alternate" hreflang="${otro}" href="${escapar(absoluta(otroPath))}"/>`,
+            ),
+            `    <xhtml:link rel="alternate" hreflang="x-default" href="${escapar(
+              absoluta(paths[DEFAULT_LOCALE] ?? path),
+            )}"/>`,
+          ]
+        : []
 
       return [
         '  <url>',
@@ -133,9 +138,8 @@ const robots = esProduccion
 User-agent: *
 Allow: /
 
-# Las 404 se sirven como pagina real (netlify.toml), asi que se excluyen a mano.
-Disallow: /es/404/
-Disallow: /en/404/
+# La 404 se sirve como pagina real (netlify.toml), asi que se excluye a mano.
+Disallow: /404/
 
 Sitemap: ${SITE_URL}/sitemap-google.xml
 Sitemap: ${SITE_URL}/sitemap.xml

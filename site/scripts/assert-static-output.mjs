@@ -109,15 +109,58 @@ for (const file of files) {
 const routesModule = join(root, 'src', 'config', 'routes.ts')
 
 if (await exists(routesModule)) {
-  const { ROUTES, LOCALES } = await import(pathToFileURL(routesModule).href)
+  const { ROUTES, IDIOMAS_ACTIVOS, MULTIIDIOMA, PREFIJO_URL, LOCALES, DEFAULT_LOCALE } =
+    await import(pathToFileURL(routesModule).href)
+
+  // React serializa el titulo escapando estos cinco caracteres. Se deshace para
+  // poder comparar contra el mensaje tal cual esta escrito en messages/*.json.
+  const decodificar = (texto) =>
+    texto
+      .replace(/&amp;/g, '&')
+      .replace(/&lt;/g, '<')
+      .replace(/&gt;/g, '>')
+      .replace(/&quot;/g, '"')
+      .replace(/&#x27;/g, "'")
+
+  const mensajesPorIdioma = new Map()
+  /** Titulo que la ruta deberia llevar, leido de los mensajes por su namespace. */
+  async function tituloEsperado(locale, namespace) {
+    if (!mensajesPorIdioma.has(locale)) {
+      const crudo = await readFile(join(root, 'messages', `${locale}.json`), 'utf8')
+      mensajesPorIdioma.set(locale, JSON.parse(crudo))
+    }
+    const nodo = namespace
+      .split('.')
+      .reduce((actual, clave) => actual?.[clave], mensajesPorIdioma.get(locale))
+    return nodo?.seo?.title
+  }
+
+  /**
+   * El `<title>` no lo miraba nadie, y por eso la 404 llego a publicarse sin el:
+   * Next conmuta la fuente de metadatos cuando la respuesta lleva estado 404
+   * (ver src/app/not-found.tsx). Se comprueba que exista y, cuando el namespace
+   * resuelve a un mensaje, que sea **ese** y no el de otra pagina.
+   */
+  async function revisarTitulo(html, contenido, route, locale) {
+    const encontrado = /<title[^>]*>([^<]*)<\/title>/.exec(contenido)?.[1]
+    if (!encontrado?.trim()) {
+      note(`out/${html}: sin <title> (ruta "${route.id}", idioma "${locale}")`)
+      return
+    }
+    const esperado = await tituloEsperado(locale, route.namespace)
+    if (esperado && decodificar(encontrado) !== esperado) {
+      note(`out/${html}: <title> es "${decodificar(encontrado)}" y deberia ser "${esperado}"`)
+    }
+  }
 
   for (const route of ROUTES) {
     if (!route.enabled) continue
-    for (const locale of LOCALES) {
+    for (const locale of IDIOMAS_ACTIVOS) {
       const path = route.paths[locale]
-      // trailingSlash: true -> /es/contacto/ se materializa como
-      // out/es/contacto/index.html
-      const html = `${path.replace(/^\/|\/$/g, '')}/index.html`
+      // trailingSlash: true -> /contacto/ se materializa como
+      // out/contacto/index.html; la raiz (`/`) es out/index.html.
+      const sinBarras = path.replace(/^\/|\/$/g, '')
+      const html = sinBarras ? `${sinBarras}/index.html` : 'index.html'
       if (!files.includes(html)) {
         note(`falta out/${html} (ruta "${route.id}", idioma "${locale}")`)
         continue
@@ -128,14 +171,84 @@ if (await exists(routesModule)) {
 
       if (!/<html[^>]+lang="/.test(content)) note(`out/${html}: sin atributo lang`)
       if (headings.length !== 1) note(`out/${html}: ${headings.length} elementos h1, debe haber 1`)
-      if (!/rel="canonical"/.test(content)) note(`out/${html}: sin canonical`)
+      await revisarTitulo(html, content, route, locale)
+      // El criterio es la indexabilidad de la ruta, no su path: una pagina
+      // indexable **debe** llevar canonical, y una no indexable **no debe**
+      // llevarlo -su cuerpo se sirve como respuesta de cualquier URL rota, asi
+      // que apuntaria a consolidar en ella URLs que no existen- pero si debe
+      // llevar noindex. Antes esto era una excepcion para `/404/`, que ademas
+      // desaparecia sola al volver el ingles.
+      if (route.indexable && !/rel="canonical"/.test(content)) {
+        note(`out/${html}: sin canonical`)
+      }
+      if (!route.indexable) {
+        if (/rel="canonical"/.test(content)) {
+          note(`out/${html}: lleva canonical siendo una ruta no indexable`)
+        }
+        if (!/name="robots"[^>]*content="[^"]*noindex/.test(content)) {
+          note(`out/${html}: ruta no indexable sin noindex`)
+        }
+      }
       // Insensible a mayusculas: React serializa el atributo como `hrefLang`.
       // HTML no distingue mayusculas en los nombres de atributo, asi que es
       // valido, pero un `test` sensible daria un falso negativo en todas las
       // paginas.
-      if (route.indexable && !/hreflang=/i.test(content)) note(`out/${html}: sin hreflang`)
+      // Sin segundo idioma no se emite hreflang (lib/metadatos.ts): un solo
+      // idioma apuntandose a si mismo no es una alternativa de verdad.
+      if (MULTIIDIOMA && route.indexable && !/hreflang=/i.test(content)) {
+        note(`out/${html}: sin hreflang`)
+      }
       if (!/<html[^>]+lang="([^"]+)"/.exec(content)?.[1]?.startsWith(locale)) {
         note(`out/${html}: el atributo lang no corresponde al idioma "${locale}"`)
+      }
+    }
+  }
+
+  // Garantia de que el ingles no se publica y de que no quedan URLs con
+  // prefijo de idioma: con IDIOMAS_ACTIVOS = ['es'] no debe existir ni un solo
+  // out/en/**/index.html ni out/es/**.
+  if (!MULTIIDIOMA) {
+    for (const file of files) {
+      if (file.startsWith('en/') || file.startsWith('es/')) {
+        note(`out/${file}: URL con prefijo de idioma en un sitio de un solo idioma`)
+      }
+    }
+  }
+
+  // Lo anterior son PAGINAS con prefijo; esto son ENLACES con prefijo, que es
+  // otra cosa y no lo veia nadie. Un href a `/es/…` solo funciona gracias al 301
+  // de legado de netlify.toml: un salto de mas en cada clic y un 404 el dia que
+  // esa regla se retire. `content:build` valida los del blog contra el
+  // manifiesto; aqui se cubre el artefacto entero -mensajes, componentes,
+  // JSON-LD, migas de pan-.
+  const prefijosValidos = new Set(
+    IDIOMAS_ACTIVOS.filter((locale) => PREFIJO_URL[locale] === `/${locale}`),
+  )
+  for (const file of files) {
+    if (!file.endsWith('.html')) continue
+    const content = await readFile(join(outDir, file), 'utf8')
+    for (const locale of LOCALES) {
+      if (prefijosValidos.has(locale)) continue
+      if (new RegExp(`href="/${locale}/`).test(content)) {
+        note(`out/${file}: enlaza a /${locale}/… , que hoy solo existe como redireccion de legado`)
+      }
+    }
+  }
+
+  // Las tres salidas que el hosting puede servir de verdad como 404. Van aparte
+  // del bucle de rutas porque dos de ellas no cuelgan de ningun path del
+  // manifiesto, y son exactamente lo que ve el visitante perdido.
+  const rutaNotFound = ROUTES.find((route) => route.id === 'notFound')
+  if (rutaNotFound) {
+    for (const html of ['404.html', '404/index.html', '_not-found/index.html']) {
+      if (!files.includes(html)) continue
+      const content = await readFile(join(outDir, html), 'utf8')
+      await revisarTitulo(html, content, rutaNotFound, DEFAULT_LOCALE)
+      if (!/name="robots"[^>]*content="[^"]*noindex/.test(content)) {
+        note(`out/${html}: la 404 sin noindex`)
+      }
+      if ((content.match(/<h1[\s>]/g) ?? []).length !== 1) {
+        note(`out/${html}: la 404 no tiene exactamente un h1`)
       }
     }
   }

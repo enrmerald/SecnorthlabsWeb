@@ -21,15 +21,41 @@ export type Locale = (typeof LOCALES)[number]
  * El espanol es el idioma por defecto, en el sentido de que es el destino de
  * quien no pide nada mas y el idioma que prevalece en los textos legales.
  *
- * ⚠️ **No significa que `/` redirija fijo aqui.** Este comentario decia «`/`
- * redirige 301 fijo a `/es/`» y describia la regla anterior. Desde la decision de
- * Direccion del 29/07/2026 la raiz reparte por idioma del navegador con dos
- * **302**, y que no sean 301 es deliberado: una permanente la cachean navegadores
- * y CDN sin volver a mirar la cabecera. El razonamiento completo esta en
- * `netlify.toml`, y las tres implementaciones que tienen que coincidir estan en
- * `public/reparto-idioma.js` y `scripts/idioma-preferido.mjs`.
+ * Hasta el 11/08/2026 este comentario describia el reparto de `/` por idioma del
+ * navegador con dos 302 (`public/reparto-idioma.js` + `scripts/idioma-preferido.mjs`).
+ * Ese reparto ha desaparecido: con `IDIOMAS_ACTIVOS = ['es']` no hay nada que
+ * repartir, y `/` es una pagina real del artefacto.
  */
 export const DEFAULT_LOCALE: Locale = 'es'
+
+/**
+ * Idiomas que se publican de verdad. Decision de Direccion del 11/08/2026: el
+ * publico objetivo es espanol y el ingles «no hace falta por ahora», mas un
+ * motivo con fecha -Cookiebot en version trial escanea 50 paginas y el sitio con
+ * ingles tiene 78; sin el, 37-.
+ *
+ * Es un interruptor como `BLOG_ENABLED` o `CALCULADORA_ACTIVA`, no un borrado:
+ * `messages/en.json`, los 22 articulos de `content/blog/en/` y los `paths.en`
+ * de este fichero se conservan intactos. Devolver el ingles es volver a
+ * `['es', 'en']` aqui.
+ */
+export const IDIOMAS_ACTIVOS: readonly Locale[] = ['es']
+
+/** `true` si hay mas de un idioma activo. Gobierna el selector de idioma, los
+ * `hreflang`/`alternates` y la clausula legal de prevalencia entre idiomas. */
+export const MULTIIDIOMA = IDIOMAS_ACTIVOS.length > 1
+
+/**
+ * Prefijo de URL por idioma. El espanol se sirve en la raiz del dominio
+ * (`https://secnorthlabs.eu/contacto/`, no `/es/contacto/`); el ingles conserva
+ * el suyo por si vuelve a activarse, y hoy solo lo consume la tabla de
+ * redirecciones de legado en `netlify.toml`.
+ */
+export const PREFIJO_URL: Record<Locale, string> = { es: '', en: '/en' }
+
+export function isLocaleActivo(v: string): v is Locale {
+  return (IDIOMAS_ACTIVOS as readonly string[]).includes(v)
+}
 
 export type RouteId =
   | 'home'
@@ -112,7 +138,7 @@ export interface RouteDefinition {
   indexable: boolean
   /** Namespace de mensajes del que sale todo el contenido de la pagina. */
   namespace: MessageNamespace
-  /** Ruta completa, con prefijo de idioma y barra final. */
+  /** Ruta completa, con prefijo de idioma (`PREFIJO_URL`) y barra final. */
   paths: Record<Locale, string>
   /**
    * Anclas conocidas de la pagina, para que el selector de idioma conserve el
@@ -127,14 +153,14 @@ export const ROUTES: readonly RouteDefinition[] = [
     enabled: true,
     indexable: true,
     namespace: 'home',
-    paths: { es: '/es/', en: '/en/' },
+    paths: { es: '/', en: '/en/' },
   },
   {
     id: 'mssp',
     enabled: true,
     indexable: true,
     namespace: 'mssp',
-    paths: { es: '/es/soluciones/mssp/', en: '/en/solutions/mssp/' },
+    paths: { es: '/soluciones/mssp/', en: '/en/solutions/mssp/' },
     // Las siglas tecnicas no se traducen.
     anchors: { it: { es: 'it', en: 'it' }, ot: { es: 'ot', en: 'ot' } },
   },
@@ -143,21 +169,21 @@ export const ROUTES: readonly RouteDefinition[] = [
     enabled: true,
     indexable: true,
     namespace: 'msspItCatalog',
-    paths: { es: '/es/soluciones/mssp/it/', en: '/en/solutions/mssp/it/' },
+    paths: { es: '/soluciones/mssp/it/', en: '/en/solutions/mssp/it/' },
   },
   {
     id: 'msspOt',
     enabled: true,
     indexable: true,
     namespace: 'msspOtCatalog',
-    paths: { es: '/es/soluciones/mssp/ot/', en: '/en/solutions/mssp/ot/' },
+    paths: { es: '/soluciones/mssp/ot/', en: '/en/solutions/mssp/ot/' },
   },
   {
     id: 'grc',
     enabled: true,
     indexable: true,
     namespace: 'grc',
-    paths: { es: '/es/soluciones/grc/', en: '/en/solutions/grc/' },
+    paths: { es: '/soluciones/grc/', en: '/en/solutions/grc/' },
     anchors: { idi: { es: 'idi', en: 'rdi' } },
   },
   {
@@ -165,80 +191,84 @@ export const ROUTES: readonly RouteDefinition[] = [
     enabled: true,
     indexable: true,
     namespace: 'grcCatalog',
-    paths: { es: '/es/soluciones/grc/catalogo/', en: '/en/solutions/grc/catalogue/' },
+    paths: { es: '/soluciones/grc/catalogo/', en: '/en/solutions/grc/catalogue/' },
   },
   {
     id: 'software',
     enabled: true,
     indexable: true,
     namespace: 'software',
-    paths: { es: '/es/software/', en: '/en/software/' },
+    paths: { es: '/software/', en: '/en/software/' },
   },
   {
     id: 'sectors',
     enabled: true,
     indexable: true,
     namespace: 'sectors',
-    paths: { es: '/es/sectores/', en: '/en/sectors/' },
+    paths: { es: '/sectores/', en: '/en/sectors/' },
   },
   {
     id: 'blog',
     enabled: BLOG_ENABLED,
     indexable: BLOG_INDEXABLE,
     namespace: 'blog',
-    paths: { es: '/es/blog/', en: '/en/blog/' },
+    paths: { es: '/blog/', en: '/en/blog/' },
   },
   {
     id: 'company',
     enabled: true,
     indexable: true,
     namespace: 'company',
-    paths: { es: '/es/compania/', en: '/en/company/' },
+    paths: { es: '/compania/', en: '/en/company/' },
   },
   {
     id: 'contact',
     enabled: true,
     indexable: true,
     namespace: 'contact',
-    paths: { es: '/es/contacto/', en: '/en/contact/' },
+    paths: { es: '/contacto/', en: '/en/contact/' },
   },
   {
     id: 'calculator',
     enabled: CALCULADORA_ACTIVA,
     indexable: CALCULADORA_ACTIVA,
     namespace: 'calculator',
-    paths: { es: '/es/calculadora/', en: '/en/calculator/' },
+    paths: { es: '/calculadora/', en: '/en/calculator/' },
   },
   {
     id: 'privacy',
     enabled: true,
     indexable: true,
     namespace: 'privacy',
-    paths: { es: '/es/politica-privacidad/', en: '/en/privacy-policy/' },
+    paths: { es: '/politica-privacidad/', en: '/en/privacy-policy/' },
   },
   {
     id: 'legal',
     enabled: true,
     indexable: true,
     namespace: 'legal',
-    paths: { es: '/es/aviso-legal/', en: '/en/legal-notice/' },
+    paths: { es: '/aviso-legal/', en: '/en/legal-notice/' },
   },
   {
     id: 'cookies',
     enabled: true,
     indexable: true,
     namespace: 'cookies',
-    paths: { es: '/es/cookies/', en: '/en/cookies/' },
+    paths: { es: '/cookies/', en: '/en/cookies/' },
   },
   {
-    // Se genera como pagina real porque las reglas del final de netlify.toml
-    // sirven /es/404/ y /en/404/ con estado 404 (seccion 10.4). Nunca se enlaza
-    // ni se indexa.
+    // Se genera como pagina real porque la regla del final de netlify.toml
+    // sirve `/*` -> `/404/` con estado 404 (seccion 10.4). Nunca se enlaza ni se
+    // indexa, y por eso tampoco lleva canonical (ver `construirMetadatos`).
+    //
+    // Sin prefijo de idioma su path cae justo en `/404/`, que Next reserva para
+    // `src/app/not-found.tsx`: sus metadatos salen de ahi y no de la ruta
+    // atrapatodo. El porque esta escrito en ese fichero.
     id: 'notFound',
     enabled: true,
     indexable: false,
     namespace: 'common.notFound',
-    paths: { es: '/es/404/', en: '/en/404/' },
+    paths: { es: '/404/', en: '/en/404/' },
   },
 ]
 
@@ -288,9 +318,14 @@ export function getLocalizedPath(id: RouteId, locale: Locale, anchorKey?: string
   return `${base}#${anchor}`
 }
 
-/** Segmentos de la ruta despues del prefijo de idioma. `/es/` -> `[]`. */
+/**
+ * Segmentos de la ruta despues del prefijo de idioma. `/` -> `[]`.
+ *
+ * Con `PREFIJO_URL[locale] === ''` (espanol) el prefijo es solo la barra
+ * inicial, asi que `slice` y el `replace` de respaldo hacen lo mismo.
+ */
 export function pathToSegments(path: string, locale: Locale): string[] {
-  const prefijo = `/${locale}/`
+  const prefijo = `${PREFIJO_URL[locale]}/`
   const resto = path.startsWith(prefijo) ? path.slice(prefijo.length) : path.replace(/^\//, '')
   return resto.split('/').filter(Boolean)
 }

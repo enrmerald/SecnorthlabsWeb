@@ -17,7 +17,7 @@ En el actual panorama de ciberseguridad en España, marcado por la plena vigenci
 
 Aunque ambos marcos comparten el ADN de la gestión de riesgos, no son equivalentes ni se aplican en los mismos contextos. Entender sus diferencias es fundamental para optimizar la inversión y evitar riesgos legales en 2026.
 
-Si todavía necesitas una visión general del marco español, puedes consultar antes nuestro artículo sobre [qué es el ENS y por qué es obligatorio en España](/es/blog/que-es-el-ens/).
+Si todavía necesitas una visión general del marco español, puedes consultar antes nuestro artículo sobre [qué es el ENS y por qué es obligatorio en España](/blog/que-es-el-ens/).
 
 ## Qué es el ENS y qué es ISO 27001
 
@@ -27,7 +27,7 @@ El **Esquema Nacional de Seguridad (ENS)** es la normativa española obligatoria
 
 Tras su actualización en 2022, el ENS se ha convertido en el espejo nacional de la resiliencia ciber, exigiendo una protección adecuada no solo de la confidencialidad, sino también de la trazabilidad y autenticidad de los datos.
 
-Para profundizar en cuándo aplica y cómo abordar el proceso, puedes leer nuestra [guía del ENS: cuándo es obligatorio y cómo adaptarse](/es/blog/ens-cuando-es-obligatorio-y-como-adaptarse/).
+Para profundizar en cuándo aplica y cómo abordar el proceso, puedes leer nuestra [guía del ENS: cuándo es obligatorio y cómo adaptarse](/blog/ens-cuando-es-obligatorio-y-como-adaptarse/).
 
 ### La norma ISO/IEC 27001:2022
 
@@ -64,7 +64,7 @@ Esto permite a las empresas adoptar un **Sistema Integrado de Gestión**.
 
 Si ya tienes ISO 27001, solo necesitas realizar un *gap analysis* para cubrir las medidas específicas del ENS, como el uso de productos cualificados o requisitos más estrictos de sellado de tiempo y trazabilidad.
 
-Este enfoque resulta especialmente relevante para empresas tecnológicas, proveedores cloud o plataformas SaaS, donde la seguridad de la información debe integrarse desde el diseño. En este sentido, también puede ser útil revisar los principales retos de la [ciberseguridad en la nube](/es/blog/ciberseguridad-en-la-nube/).
+Este enfoque resulta especialmente relevante para empresas tecnológicas, proveedores cloud o plataformas SaaS, donde la seguridad de la información debe integrarse desde el diseño. En este sentido, también puede ser útil revisar los principales retos de la [ciberseguridad en la nube](/blog/ciberseguridad-en-la-nube/).
 
 ## El impacto de la Directiva NIS2
 
@@ -74,7 +74,7 @@ El ENS en España está alineado casi en su totalidad con los requisitos de la N
 
 Por lo tanto, certificarse en el ENS no solo te abre las puertas de las licitaciones públicas, sino que garantiza que tu empresa cumple con las obligaciones europeas de notificación de incidentes y gestión de riesgos, evitando sanciones que pueden llegar a ser muy cuantiosas.
 
-Además, la presión regulatoria no afecta únicamente a la organización principal. Cada vez es más importante controlar la seguridad de proveedores, terceros y servicios externalizados, especialmente ante el aumento de los [ataques a la cadena de suministro](/es/blog/ataques-cadena-suministro-riesgo-invisible/).
+Además, la presión regulatoria no afecta únicamente a la organización principal. Cada vez es más importante controlar la seguridad de proveedores, terceros y servicios externalizados, especialmente ante el aumento de los [ataques a la cadena de suministro](/blog/ataques-cadena-suministro-riesgo-invisible/).
 
 ## Cuál necesita tu empresa: ENS, ISO 27001 o ambos
 
@@ -98,7 +98,7 @@ Considera el enfoque combinado.
 
 La ISO 27001 aporta la estructura de gestión, mientras que el ENS garantiza los niveles mínimos de seguridad exigidos por la ley española.
 
-En este tipo de entornos también cobra especial importancia la monitorización continua, la detección temprana de incidentes y la capacidad de respuesta. Soluciones como [SIEM y SOAR](/es/blog/que-es-un-siem-y-para-que-sirve-y-un-soar/) pueden ayudar a reforzar la trazabilidad, la correlación de eventos y la gestión operativa de la seguridad.
+En este tipo de entornos también cobra especial importancia la monitorización continua, la detección temprana de incidentes y la capacidad de respuesta. Soluciones como [SIEM y SOAR](/blog/que-es-un-siem-y-para-que-sirve-y-un-soar/) pueden ayudar a reforzar la trazabilidad, la correlación de eventos y la gestión operativa de la seguridad.
 
 ## Preguntas frecuentes sobre ENS vs ISO 27001
 
@@ -129,9 +129,9 @@ En muchos casos, el enfoque más eficiente será combinar ambos marcos dentro de
 
 La ciberseguridad ha pasado de ser una opción técnica a una responsabilidad de negocio.
 
-En [ISN Labs](/es/compania/), ayudamos a las organizaciones a navegar este mapa normativo, implementando sistemas que no solo “cumplan el papel”, sino que mejoren la resiliencia real frente a ataques de ransomware y brechas de datos.
+En [ISN Labs](/compania/), ayudamos a las organizaciones a navegar este mapa normativo, implementando sistemas que no solo “cumplan el papel”, sino que mejoren la resiliencia real frente a ataques de ransomware y brechas de datos.
 
-En organizaciones con mayor exposición, este enfoque puede apoyarse también en capacidades de vigilancia, detección y respuesta continua, como las que explicamos en nuestro artículo sobre [qué es un SOC en ciberseguridad](/es/blog/que-es-un-soc-en-ciberseguridad/).
+En organizaciones con mayor exposición, este enfoque puede apoyarse también en capacidades de vigilancia, detección y respuesta continua, como las que explicamos en nuestro artículo sobre [qué es un SOC en ciberseguridad](/blog/que-es-un-soc-en-ciberseguridad/).
 
 **¿No sabes por dónde empezar?**
 Analizamos tu caso para definir si necesitas ENS, ISO 27001 o un sistema integrado que optimice tu inversión.

@@ -13,7 +13,7 @@ originalUrl: https://ewala.es/blog/posts/ciberseguridad-en-la-nube/
 ---
 
 En un contexto donde **el 94% de las empresas** utilizan al menos un servicio cloud, la **ciberseguridad en la nube** se ha convertido en un factor crítico para la continuidad de negocio.
-Hoy en el blog de [ISN Labs](/es/compania/) te contamos todo lo que necesitas saber para proteger tus datos y sistemas en entornos cloud.
+Hoy en el blog de [ISN Labs](/compania/) te contamos todo lo que necesitas saber para proteger tus datos y sistemas en entornos cloud.
 Utilizar la nube ofrece **oportunidades únicas de escalabilidad, eficiencia y acceso remoto**, pero también implica asumir nuevos retos en **protección y cumplimiento normativo**.
 
 ## ¿Qué es la ciberseguridad en la nube?
@@ -60,13 +60,13 @@ Se basa en el **modelo de responsabilidad compartida**:
 5. **SIEM y SOAR** con IA para respuesta automática a incidentes.  
 6. **Cumplimiento activo**: RGPD, ISO 27017, NIST SP 800-144, ENS.  
 
-💡 Puedes leer más sobre esto en nuestro post de [Tendencias de ciberseguridad en 2025](/es/blog/tendencias-ciberseguridad-2025/).
+💡 Puedes leer más sobre esto en nuestro post de [Tendencias de ciberseguridad en 2025](/blog/tendencias-ciberseguridad-2025/).
 
 ---
 
 ## ISN Labs te acompaña en el camino hacia la ciberseguridad en la nube
 
-En [ISN Labs](/es/compania/) entendemos que la **ciberseguridad en la nube** es un pilar esencial para cualquier empresa que quiera **innovar y crecer de forma segura**.  
+En [ISN Labs](/compania/) entendemos que la **ciberseguridad en la nube** es un pilar esencial para cualquier empresa que quiera **innovar y crecer de forma segura**.  
 Ofrecemos soluciones **personalizadas**, alineadas con normativas y adaptadas a tu negocio.  
 
-Descubre nuestro [Plan Base de Ciberseguridad Gestionada](/es/soluciones/mssp/) y lleva tu protección cloud al siguiente nivel.
+Descubre nuestro [Plan Base de Ciberseguridad Gestionada](/soluciones/mssp/) y lleva tu protección cloud al siguiente nivel.

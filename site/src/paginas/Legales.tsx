@@ -1,6 +1,6 @@
 import { Breadcrumbs } from '@/components/ui/Breadcrumbs'
 import { TextoEnlazado } from '@/components/ui/TextoEnlazado'
-import { getLocalizedPath, type Locale, type RouteId } from '@/config/routes'
+import { MULTIIDIOMA, getLocalizedPath, type Locale, type RouteId } from '@/config/routes'
 import { cargarMensajes } from '@/i18n/mensajes'
 import type { TramoBreadcrumb } from '@/lib/tipos'
 
@@ -306,7 +306,12 @@ function PaginaDocumento({
           acepto hace seis meses. */}
       <div className="border-border flex flex-col gap-3 border-b pb-8">
         <p className="texto-cuerpo text-sm">{documento.intro}</p>
-        <p className="text-text-dim text-xs italic">{documento.prevalence}</p>
+        {/* Los tres documentos afirman que se publican en espanol y en ingles
+            y que en discrepancia prevalece el espanol. Con el ingles retirado
+            (IDIOMAS_ACTIVOS) eso deja de ser cierto, asi que se oculta en vez
+            de reescribirse: el texto lo redacta cumplimiento y solo vuelve a
+            publicarse si el ingles vuelve. */}
+        {MULTIIDIOMA && <p className="text-text-dim text-xs italic">{documento.prevalence}</p>}
       </div>
 
       {documento.sections.map((seccion, indice) => (

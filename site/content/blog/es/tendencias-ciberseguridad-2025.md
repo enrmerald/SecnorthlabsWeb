@@ -14,7 +14,7 @@ originalUrl: https://ewala.es/blog/posts/tendencias-ciberseguridad-2025/
 
 La **ciberseguridad en 2025** plantea un desafío sin precedentes. Las amenazas son más sofisticadas, los entornos digitales son más complejos y las exigencias por parte de las empresas son más altas. Por lo tanto, las organizaciones no solo deben protegerse, sino también transformarse y adaptarse.
 
-Desde **[ISN Labs](/es/compania/)**, analizamos las principales tendencias de este año que marcarán la agenda de ciberseguridad, y cómo abordarlas de forma proactiva y eficaz.
+Desde **[ISN Labs](/compania/)**, analizamos las principales tendencias de este año que marcarán la agenda de ciberseguridad, y cómo abordarlas de forma proactiva y eficaz.
 
 ## Un entorno de amenazas en constante evolución
 
@@ -100,7 +100,7 @@ El **entorno normativo** evoluciona con rapidez. Nuevas **leyes sobre privacidad
 
 ## Claves para estar preparado
 
-Desde **[ISN Labs](/es/compania/)** se recomienda una estrategia de **ciberseguridad integrada**, flexible y alineada con tu negocio.
+Desde **[ISN Labs](/compania/)** se recomienda una estrategia de **ciberseguridad integrada**, flexible y alineada con tu negocio.
 
 **Estas son las principales recomendaciones para 2025:**
 
@@ -118,6 +118,6 @@ Desde **[ISN Labs](/es/compania/)** se recomienda una estrategia de **cibersegur
 
 ## ISN Labs te ofrece la mejor ciberseguridad en 2025
 
-La **ciberseguridad en 2025** requiere anticipación, visión y colaboración en todos los niveles de la empresa. **[ISN Labs](/es/compania/)** ayuda a construir entornos digitales más seguros, sostenibles y adaptados a los desafíos del futuro.
+La **ciberseguridad en 2025** requiere anticipación, visión y colaboración en todos los niveles de la empresa. **[ISN Labs](/compania/)** ayuda a construir entornos digitales más seguros, sostenibles y adaptados a los desafíos del futuro.
 
-[Contácta](/es/contacto/) con **ISN Labs** y trabajemos juntos en tu estrategia de ciberseguridad  o descubre nuestro [**Plan Base de Ciberseguridad Gestionada**](/es/soluciones/mssp/) para dar el siguiente paso en la protección de tu empresa.
+[Contácta](/contacto/) con **ISN Labs** y trabajemos juntos en tu estrategia de ciberseguridad  o descubre nuestro [**Plan Base de Ciberseguridad Gestionada**](/soluciones/mssp/) para dar el siguiente paso en la protección de tu empresa.

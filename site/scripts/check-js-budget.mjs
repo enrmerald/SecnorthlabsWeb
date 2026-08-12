@@ -61,19 +61,20 @@ const outDir = join(root, 'out')
  */
 const PRESUPUESTO_KB = Number(process.env.JS_BUDGET_KB ?? 160)
 
+// Sin prefijo de idioma (IDIOMAS_ACTIVOS = ['es']): la home EN desaparece con
+// el ingles, y las demas pierden el `es/` inicial.
 const paginas = [
-  { etiqueta: 'home ES', path: 'es/index.html' },
-  { etiqueta: 'home EN', path: 'en/index.html' },
-  { etiqueta: 'MSSP ES', path: 'es/soluciones/mssp/index.html' },
-  { etiqueta: 'contacto ES', path: 'es/contacto/index.html' },
+  { etiqueta: 'home ES', path: 'index.html' },
+  { etiqueta: 'MSSP ES', path: 'soluciones/mssp/index.html' },
+  { etiqueta: 'contacto ES', path: 'contacto/index.html' },
   // La calculadora estaba aqui. Mientras `CALCULADORA_ACTIVA` sea `false` no se
   // genera, y contacto cubre lo mismo: es el otro formulario de cliente.
   // El listado del blog es la pagina con mas elementos del sitio -26 tarjetas y
   // el filtro por tema- y el detalle es la de mas texto. Si algun dia alguien
   // convierte Markdown en el navegador o arrastra el JSON del contenido a un
   // componente de cliente, se ve aqui.
-  { etiqueta: 'blog ES', path: 'es/blog/index.html' },
-  { etiqueta: 'articulo ES', path: 'es/blog/que-es-el-ens/index.html' },
+  { etiqueta: 'blog ES', path: 'blog/index.html' },
+  { etiqueta: 'articulo ES', path: 'blog/que-es-el-ens/index.html' },
 ]
 
 const cache = new Map()

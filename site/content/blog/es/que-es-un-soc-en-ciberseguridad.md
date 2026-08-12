@@ -16,9 +16,9 @@ originalUrl: https://ewala.es/blog/posts/que-es-un-soc-en-ciberseguridad/
 
 El entorno digital se ha convertido en una parte imprescindible para cualquier organización, y junto a este entorno vienen todo tipo de amenazas cibernéticas. En este contexto, un servicio de SOC se ha vuelto prácticamente imprescindible.
 
-Hoy, el equipo de [ISN Labs](/es/compania/) te contará qué funciones desarrolla y por qué deberías tener uno si tienes una infraestructura IT.
+Hoy, el equipo de [ISN Labs](/compania/) te contará qué funciones desarrolla y por qué deberías tener uno si tienes una infraestructura IT.
 
-¡También puedes conocer nuestro [Plan Base de Ciberseguridad Gestionada](/es/soluciones/mssp/)!
+¡También puedes conocer nuestro [Plan Base de Ciberseguridad Gestionada](/soluciones/mssp/)!
 
 ## Qué es un servicio SOC
 
@@ -42,7 +42,7 @@ Estas herramientas permiten automatizar procesos, centralizar alertas y analizar
 
 El **SIEM** es la herramienta central en la arquitectura de un SOC. Actúa como el núcleo desde el que se recopila, analiza y correlaciona la información crítica de seguridad procedente de toda la infraestructura tecnológica.
 
-[Descubre qué es un SIEM en profundidad](/es/blog/que-es-un-siem-y-para-que-sirve-y-un-soar/).
+[Descubre qué es un SIEM en profundidad](/blog/que-es-un-siem-y-para-que-sirve-y-un-soar/).
 
 ### SOAR (Security Orchestration, Automation and Response)
 
@@ -51,7 +51,7 @@ Automatiza la respuesta ante incidentes, orquesta acciones entre herramientas di
 ### EDR/XDR (Endpoint / Extended Detection and Response)
 
 Detectan y responden ante amenazas avanzadas en dispositivos y redes, proporcionando análisis forense y contención.  
-[Aquí te contamos qué es XDR](/es/blog/que-es-un-xdr-y-como-puede-proteger-tu-empresa/).
+[Aquí te contamos qué es XDR](/blog/que-es-un-xdr-y-como-puede-proteger-tu-empresa/).
 
 ### TIP (Threat Intelligence Platforms)
 
@@ -72,14 +72,14 @@ El SOC no solo actúa como centro de vigilancia, sino que cumple funciones esenc
 - **Mejora continua:** Evalúa el rendimiento de las herramientas de seguridad.  
 - **Cumplimiento normativo:** Asegura la gestión conforme a normativas como el RGPD o ISO27001.
 
-[Contacta con ISN Labs](/es/contacto/) si quieres conocer todos los detalles.
+[Contacta con ISN Labs](/contacto/) si quieres conocer todos los detalles.
 
 ## Tipos de SOC
 
 Existen distintos modelos de SOC según la organización de los recursos:
 
 - **SOC interno:** Gestionado por el equipo IT de la empresa.  
-- **SOC externalizado:** Operado por un proveedor especializado como [ISN Labs](/es/compania/).  
+- **SOC externalizado:** Operado por un proveedor especializado como [ISN Labs](/compania/).  
 - **SOC híbrido:** Combina equipos internos con apoyo externo.
 
 El software SOC puede aplicarse a sectores como la salud, energía, transporte o cualquier entidad con información crítica.
@@ -95,6 +95,6 @@ No todas las organizaciones requieren un SOC, pero si tu empresa presenta alguno
 
 ## Descubre qué puede hacer un SOC por tu empresa con ISN Labs
 
-Si estás valorando cómo mejorar la seguridad digital de tu organización, en [ISN Labs](/es/compania/) te ayudamos a evaluar si necesitas un SOC interno o externalizado, y te asesoramos en su implementación.
+Si estás valorando cómo mejorar la seguridad digital de tu organización, en [ISN Labs](/compania/) te ayudamos a evaluar si necesitas un SOC interno o externalizado, y te asesoramos en su implementación.
 
-**[Contáctanos](/es/contacto/) y descubre cómo fortalecer la protección de tu empresa con soluciones eficaces, escalables y ajustadas a tus necesidades.**
+**[Contáctanos](/contacto/) y descubre cómo fortalecer la protección de tu empresa con soluciones eficaces, escalables y ajustadas a tus necesidades.**

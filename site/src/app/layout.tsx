@@ -1,18 +1,92 @@
-import type { ReactNode } from 'react'
+import { setRequestLocale } from "next-intl/server";
+import type { ReactNode } from "react";
+import { displayFont, sansFont } from "@/app/fuentes";
+import { Footer } from "@/components/layout/Footer";
+import { Navbar } from "@/components/layout/Navbar";
+import { Analitica, AnaliticaSinJs } from "@/components/seo/Analitica";
+import { DEFAULT_LOCALE } from "@/config/routes";
+import { cargarMensajes } from "@/i18n/mensajes";
+import "@/app/globals.css";
 
 /**
- * Layout raiz.
+ * Layout raiz y unico: con `IDIOMAS_ACTIVOS = ['es']` no hay segmento de idioma
+ * en la URL, asi que este fichero hace lo que antes hacia `[locale]/layout.tsx`
+ * -renderiza `<html lang>`, la cabecera y el pie- fijo a `DEFAULT_LOCALE`.
+ * Volver a `['es', 'en']` en `routes.ts` exige devolver el segmento `[locale]`
+ * y con el este fichero a como era antes (ver `PLAN-solo-espanol.md`).
  *
- * Deliberadamente **no renderiza `<html>` ni `<body>`**: los renderiza
- * `app/[locale]/layout.tsx`, que es el unico que sabe que valor va en `lang`.
- * Un `<html lang>` fijo aqui obligaria a que el layout de idioma lo sobreescriba
- * desde dentro, que no se puede.
+ * **No se monta `NextIntlClientProvider`.** Es deliberado y esta medido: el
+ * provider arrastra el runtime de cliente de next-intl a todas las paginas, y
+ * ninguna lo necesita, porque los componentes de cliente reciben las cadenas que
+ * usan como props desde los de build (seccion 1.4.1). Enviar el arbol de
+ * mensajes entero al navegador para que un componente use veinte cadenas es
+ * exactamente lo que prohibe el presupuesto de JavaScript de la seccion 12.6.
  *
- * Todo el contenido del sitio vive bajo `/es/` o `/en/`; en `/` no hay nada,
- * porque Netlify lo redirige con un 301 fijo (seccion 2.1). Lo unico que pasa
- * por aqui sin idioma es `app/not-found.tsx`, la 404 de ultimo recurso, que
- * monta su propio documento.
+ * Si algun dia un componente de cliente necesitara formateo con configuracion
+ * regional, se monta el provider **alrededor de ese componente**, no aqui.
  */
 export default function RootLayout({ children }: { children: ReactNode }) {
-  return children
+  // Sin esto, cualquier lectura de traducciones fuerza renderizado dinamico y
+  // la pagina deja de ser estatica, que con output: 'export' es un fallo de
+  // build y no una degradacion silenciosa.
+  setRequestLocale(DEFAULT_LOCALE);
+
+  const { common } = cargarMensajes(DEFAULT_LOCALE);
+
+  return (
+    <html
+      lang={DEFAULT_LOCALE}
+      className={`${displayFont.variable} ${sansFont.variable} h-full antialiased`}
+    >
+      <body className="flex min-h-full flex-col">
+        {/* ═══════════════════════════════════════════════════════════════════
+            LA ANALITICA VA MONTADA, Y HAY UN PENDIENTE ABIERTO CON ELLA.
+
+            GTM y GA4 escriben cookies al abrir la pagina, y en la UE eso exige
+            consentimiento previo. El aviso lo va a poner **Cookiebot**, y su
+            escaner necesita que las etiquetas disparen de verdad para inventariar
+            que cookies se escriben: sin medicion no hay nada que descubrir, y la
+            declaracion de cookies saldria vacia. Por eso se publica midiendo
+            (decision de Direccion del 30/07/2026).
+
+            ⚠️ Mientras dure ese escaneo, la politica de cookies afirma algo que
+            todavia no es cierto -que las analiticas no se cargan hasta
+            aceptarlas-. Es una ventana conocida y acotada, no un descuido, y se
+            cierra al activar el banner de Cookiebot. Ver la nota de `Legales.tsx`.
+
+            Orden de trabajo previsto:
+              1. Publicar con medicion (esto).
+              2. Cookiebot escanea el dominio e inventaria las cookies.
+              3. Banner de Cookiebot + Consent Mode v2 en GTM, con
+                 `analytics_storage` en `denied` por defecto.
+              4. La declaracion de cookies de Cookiebot sustituye a la tabla
+                 escrita a mano de la politica.
+
+            GA4 se configura **dentro del contenedor de GTM**, no desde el codigo
+            (ver `public/analitica.js`): es lo que permite que el paso 3 se haga en
+            GTM sin recompilar, y lo que hace que Cookiebot pueda gobernarlo.
+
+            Lo mas arriba posible, que es lo que pide Google para no perder visitas
+            de quien cierra la pestana enseguida. No estorba al enlace de salto: un
+            script no es enfocable, asi que el primer destino del tabulador sigue
+            siendo el de abajo.
+            ═══════════════════════════════════════════════════════════════════ */}
+        <Analitica />
+        <AnaliticaSinJs />
+
+        {/* Primer elemento enfocable de la pagina. Sin el, quien navega por
+              teclado recorre la navegacion entera en cada una (Fase 9). */}
+        <a
+          href="#contenido"
+          className="salto-contenido font-display bg-green text-bg rounded-[10px] px-4 py-2 text-sm font-bold"
+        >
+          {common.a11y.skipToContent}
+        </a>
+
+        <Navbar locale={DEFAULT_LOCALE} />
+        {children}
+        <Footer locale={DEFAULT_LOCALE} />
+      </body>
+    </html>
+  );
 }

@@ -1,7 +1,9 @@
 import { describe, expect, it } from 'vitest'
 import {
   DEFAULT_LOCALE,
+  IDIOMAS_ACTIVOS,
   LOCALES,
+  PREFIJO_URL,
   ROUTES,
   getLocalizedPath,
   getRoute,
@@ -28,19 +30,28 @@ describe('manifiesto de rutas', () => {
     // @ts-expect-error se comprueba el fallo en runtime, no el tipado
     expect(() => getRoute('inventada')).toThrow(/inventada/)
   })
+
+  it('IDIOMAS_ACTIVOS es subconjunto de LOCALES, y todo idioma del catalogo declara PREFIJO_URL', () => {
+    for (const locale of IDIOMAS_ACTIVOS) {
+      expect(LOCALES).toContain(locale)
+    }
+    for (const locale of LOCALES) {
+      expect(PREFIJO_URL[locale]).toBeDefined()
+    }
+  })
 })
 
 describe('getLocalizedPath', () => {
   it('traduce el slug conservando la pagina logica', () => {
-    expect(getLocalizedPath('grc', 'es')).toBe('/es/soluciones/grc/')
+    expect(getLocalizedPath('grc', 'es')).toBe('/soluciones/grc/')
     expect(getLocalizedPath('grc', 'en')).toBe('/en/solutions/grc/')
-    expect(getLocalizedPath('company', 'es')).toBe('/es/compania/')
+    expect(getLocalizedPath('company', 'es')).toBe('/compania/')
     expect(getLocalizedPath('company', 'en')).toBe('/en/company/')
   })
 
   it('traduce tambien el ancla, no solo la pagina', () => {
     // Es el caso concreto de la seccion 2.1.3 del plan.
-    expect(getLocalizedPath('grc', 'es', 'idi')).toBe('/es/soluciones/grc/#idi')
+    expect(getLocalizedPath('grc', 'es', 'idi')).toBe('/soluciones/grc/#idi')
     expect(getLocalizedPath('grc', 'en', 'idi')).toBe('/en/solutions/grc/#rdi')
   })
 
@@ -69,7 +80,7 @@ describe('pathToSegments y resolveRoute son inversas', () => {
   })
 
   it('la portada no tiene segmentos', () => {
-    expect(pathToSegments('/es/', 'es')).toEqual([])
+    expect(pathToSegments('/', 'es')).toEqual([])
     expect(resolveRoute('es', [])?.id).toBe('home')
   })
 

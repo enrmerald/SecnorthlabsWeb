@@ -32,7 +32,8 @@ mensajes, componentes de cliente o el artefacto. `pnpm test:e2e` construye contr
 | Tocar el modelo economico | `pbcg/`. **Jamas** desde `src/` |
 | Cambiar una plantilla de correo | `netlify/functions/_plantillas/`. Se ve con `pnpm correos:preview`, que no envia nada. Tablas y CSS en linea: el navegador de la vista previa es mas permisivo que Outlook |
 | Redirecciones, cabeceras o CSP | `netlify.toml`. `next.config.ts` no puede hacerlo con `output: 'export'` |
-| Analitica (GA4 y GTM) | `src/components/seo/Analitica.tsx`, arranque en `public/analitica.js`, identificadores en `src/config/analitica.ts`. Va en el layout de idioma, **no en `/`**. GA4 se configura dentro del contenedor de GTM, no desde el codigo, para que Consent Mode -y Cookiebot- puedan gobernarlo. ⚠️ Se publica midiendo sin banner a proposito, para que Cookiebot pueda inventariar las cookies; ver la nota del layout |
+| Analitica (GA4 y GTM) | `src/components/seo/Analitica.tsx`, arranque en `public/analitica.js`, identificadores en `src/config/analitica.ts`. Va en el layout raiz (`src/app/layout.tsx`), y con un solo idioma eso incluye `/`. GA4 se configura dentro del contenedor de GTM, no desde el codigo, para que Consent Mode -y Cookiebot- puedan gobernarlo. ⚠️ Se publica midiendo sin banner a proposito, para que Cookiebot pueda inventariar las cookies; ver la nota del layout |
+| Devolver el ingles | `IDIOMAS_ACTIVOS` en `src/config/routes.ts`, de `['es']` a `['es', 'en']`. Ver `PLAN-solo-espanol.md` mientras siga vigente: recupera el segmento `[locale]` en `src/app/`, el selector de idioma y el reparto de raiz. Las 14 reglas de legado `/en/…` de `netlify.toml` **no** hay que tocarlas: no llevan `force`, asi que se apartan solas en cuanto el fichero exista. Ponerles `force` dejaria el ingles inalcanzable con todas las comprobaciones en verde |
 
 `src/generated/` es **salida de build**: no se edita a mano.
 
@@ -77,8 +78,8 @@ falta** como props a los de cliente. No hay provider global de traduccion.
   y `next build` no lo ejecuta.
 - **No hay `next start`.** Con `output: 'export'` lo que se sirve es `out/`, y de
   eso se encarga `scripts/static-server.mjs` (`pnpm preview`), que ademas imita a
-  Netlify: barra final, 404 por idioma, reparto de la raiz y `/api/*` invocando
-  las funciones de verdad.
+  Netlify: barra final, la 404 unica, las reglas 301 de legado (`/es/*`, `/en/*`,
+  leidas del propio `netlify.toml`) y `/api/*` invocando las funciones de verdad.
 - **Vitest no resuelve el alias `@/`.** En un fichero que importe **valores** (no
   solo tipos) desde un modulo que las pruebas cargan, usa ruta relativa.
 - **`crypto.randomUUID()` no existe fuera de contexto seguro** (HTTP por IP, que
@@ -88,9 +89,6 @@ falta** como props a los de cliente. No hay provider global de traduccion.
 - **Playwright no tiene proyecto `chromium`.** Las anchuras son `movil-320`,
   `movil-390`, `tablet-768` y `escritorio-1440`, y la matriz existe porque un
   breakpoint no demuestra que el contenido quepa.
-- **`public/reparto-idioma.js` no pasa por el compilador.** Se sirve tal cual:
-  JavaScript de toda la vida, sin modulos. Lo ejecuta y lo compara con el
-  manifiesto y con `netlify.toml` la prueba `src/app/reparto-idioma.test.ts`.
 - **Los logos de terceros no se recolorean.** Van en capsula clara y se
   referencian en su version positiva; el motivo completo esta en
   `src/config/logos.ts`.

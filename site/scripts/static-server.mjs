@@ -4,15 +4,76 @@
 // directorio de ficheros. Esto reproduce como los sirve Netlify (trailingSlash,
 // 404 por idioma) para poder revisar el artefacto real antes de desplegarlo.
 import { createServer } from 'node:http'
-import { createReadStream } from 'node:fs'
+import { createReadStream, readFileSync } from 'node:fs'
 import { stat } from 'node:fs/promises'
 import { fileURLToPath, pathToFileURL } from 'node:url'
 import { dirname, extname, join, normalize, resolve, sep } from 'node:path'
-import { idiomaPreferido } from './idioma-preferido.mjs'
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..')
 const publishDir = resolve(root, process.argv[2] ?? 'out')
 const port = Number(process.env.PORT ?? 4173)
+
+/**
+ * Lee las reglas `[[redirects]]` 301 de `netlify.toml`, en vez de duplicarlas
+ * aqui: es el mismo patron que usaba `idioma-preferido.mjs` con las variantes
+ * de castellano, y sin el las redirecciones de legado (`/es/*`, `/en/*`…) no se
+ * podrian probar en local ni en las pruebas E2E.
+ *
+ * Parser deliberadamente minimo: solo entiende lo que este proyecto escribe en
+ * `[[redirects]]` -pares `clave = "valor"` de una linea, sin arrays ni tablas
+ * anidadas- porque un TOML completo es mucho mas de lo que hace falta para leer
+ * unas pocas reglas de redireccion.
+ */
+function cargarRedirects301() {
+  const texto = readFileSync(join(root, 'netlify.toml'), 'utf8')
+  const bloques = texto.split(/\n(?=\[\[redirects\]\])/)
+  const reglas = []
+
+  for (const bloque of bloques) {
+    if (!bloque.startsWith('[[redirects]]')) continue
+
+    const regla = {}
+    for (const linea of bloque.split('\n').slice(1)) {
+      const coincidencia = /^\s*(\w+)\s*=\s*(.+?)\s*$/.exec(linea)
+      if (!coincidencia) continue
+      const [, clave, valorCrudo] = coincidencia
+      // No se leen `conditions`: las unicas reglas con condicion eran el reparto
+      // de raiz por idioma, que ha desaparecido.
+      if (clave === 'conditions') break
+      const cadena = /^"(.*)"$/.exec(valorCrudo)
+      // Sin comillas es un booleano (`force = true`) o un numero
+      // (`status = 301`): de los dos, solo el numero necesita seguir siendo
+      // comparable con `Number(...)`, asi que se deja tal cual en ese caso.
+      regla[clave] = cadena
+        ? cadena[1]
+        : valorCrudo === 'true' || valorCrudo === 'false'
+          ? valorCrudo === 'true'
+          : valorCrudo
+    }
+
+    if (regla.from && regla.to && Number(regla.status) === 301) reglas.push(regla)
+  }
+
+  return reglas
+}
+
+const REDIRECTS_301 = cargarRedirects301()
+
+/** Aplica `:splat` de la primera regla 301 que casa con `pathname`, o `null`. */
+function resolverRedirect301(pathname) {
+  for (const { from, to } of REDIRECTS_301) {
+    if (!from.includes('*')) {
+      if (pathname === from) return to
+      continue
+    }
+    const base = from.slice(0, -1) // quita el "*" final, conserva la barra
+    if (pathname.startsWith(base)) {
+      const splat = pathname.slice(base.length)
+      return to.replace(':splat', splat)
+    }
+  }
+  return null
+}
 
 /**
  * `PREVIEW_NOINDEX=1` marca todo el servidor como no indexable.
@@ -141,31 +202,19 @@ const server = createServer(async (request, response) => {
     return
   }
 
-  // La raiz reparte por idioma del navegador, igual que las dos reglas de
-  // netlify.toml. Se reproduce aqui para que se pueda comprobar en local: es una
-  // regla que depende de una cabecera, y esas son justo las que nadie prueba
-  // hasta que fallan en produccion.
-  //
-  // `Vary: Accept-Language` no es decorativo: sin el, cualquier cache
-  // intermedia guardaria la respuesta del primer visitante y se la daria a todos
-  // los demas, con lo que la mitad acabaria en el idioma equivocado.
-  if (pathname === '/') {
-    response
-      .writeHead(302, {
-        Location: `/${idiomaPreferido(request.headers['accept-language'])}/`,
-        Vary: 'Accept-Language',
-        'Cache-Control': 'no-store',
-      })
-      .end()
+  // Legado con prefijo de idioma (`/es/*`, `/en/*`…): las mismas reglas 301 de
+  // netlify.toml, leidas de ahi mismo para que no puedan divergir.
+  const destino301 = resolverRedirect301(pathname)
+  if (destino301) {
+    response.writeHead(301, { Location: destino301, 'Cache-Control': 'no-store' }).end()
     return
   }
 
   const file = await resolveFile(pathname)
 
   if (!file) {
-    // 404 por idioma, como las reglas del final de netlify.toml (Fase 10.4).
-    const locale = pathname.startsWith('/en/') ? 'en' : 'es'
-    const notFound = await fileAt(join(publishDir, locale, '404', 'index.html'))
+    // 404 unica, como la regla del final de netlify.toml.
+    const notFound = await fileAt(join(publishDir, '404', 'index.html'))
     if (!notFound) {
       response.writeHead(404, { 'Content-Type': 'text/plain; charset=utf-8' }).end('404')
       return

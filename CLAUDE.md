@@ -14,7 +14,7 @@ sobrescribas.
 Una carpeta de codigo y varias de apoyo, sin workspace que las una:
 
 - **`site/`** - **todo el sitio**. Next.js 16 (App Router) con `output: 'export'`,
-  las 78 paginas estaticas, las dos Netlify Functions de ingestion y el motor
+  las 37 paginas estaticas, las dos Netlify Functions de ingestion y el motor
   PBCG. Aqui ocurre todo el desarrollo.
 - **`contracts/`** - contrato de ingestion para EspoCRM, mapeo de enums y los
   vectores de oro del PBCG, compartidos con el servicio local de importacion, que
@@ -39,22 +39,22 @@ El despliegue de produccion lo hace **Netlify** desde `site/netlify.toml`.
 ```text
 site/
 ├── src/                  Next.js. NO puede importar de pbcg/ ni de netlify/
-│   ├── app/              layout, la ruta atrapatodo, `/` y las dos 404
+│   ├── app/              layout raiz, la ruta atrapatodo y la 404
 │   ├── components/       blocks · blog · calculadora · forms · layout · seo · ui
-│   ├── config/           routes.ts (manifiesto) y logos.ts
+│   ├── config/           routes.ts (manifiesto, con el interruptor IDIOMAS_ACTIVOS) y logos.ts
 │   ├── generated/        blog.json e images.json · SALIDA de build, no se edita
 │   ├── i18n/             carga de mensajes (next-intl)
 │   ├── lib/              navegacion, metadatos, jsonld, empresa, blog/, api/
 │   └── paginas/          un renderizador por pagina + registro.tsx
 ├── netlify/functions/    quote.ts, contact.ts y _comun.ts. Netlify las despliega aparte
 ├── pbcg/                 motor economico + CLI. 37 pruebas. Solo lo ejecuta la funcion
-├── content/blog/         los articulos, en Markdown: es/ y en/
+├── content/blog/         los articulos, en Markdown: es/ y en/ (en/ se conserva sin compilar)
 ├── assets/images/        originales de las imagenes. NO se publican tal cual
-├── messages/             es.json y en.json
-├── public/               logos, imagenes procesadas, sitemap, robots y reparto-idioma.js
+├── messages/             es.json y en.json (en.json se conserva sin usar)
+├── public/               logos, imagenes procesadas, sitemap y robots
 ├── scripts/              build, verificaciones y el servidor de `pnpm preview`
-├── e2e/                  564 pruebas de Playwright en cuatro anchuras
-└── netlify.toml          redirecciones, cabeceras y reparto por idioma
+├── e2e/                  pruebas de Playwright en cuatro anchuras
+└── netlify.toml          redirecciones (incluido el legado /es/* y /en/*) y cabeceras
 ```
 
 ### El blog se escribe en Markdown, y se compila en build
@@ -62,7 +62,8 @@ site/
 Un articulo es **un fichero** en `content/blog/<idioma>/<slug>.md`; el nombre del
 fichero es la URL. `content:build` valida la cabecera con zod, convierte el
 Markdown a HTML y emite `src/generated/blog.json`, que es lo unico que leen las
-paginas. Hoy hay **22 articulos publicados en cada idioma**.
+paginas. Hoy hay **22 articulos publicados en espanol**; los 22 equivalentes en
+ingles siguen en `content/blog/en/` sin compilarse (`IDIOMAS_ACTIVOS`).
 
 El conversor (`markdown-it`) **se queda en el build**: no viaja al navegador, asi
 que publicar veinte articulos mas no mueve el presupuesto de `check:js`. El mismo
@@ -101,8 +102,8 @@ pnpm preview          # sirve out/ con scripts/static-server.mjs (no existe `nex
 
 pnpm lint             # eslint . --max-warnings=0 (`next lint` no existe en Next 16)
 pnpm typecheck        # tsc --noEmit
-pnpm test             # content:build → vitest run · 240 pruebas en 15 ficheros
-pnpm test:e2e         # playwright test · 564 pruebas en cuatro anchuras, contra out/
+pnpm test             # content:build → vitest run · 222 pruebas en 14 ficheros
+pnpm test:e2e         # playwright test · 400 pruebas en cuatro anchuras, contra out/
 
 pnpm check:i18n       # es.json y en.json, misma estructura de claves
 pnpm check:routes     # ningun RouteId sin registrar, ningun slug duplicado por idioma
@@ -121,26 +122,36 @@ artefacto completo. Las pruebas e2e necesitan un `out/` recien construido.
 ## Arquitectura de `site/` (Next.js 16, `output: 'export'`)
 
 **Una sola ruta fisica resuelve las 15 paginas del sitio.**
-`src/app/[locale]/[[...slug]]/page.tsx` es un atrapatodo con
-`generateStaticParams()` y `dynamicParams = false` (obligatorio con exportacion
-estatica). No hay un `page.tsx` por seccion: el contenido real vive en
-`src/paginas/` (Home, Mssp, Catalogos, Grc, Software, Sectores, Compania,
-Contacto, Blog, Articulo, Calculadora, Legales, NoEncontrada) y
-`src/paginas/registro.tsx` mapea cada `RouteId` a su renderizador. El
-`Record<RouteId, …>` no es decorativo: anadir un `RouteId` sin escribir su
-renderizador **no compila**.
+`src/app/[[...slug]]/page.tsx` es un atrapatodo con `generateStaticParams()` y
+`dynamicParams = false` (obligatorio con exportacion estatica). No hay un
+`page.tsx` por seccion: el contenido real vive en `src/paginas/` (Home, Mssp,
+Catalogos, Grc, Software, Sectores, Compania, Contacto, Blog, Articulo,
+Calculadora, Legales, NoEncontrada) y `src/paginas/registro.tsx` mapea cada
+`RouteId` a su renderizador. El `Record<RouteId, …>` no es decorativo: anadir un
+`RouteId` sin escribir su renderizador **no compila**.
 
-El artefacto son **78 paginas HTML**: 15 rutas x 2 idiomas (30), 22 articulos x
-2 idiomas (44) y cuatro sueltas: `/`, `/_not-found` y las dos formas de la 404
-que emite la exportacion estatica (`/404.html` y `/404/index.html`).
+Hasta el 11/08/2026 esta ruta vivia bajo un segmento `src/app/[locale]/`, con un
+`layout.tsx` de idioma separado del raiz. Con `IDIOMAS_ACTIVOS = ['es']` no hay
+segmento de idioma en la URL, asi que `src/app/layout.tsx` hace directamente lo
+que antes hacia el layout de idioma (`<html lang>`, cabecera y pie), fijo a
+`DEFAULT_LOCALE`. Devolver el ingles exige recuperar ese segmento; el detalle
+completo esta en `PLAN-solo-espanol.md` mientras siga vigente.
+
+El artefacto son **37 paginas HTML**: 15 rutas activas -la 404 es una de ellas- y
+22 articulos, todo en espanol y sin prefijo. En `out/` hay dos ficheros mas,
+`404.html` y `_not-found/index.html`, que son la misma pagina que `/404/`: Next
+la escribe tres veces porque el path del manifiesto coincide con el que reserva
+para `app/not-found.tsx`. Con el ingles activo (`IDIOMAS_ACTIVOS = ['es', 'en']`)
+vuelven a ser 78: 15 rutas x 2 idiomas, 22 articulos x 2 idiomas y las piezas
+sueltas de la eleccion de idioma en `/`.
 
 **`src/config/routes.ts` es el manifiesto central de rutas** - unica fuente de
-verdad, consumida por navegacion, pie, selector de idioma, `generateStaticParams`,
-metadatos, sitemap, migas de pan, JSON-LD y las pruebas e2e. Declara 16 `RouteId`
-(home, mssp, msspIt, msspOt, grc, grcCatalog, software, sectors, blog, company,
-contact, calculator, privacy, legal, cookies, notFound) con slugs **traducidos**
-por idioma (`/es/soluciones/mssp/` ↔ `/en/solutions/mssp/`) y anclas traducidas
-(`#idi` ↔ `#rdi`). No anadas una ruta sin registrarla aqui; `check:routes` falla.
+verdad, consumida por navegacion, pie, `generateStaticParams`, metadatos,
+sitemap, migas de pan, JSON-LD y las pruebas e2e. Declara 16 `RouteId` -15
+activos mas `calculator`, retirada con `CALCULADORA_ACTIVA`- con
+`paths` en los dos idiomas del catalogo (`LOCALES`) y anclas traducidas (`#idi` ↔
+`#rdi`), aunque solo se publiquen los de `IDIOMAS_ACTIVOS`. No anadas una ruta
+sin registrarla aqui; `check:routes` falla.
 
 `enabled: false` retira una ruta de la navegacion, del pie, del sitemap, del
 build y de las pruebas de una sola vez, y hace que su URL responda 404. Es el
@@ -155,29 +166,41 @@ poner `true` y devolver esos CTA (barra, Home, MSSP IT, catalogo IT y articulos)
 la entrada de `check:js` y las pruebas retiradas de `e2e/contexto-no-seguro.spec.ts`
 y `e2e/movil.spec.ts`.
 
-**i18n vive bajo `/es/` y `/en/`, nunca en `/`.** `src/i18n/mensajes.ts` +
-`request.ts` (next-intl) importan `messages/es.json` y `messages/en.json` en
-build; los dos arboles de claves deben coincidir (`check:i18n`). No se monta
-ningun provider global de traduccion: las paginas son componentes de build y los
-componentes de cliente reciben solo las cadenas que necesitan, como props.
+**El sitio se publica en espanol y se sirve en la raiz del dominio**
+(`https://secnorthlabs.eu/contacto/`, no `/es/contacto/`). Decision de
+Direccion del 11/08/2026: el publico objetivo es espanol y el ingles «no hace
+falta por ahora», mas un motivo con fecha -Cookiebot en version trial escanea 50
+paginas y el sitio con ingles tiene 78; sin el, 37-.
 
-**La raiz reparte por idioma del navegador** (decision de Direccion del
-29/07/2026, que sustituye a la regla original de «no se detecta
-`Accept-Language`»). Dentro del sitio el idioma **solo** cambia con accion
-explicita del usuario; el reparto es unicamente para quien escribe el dominio a
-secas. Ocurre en tres sitios que tienen que decir lo mismo, y hay pruebas que lo
-comprueban:
+Es un interruptor, como `BLOG_ENABLED` o `CALCULADORA_ACTIVA`, y no un borrado:
 
-1. `netlify.toml` - dos reglas **302** (no 301: un 301 lo cachean navegadores y
-   CDN sin volver a mirar la cabecera) con la lista de variantes de castellano.
-   Es lo que manda en produccion, sin JavaScript y en el borde.
-2. `public/reparto-idioma.js` - fichero estatico, **no** pasa por el compilador.
-   Lo carga un `<script src>` sin `async` ni `defer` como primer hijo del `<body>`
-   de `/`, asi que se ejecuta antes del primer pintado. Antes esto era un
-   `useEffect`, que corre despues de pintar: la pagina de eleccion de idioma
-   parpadeaba y se confundia con un 404.
-3. `scripts/idioma-preferido.mjs` - la copia del servidor de `pnpm preview`, que
-   lee las variantes del propio `netlify.toml` para que no puedan divergir.
+- `IDIOMAS_ACTIVOS` en `src/config/routes.ts` es `['es']`; con `['es', 'en']`
+  vuelve el ingles completo, con su propio prefijo `/en/` (`PREFIJO_URL`).
+- `messages/en.json`, los 22 articulos de `content/blog/en/` y los `paths.en`
+  del manifiesto **se conservan intactos**. `content:build` solo compila
+  `IDIOMAS_ACTIVOS`; los `.md` en ingles se quedan en disco sin tocar.
+- El legado con prefijo (`/es/*`, `/en/*`) no da 404: `netlify.toml` lo redirige
+  301 a la URL sin prefijo (una regla para las 37 URLs espanolas, mas una lista
+  explicita para las paginas fijas en ingles, que no comparten slug con la
+  espanola). `scripts/static-server.mjs` lee esas mismas reglas para que
+  `pnpm preview` y las pruebas E2E se comporten igual que produccion.
+- El selector de idioma de la cabecera, la cláusula legal de prevalencia entre
+  idiomas y los `hreflang`/`alternates` de SEO se ocultan con `MULTIIDIOMA`
+  (`= IDIOMAS_ACTIVOS.length > 1`), no se borran.
+
+Hasta el 11/08/2026 la raiz repartia por idioma del navegador con dos reglas
+**302** de `netlify.toml`, un script bloqueante (`public/reparto-idioma.js`) y su
+copia para `pnpm preview` (`scripts/idioma-preferido.mjs`). Las tres piezas se
+han retirado: `/` es ahora la Home real, en espanol, sin ninguna regla de por
+medio. Si el dia de manana vuelve a hacer falta reparto de raiz -por ejemplo, al
+reactivar el ingles con `IDIOMAS_ACTIVOS = ['es', 'en']`- el diseno anterior sigue
+disponible en el historial de git.
+
+`src/i18n/mensajes.ts` + `request.ts` (next-intl) importan `messages/es.json` y
+`messages/en.json` en build; los dos arboles de claves deben coincidir
+(`check:i18n`) aunque solo uno se publique. No se monta ningun provider global de
+traduccion: las paginas son componentes de build y los componentes de cliente
+reciben solo las cadenas que necesitan, como props.
 
 **Se publica midiendo, y hay un pendiente abierto.** GTM y GA4 escriben cookies al
 abrir la pagina, y en la UE eso exige consentimiento previo. El aviso lo pondra
@@ -217,8 +240,9 @@ por dos motivos distintos:
 
 `verify:export` cierra la misma puerta desde el otro lado: inspecciona `out/`
 buscando tarifas, nombres de clientes, `.env`, source maps o restos de servidor,
-y comprueba que cada ruta activa tenga su HTML con un solo `h1`, `lang` correcto,
-canonica y hreflang.
+y comprueba que cada ruta activa tenga su HTML con un solo `h1`, `lang` correcto
+y canonica (mas `hreflang` si `MULTIIDIOMA`, y que no quede ningun `out/es/**` ni
+`out/en/**` si no lo es).
 
 **La regla de componentes es la inversa de la intuicion comun:** el minimo de
 Client Components (`'use client'` solo para interaccion real - menu movil,
