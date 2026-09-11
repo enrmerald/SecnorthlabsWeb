@@ -82,11 +82,15 @@
 # Los destinos van sin prefijo de idioma (decision de Direccion del 11/08/2026,
 # ver la seccion de mas abajo): antes eran `/es/...`.
 
+# Sin `force`: con `force = true` Netlify aplica la redireccion incluso cuando
+# la peticion ya trae la barra final y el fichero estatico existe -normaliza la
+# barra al comparar el `from`-, lo que la convertia en un 301 hacia si misma y
+# provocaba ERR_TOO_MANY_REDIRECTS en produccion. Sin `force`, Netlify sirve
+# primero el fichero real de `out/` y solo redirige la URL legado sin barra.
 [[redirects]]
   from = "/politica-privacidad"
   to = "/politica-privacidad/"
   status = 301
-  force = true
 
 [[redirects]]
   from = "/privacidad"
@@ -94,17 +98,17 @@
   status = 301
   force = true
 
+# Mismo motivo que arriba: sin `force`, para no auto-redirigirse contra el
+# fichero real cuando la peticion ya trae la barra final.
 [[redirects]]
   from = "/aviso-legal"
   to = "/aviso-legal/"
   status = 301
-  force = true
 
 [[redirects]]
   from = "/cookies"
   to = "/cookies/"
   status = 301
-  force = true
 
 # Anclas de la SPA: no generaban URL propia, pero pueden estar enlazadas desde
 # fuera con la forma /about, /product o /contact.
